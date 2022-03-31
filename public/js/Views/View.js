@@ -1,25 +1,9 @@
-class loginView {
-    #inputEmail = document.querySelector("#email--input");
-    #inputPassword = document.querySelector("#password--input");
-    #btnLogin = document.querySelector("#login--btn");
-    #validEmail;
-    #validPassword;
+export default class View {
 
-    inputsCheck() {
-        window.addEventListener("load", () => {
-            this.#inputEmail.value = this.#inputPassword = "";
-        })
-        this.#inputEmail.addEventListener("focus", this._renderFocusValidation);
-        this.#inputEmail.addEventListener("blur", this._renderBlurValidation);
-        this.#inputEmail.addEventListener("input", (e) => {
-            this._renderInputValidation(e.target, "email")();
-        });
-        this.#inputPassword.addEventListener("focus", this._renderFocusValidation);
-        this.#inputPassword.addEventListener("blur", this._renderBlurValidation);
-        this.#inputPassword.addEventListener("input", (e) => {
-            this._renderInputValidation(e.target, "password")();
-        });
-    }
+    #reEmail =  /^([a-z]){1,}\.([a-zA-Z])+(@esi-sba\.dz)$/;
+    #rePassword = /^(?=.*\d)(?=.*[!#$%&?"*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    #reChars = /(?=.*[A-Z])(?=.*[a-z]).*$/
+    #reDigits = /\d/; 
 
 
     _renderFocusValidation(parentEl) {
@@ -63,15 +47,22 @@ class loginView {
             const input = parentEl.value;
 
     
-            const re = type === "email" ? /^([a-z]){1,}\.([a-zA-Z])+(@esi-sba\.dz)$/ : /^(?=.*\d)(?=.*[!#$%&?"*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ ;
+            const re = 
+            type === "email" ? /^([a-z]){1,}\.([a-zA-Z])+(@esi-sba\.dz)$/ 
+            : 
+            type === "password" ? /^(?=.*\d)(?=.*[!#$%&?"*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ 
+            : 
+            type === "text" ? /^[a-zA-Z]{4,16}$/
+            : 
+            type === "phone" ? /^\d{10}$/ : "";
+
+
     
     
             if (re.test(input) && iconValid.classList.contains("d-none")) {
                 this._majDisplayIcons(iconValid, iconInvalid);
                 this._majDisplayMessages(textValid, textInvalid);
                 this._majDisplayInputStyle(parentEl);
-                console.log(`${type} is correct`);
-                type == "email" ? this.#validEmail = true : type == "password" ? this.#validPassword = true : "";
             } else if (
                 !re.test(input) &&
                 iconInvalid.classList.contains("d-none")
@@ -79,19 +70,8 @@ class loginView {
                 this._majDisplayIcons(iconValid, iconInvalid);
                 this._majDisplayMessages(textValid, textInvalid);
                 this._majDisplayInputStyle(parentEl);
-                console.log(`${type} is not correct`);
-                type == "password" ? this.#validPassword = false : this.#validEmail = false;
-
             }
-
-            console.log(this.#validEmail, this.#validPassword);
     
-            if (this.#validEmail && this.#validPassword) {
-                this.#btnLogin.classList.remove("disabled");
-            } else if (
-                !this.#btnLogin.classList.contains("disabled")
-            )
-                this.#btnLogin.classList.add("disabled");
         }
     }
 
@@ -108,10 +88,3 @@ class loginView {
         parentInput.classList.toggle("is-invalid");
     }
 }
-
-export default new loginView();
-
-// const re1 = /(?=.*[A-Z])(?=.*[a-z]).*$/
-// const re2 = /[!#$%&?"*]/;
-// const re3 = /\d/;
-// const re4 = /.{8,}/;

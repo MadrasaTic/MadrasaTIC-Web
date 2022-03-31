@@ -2,14 +2,13 @@
 
 <head>
   <link href="{{ asset('css/login.css') }}" rel="stylesheet" />
-  <link href="css/hover-min.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh">
-    <div class="px-5 pb-5 rounded-6 hvr-grow animate__animated animate__fadeInUp " id="login-container">
+  <div class="container-fluid d-flex justify-content-center align-items-center animate__animated animate__fadeIn" style="height: 100vh">
+    <div class="px-5 pb-5 rounded-6 hvr-grow  " id="login-container">
       <div class="">
-        <i id="login--icon" class="fa-solid fa-circle-user position-relative top-100 start-50 translate-middle mt-1 bi bi-caret-down-fill"></i>
+        <i id="login--icon" class="fa-solid fa-circle-user position-relative top-100 start-50 translate-middle mt-1"></i>
       </div>
       <div class=" mb-4">
         <h1 class="fw-bolder text-primary">Connectez-vous</h1>
@@ -48,7 +47,7 @@
           <!-- Submit -->
           <div class="col-12 d-flex align-items-center">
             <button class="btn btn-primary btn-lg disabled me-auto" type="submit" id="login--btn">Connexion</button>
-            <a href="#" class="fs-5 link-primary fw-bold">Mot de passe oublié</a>
+            <a href="#" class="fs-5 link-primary fw-bold">Mot de passe oublié ?</a>
           </div>
         </form>
         <!-- Form End -->

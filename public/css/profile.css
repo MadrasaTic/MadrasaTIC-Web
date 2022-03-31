@@ -1,0 +1,122 @@
+/* Profile Header */
+
+#profile-picture {
+    height: 205px;
+    width: 205px;
+}
+
+/* Profile Form */
+
+
+#profil--form label {
+    color: #4A4A68;
+    font-weight: 500;
+}
+
+#profil--form input {
+    background: #ecf1f4;
+    box-shadow: inset 0px 2px 2px -1px rgba(74, 74, 104, 0.1);
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    transition: all .5s linear;
+}
+
+#profil--form input:focus {
+    background: #ffffff;
+
+    /* cello */
+    border: 1px solid #203659;
+    box-shadow: 0px 0px 0px 4px rgba(75, 77, 237, 0.2);
+}
+
+#profil--form input:disabled {
+    background: #FAFCFE;
+}
+
+.check--container {
+    background: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Separator */
+.separator {
+    background-color: #8C8CA2;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+
+/* Input Validation  */
+.is-valid {
+    border: 1px solid #35F9AE !important;
+    box-shadow: 0px 0px 0px 4px rgba(49, 208, 170, 0.2) !important;
+    transition: all 1s linear;
+}
+
+.is-invalid {
+    border: 1px solid #F80509 !important;
+    box-shadow: 0px 0px 0px 4px rgba(237, 75, 158, 0.2) !important;
+    transition: all 1s linear;
+}
+
+/* Modal */
+#profil_photo--modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); 
+}
+
+#password--modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); 
+}
+
+#disconnect--modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); 
+}
+
+/* Photo Modal */
+#modal_photo--container {
+    border-radius: 8px;
+}
+
+#modal_photo--bg {
+    height: 40vh;
+    background-color: #ECF1F4;
+}
+
+.upload--icon {
+    font-size: calc(1.725rem + 6.5vw);
+}
+
+#upload_icon--success {
+    line-height: 0 !important;
+    font-size: calc(1.825rem + 7.5vw);
+}
+
+#upload_image--success, #upload_image--error {
+    transition: all .5s linear;
+}
+
+
+
