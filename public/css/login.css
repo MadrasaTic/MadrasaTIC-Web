@@ -2,27 +2,71 @@
     color: #203659;
 }
 
-label {
-    font-weight: 500;
+/* Body */
+
+.container-fluid {
+    background-image: url('../loginImgs/Login.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #login-container {
     min-height: 496px;
     width: 522px;
     background-color: #FAFCFE;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15), 0px 4px 8px rgba(0, 0, 0, 0.2);   
 }
 
-.container-fluid {
-    background-image: url('../loginImgs/Login.svg');
-    background-position: center center;
-    background-repeat: no-repeat;
+#login--form {
+    transition: all 1s linear;
 }
 
+#login--icon {
+    font-size: calc(1.725rem + 5.0vw);
+    font-weight: 300;
+    line-height: .5  !important;
+}
 
+/* Input */
 
-.check--container{
+label {
+    font-weight: 500;
+}
+
+.input-group input {
+    outline: none;
+    width: 90%;
+}
+
+#email--input, #password--input {
+    border: 1px solid #ECF1F4;
+    box-shadow: inset 0px 2px 2px -1px rgba(74, 74, 104, 0.1);
+    border-radius: 0 8px 8px 0;
+    
+}
+
+.input-group span:first-child {
+    width: 10%;
+    border-radius: 8px 0 0 8px;
+}
+
+.is-valid {
+    border: 1px solid #35F9AE !important;
+    box-shadow: 0px 0px 0px 4px rgba(49, 208, 170, 0.2) !important;
+    transition: all 1s linear;
+}
+
+.is-invalid {
+    border: 1px solid #F80509 !important;
+    box-shadow: 0px 0px 0px 4px rgba(237, 75, 158, 0.2) !important;
+    transition: all 1s linear;
+}
+
+/* Icons */
+.check--container {
     background: none;
-
-
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
-

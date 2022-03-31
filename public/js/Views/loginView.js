@@ -1,126 +1,117 @@
 class loginView {
     #inputEmail = document.querySelector("#email--input");
     #inputPassword = document.querySelector("#password--input");
-    #checkContainer = document.querySelectorAll(".check--container");
-    #errorMessagesContainer = document.querySelector("#error_messages--container")
-    #textValidEmail = document.querySelector(".valid_email--text");
-    #textInvalidEmail = document.querySelector(".invalid_email--text");
     #btnLogin = document.querySelector("#login--btn");
-    #validEmail = false;
-    #validPassword = false;
-
-
+    #validEmail;
+    #validPassword;
 
     validEmailCheck() {
-        let labelValid;
-        let labelInvalid;
-
-
-
-        let input = ""
-        const reInput = /^([a-z]){1,}\.([a-zA-Z])+(@esi-sba\.dz)$/
-        const rePassword = /^(?=.*\d)(?=.*[!#$%&?"*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/
-        const re1 = /(?=.*[A-Z])(?=.*[a-z]).*$/
-        const re2 = /[!#$%&?"*]/;
-        const re3 = /\d/;
-        const re4 = /.{8,}/;
-
-        
-
+        window.addEventListener("load", () => {
+            this.#inputEmail.value = this.#inputPassword = "";
+        })
+        this.#inputEmail.addEventListener("focus", this._renderFocusValidation);
+        this.#inputEmail.addEventListener("blur", this._renderBlurValidation);
         this.#inputEmail.addEventListener("input", (e) => {
-            this.#checkContainer[0].classList.remove("d-none");
-            this.#textInvalidEmail.classList.remove("d-none");
-            labelValid = this.#inputEmail.parentElement.querySelector(".valid--icon");
-            labelInvalid = this.#inputEmail.parentElement.querySelector(".invalid--icon");
-            
-            input = e.target.value;
-            if (reInput.test(input) && labelValid.classList.contains("d-none") ) { 
-                this._displayValidInput(labelValid, labelInvalid);
-                this._displayValidEmailMessage();
-                this.#validEmail = true;
-            } else if (!reInput.test(input) && labelInvalid.classList.contains("d-none")) {
-                this._displayInvalidInput(labelValid, labelInvalid);
-                this._displayInvalidEmailMessage();
-                this.#validEmail = false;
-
-            }
-
-            console.log(this.#validEmail, this.#validPassword);
-            if(this.#validEmail && this.#validPassword){
-                this.#btnLogin.classList.remove("disabled")
-            } 
-            else if (!this.#btnLogin.classList.contains("disabled"))this.#btnLogin.classList.add("disabled")
-
-            
-
+            this._renderInputValidation(e.target, "email")();
         });
-
-
-
+        this.#inputPassword.addEventListener("focus", this._renderFocusValidation);
+        this.#inputPassword.addEventListener("blur", this._renderBlurValidation);
         this.#inputPassword.addEventListener("input", (e) => {
-            this.#checkContainer[1].classList.remove("d-none");
-            this.#errorMessagesContainer.classList.remove("d-none");
+            this._renderInputValidation(e.target, "password")();
+        });
+    }
+
+
+    _renderFocusValidation(parentEl) {
+        const iconValid =
+            parentEl.target.parentElement.querySelector(".valid--icon");
+        if (!iconValid.classList.contains("d-none")) return;
+
+        const iconInvalid =
+            parentEl.target.parentElement.querySelector(".invalid--icon");
+        const textInvalid =
+            parentEl.target.parentElement.parentElement.querySelector(
+                ".invalid-feedback"
+            );
+
+        // Init
+        textInvalid.classList.remove("d-none");
+        iconInvalid.classList.remove("d-none");
+        parentEl.target.classList.remove("is-valid");
+        parentEl.target.classList.add("is-invalid");
+    }   
+
+    _renderBlurValidation(parentEl) {
+        const iconInvalid =
+            parentEl.target.parentElement.querySelector(".invalid--icon");
+        const textInvalid =
+            parentEl.target.parentElement.parentElement.querySelector(
+                ".invalid-feedback"
+            );
+
+        iconInvalid.classList.add("d-none");
+        textInvalid.classList.add("d-none");
+        parentEl.target.classList.remove("is-invalid")
+    }
+
+    _renderInputValidation(parentEl, type) {
+        return () => {
+            const iconValid = parentEl.parentElement.querySelector(".valid--icon");
+            const iconInvalid = parentEl.parentElement.querySelector(".invalid--icon");
+            const textValid = parentEl.parentElement.parentElement.querySelector(".valid-feedback");
+            const textInvalid = parentEl.parentElement.parentElement.querySelector(".invalid-feedback");
+            const input = parentEl.value;
+
     
-            labelValid = this.#inputPassword.parentElement.querySelector(".valid--icon");
-            labelInvalid = this.#inputPassword.parentElement.querySelector(".invalid--icon");
+            const re = type === "email" ? /^([a-z]){1,}\.([a-zA-Z])+(@esi-sba\.dz)$/ : /^(?=.*\d)(?=.*[!#$%&?"*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ ;
+    
+    
+            if (re.test(input) && iconValid.classList.contains("d-none")) {
+                this._majDisplayIcons(iconValid, iconInvalid);
+                this._majDisplayMessages(textValid, textInvalid);
+                this._majDisplayInputStyle(parentEl);
+                console.log(`${type} is correct`);
+                type == "email" ? this.#validEmail = true : type == "password" ? this.#validPassword = true : "";
+            } else if (
+                !re.test(input) &&
+                iconInvalid.classList.contains("d-none")
+            ) {
+                this._majDisplayIcons(iconValid, iconInvalid);
+                this._majDisplayMessages(textValid, textInvalid);
+                this._majDisplayInputStyle(parentEl);
+                console.log(`${type} is not correct`);
+                type == "password" ? this.#validPassword = false : this.#validEmail = false;
 
-            input = e.target.value;
-
-            if (rePassword.test(input) && labelValid.classList.contains("d-none") ) { 
-                this._displayValidInput(labelValid, labelInvalid);
-                this.#validPassword = true
-            } else if (!rePassword.test(input) && labelInvalid.classList.contains("d-none")) {
-                this._displayInvalidInput(labelValid, labelInvalid);
-                this.#validEmail = false;
             }
 
-            console.log("InputIsTypes");
-
-            if (re1.test(input)) document.querySelector("#er1").classList.add("text-success")
-            else document.querySelector("#er1").classList.remove("text-success");
-            if (re2.test(input)) document.querySelector("#er2").classList.add("text-success")
-            else document.querySelector("#er2").classList.remove("text-success");
-            if (re3.test(input)) document.querySelector("#er3").classList.add("text-success")
-            else document.querySelector("#er3").classList.remove("text-success");
-            if (re4.test(input)) document.querySelector("#er4").classList.add("text-success")
-            else document.querySelector("#er4").classList.remove("text-success");
-
             console.log(this.#validEmail, this.#validPassword);
-            if(this.#validEmail && this.#validPassword){
-                this.#btnLogin.classList.remove("disabled")
-            } 
-            else if (!this.#btnLogin.classList.contains("disabled") )this.#btnLogin.classList.add("disabled")
-        });
-
-
-       
-
-
-    }
-    _displayValidInput(labelValid, labelInvalid) {
-        // Display / Hide Icons
-        labelValid.classList.toggle("d-none");
-        labelInvalid.classList.toggle("d-none");
-
-
-
-    }
-    _displayInvalidInput(labelValid, labelInvalid) {
-        labelValid.classList.toggle("d-none");
-        labelInvalid.classList.toggle("d-none");
+    
+            if (this.#validEmail && this.#validPassword) {
+                this.#btnLogin.classList.remove("disabled");
+            } else if (
+                !this.#btnLogin.classList.contains("disabled")
+            )
+                this.#btnLogin.classList.add("disabled");
+        }
     }
 
-    _displayValidEmailMessage() {
-        this.#textValidEmail.classList.toggle("d-none");
-        this.#textInvalidEmail.classList.toggle("d-none");        
+    _majDisplayIcons(iconValid, iconInvalid) {
+        iconValid.classList.toggle("d-none");
+        iconInvalid.classList.toggle("d-none");
     }
-
-    _displayInvalidEmailMessage() {
-        this.#textValidEmail.classList.toggle("d-none");
-        this.#textInvalidEmail.classList.toggle("d-none");  
+    _majDisplayMessages(textValid, textInvalid) {
+        textValid.classList.toggle("d-none");
+        textInvalid.classList.toggle("d-none");
     }
-
-
+    _majDisplayInputStyle(parentInput) {
+        parentInput.classList.toggle("is-valid");
+        parentInput.classList.toggle("is-invalid");
+    }
 }
 
 export default new loginView();
+
+// const re1 = /(?=.*[A-Z])(?=.*[a-z]).*$/
+// const re2 = /[!#$%&?"*]/;
+// const re3 = /\d/;
+// const re4 = /.{8,}/;
