@@ -1,0 +1,28 @@
+*{
+    color: #203659;
+}
+
+label {
+    font-weight: 500;
+}
+
+#login-container {
+    min-height: 496px;
+    width: 522px;
+    background-color: #FAFCFE;
+}
+
+.container-fluid {
+    background-image: url('../loginImgs/Login.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+
+
+.check--container{
+    background: none;
+
+
+}
+

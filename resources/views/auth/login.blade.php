@@ -1,76 +1,59 @@
-@extends('layouts.app')
+@include('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+  <link href="{{ asset('css/login.css') }}" rel="stylesheet" />
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+</head>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+<body>
+  <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh">
+    <!-- Login Container  -->
+    <div class=" px-5 border border-primary rounded-3 " id="login-container">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                {{-- <a href="{{ url('auth/google') }}" class="btn btn-primary btn-block">
-                                    <strong>Login With Google</strong>
-                                </a>  --}}
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    <i id="login--icon" class="display-1 fa-solid fa-circle-user position-relative top-100 start-50 translate-middle mt-1 bi bi-caret-down-fill"></i>
+    
+      
+      <div class="border mb-4">
+        <h1 class="fw-bolder text-primary">Connecez-vous</h1>
+      </div>
+ 
+      
+      <!-- Form -->
+      <div class="border">
+        <form class="row g-3">
+          <!-- E-Mail Input -->
+          <div class="i col-md-12">
+            <label for="loginemail" class="form-label mb-1">E-Mail</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-circle-user"></i></span>
+              <input type="text" class="form-control" id="email--input" />
+              <span class="input-group-text check--container d-none"><i class="fa-solid fa-circle-check text-success valid--icon d-none"></i><i class="fa-solid fa-circle-exclamation invalid--icon text-danger"></i></span>
             </div>
-        </div>
+            <div class="invalid-feedback invalid_email--text d-none">Enter une adresse e-mail valide (username@esi-sba.dz)</div>
+            <div class="valid-feedback valid_email--text d-none">Email Valide</div>
+          </div>
+          <!-- Password Input -->
+          <div class="i col-md-12 mb-3">
+            <label for="password--input" class="form-label mb-1">Mot de passe</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" class="form-control" id="password--input" />
+              
+              <span class="input-group-text check--container d-none"><i class="fa-solid fa-circle-check text-success passwooord valid--icon d-none"></i><i class="fa-solid fa-circle-exclamation invalid--icon text-danger"></i></span>
+            </div>
+            <div class="d-none" id="error_messages--container">
+              <div class="invalid-feedback" id="er1">Au moin une majuscule/miniscule</div>
+              <div class="invalid-feedback" id="er2">Au moin un caractère spécial</div>
+              <div class="invalid-feedback" id="er3">Au moin un chiffre</div>
+              <div class="invalid-feedback" id="er4">Au moin 8 caractères</div>
+            </div>
+          </div>
+          <div class="col-12  ">
+            <button class="btn btn-primary btn-lg disabled" type="submit" id="login--btn">Connexion</button>
+          </div>
+
+        </form>
+      </div>
     </div>
-</div>
-@endsection
+  </div>
+</body>
