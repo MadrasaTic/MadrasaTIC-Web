@@ -17,7 +17,15 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
+});
+
+Route::get('/profil', function () {
+    return view('profil');
+});
+
+Route::get('/members', function () {
+    return view('members');
 });
 
 Route::get('google', function () {

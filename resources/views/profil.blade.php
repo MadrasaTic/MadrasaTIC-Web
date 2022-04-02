@@ -1,4 +1,4 @@
-@include('layouts.app')
+@include('layouts.app')   
 
 <head>
   <link href="{{ asset('css/profile.css') }}" rel="stylesheet" />
@@ -7,7 +7,7 @@
 
 <body>
   <div class="container-fluid p-0" style="min-height: 100vh">
-    <div class="row">
+    <div class="row p-0 g-0" >
       <!-- Modal Save Photo -->
       <div class="d-none animate__animated animate__fadeIn" id="profil_photo--modal">
         <div class="modal-dialog modal-dialog-centered animate__animated animate__fadeIn" >
@@ -89,9 +89,9 @@
         </div>
       </div> <!-- Modal Disconnect  End -->
       
-      <div class="col d-flex align-items-center justify-content-center">side bar</div>
+      <div class="col d-flex align-items-center justify-content-center border">side bar</div>
       <!-- Middle Part -->
-      <div class="col-md-7 animate__animated animate__fadeIn animate__delay-0.5s"> 
+      <div class="col-md-7 animate__animated animate__fadeIn animate__delay-0.5s "> 
         <!-- Wrapper -->
         <div class="col-lg-9 col-md-12">
           <!-- Profile Header -->
@@ -265,7 +265,7 @@
         <!-- Button trigger modal -->
         </div> <!-- Wrapper End---> 
       </div> <!-- Middle Part END -->
-      <div class="col-md-3 d-flex align-items-center justify-content-center">actu</div>
+      <div class="col-md-3 d-flex align-items-center justify-content-center border">actu</div>
     </div>
   </div>
 </body>

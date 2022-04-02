@@ -41,7 +41,7 @@
                 <i class="invalid--icon fa-solid fa-circle-exclamation text-danger d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
               </span>
             </div>
-            <div class="invalid-feedback fs-6 d-none">Enter une adresse mot de passe valide</div>
+            <div class="invalid-feedback fs-6 d-none">Enter un mot de passe valide</div>
             <div class="valid-feedback fs-6 d-none">Mot de passe valide</div>
           </div>
           <!-- Submit -->

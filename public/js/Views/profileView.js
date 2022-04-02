@@ -66,8 +66,6 @@ class profileView extends View{
             this.#modalDisconnect.classList.add("d-none");
         })
 
-
-
         this.#btnClosePassword.addEventListener("click", () => {
             this.#modalPassword.classList.add("d-none");
         })

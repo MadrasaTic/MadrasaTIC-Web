@@ -38,6 +38,31 @@ export default class View {
         parentEl.target.classList.remove("is-invalid")
     }
 
+    _renderQuitBlurValidation(parentEl) {
+        const iconValid =
+            parentEl.parentElement.querySelector(".valid--icon");
+        const textValid = 
+            parentEl.parentElement.parentElement.querySelector(".valid-feedback");
+        const iconInvalid =
+            parentEl.parentElement.querySelector(".invalid--icon");
+        const textInvalid =
+            parentEl.parentElement.parentElement.querySelector(
+                ".invalid-feedback"
+            );
+
+        if (!iconValid.classList.contains("d-none")) {
+            iconValid.classList.add("d-none");
+            textValid.classList.add("d-none");
+            parentEl.classList.remove("is-valid");
+        }
+
+        if (!iconInvalid.classList.contains("d-none")) {
+            iconInvalid.classList.add("d-none");
+            textInvalid.classList.add("d-none");
+            parentEl.classList.remove("is-invalid");
+        }
+    }
+
     _renderInputValidation(parentEl, type) {
         return () => {
             const iconValid = parentEl.parentElement.querySelector(".valid--icon");
@@ -54,11 +79,8 @@ export default class View {
             : 
             type === "text" ? /^[a-zA-Z]{4,16}$/
             : 
-            type === "phone" ? /^\d{10}$/ : "";
+            type === "number" ? /^\d{10}$/ : "";
 
-
-    
-    
             if (re.test(input) && iconValid.classList.contains("d-none")) {
                 this._majDisplayIcons(iconValid, iconInvalid);
                 this._majDisplayMessages(textValid, textInvalid);

@@ -1,0 +1,39 @@
+#permissions--thead, #roles--thead, #members--thead {
+    background-color: #ECF1F4;
+}
+
+.input-group input, .input-group select, .input-group textarea {
+    background: #ecf1f4;
+    box-shadow: inset 0px 2px 2px -1px rgba(74, 74, 104, 0.1);
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    transition: all .1s linear;
+    border-radius: 8px !important;
+}
+
+.input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+    background: #ffffff;
+    /* cello */
+    border: 1px solid #203659;
+    box-shadow: 0px 0px 0px 4px rgba(75, 77, 237, 0.2);
+}
+
+.is-valid {
+    border: 1px solid #35F9AE !important;
+    box-shadow: 0px 0px 0px 4px rgba(49, 208, 170, 0.2) !important;
+    transition: all 1s linear;
+}
+
+.is-invalid {
+    border: 1px solid #F80509 !important;
+    box-shadow: 0px 0px 0px 4px rgba(237, 75, 158, 0.2) !important;
+    transition: all 1s linear;
+}
+
+.check--container {
+    background: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
