@@ -4,20 +4,16 @@ import profileView from "./Views/profileView.js";
 import membersView from "./Views/membersView.js"
 
 window.addEventListener("load", function() {
-    if (window.location.pathname.slice(1) == "login" || "" ) {
+    if ((window.location.pathname.slice(1) == "login") || (window.location.pathname == "/") ) {
+        loginView.generateFormArray();
+        loginView.clearAllInputs();
         loginView.inputsCheck();
     }
-})
-
-window.addEventListener("load", function() {
     if (window.location.pathname.slice(1) == "profil") {
         profileView.inputsCheck();
         profileView.clearInputs();
         profileView.renderProfilInputName();
     }
-})
-
-window.addEventListener("load", function() {
     if (window.location.pathname.slice(1) == "members") {
         membersView.setDefaultOption();
         membersView.clearAllInputs();
