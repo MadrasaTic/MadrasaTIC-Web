@@ -7,7 +7,6 @@ class Members extends View {
     #selectTable = document.querySelector("#table--select");
     #formsAdd = [...document.querySelectorAll(".add--forms")];
     #inputsArray = this.#formsAdd.map((form) => [...form.elements]).flat().filter((input) => ((input.placeholder) && (input.type != "textarea")));
-
     // Hide / Show
     #iconClose = document.querySelector("#close--icon");
     #btnClose = document.querySelector("#close--button");
@@ -27,17 +26,24 @@ class Members extends View {
         })
         this.#btnSave.classList.add("disabled")
     }
+    
+    displaySelectedTable() {
+        let newSelect = ""
+        this._consultRemoveLinks();
 
-    _validInputs(type) {
-        const inputsArray = this.#inputsArray.filter((input) => input.classList.contains(`${type}--inputs`));
-        inputsArray.forEach((input) => {
-            input.addEventListener("focus", this._renderFocusValidation);
-            input.addEventListener("blur", this._renderBlurValidation);
-            input.addEventListener("input", (e) => {
-                this._renderInputValidation(e.target, input.type )();
-                if (this._enableSaveBtn(inputsArray)) this.#btnSave.classList.remove("disabled")
-                else this.#btnSave.classList.add("disabled")
-            })
+        this.#selectTable.addEventListener("focus", (e) => {
+            this.#currentSelect = e.target.value;
+        })
+        
+        this.#selectTable.addEventListener("change", (e) => {
+            newSelect = e.target.value;
+            document.querySelector(`#${this.#currentSelect}--table`).classList.add("d-none");
+            document.querySelector(`#${newSelect}--table`).classList.remove("d-none");
+            document.querySelector(`#add_${this.#currentSelect}--text`).classList.add("d-none");
+            document.querySelector(`#add_${newSelect}--text`).classList.remove("d-none");
+            this.#currentSelect = newSelect;
+            e.target.blur();
+            this._consultRemoveLinks();
         })
     }
 
@@ -74,6 +80,19 @@ class Members extends View {
             document.querySelector("#modal--title").textContent = `Ajouter ${displayedType}`
         })
     }
+    
+    _validInputs(type) {
+        const inputsArray = this.#inputsArray.filter((input) => input.classList.contains(`${type}--inputs`));
+        inputsArray.forEach((input) => {
+            input.addEventListener("focus", this._renderFocusValidation);
+            input.addEventListener("blur", this._renderBlurValidation);
+            input.addEventListener("input", (e) => {
+                this._renderInputValidation(e.target, input.type )();
+                if (this._enableSaveBtn(inputsArray)) this.#btnSave.classList.remove("disabled")
+                else this.#btnSave.classList.add("disabled")
+            })
+        })
+    }
 
     _consultRemoveLinks() {
         const consultLink = document.querySelector(`#${this.#currentSelect}_consult--link`);
@@ -100,25 +119,6 @@ class Members extends View {
         return inputsArray.every(input => input.classList.contains("is-valid"));
     }
 
-    displaySelectedTable() {
-        let newSelect = ""
-        this._consultRemoveLinks();
-
-        this.#selectTable.addEventListener("focus", (e) => {
-            this.#currentSelect = e.target.value;
-        })
-        
-        this.#selectTable.addEventListener("change", (e) => {
-            newSelect = e.target.value;
-            document.querySelector(`#${this.#currentSelect}--table`).classList.add("d-none");
-            document.querySelector(`#${newSelect}--table`).classList.remove("d-none");
-            document.querySelector(`#add_${this.#currentSelect}--text`).classList.add("d-none");
-            document.querySelector(`#add_${newSelect}--text`).classList.remove("d-none");
-            this.#currentSelect = newSelect;
-            e.target.blur();
-            this._consultRemoveLinks();
-        })
-    }
 }
 
 export default new Members();

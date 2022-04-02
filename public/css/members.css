@@ -1,7 +1,9 @@
+/* Tables */
 #permissions--thead, #roles--thead, #members--thead {
     background-color: #ECF1F4;
 }
 
+/* Modals Forms */
 .input-group input, .input-group select, .input-group textarea {
     background: #ecf1f4;
     box-shadow: inset 0px 2px 2px -1px rgba(74, 74, 104, 0.1);
