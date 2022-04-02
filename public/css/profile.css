@@ -1,19 +1,16 @@
 /* Profile Header */
-
 #profile-picture {
     height: 205px;
     width: 205px;
 }
 
-/* Profile Form */
-
-
-#profil--form label {
+/* Password / Info Form */
+#infos--form label, #password--form label{
     color: #4A4A68;
     font-weight: 500;
 }
 
-#profil--form input {
+#infos--form input, #password--form input {
     background: #ecf1f4;
     box-shadow: inset 0px 2px 2px -1px rgba(74, 74, 104, 0.1);
     border: none;
@@ -22,14 +19,14 @@
     transition: all .5s linear;
 }
 
-#profil--form input:focus {
+#infos--form input:focus, #password--form input:focus {
     background: #ffffff;
     /* cello */
     border: 1px solid #203659;
     box-shadow: 0px 0px 0px 4px rgba(75, 77, 237, 0.2);
 }
 
-#profil--form input:disabled {
+#infos--form input:disabled, #password--form input:disabled {
     background: #FAFCFE;
 }
 
@@ -60,41 +57,7 @@
     transition: all 1s linear;
 }
 
-/* Modal */
-#profil_photo--modal {
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); 
-}
-
-#password--modal {
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); 
-}
-
-#disconnect--modal {
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); 
-}
-
-/* Photo Modal */
+/* Modal Photo */
 #modal_photo--container {
     border-radius: 8px;
 }
@@ -117,5 +80,13 @@
     transition: all .5s linear;
 }
 
+/* Remove Phone inputs arrow */
+#phone--input::-webkit-outer-spin-button, #phone--input::-webkit-inner-spin-button  {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
+#phone--input[type=number] {
+    -moz-appearance: textfield;
+}
 

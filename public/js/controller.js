@@ -10,9 +10,10 @@ window.addEventListener("load", function() {
         loginView.inputsCheck();
     }
     if (window.location.pathname.slice(1) == "profil") {
-        profileView.inputsCheck();
+        profileView.generateFormArray();
+        profileView.infoFormValidation();
+        profileView.modalsHanlder();
         profileView.clearInputs();
-        profileView.renderProfilInputName();
     }
     if (window.location.pathname.slice(1) == "members") {
         membersView.setDefaultOption();

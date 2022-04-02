@@ -1,13 +1,18 @@
 import View from './View.js'
 
 class profileView extends View{
+    // Main Buttons
+    #btnSave = document.querySelector("#btn--save");
+    #btnModify = document.querySelector("#btn--modify");
+    // Forms
+    #formInfos = "";
+    #formPassword = "";
+    // Modals 
     #inputFirstName = document.querySelector("#fname--input"); 
     #inputLastName = document.querySelector("#lname--input");
     #inputPhone = document.querySelector("#phone--input");
     #newPassword = document.querySelector("#new_password--input");
     #previousPassword = document.querySelector("#previous_password--input")
-    #btnModify = document.querySelector("#btn--modify");
-    #btnSave = document.querySelector("#btn--save");
     #inputProfilImage = document.querySelector("#profil_image--input");
     #textProfilImage = document.querySelector("#img_profil--text");
     #btnUploadImage = document.querySelector("#upload_image--button");
@@ -33,12 +38,39 @@ class profileView extends View{
     #modalDisconnect = document.querySelector("#disconnect--modal");
     #btnDisconnect = document.querySelector("#disconnect--button");
 
-
     clearInputs() {
-        this.#inputFirstName.value = this.#inputLastName.value = this.#inputPhone.value = this.#newPassword.value =  this.#previousPassword.value = "";
+        const inputsArray = [...this.#formInfos, ...this.#formPassword];
+        inputsArray.forEach((input) => {
+            input.value = ""
+        })
     }
 
-    renderProfilInputName () {
+    generateFormArray() {
+        this.#formInfos = Array.from(document.querySelector("#infos--form").elements).filter((input) => (input.placeholder) && (!input.classList.contains("disabled")));
+        this.#formPassword = Array.from(document.querySelector("#password--form").elements).filter((input) => (input.placeholder) && (!input.classList.contains("disabled")));
+    }
+
+    infoFormValidation() {
+        this.#formInfos.forEach((input) => {
+            input.addEventListener("focus", this._renderFocusValidation);
+            input.addEventListener("blur", this._renderBlurValidation);
+            input.addEventListener("input", (e) => {
+                this._renderInputValidation(e.target, input.type)();
+                this._enableModifyBtn();
+                console.log(input.type);
+            });
+        })
+        this.#formPassword.forEach((input) => {
+            input.addEventListener("focus", this._renderFocusValidation);
+            input.addEventListener("blur", this._renderBlurValidation);
+            input.addEventListener("input", (e) => {
+                this._renderInputValidation(e.target, input.type)();
+                this._enableSaveBtn();
+            }); 
+        })
+    }
+
+    modalsHanlder () {
         let imgName = "";
 
         this.#btnDisconnect.addEventListener("click", (e) => {
@@ -123,43 +155,8 @@ class profileView extends View{
             this.#inputSubmitImage.click();
         })
     }
-    
-    inputsCheck() {
-        this.#inputFirstName.addEventListener("focus", this._renderFocusValidation);
-        this.#inputFirstName.addEventListener("blur", this._renderBlurValidation);
-        this.#inputFirstName.addEventListener("input", (e) => {
-            this._renderInputValidation(e.target, "text")();
-            this._enableModifyBtn();
-        });
-        this.#inputLastName.addEventListener("focus", this._renderFocusValidation);
-        this.#inputLastName.addEventListener("blur", this._renderBlurValidation);
-        this.#inputLastName.addEventListener("input", (e) => {
-            this._renderInputValidation(e.target, "text")();
-            this._enableModifyBtn();
 
-        });
-        this.#inputPhone.addEventListener("focus", this._renderFocusValidation);
-        this.#inputPhone.addEventListener("blur", this._renderBlurValidation);
-        this.#inputPhone.addEventListener("input", (e) => {
-            this._renderInputValidation(e.target, "phone")();
-            this._enableModifyBtn();
-        });
-
-        this.#newPassword.addEventListener("focus", this._renderFocusValidation);
-        this.#newPassword.addEventListener("blur", this._renderBlurValidation);
-        this.#newPassword.addEventListener("input", (e) => {
-            this._renderInputValidation(e.target, "password")();
-            this._enableSaveBtn();
-        });
-
-        this.#previousPassword.addEventListener("focus", this._renderFocusValidation);
-        this.#previousPassword.addEventListener("blur", this._renderBlurValidation);
-        this.#previousPassword.addEventListener("input", (e) => {
-            this._renderInputValidation(e.target, "password")();
-            this._enableSaveBtn();
-        });
-    }
-
+    // Buttons Handling
     _enableModifyBtn() {
         if (
             this.#inputFirstName.classList.contains("is-valid") ||
@@ -170,7 +167,6 @@ class profileView extends View{
         }
         else this.#btnModify.classList.add("disabled")
     }
-
     _enableSaveBtn() {
         if ((this.#newPassword.classList.contains("is-valid")) && (this.#previousPassword.classList.contains("is-valid")))this.#btnSave.classList.remove("disabled")
         else this.#btnSave.classList.add("disabled")
