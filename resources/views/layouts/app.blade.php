@@ -34,11 +34,46 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+
                         <li>
-                            <a class="nav-link" href="{{ url('/configure') }}">
-                                Configure
+                            <a href="{{ route('home') }}"
+                                class="nav-link">
+                                Dashboard
                             </a>
                         </li>
+                        @guest
+                        @else
+                        <li>
+                            <a href="{{ route('configure.roles-assignment.index') }}"
+                                class="nav-link">
+                                Roles & Permissions Assignment
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('configure.roles.index') }}"
+                                class="nav-link">
+                                Roles
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('configure.permissions.index') }}"
+                                class="nav-link">
+                                Permissions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('indexx') }}"
+                                class="nav-link">
+                                Example 1 "index"
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('create') }}"
+                                class="nav-link">
+                                Example 2 "create"
+                            </a>
+                        </li>
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -63,6 +98,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        {{ __('Profile') }}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

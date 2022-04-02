@@ -36,6 +36,7 @@ class HasPermission
     
             if(!$permission_result) {
                 $permission_id_id = 0;
+                return $next($request);
             }
             else {
                 $permission_id_id = $permission_id->id;

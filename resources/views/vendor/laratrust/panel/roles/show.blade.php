@@ -32,7 +32,7 @@
         </ul>
         <div class="flex justify-end">
           <a
-            href="{{route("laratrust.roles.index")}}"
+            href="{{route("configure.roles.index")}}"
             class="text-blue-600 hover:text-blue-900"
           >
             Back

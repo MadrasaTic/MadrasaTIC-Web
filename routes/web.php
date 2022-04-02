@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+
+use App\Http\Controllers\Configure\PermissionsController;
+use App\Http\Controllers\Configure\RolesController;
+use App\Http\Controllers\Configure\RolesAssignmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +35,25 @@ Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallbac
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+    Route::middleware(['HasPermission'])->group(function () {
+        Route::get('/profile', [UserController::class, 'show'])->name('profile');
+        Route::get('/create',[CheckController::class, 'create'])->name('create');
+        Route::get('/indexx',[CheckController::class, 'index'])->name('indexx');
+    });
 
-Route::middleware(['auth','HasPermission'])->group(function () {
-    Route::get('/create',[CheckController::class, 'create']);
-    Route::get('/indexx',[CheckController::class, 'index']);
+    Route::middleware(['HasPermission'])->group(function () {
+
+        Route::resource('/permissions', PermissionsController::class, ['as' => 'configure'])
+            ->only(['index', 'create', 'store', 'edit', 'update']);
+        
+        Route::resource('/roles', RolesController::class, ['as' => 'configure']);
+        
+        Route::resource('/roles-assignment', RolesAssignmentController::class, ['as' => 'configure'])
+            ->only(['index', 'edit', 'update']);
+        });
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');

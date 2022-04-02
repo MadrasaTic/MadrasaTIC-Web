@@ -8,11 +8,11 @@ class CheckController extends Controller
 {
     public function index()
     {
-      return 'Silence is golden!';
+      return 'Index Page Example!';
     }
   
     public function create()
     {
-      return view('welcome');
+      return 'Create Page Example';
     }
 }

@@ -11,7 +11,7 @@
         x-data="laratrustForm()"
         x-init="{!! $model ? '' : '$watch(\'displayName\', value => onChangeDisplayName(value))'!!}"
         method="POST"
-        action="{{$model ? route("laratrust.{$type}s.update", $model->getKey()) : route("laratrust.{$type}s.store")}}"
+        action="{{$model ? route("configure.{$type}s.update", $model->getKey()) : route("configure.{$type}s.store")}}"
         class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200 p-8"
       >
         @csrf
@@ -21,11 +21,10 @@
         <label class="block">
           <span class="text-gray-700">Name/Code</span>
           <input
-            class="form-input mt-1 block w-full bg-gray-200 text-gray-600 @error('name') border-red-500 @enderror"
+            class="form-input mt-1 block w-full text-gray-700 @error('name') border-red-500 @enderror"
             name="name"
-            placeholder="this-will-be-the-code-name"
+            placeholder="ControllerName@functionName"
             :value="name"
-            readonly
             autocomplete="off"
           >
           @error('name')
@@ -72,7 +71,7 @@
         @endif
         <div class="flex justify-end">
           <a
-            href="{{route("laratrust.{$type}s.index")}}"
+            href="{{route("configure.{$type}s.index")}}"
             class="btn btn-red mr-4"
           >
             Cancel
@@ -95,9 +94,9 @@
               .join('-')
               .trim();
         },
-        onChangeDisplayName(value) {
+        /* onChangeDisplayName(value) {
           this.name = this.toKebabCase(value);
-        }
+        } */
       }
     }
   </script>

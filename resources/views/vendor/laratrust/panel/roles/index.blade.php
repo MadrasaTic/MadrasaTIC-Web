@@ -5,8 +5,8 @@
 @section('content')
   <div class="flex flex-col">
     <a
-      href="{{route('laratrust.roles.create')}}"
-      class="self-end bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+      href="{{route('configure.roles.create')}}"
+      class="self-end bg-transparent hover:bg-blue-500 text-blue-700 font-semibold py-2 px-4 border border-blue-500 hover:border-transparent rounded"
     >
       + New Role
     </a>
@@ -39,12 +39,12 @@
               </td>
               <td class="flex justify-end px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                 @if (\Laratrust\Helper::roleIsEditable($role))
-                <a href="{{route('laratrust.roles.edit', $role->getKey())}}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                <a href="{{route('configure.roles.edit', $role->getKey())}}" class="text-blue-600 hover:text-blue-900">Edit</a>
                 @else
-                <a href="{{route('laratrust.roles.show', $role->getKey())}}" class="text-blue-600 hover:text-blue-900">Details</a>
+                <a href="{{route('configure.roles.show', $role->getKey())}}" class="text-blue-600 hover:text-blue-900">Details</a>
                 @endif
                 <form
-                  action="{{route('laratrust.roles.destroy', $role->getKey())}}"
+                  action="{{route('configure.roles.destroy', $role->getKey())}}"
                   method="POST"
                   onsubmit="return confirm('Are you sure you want to delete the record?');"
                 >

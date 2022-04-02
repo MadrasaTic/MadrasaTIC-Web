@@ -6,8 +6,8 @@
   <div class="flex flex-col">
     @if (config('laratrust.panel.create_permissions'))
     <a
-      href="{{route('laratrust.permissions.create')}}"
-      class="self-end bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+      href="{{route('configure.permissions.create')}}"
+      class="self-end bg-transparent hover:bg-blue-500 text-blue-700 font-semibold py-2 px-4 border border-blue-500 hover:border-transparent rounded"
     >
       + New Permission
     </a>
@@ -40,7 +40,7 @@
                 {{$permission->description}}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                <a href="{{route('laratrust.permissions.edit', $permission->getKey())}}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                <a href="{{route('configure.permissions.edit', $permission->getKey())}}" class="text-blue-600 hover:text-blue-900">Edit</a>
               </td>
             </tr>
             @endforeach
