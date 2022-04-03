@@ -1,76 +1,61 @@
-@extends('layouts.app')
+@include('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+  <link href="{{ asset('css/login.css') }}" rel="stylesheet" />
+</head>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                {{-- <a href="{{ url('auth/google') }}" class="btn btn-primary btn-block">
-                                    <strong>Login With Google</strong>
-                                </a>  --}}
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<body>
+  <div class="container-fluid d-flex justify-content-center align-items-center animate__animated animate__fadeIn" style="height: 100vh">
+    <div class="row">
+      <div class="col-md-6 mx-auto px-5 pb-5 rounded-6 hvr-grow" id="login-container">
+        <!-- Login Icon -->
+        <div class="">
+          <i id="login--icon" class="fa-solid fa-circle-user position-relative top-100 start-50 translate-middle mt-1"></i>
         </div>
+        <!-- Login Text -->
+        <div class="mb-4">
+          <h1 class="fw-bolder text-primary">Connectez-vous</h1>
+        </div>
+        <!-- Login Form Container -->
+        <div>
+          <form class="row g-4" id="login--form">
+            <!-- E-Mail Input -->
+            <div class="col-md-12">
+              <label for="email--input" class="form-label fs-5 mb-1">E-Mail</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="mx-auto fa-solid fa-circle-user input--icon fs-4 "></i></span>
+                <input type="email" class="p-3" id="email--input" placeholder="username@esi-sba.dz" />
+                <span class="check--container end-0 me-2 fs-4 ">
+                    <i class="valid--icon fa-solid fa-circle-check text-success d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
+                    <i class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
+                </span>
+              </div>
+              <div class="invalid-feedback fs-6 d-none">Enter une adresse e-mail valide</div>
+              <div class="valid-feedback fs-6 d-none">Email Valide</div>
+            </div>
+            <!-- Password Input -->
+            <div class="col-md-12 mb-3">
+              <label for="password--input" class="form-label fs-5 mb-1">Mot de passe</label>
+              <div class="input-group">
+                <span class="input-group-text text-center"><i class="mx-auto fa-solid fa-lock input--icon fs-4"></i></span>
+                <input type="password" class="p-3" id="password--input" placeholder="Mot de passe" />
+                <span class="check--container end-0 me-2 fs-4 animate__animated animate__fadeIn">
+                  <i class="valid--icon fa-solid fa-circle-check text-success d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
+                  <i class="invalid--icon fa-solid fa-circle-exclamation text-danger d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
+                </span>
+              </div>
+              <div class="invalid-feedback fs-6 d-none">Enter un mot de passe valide</div>
+              <div class="valid-feedback fs-6 d-none">Mot de passe valide</div>
+            </div>
+            <!-- Submit -->
+            <div class="col-12 d-flex align-items-center">
+              <button class="btn btn-primary btn-lg disabled me-auto" type="submit" id="login--btn">Connexion</button>
+              <a href="#" class="fs-5 link-primary fw-bold">Mot de passe oublié ?</a>
+            </div>
+          </form>
+        </div> <!-- Login Form Container End -->
+      </div> <!-- Login Container End -->
     </div>
-</div>
-@endsection
+    <!-- Login Container -->
+  </div>
+</body>

@@ -22,7 +22,15 @@ use App\Http\Controllers\Configure\RolesAssignmentController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
+});
+
+Route::get('/profil', function () {
+    return view('profil');
+});
+
+Route::get('/members', function () {
+    return view('members');
 });
 
 Route::get('google', function () {
