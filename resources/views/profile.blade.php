@@ -9,7 +9,7 @@
     <div class="container-fluid p-0" style="min-height: 100vh">
         <div class="row p-0 g-0">
             <!-- Side Bar -->
-            <div class="col d-flex align-items-center justify-content-center border">side bar</div>
+            @include("./include/sideBar")
             <!-- Middle Part -->
             <div class="col-md-7 animate__animated animate__fadeIn animate__delay-0.5s ">
                 <!-- Wrapper -->
@@ -152,107 +152,16 @@
                             </div>
                         </form>
                     </div>
-                    <!-- Button trigger modal -->
                 </div> <!-- Wrapper End--->
             </div> <!-- Middle Part END -->
-            <!-- Actu Bar -->
-            <div class="col-md-3 d-flex align-items-center justify-content-center border">actu</div>
+            <!-- Notifications Bar -->
+            @include("./include/notificationsPage");
             <!-- Modal Save Photo -->
-            <div class="d-none animate__animated animate__fadeIn modal_bg--default" id="profil_photo--modal">
-                <div class="modal-dialog modal-dialog-centered animate__animated animate__fadeIn">
-                    <div class="modal-content animate__animated animate__fadeInDown" id="modal_photo--container">
-                        <!-- Modal Header -->
-                        <div class="modal-header" id="modal_photo--header">
-                            <h5 class="modal-title">Changer votre photo</h5>
-                            <button type="button" class="btn-close" aria-label="Close" id="close_photo--icon"></button>
-                        </div>
-                        <!-- Modal Body -->
-                        <div class="modal-body" id="modal_photo--body">
-                            <div class="container-fluid p-0">
-                                <div class="rounded-6  d-flex align-items-center justify-content-center"
-                                    id="modal_photo--bg">
-                                    <div class="text-center">
-                                        <i class="upload--icon fa-solid fa-cloud-arrow-up text-primary mb-2 "
-                                            id="upload_icon--default"></i>
-                                        <i class="bi bi-cloud-check-fill p-0 text-primary mb-0 d-none animate__animated animate__fadeIn"
-                                            id="upload_icon--success"></i>
-                                        <p class="fw-normal mb-0" id="img_profil--text">Aucune image sectionnée</p>
-                                        <p class="text-success mb-3 d-none" id="upload_image--success">Image Uploder
-                                            avec Succès</p>
-                                        <p class="text-danger mb-3 d-none" id="upload_image--error">Erreur lors du
-                                            chargement</p>
-                                        <form action="" class="mt-3">
-                                            <label for="profil_image--input" class="btn btn-primary"
-                                                id="upload_image--button">Uploder une image </label>
-                                            <input class="d-none" id="profil_image--input" type="file" accept="image/*">
-                                            <input class="d-none" type="submit" id="submit_image--input">
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Modal Footer -->
-                        <div class="container-fluid p-2 d-flex" id="moda_photo--footer">
-                            <button type="button" class="btn btn-outline-secondary me-auto fw-bold"
-                                data-bs-dismiss="modal" id="close_photo--button">Fermer</button>
-                            <button type="button" class="btn btn-primary fw-bold disabled"
-                                id="save_profil--button">Sauvgarder</button>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- Modal Save Photo End -->
+            @include("./include/addPictureModal")
             <!-- Modal Confirm Password -->
-            <div class="animate__animated animate__fadeIn d-none modal_bg--default" id="password--modal">
-                <div class="modal-dialog modal-dialog-centered animate__animated animate__fadeIn">
-                    <div class="modal-content animate__animated animate__fadeInDown">
-                        <!-- Modal Header -->
-                        <div class="modal-header" id="modal_password--header">
-                            <h5 class="modal-title">Changement mot de passe</h5>
-                            <button type="button" class="btn-close" aria-label="Close"
-                                id="close_password--icon"></button>
-                        </div>
-                        <!-- Modal Body -->
-                        <div class="modal-body" id="modal_password--body">
-                            <p>Êtes-vous sûr de vouloir changer votre mot de passe ?</p>
-                        </div>
-                        <!-- Modal Footer -->
-                        <div class="container-fluid p-2 d-flex" id="modal_password--footer">
-                            <button type="button" class="btn btn-outline-secondary me-auto fw-bold"
-                                data-bs-dismiss="modal" id="close_password--button">Fermer</button>
-                            <button class="btn btn-secondary text-primary fw-bold me-2"
-                                id="cancel_password--button">Annuler</button>
-                            <button type="button" class="btn btn-primary fw-bold"
-                                id="save_password--button">Confirmer</button>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- Modal Save Photo End -->
+            @include("./include/confirmPasswordChangeModal")
             <!-- Modal Disconnect -->
-            <div class="animate__animated animate__fadeIn d-none modal_bg--default" id="disconnect--modal">
-                <div class="modal-dialog modal-dialog-centered animate__animated animate__fadeIn">
-                    <div class="modal-content animate__animated animate__fadeInDown">
-                        <!-- Modal Header -->
-                        <div class="modal-header" id="modal_disconnect--header">
-                            <h5 class="modal-title">Déconnexion</h5>
-                            <button type="button" class="btn-close" aria-label="Close"
-                                id="close_disconnect--icon"></button>
-                        </div>
-                        <!-- Modal Body -->
-                        <div class="modal-body" id="modal_disconnect--body">
-                            <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
-                        </div>
-                        <!-- Modal Footer -->
-                        <div class="container-fluid p-2 d-flex" id="modal_disconnect--footer">
-                            <button type="button" class="btn btn-outline-secondary me-auto fw-bold"
-                                data-bs-dismiss="modal" id="close_disconnect--button">Fermer</button>
-                            <button class="btn btn-secondary text-primary fw-bold me-2"
-                                id="cancel_disconnect--button">Annuler</button>
-                            <button type="button" class="btn btn-primary fw-bold"
-                                id="save_disconnect--button">Confirmer</button>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- Modal Disconnect  End -->
+            @include("./include/confirmDisconnectModal")
         </div>
     </div>
 </body>
