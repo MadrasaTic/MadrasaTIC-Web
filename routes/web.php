@@ -1,10 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CheckController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+
+use App\Http\Controllers\CheckController;
 
 use App\Http\Controllers\Configure\PermissionsController;
 use App\Http\Controllers\Configure\RolesController;
@@ -21,17 +26,7 @@ use App\Http\Controllers\Configure\RolesAssignmentController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth/login');
-});
-
-Route::get('/profil', function () {
-    return view('profil');
-});
-
-Route::get('/members', function () {
-    return view('members');
-});
+Route::get('/', [LoginController::class, 'showLoginForm']);
 
 Route::get('google', function () {
     return view('googleAuth');
@@ -40,10 +35,27 @@ Route::get('google', function () {
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
 
-Auth::routes();
+// Authentication Routes...
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+// Registration Routes...
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
+
+// Password Reset Routes...
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('resetPasswordFromLogin');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm']);
+Route::post('password/reset', [ResetPasswordController::class, 'reset']);
+
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {    
+    Route::get('/members', function () {
+        return view('members');
+    });
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');

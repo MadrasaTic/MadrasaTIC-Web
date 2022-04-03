@@ -18,13 +18,14 @@
         </div>
         <!-- Login Form Container -->
         <div>
-          <form class="row g-4" id="login--form">
+          <form method="POST" action="{{ route('login') }}" class="row g-4" id="login--form">
+            @csrf
             <!-- E-Mail Input -->
             <div class="col-md-12">
               <label for="email--input" class="form-label fs-5 mb-1">E-Mail</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="mx-auto fa-solid fa-circle-user input--icon fs-4 "></i></span>
-                <input type="email" class="p-3" id="email--input" placeholder="username@esi-sba.dz" />
+                <input name="email" type="email" class="p-3" id="email--input" placeholder="username@esi-sba.dz" />
                 <span class="check--container end-0 me-2 fs-4 ">
                     <i class="valid--icon fa-solid fa-circle-check text-success d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
                     <i class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -38,7 +39,7 @@
               <label for="password--input" class="form-label fs-5 mb-1">Mot de passe</label>
               <div class="input-group">
                 <span class="input-group-text text-center"><i class="mx-auto fa-solid fa-lock input--icon fs-4"></i></span>
-                <input type="password" class="p-3" id="password--input" placeholder="Mot de passe" />
+                <input name="password" type="password" class="p-3" id="password--input" placeholder="Mot de passe" />
                 <span class="check--container end-0 me-2 fs-4 animate__animated animate__fadeIn">
                   <i class="valid--icon fa-solid fa-circle-check text-success d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
                   <i class="invalid--icon fa-solid fa-circle-exclamation text-danger d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -50,7 +51,7 @@
             <!-- Submit -->
             <div class="col-12 d-flex align-items-center">
               <button class="btn btn-primary btn-lg disabled me-auto" type="submit" id="login--btn">Connexion</button>
-              <a href="#" class="fs-5 link-primary fw-bold">Mot de passe oublié ?</a>
+              <a href="{{ route('resetPasswordFromLogin') }}" class="fs-5 link-primary fw-bold">Mot de passe oublié ?</a>
             </div>
           </form>
         </div> <!-- Login Form Container End -->
