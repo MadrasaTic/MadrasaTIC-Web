@@ -111,7 +111,7 @@ class profileView extends View{
         this.#btnSavePassword.addEventListener("click", ()=> {
             this.#modalPassword.classList.add("d-none");
             this.#previousPassword.value = this.#newPassword.value = "";
-            location.reload();
+            document.querySelector("#password_save--submit").click();
         })
 
         this.#btnSave.addEventListener("click", (e) => {

@@ -13,6 +13,11 @@ window.addEventListener("load", function() {
         profileView.generateFormArray();
         profileView.infoFormValidation();
         profileView.modalsHanlder();
+        window.addEventListener("keydown", (e) => {
+            if (e.key == "Enter") {
+                e.preventDefault();
+            }
+        })
         // profileView.clearInputs();
     }
     if (window.location.pathname.slice(1) == "members") {
