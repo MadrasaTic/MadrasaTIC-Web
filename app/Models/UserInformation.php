@@ -10,4 +10,9 @@ class UserInformation extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'first_name', 'last_name', 'phone_number', 'avatar_path', 'position_id'];
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
 }

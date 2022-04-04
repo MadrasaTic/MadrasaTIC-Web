@@ -13,7 +13,7 @@ window.addEventListener("load", function() {
         profileView.generateFormArray();
         profileView.infoFormValidation();
         profileView.modalsHanlder();
-        profileView.clearInputs();
+        // profileView.clearInputs();
     }
     if (window.location.pathname.slice(1) == "members") {
         membersView.setDefaultOption();

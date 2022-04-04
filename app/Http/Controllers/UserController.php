@@ -40,24 +40,26 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Place  $place
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
     {
+        $user = $request->user()->load(['userInformation.position']);
+        // dd($user->toArray());
         return view('profile', [
             'request' => $request,
-            'user' => $request->user(),
+            'user' => $user,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Place  $place
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Place $place)
+    public function edit()
     {
         //
     }
@@ -66,21 +68,26 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Place  $place
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Place $place)
+    public function update(Request $request)
     {
-        //
+        dd($request);
+        $user = $request->user()->load(['userInformation.position']);
+        $user->userInformation->first_name = $request->first_name;
+        $user->userInformation->last_name = $request->last_name;
+        $user->userInformation->first_name = $request->first_name;
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Place  $place
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Place $place)
+    public function destroy(User $user)
     {
         //
     }

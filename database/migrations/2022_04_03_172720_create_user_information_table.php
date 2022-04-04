@@ -13,12 +13,12 @@ class CreateUserInformationTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_informations', function (Blueprint $table) {
+        Schema::create('user_information', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('phone_number');
-            $table->string('avatar_path');
+            $table->string('phone_number')->nullable();
+            $table->string('avatar_path')->nullable();
             $table->unsignedBigInteger('position_id');
             $table->timestamps();
             $table->primary('user_id');
@@ -32,6 +32,6 @@ class CreateUserInformationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_informations');
+        Schema::dropIfExists('user_information');
     }
 }
