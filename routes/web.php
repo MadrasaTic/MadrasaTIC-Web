@@ -55,6 +55,7 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset']);
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/profile', [UserController::class, 'show'])->name('profile');
     Route::post('/profile', [UserController::class, 'update']);
+    Route::post('/profile/updatePassword', [UserController::class, 'updatePassword'])->name('updatePasswordFromProfile');
 
     Route::get('/members', function () {
         return view('members');

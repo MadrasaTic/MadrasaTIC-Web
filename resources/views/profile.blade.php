@@ -22,8 +22,8 @@
                             <div class="rounded-circle bg-secondary me-5" id="profile-picture"></div>
                             <div>
                                 <h3 class="mb-1">{{ $user->userInformation->last_name }}<span
-                                        class="fw-normal"> {{ $user->userInformation->first_name }}</span></h3>
-                                <p class="fs-5">{{ $user->userInformation->position->name }}</p>
+                                        class="fw-normal"> {{ $user->userInformation->last_name }}</span></h3>
+                                <p class="fs-5">{{ $user->userInformation->position->first_name }}</p>
                                 <button class="btn btn-secondary btn-lg align-self-center text-primary fs-6 fw-bold"
                                     id="change_photo--button">
                                     <i class="fa-solid fa-pen-to-square me-1"></i> CHANGER LA PHOTO
@@ -41,7 +41,7 @@
                             <div class="col-md-6 p-3">
                                 <label for="fname--input" class="form-label">Nom</label>
                                 <div class="input-group">
-                                    <input name="first_name" class="w-100 p-3" type="text" id="fname--input"
+                                    <input name="last_name" class="w-100 p-3" type="text" id="fname--input"
                                         placeholder="{{ $user->userInformation->last_name }}" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i
@@ -56,7 +56,7 @@
                             <div class="col-md-6 p-3">
                                 <label for="lname--input" class="form-label">Prénom</label>
                                 <div class="input-group">
-                                    <input name="last_name" class="w-100 p-3" type="text" id="lname--input"
+                                    <input name="first_name" class="w-100 p-3" type="text" id="lname--input"
                                         placeholder="{{ $user->userInformation->first_name }}" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i
@@ -108,13 +108,13 @@
                     <p class="text-lead mb-3">Mot de Passe</p>
                     <!-- Profile Change Password -->
                     <div class="">
-                        <form class="row" id="password--form">
+                        <form method="POST" action="{{ route('updatePasswordFromProfile') }}" class="row" id="password--form">
                             <div class="row">
                                 <div class="col-md-6 p-3">
                                     <label for="previous_password--input" class="form-label">Ancien mot de
                                         passe</label>
                                     <div class="input-group">
-                                        <input class="w-100 p-3" type="password" id="previous_password--input"
+                                        <input name="previous_password" class="w-100 p-3" type="password" id="previous_password--input"
                                             placeholder="Ancien mot de passe" />
                                         <span class="check--container end-0 me-2 fs-4">
                                             <i
@@ -135,7 +135,7 @@
                             <div class="col-md-6 p-3">
                                 <label for="new_password--input" class="form-label">Nouveau mot de passe</label>
                                 <div class="input-group">
-                                    <input class="w-100 p-3" type="password" id="new_password--input"
+                                    <input name="new_password" class="w-100 p-3" type="password" id="new_password--input"
                                         placeholder="Nouveau mot de passe" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i
@@ -151,8 +151,8 @@
                                 <label for="confirm_password--input" class="form-label">Confirmer le mot de
                                     passe</label>
                                 <div class="input-group">
-                                    <input class="w-100 p-3" type="password" id="confirm_password--input"
-                                        placeholder="Nouveau mot de passe" />
+                                    <input name="confirm_password" class="w-100 p-3" type="password" id="confirm_password--input"
+                                        placeholder="Confirmez votre mot de passe" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i
                                             class="valid--icon fa-solid fa-circle-check text-success d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -165,7 +165,7 @@
                             </div>
                             <div class="col-md-6 d-flex align-items-center justify-content-center p-3 mt-2 mb-5"
                                 id="this_div">
-                                <button class="btn btn-primary disabled" id="btn--save" type="submit"><i
+                                <button class="btn btn-primary" id="btn--save" type="submit"><i
                                         class="fa-solid fa-bookmark me-2"></i>Sauvgarder</button>
                             </div>
                             <div class="col-md-6 d-flex align-items-center justify-content-center p-3 mt-2 mb-5">

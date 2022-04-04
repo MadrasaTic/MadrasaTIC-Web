@@ -7,8 +7,8 @@ class profileView extends View{
     // Forms
     #formInfos = "";
     #formPassword = "";
-    // Modals 
-    #inputFirstName = document.querySelector("#fname--input"); 
+    // Modals
+    #inputFirstName = document.querySelector("#fname--input");
     #inputLastName = document.querySelector("#lname--input");
     #inputPhone = document.querySelector("#phone--input");
     #newPassword = document.querySelector("#new_password--input");
@@ -66,7 +66,7 @@ class profileView extends View{
             input.addEventListener("input", (e) => {
                 this._renderInputValidation(e.target, input.type)();
                 this._enableSaveBtn();
-            }); 
+            });
         })
     }
 
@@ -113,16 +113,16 @@ class profileView extends View{
             this.#previousPassword.value = this.#newPassword.value = "";
             location.reload();
         })
-        
+
         this.#btnSave.addEventListener("click", (e) => {
             e.preventDefault()
-            this.#modalPassword.classList.remove("d-none"); 
+            this.#modalPassword.classList.remove("d-none");
         })
 
         this.#iconClosePassword.addEventListener("click", () => {
             this.#modalPassword.classList.add("d-none");
         })
-        
+
         this.#btnChangePhoto.addEventListener("click", () => {
             this.#modalProfilImage.classList.remove("d-none")
         })
@@ -139,7 +139,7 @@ class profileView extends View{
             console.log(this.#btnSaveProfil);
             if (e.target.value) {
                 imgName = String(this.#inputProfilImage.value).split("\\").slice(-1).join("");
-                this.#textProfilImage.textContent = imgName;        
+                this.#textProfilImage.textContent = imgName;
                 this.#btnUploadSuccess.classList.remove("d-none");
                 this.#btnSaveProfil.classList.remove("disabled");
                 this.#iconSuccessUpload.classList.remove("d-none");

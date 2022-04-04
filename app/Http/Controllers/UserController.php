@@ -73,11 +73,48 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        dd($request);
+        // dd($request);
         $user = $request->user()->load(['userInformation.position']);
         $user->userInformation->first_name = $request->first_name;
         $user->userInformation->last_name = $request->last_name;
-        $user->userInformation->first_name = $request->first_name;
+        $user->userInformation->phone_number = $request->phone_number;
+        $user->userInformation->save();
+        return \Redirect::route('profile')->with('message', 'User has been updated!');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        dd($request);
+        $this->validate($request, [
+
+            'oldpassword' => 'required',
+            'newpassword' => 'required',
+        ]);
+
+
+
+        $hashedPassword = Auth::user()->password;
+
+        if (\Hash::check($request->oldpassword , $hashedPassword )) {
+
+            if (!\Hash::check($request->newpassword , $hashedPassword)) {
+
+                $users =admin::find(Auth::user()->id);
+                $users->password = bcrypt($request->newpassword);
+                admin::where( 'id' , Auth::user()->id)->update( array( 'password' =>  $users->password));
+
+                session()->flash('message','password updated successfully');
+                return redirect()->back();
+            } else {
+                    session()->flash('message','new password can not be the old password!');
+                    return redirect()->back();
+            }
+
+        } else {
+            session()->flash('message','old password doesnt matched ');
+            return redirect()->back();
+        }
+
 
     }
 

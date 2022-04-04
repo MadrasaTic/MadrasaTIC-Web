@@ -14,6 +14,7 @@ class CreateUserInformationTable extends Migration
     public function up()
     {
         Schema::create('user_information', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('first_name');
             $table->string('last_name');
@@ -21,7 +22,6 @@ class CreateUserInformationTable extends Migration
             $table->string('avatar_path')->nullable();
             $table->unsignedBigInteger('position_id');
             $table->timestamps();
-            $table->primary('user_id');
         });
     }
 
