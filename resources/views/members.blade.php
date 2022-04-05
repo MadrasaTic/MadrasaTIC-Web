@@ -70,26 +70,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($members as $member)
                             <tr>
-                                <th class="py-3" scope="row">1</th>
-                                <td>BAGHDADLI Mohammed Yacine</td>
-                                <td>my.baghdadli@esi-sba.dz</td>
-                                <td>Etudiant</td>
+                                <th class="py-3" scope="row">{{ $member['id'] }}</th>
+                                <td>{{ $member['userinformation']['first_name'].' '.$member['userinformation']['last_name'] }}</td>
+                                <td>{{ $member['email'] }}</td>
+                                <td>{{ $member['userinformation']['position']['name'] }}</td>
                                 <td>
                                     <a href="#" class="modify--button me-3 fw-bold">Consulter</a>
                                     <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <th class="py-3" scope="row">1</th>
-                                <td>BAGHDADLI Mohammed Yacine</td>
-                                <td>my.baghdadli@esi-sba.dz</td>
-                                <td>Etudiant</td>
-                                <td>
-                                    <a href="#" class="modify--button me-3 fw-bold">Consulter</a>
-                                    <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
