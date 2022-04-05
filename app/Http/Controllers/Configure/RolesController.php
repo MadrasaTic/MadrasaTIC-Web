@@ -23,10 +23,6 @@ class RolesController extends Controller
 
     public function index()
     {
-        /*return View::make('laratrust::panel.roles.index', [
-            'roles' => $this->rolesModel::withCount('permissions')
-                ->simplePaginate(10),
-        ]);*/
         return View::make('roles', [
             'roles' => $this->rolesModel::withCount('permissions')->simplePaginate(10),
         ]);
@@ -57,7 +53,6 @@ class RolesController extends Controller
             'display_name' => 'nullable|string',
             'description' => 'nullable|string',
         ]);
-
         $role = $this->rolesModel::create($data);
         $role->syncPermissions($request->get('permissions') ?? []);
 
