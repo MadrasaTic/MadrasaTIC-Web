@@ -21,9 +21,7 @@
                             <div class="container-fluid p-0">
                                 <!-- Add Permission -->
                                 <div class="d-none" id="permissions_add--body">
-                                    
                                     @include("./include/permissionsFormAdd")
-                                    
                                 </div>
                                 <!-- Modify Permisison -->
                                 <div class="d-none" id="permissions_modify--body">
@@ -32,6 +30,7 @@
                                 <!-- Remove Body -->
                                 <p class="d-none" id="remove--body">
                                     Êtes vous sûr de vous supprimer cet élément ?
+                                    <input type="submit" value="Submit" >
                                 </p>
                             </div>
                         </div>
