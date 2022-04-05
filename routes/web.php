@@ -25,7 +25,7 @@ use App\Http\Controllers\Configure\RolesAssignmentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// views
 Route::get('/', [LoginController::class, 'showLoginForm']);
 
 Route::get('google', function () {
@@ -40,7 +40,7 @@ Route::get('/permissions', function () {
     return view('permissions');
 });
 
-
+//====================================================================================================
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
 
@@ -63,13 +63,13 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset']);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/profile', [UserController::class, 'show'])->name('profile');
+    //Route::get('/profile', [UserController::class, 'show'])->name('profile');
     Route::post('/profile', [UserController::class, 'update']);
     Route::post('/profile/updatePassword', [UserController::class, 'updatePassword'])->name('updatePasswordFromProfile');
 
-    Route::get('/members', function () {
-        return view('members');
-    });
+    //Route::get('/members', function () {
+      //  return view('members');
+    //});
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
@@ -81,14 +81,26 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     });
 
     Route::middleware(['HasPermission'])->group(function () {
+        
+         //Route::resource('/permissions', PermissionsController::class, ['as' => 'configure'])
+           //  ->only(['index', 'create', 'store', 'edit', 'update']);
 
-        // Route::resource('/permissions', PermissionsController::class, ['as' => 'configure'])
-        //     ->only(['index', 'create', 'store', 'edit', 'update']);
-
-        // Route::resource('/roles', RolesController::class, ['as' => 'configure']);
+         //Route::resource('/roles', RolesController::class, ['as' => 'configure']);
 
         Route::resource('/roles-assignment', RolesAssignmentController::class, ['as' => 'configure'])
             ->only(['index', 'edit', 'update']);
         });
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+Route::get('/members', function () {
+    return view('members');
+});
+
+Route::get('/profile', [UserController::class, 'show'])->name('profile');
+
+Route::post('/permissions',[PermissionsController::class,'store'])->name('permissions');
+Route::get('/permissions',[PermissionsController::class,'index'])->name('permissions');
+Route::get('edit/{id}',[PermissionsController::class,'edit']);
+Route::post('/permission',[PermissionsController::class,'update'])->name('permissions');
