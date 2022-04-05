@@ -1,4 +1,4 @@
-<form method="POST" action="/permissions" class="row" id="modal--form">
+<form method="POST" action="/permissions/{id}" class="row" id="modal--form">
 @csrf
     <div class="mb-4 col-md-12">
         <div class="input-group">

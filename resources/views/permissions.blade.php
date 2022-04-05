@@ -77,7 +77,7 @@
                                 <td>{{$permission['name']}}</td>
                                 <td>{{$permission['description']}}</td>
                                 <td>
-                                    <a href={{"permissions/".$permission['id']}}
+                                    <a href={{'permissions/'.$permission['id']}}
                                         class="modify--button consult--link link-primary me-3 fw-bold">Modifier</a>
                                     <a href={{"/permissions/delete/".$permissions['id']}} class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
