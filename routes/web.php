@@ -34,9 +34,14 @@ Route::get('google', function () {
 
 /*Route::get('/roles', function () {
     return view('roles');
-});
-*/
+});*/
 Route::get('/roles',[RolesController::class,'index'])->name('roles');
+Route::post('/roles',[RolesController::class,'store'])->name('roles');
+// Route::post('/roles',[RolesController::class,'update']);
+
+Route::get('/roles/{id}',[RolesController::class,'edit']);
+Route::get('/roles/delete/{id}','App\Http\Controllers\RolesController@delete');
+
 
 Route::get('/permissions', function () {
     return view('permissions');
@@ -97,6 +102,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/members', 'App\Http\Controllers\MemberController@show');
+Route::post('/members', 'App\Http\Controllers\MemberController@create');
 
 Route::get('/profile', [UserController::class, 'show'])->name('profile');
 
@@ -104,3 +110,5 @@ Route::post('/permissions',[PermissionsController::class,'store'])->name('permis
 Route::get('/permissions',[PermissionsController::class,'index'])->name('permissions');
 Route::get('edit/{id}',[PermissionsController::class,'edit']);
 Route::post('/permission',[PermissionsController::class,'update'])->name('permissions');
+
+
