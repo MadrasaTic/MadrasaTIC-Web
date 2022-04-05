@@ -21,11 +21,11 @@
                             <div class="container-fluid p-0">
                                 <!-- Add Membre -->
                                 <div class="d-none" id="members_add--body">
-                                    @include("./include/membersForm")
+                                    @include("./include/membersFormAdd")
                                 </div>
                                 <!-- Modfiy Membre -->
                                 <div class="d-none" id="members_modify--body">
-                                    @include("./include/membersForm")
+                                    @include("./include/membersFormUpdate")
                                 </div>
                                 <!-- Remove Body -->
                                 <p class="d-none" id="remove--body">

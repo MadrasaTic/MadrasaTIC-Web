@@ -21,11 +21,11 @@
                             <div class="container-fluid p-0">
                                 <!-- Add Rôle -->
                                 <div class="d-none" id="roles_add--body">
-                                    @include("./include/rolesForm")
+                                        @include("./include/rolesFormAdd")
                                 </div>
                                 <!-- Modify Rôle -->
                                 <div class="d-none" id="roles_modify--body">
-                                    @include("./include/rolesForm")
+                                    @include("./include/rolesFormUpdate")
                                 </div>
                                 <!-- Remove Body -->
                                 <p class="d-none" id="remove--body">
@@ -75,7 +75,7 @@
                                 <td>{{ $role['display_name'] }}</td>
                                 <td>{{ $role['permissions_count'] }}</td>
                                 <td>
-                                    <a href="#" class="modify--button link-primary me-3 fw-bold">Modifier</a>
+                                    <a href="{{ 'roles/'.$role['id'] }}" class="modify--button link-primary me-3 fw-bold">Modifier</a>
                                     <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
                             </tr>
