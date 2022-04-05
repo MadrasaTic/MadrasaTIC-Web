@@ -82,9 +82,9 @@ class Members extends View {
             })
         })
 
-        this.#modalSaveButton.addEventListener("click", () => {
-            this.#btnSubmit.click();
-        })
+        // this.#modalSaveButton.addEventListener("click", () => {
+        //     this.#btnSubmit.click();
+        // })
     }
 
 }
