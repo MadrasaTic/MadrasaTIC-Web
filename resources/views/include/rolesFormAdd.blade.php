@@ -1,3 +1,4 @@
+<form class="row" id="modal--form" action="/roles" method="POST">
     @csrf
     <div class="mb-4 col-md-12">
         <div class="input-group">
@@ -58,4 +59,4 @@
         </div>
     </div>
     <input type="submit" value="" id="submit--button" hidden>
-
+</form>
