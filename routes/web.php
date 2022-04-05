@@ -102,5 +102,6 @@ Route::get('/profile', [UserController::class, 'show'])->name('profile');
 
 Route::post('/permissions',[PermissionsController::class,'store'])->name('permissions');
 Route::get('/permissions',[PermissionsController::class,'index'])->name('permissions');
-Route::get('edit/{id}',[PermissionsController::class,'edit']);
-Route::post('/permission',[PermissionsController::class,'update'])->name('permissions');
+Route::get('/permissions/{id}',[PermissionsController::class,'edit']);
+Route::post('/permissions',[PermissionsController::class,'update']);
+Route::get('/permissions/delete/{id}',[PermissionsController::class,'delete']);

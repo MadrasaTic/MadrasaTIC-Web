@@ -52,7 +52,7 @@ class PermissionsController extends Controller
     {
         $permission = $this->permissionModel::findOrFail($id);
 
-        return View::make('laratrust::panel.edit', [
+        return View::make('permissions', [
             'model' => $permission,
             'type' => 'permission',
         ]);
@@ -71,5 +71,11 @@ class PermissionsController extends Controller
 
         Session::flash('laratrust-success', 'Permission updated successfully');
         return redirect(route('permissions'));
+    }
+    public function delete($id){
+        dd($id);
+        $permissions=permissionModel::find($id);
+        $permissions->delete();
+        return redirect('permissions');
     }
 }

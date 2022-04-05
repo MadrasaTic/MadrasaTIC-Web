@@ -21,17 +21,13 @@
                             <div class="container-fluid p-0">
                                 <!-- Add Permission -->
                                 <div class="d-none" id="permissions_add--body">
-                                    <form method="POST" action="/permissions" class="row" id="modal--form">
-                                        @csrf
-                                        @include("./include/permissionsForm")
-                                    </form>
+                                    
+                                    @include("./include/permissionsFormAdd")
+                                    
                                 </div>
                                 <!-- Modify Permisison -->
                                 <div class="d-none" id="permissions_modify--body">
-                                    <form method="POST" action="/permissions" class="row" id="modal--form">
-                                        @csrf
-                                        @include("./include/permissionsForm")
-                                    </form>
+                                    @include("./include/permissionsFormUpdate")
                                 </div>
                                 <!-- Remove Body -->
                                 <p class="d-none" id="remove--body">
@@ -75,15 +71,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($permissions as $permission)
+                            @foreach($permissions  as $permission)
                             <tr>
                                 <th class="py-3" scope="row">{{$permission['id']}}</th>
                                 <td>{{$permission['name']}}</td>
                                 <td>{{$permission['description']}}</td>
                                 <td>
-                                    <a href="#"
+                                    <a href={{"permissions/".$permission['id']}}
                                         class="modify--button consult--link link-primary me-3 fw-bold">Modifier</a>
-                                    <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
+                                    <a href={{"/permissions/delete/".$permissions['id']}} class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
                             </tr>
                             @endforeach
