@@ -21,7 +21,7 @@
                         <div class="d-flex align-items-center">
                             <div class="rounded-circle bg-secondary me-5" id="profile-picture"></div>
                             <div>
-                                <h3 class="mb-1">{{ $user->userInformation->last_name }}<span
+                                <h3 class="mb-1">{{ $user->userInformation->name }}<span
                                         class="fw-normal"> {{ $user->userInformation->last_name }}</span></h3>
                                 <p class="fs-5">{{ $user->userInformation->position->first_name }}</p>
                                 <button class="btn btn-secondary btn-lg align-self-center text-primary fs-6 fw-bold"

@@ -32,11 +32,11 @@ Route::get('google', function () {
     return view('googleAuth');
 });
 
-Route::get('roles', function () {
+Route::get('/roles', function () {
     return view('roles');
 });
 
-Route::get('permissions', function () {
+Route::get('/permissions', function () {
     return view('permissions');
 });
 
