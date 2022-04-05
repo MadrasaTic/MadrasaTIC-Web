@@ -73,9 +73,9 @@
                             @foreach($members as $member)
                             <tr>
                                 <th class="py-3" scope="row">{{ $member['id'] }}</th>
-                                <td>{{ $member['userinformation']['first_name'].' '.$member['userinformation']['last_name'] }}</td>
+                                <td>{{ $member['name'] }}</td>
                                 <td>{{ $member['email'] }}</td>
-                                <td>{{ $member['userinformation']['position']['name'] }}</td>
+                                <td>{{ $member['userinformation']['position']['name'] ?? $member['role'] }}</td>
                                 <td>
                                     <a href="#" class="modify--button me-3 fw-bold">Consulter</a>
                                     <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>

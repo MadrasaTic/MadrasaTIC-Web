@@ -1,8 +1,8 @@
-<form class="row" id="modal--form" method="POST" action="/members/add">
+<form class="row" id="modal--form" method="POST" action="/members">
     @csrf
     <div class="mb-4 col-md-12">
         <div class="input-group">
-            <input type="text" class="modal--input w-100 p-3" placeholder="Nom" />
+            <input type="text" class="modal--input w-100 p-3" placeholder="Nom" name="last_name"/>
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -15,7 +15,7 @@
     </div>
     <div class="mb-4 col-md-12">
         <div class="input-group">
-            <input type="text" class="modal--input w-100 p-3" placeholder="Prénom" />
+            <input type="text" class="modal--input w-100 p-3" placeholder="Prénom" name="first_name"/>
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -28,7 +28,7 @@
     </div>
     <div class="mb-4 col-md-12">
         <div class="input-group">
-            <input type="email" class="modal--input w-100 p-3" placeholder="Email" />
+            <input type="email" class="modal--input w-100 p-3" placeholder="Email" name="email"/>
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -42,7 +42,7 @@
     </div>
     <div class="mb-4 col-md-12">
         <div class="input-group">
-            <input type="password" class="modal--input w-100 p-3" placeholder="Mot de passe" />
+            <input type="password" class="modal--input w-100 p-3" placeholder="Mot de passe" name="password"/>
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -55,8 +55,8 @@
     </div>
     <div class="col-md-12">
         <div class="input-group">
-            <select class="w-100 p-3">
-                <option selected>Admin</option>
+            <select class="w-100 p-3" name="position">
+                <option value="admin" selected>Admin</option>
             </select>
         </div>
     </div>

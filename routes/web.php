@@ -74,6 +74,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/profile', [UserController::class, 'update']);
     Route::post('/profile/updatePassword', [UserController::class, 'updatePassword'])->name('updatePasswordFromProfile');
 
+    Route::post('/members', 'App\Http\Controllers\MemberController@store');
+
     //Route::get('/members', function () {
       //  return view('members');
     //});
@@ -102,7 +104,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/members', 'App\Http\Controllers\MemberController@show');
-Route::post('/members', 'App\Http\Controllers\MemberController@create');
 
 Route::get('/profile', [UserController::class, 'show'])->name('profile');
 
