@@ -69,23 +69,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($roles as $role)
                             <tr>
-                                <th class="py-3" scope="row">1</th>
-                                <td>Admin</td>
-                                <td>6</td>
+                                <th class="py-3" scope="row">{{ $role['id'] }}</th>
+                                <td>{{ $role['display_name'] }}</td>
+                                <td>{{ $role['permissions_count'] }}</td>
                                 <td>
                                     <a href="#" class="modify--button link-primary me-3 fw-bold">Modifier</a>
                                     <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <th class="py-3" scope="row">1</th>
-                                <td>Admin</td>
-                                <td>6</td>
-                                <td>
-                                    <a href="#" class="modify--button link-primary me-3 fw-bold">Modifier</a>
-                                    <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
-                                </td>
+                            @endforeach
                             </tr>
                         </tbody>
                     </table>
