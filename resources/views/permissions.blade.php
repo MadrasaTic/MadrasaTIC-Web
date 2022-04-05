@@ -24,7 +24,7 @@
                                     <form class="row" id="modal--form">
                                         <div class="mb-4 col-md-12">
                                             <div class="input-group">
-                                                <input type="text" class="moda--input w-100 p-3"
+                                                <input type="text" class="modal--input w-100 p-3"
                                                     placeholder="Nom/Code" />
                                                 <span class=" check--container end-0 me-2 fs-4 ">
                                                     <i
