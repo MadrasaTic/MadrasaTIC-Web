@@ -1,4 +1,4 @@
-// Module Import 
+// Module Import
 import loginView from "./Views/loginView.js";
 import profileView from "./Views/profileView.js";
 import membersView from "./Views/membersView.js"
@@ -11,11 +11,11 @@ window.addEventListener("load", function() {
     }
     if (window.location.pathname.slice(1) == "profile") {
         profileView.generateFormArray();
-        profileView.infoFormValidation();
+        // profileView.infoFormValidation();
         profileView.modalsHanlder();
         window.addEventListener("keydown", (e) => {
             if (e.key == "Enter") {
-                e.preventDefault();
+                // e.preventDefault();
             }
         })
         // profileView.clearInputs();
