@@ -2814,7 +2814,7 @@ textarea.form-control-lg {
   margin-top: 0.25rem;
   font-size: 0.875em;
   color: #35F9AE;
-  transition: all .5s linear; 
+  transition: all .5s linear;
 }
 
 .valid-tooltip {
@@ -11326,5 +11326,23 @@ textarea.form-control-lg {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.4); 
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* NEEDS MORE WORK */
+
+.notification-bottom {
+    position: fixed;
+    width: calc(100vw-20px);
+    bottom: 0;
+    right: 20px;
+    z-index: 5;
+    /* Rest of your styling */
+}
+
+.notification-close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    /* This are approximated values, and the rest of your styling goes here */
 }
