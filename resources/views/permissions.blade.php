@@ -20,66 +20,17 @@
                         <div class="modal-body">
                             <div class="container-fluid p-0">
                                 <!-- Add Permission -->
-                                <div class="d-none" id="permissions--body">
+                                <div class="d-none" id="permissions_add--body">
                                     <form method="POST" action="/permissions" class="row" id="modal--form">
                                         @csrf
-                                        <div class="mb-4 col-md-12">
-                                            <div class="input-group">
-                                                <input name="code" type="text" class="modal--input w-100 p-3"
-                                                    placeholder="Code" />
-                                                <span class=" check--container end-0 me-2 fs-4 ">
-                                                    <i
-                                                        class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
-                                                    <i
-                                                        class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
-                                                </span>
-                                            </div>
-                                            <div class="invalid-feedback fs-6 d-none">Enter un code valide</div>
-                                            <div class="valid-feedback fs-6 d-none">Code valide</div>
-                                        </div>
-                                        <div class="mb-4 col-md-12">
-                                            <div class="input-group">
-                                                <input name="name" type="text" class="modal--input  w-100 p-3"
-                                                    placeholder="Name" />
-                                                <span class=" check--container end-0 me-2 fs-4 ">
-                                                    <i
-                                                        class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
-                                                    <i
-                                                        class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
-                                                </span>
-                                            </div>
-                                            <div class="invalid-feedback fs-6 d-none">Enter un name valide</div>
-                                            <div class="valid-feedback fs-6 d-none">Name valide</div>
-                                        </div>
-                                        <div class="mb-4 col-md-12">
-                                            <div class="input-group">
-                                                <input name="display_name" type="text" class="modal--input  w-100 p-3"
-                                                    placeholder="display_name" />
-                                                <span class=" check--container end-0 me-2 fs-4 ">
-                                                    <i
-                                                        class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
-                                                    <i
-                                                        class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
-                                                </span>
-                                            </div>
-                                            <div class="invalid-feedback fs-6 d-none">Enter un nom valide</div>
-                                            <div class="valid-feedback fs-6 d-none">Nom valide</div>
-                                        </div>
-                                        <div class="mb-4 col-md-12">
-                                            <div class="input-group">
-                                                <textarea name="description" class="w-100 p-3" placeholder="Déscription de la permission"
-                                                    style="height: 25vh"></textarea>
-                                                <span class="check--container end-0 me-2 fs-4 d-none ">
-                                                    <i
-                                                        class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
-                                                    <i
-                                                        class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
-                                                </span>
-                                            </div>
-                                            <div class="invalid-feedback fs-6 d-none">Enter un nom valide</div>
-                                            <div class="valid-feedback fs-6 d-none">Nom valide</div>
-                                        </div>
-                                        <input type="submit" value="" id="submit--button" hidden> 
+                                        @include("./include/permissionsForm")
+                                    </form>
+                                </div>
+                                <!-- Modify Permisison -->
+                                <div class="d-none" id="permissions_modify--body">
+                                    <form method="POST" action="/permissions" class="row" id="modal--form">
+                                        @csrf
+                                        @include("./include/permissionsForm")
                                     </form>
                                 </div>
                                 <!-- Remove Body -->
@@ -125,17 +76,17 @@
                         </thead>
                         <tbody>
                             @foreach($permissions as $permission)
-                                <tr>
-                                    <th class="py-3" scope="row">{{$permission['id']}}</th>
-                                    <td>{{$permission['name']}}</td>
-                                    <td>{{$permission['description']}}</td>
-                                    <td>
-                                        <a href="#" class="modify--button consult--link link-primary me-3 fw-bold">Modifier</a>
-                                        <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <th class="py-3" scope="row">{{$permission['id']}}</th>
+                                <td>{{$permission['name']}}</td>
+                                <td>{{$permission['description']}}</td>
+                                <td>
+                                    <a href="#"
+                                        class="modify--button consult--link link-primary me-3 fw-bold">Modifier</a>
+                                    <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
+                                </td>
+                            </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>

@@ -43,12 +43,21 @@ class Members extends View {
     dipslayHideModal () {
         const closeBtns = [this.#modalCloseButton, this.#modalCloseIcon];
 
-        [this.#btnAdd, ...this.#btnModify].forEach((btn) => {
+        this.#btnAdd.addEventListener("click", (e) => {
+                e.preventDefault()
+                this.#modalContainer.classList.remove("d-none");
+                document.querySelector(`#${this.#currentPage}_add--body`).classList.remove("d-none");
+                document.querySelector("#modal--title").textContent = "Ajouter une Permission";
+                this._inputsCheck();
+        })
+
+
+        this.#btnModify.forEach((btn) => {
             btn.addEventListener("click", (e) => {
                 e.preventDefault()
                 this.#modalContainer.classList.remove("d-none");
-                document.querySelector(`#${this.#currentPage}--body`).classList.remove("d-none");
-                document.querySelector("#modal--title").textContent = "Ajouter une Permission";
+                document.querySelector(`#${this.#currentPage}_modify--body`).classList.remove("d-none");
+                document.querySelector("#modal--title").textContent = "Modifier la Permission";
                 this._inputsCheck();
             })
         })
@@ -65,7 +74,8 @@ class Members extends View {
         closeBtns.forEach(btn => {
             btn.addEventListener("click", () => {
                 this.#modalContainer.classList.add("d-none");
-                document.querySelector(`#${this.#currentPage}--body`).classList.add("d-none");
+                document.querySelector(`#${this.#currentPage}_add--body`).classList.add("d-none");
+                document.querySelector(`#${this.#currentPage}_modify--body`).classList.add("d-none");
                 document.querySelector("#remove--body").classList.add("d-none");
                 this.#modalSaveButton.classList.add("disabled");
                 document.querySelector("#modal--title").textContent = "";
