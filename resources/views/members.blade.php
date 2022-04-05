@@ -21,11 +21,11 @@
                         <div class="modal-body">
                             <div class="container-fluid p-0">
                                 <!-- Add Membre -->
-                                <div class="" id="members--body">
+                                <div class="d-none" id="members--body">
                                     <form class="row" id="modal--form">
                                         <div class="mb-4 col-md-12">
                                             <div class="input-group">
-                                                <input type="text" class="members--inputs w-100 p-3"
+                                                <input type="text" class="modal--input w-100 p-3"
                                                     placeholder="Nom" />
                                                 <span class="check--container end-0 me-2 fs-4 ">
                                                     <i
@@ -39,7 +39,7 @@
                                         </div>
                                         <div class="mb-4 col-md-12">
                                             <div class="input-group">
-                                                <input type="text" class="members--inputs w-100 p-3"
+                                                <input type="text" class="modal--input w-100 p-3"
                                                     placeholder="Prénom" />
                                                 <span class="check--container end-0 me-2 fs-4 ">
                                                     <i
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="mb-4 col-md-12">
                                             <div class="input-group">
-                                                <input type="email" class="members--inputs w-100 p-3"
+                                                <input type="email" class="modal--input w-100 p-3"
                                                     placeholder="Email" />
                                                 <span class="check--container end-0 me-2 fs-4 ">
                                                     <i
@@ -68,7 +68,7 @@
                                         </div>
                                         <div class="mb-4 col-md-12">
                                             <div class="input-group">
-                                                <input type="password" class="members--inputs w-100 p-3"
+                                                <input type="password" class="modal--input w-100 p-3"
                                                     placeholder="Mot de passe" />
                                                 <span class="check--container end-0 me-2 fs-4 ">
                                                     <i

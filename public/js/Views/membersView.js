@@ -2,7 +2,7 @@
 import View from "./View.js"
 
 class Members extends View {
-       // Buttons
+    // Buttons
     #btnAdd = document.querySelector("#add--button");
     #btnModify = Array.from(document.querySelectorAll(".modify--button"));
     #btnRemove = Array.from(document.querySelectorAll(".remove--button"));
@@ -13,17 +13,15 @@ class Members extends View {
     #modalCloseIcon = document.querySelector("#close--icon");
     // Form
     #modalForm = "";
-    #btnSubmit = document.querySelector("#submit--button")
+    #btnSubmit = document.querySelector("#submit--button");
+    #currentPage = window.location.pathname.slice(1);
     
-
-    testFunction() {
-        console.log(this.#btnModify);
-    }
 
     generateFormTable() {
         this.#modalForm = Array.from(document.querySelector("#modal--form").elements)
-        .filter (input => ((input.tagName == "INPUT") && (input.type != "submit")));
+        .filter (input => input.classList.contains("modal--input"));
     }
+
 
     _inputsCheck() {
         this.#modalForm.forEach((input) => {
@@ -49,10 +47,9 @@ class Members extends View {
             btn.addEventListener("click", (e) => {
                 e.preventDefault()
                 this.#modalContainer.classList.remove("d-none");
-                document.querySelector("#members--body").classList.remove("d-none");
+                document.querySelector(`#${this.#currentPage}--body`).classList.remove("d-none");
                 document.querySelector("#modal--title").textContent = "Ajouter une Permission";
                 this._inputsCheck();
-                console.log(btn);
             })
         })
 
@@ -68,7 +65,7 @@ class Members extends View {
         closeBtns.forEach(btn => {
             btn.addEventListener("click", () => {
                 this.#modalContainer.classList.add("d-none");
-                document.querySelector("#members--body").classList.add("d-none");
+                document.querySelector(`#${this.#currentPage}--body`).classList.add("d-none");
                 document.querySelector("#remove--body").classList.add("d-none");
                 this.#modalSaveButton.classList.add("disabled");
                 document.querySelector("#modal--title").textContent = "";
