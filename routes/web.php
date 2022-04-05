@@ -32,9 +32,11 @@ Route::get('google', function () {
     return view('googleAuth');
 });
 
-Route::get('/roles', function () {
+/*Route::get('/roles', function () {
     return view('roles');
 });
+*/
+Route::get('/roles',[RolesController::class,'index'])->name('roles');
 
 Route::get('/permissions', function () {
     return view('permissions');
@@ -94,9 +96,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-Route::get('/members', function () {
-    return view('members');
-});
+Route::get('/members', 'App\Http\Controllers\MemberController@show');
 
 Route::get('/profile', [UserController::class, 'show'])->name('profile');
 
