@@ -76,16 +76,20 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required|numeric',
-        ]);
-
         $user = $request->user()->load(['userInformation.position']);
-        $user->userInformation->first_name = $request->first_name;
-        $user->userInformation->last_name = $request->last_name;
-        $user->userInformation->phone_number = $request->phone_number;
+
+        if ($request['first_name'] != '' && $request['first_name'] != null) {
+            $user->userInformation->first_name = $request->first_name;
+        }
+        if ($request['last_name'] != '' && $request['last_name'] != null) {
+            $user->userInformation->last_name = $request->last_name;
+        }
+        if ($request['phone_number'] != '' && $request['phone_number'] != null) {
+            $this->validate($request, [
+                'phone_number' => 'required|numeric',
+            ]);
+            $user->userInformation->phone_number = $request->phone_number;
+        }
         $user->userInformation->save();
         return \Redirect::route('profile')->with('message', 'Vos informations ont été mit a jour avec succès');
     }
