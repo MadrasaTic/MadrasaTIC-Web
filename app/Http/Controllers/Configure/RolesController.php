@@ -56,16 +56,16 @@ class RolesController extends Controller
             'description' => 'nullable|string',
         ]);*/
         $data = [
-            'name' => $request->get('name'), 
-            'display_name' => $request->get('display_name'), 
-            'description' => $request->get('description'), 
+            'name' => $request->get('name'),
+            'display_name' => $request->get('display_name'),
+            'description' => $request->get('description'),
 
         ];
 
-        $role = $this->rolesModel::create($data); 
-        $role->syncPermissions($request->get('list') ?? []);
+        $role = $this->rolesModel::create($data);
+        $role->syncPermissions($request->get('permissions') ?? []);
 
-        Session::flash('laratrust-success', 'Role created successfully');
+        Session::flash('success', 'Rôle créé avec succès');
         return redirect()->back();
     }
 
@@ -76,7 +76,7 @@ class RolesController extends Controller
             ->findOrFail($id);
         return $role;
         if (!Helper::roleIsEditable($role)) {
-            Session::flash('laratrust-error', 'The role is not editable');
+            Session::flash('error', 'Le rôle n\'est pas modifiable');
             return redirect()->back();
         }
 
@@ -101,7 +101,7 @@ class RolesController extends Controller
         $role = $this->rolesModel::findOrFail($id);
 
         if (!Helper::roleIsEditable($role)) {
-            Session::flash('laratrust-error', 'The role is not editable');
+            Session::flash('error', 'Le rôle n\'est pas modifiable');
             return redirect()->back();
         }
 
@@ -113,7 +113,7 @@ class RolesController extends Controller
         $role->update($data);
         $role->syncPermissions($request->get('permissions') ?? []);
 
-        Session::flash('laratrust-success', 'Role updated successfully');
+        Session::flash('success', 'Rôle mis à jour avec succès');
         return redirect(route('configure.roles.index'));
     }
 
@@ -125,14 +125,14 @@ class RolesController extends Controller
         $role = $this->rolesModel::findOrFail($id);
 
         if (!Helper::roleIsDeletable($role)) {
-            Session::flash('laratrust-error', 'The role is not deletable');
+            Session::flash('error', 'Le rôle ne peut pas être supprimé');
             return redirect()->back();
         }
 
         if ($usersAssignedToRole > 0) {
-            Session::flash('laratrust-warning', 'Role is attached to one or more users. It can not be deleted');
+            Session::flash('warning', 'Le rôle est attaché à un ou plusieurs utilisateurs. Il ne peut pas être supprimé');
         } else {
-            Session::flash('laratrust-success', 'Role deleted successfully');
+            Session::flash('success', 'Rôle supprimé avec succès');
             $this->rolesModel::destroy($id);
         }
 
