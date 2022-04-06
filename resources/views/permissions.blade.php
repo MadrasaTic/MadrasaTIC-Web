@@ -51,7 +51,7 @@
             <!-- Side Bar -->
             @include("./include/sideBar")
             <!-- Profile -->
-            <div class="col-md-7" style="min-height: 100vh">
+            <div class="p-4 col-md-7" style="min-height: 100vh">
                 <!-- Header -->
                 <h3 class="fw-bold mt-6 mb-4">Permissions</h3>
                 <div class="px-4">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <!-- Permission Table -->
-                <div class="p-4 mt-5" id="permissions--table">
+                <div class=" mt-5" id="permissions--table">
                     <table class="table table-responsive text-center align-middle">
                         <thead id="permissions--thead">
                             <tr>

@@ -14,7 +14,7 @@
             <!-- Middle Part -->
             <div class="col-md-7 animate__animated animate__fadeIn animate__delay-0.5s ">
                 <!-- Wrapper -->
-                <div class="col-lg-10 col-md-12 mx-auto">
+                <div class="col-lg-11 col-md-12 mx-auto">
                     <!-- Profile Header -->
                     <h3 class="fw-bold mt-6 mb-1">Mon profile</h3>
                     <div id="profile--header" class="">

@@ -51,7 +51,7 @@
             <!-- Side Bar -->
             @include("./include/sideBar")
             <!-- Table -->
-            <div class="col-md-7" style="min-height: 100vh">
+            <div class=" p-4 col-md-7" style="min-height: 100vh">
                 <!-- Header -->
                 <h3 class="fw-bold mt-6 mb-4">Membres</h3>
                 <div class="px-4">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <!-- Members Table -->
-                <div class=" p-4 mt-5" id="members--table">
+                <div class=" mt-5" id="members--table">
                     <table class="table table-responsive text-center align-middle">
                         <thead id="members--thead">
                             <tr>
