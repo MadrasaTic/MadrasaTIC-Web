@@ -14,6 +14,7 @@ use App\Http\Controllers\CheckController;
 use App\Http\Controllers\Configure\PermissionsController;
 use App\Http\Controllers\Configure\RolesController;
 use App\Http\Controllers\Configure\RolesAssignmentController;
+use App\Http\Controllers\MembersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,15 +33,23 @@ Route::get('google', function () {
     return view('googleAuth');
 });
 
-Route::get('/roles', function () {
+/*Route::get('/roles', function () {
     return view('roles');
-});
+});*/
+Route::get('/roles',[RolesController::class,'index'])->name('roles');
+Route::post('/roles/{id}',[RolesController::class,'update']);
+Route::post('/roles/delete/{id}',[RolesController::class,'delete']);
 
 Route::get('/permissions', function () {
     return view('permissions');
 });
 
 Route::resource('/roles', RolesController::class, ['as' => 'configure']);
+
+Route::resource('/members', MembersController::class);
+Route::get('/members',[MembersController::class,'index'])->name('members');
+Route::post('/members/{id}',[MembersController::class,'update']);
+Route::post('/members/delete/{id}',[MembersController::class,'delete']);
 
 
 //====================================================================================================
@@ -71,6 +80,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/profile/updatePassword', [UserController::class, 'updatePassword'])->name('updatePasswordFromProfile');
     Route::post('/profile/uploadProfilePicture', [UserController::class, 'uploadProfilePicture'])->name('uploadProfilePicture');
 
+    // Route::post('/members', 'App\Http\Controllers\MemberController@store');
+    // Route::post('/members/edit/{id}', 'App\Http\Controllers\MemberController@update');
+    // Route::post('/members/delete/{id}', 'App\Http\Controllers\MemberController@softDelete');
+
     //Route::get('/members', function () {
       //  return view('members');
     //});
@@ -85,7 +98,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     });
 
     Route::middleware(['HasPermission'])->group(function () {
-        
+
          //Route::resource('/permissions', PermissionsController::class, ['as' => 'configure'])
            //  ->only(['index', 'create', 'store', 'edit', 'update']);
 
@@ -98,14 +111,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-Route::get('/members', function () {
-    return view('members');
-});
+// Route::get('/members', 'App\Http\Controllers\MemberController@show');
 
 Route::get('/profile', [UserController::class, 'show'])->name('profile');
 
 Route::post('/permissions',[PermissionsController::class,'store'])->name('permissions');
 Route::get('/permissions',[PermissionsController::class,'index'])->name('permissions');
+
 Route::get('/permissions/{id}',[PermissionsController::class,'edit']);
 Route::post('/permissions/{id}',[PermissionsController::class,'update']);
 Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);

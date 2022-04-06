@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
+use App\Models\Permission;
+
 
 class RolesController extends Controller
 {
@@ -23,10 +25,9 @@ class RolesController extends Controller
 
     public function index()
     {
-        return View::make('laratrust::panel.roles.index', [
-            'roles' => $this->rolesModel::withCount('permissions')
-                ->simplePaginate(10),
-        ]);
+                $permissions = Permission::all();
+        $roles = $this->rolesModel::withCount('permissions')->simplePaginate(20);
+        return View('roles', compact('roles', 'permissions'));
     }
 
     public function create()
@@ -49,17 +50,23 @@ class RolesController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        /*$data = $request->validate([
             'name' => 'required|string|unique:roles,name',
             'display_name' => 'nullable|string',
             'description' => 'nullable|string',
-        ]);
+        ]);*/
+        $data = [
+            'name' => $request->get('name'), 
+            'display_name' => $request->get('display_name'), 
+            'description' => $request->get('description'), 
 
-        $role = $this->rolesModel::create($data);
-        $role->syncPermissions($request->get('permissions') ?? []);
+        ];
+
+        $role = $this->rolesModel::create($data); 
+        $role->syncPermissions($request->get('list') ?? []);
 
         Session::flash('laratrust-success', 'Role created successfully');
-        return redirect(route('configure.roles.index'));
+        return redirect()->back();
     }
 
     public function edit($id)
@@ -110,7 +117,7 @@ class RolesController extends Controller
         return redirect(route('configure.roles.index'));
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
         $usersAssignedToRole = DB::table(Config::get('laratrust.tables.role_user'))
             ->where(Config::get('laratrust.foreign_keys.role'), $id)
@@ -132,3 +139,5 @@ class RolesController extends Controller
         return redirect(route('configure.roles.index'));
     }
 }
+
+

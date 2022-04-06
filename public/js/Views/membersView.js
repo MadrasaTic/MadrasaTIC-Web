@@ -1,4 +1,3 @@
-
 import View from "./View.js";
 
 
@@ -18,7 +17,7 @@ class Members extends View {
     #btnSubmit = document.querySelector("#submit--button");
     #currentPage = window.location.pathname.slice(1);
     #Obj
-    
+
 
     generateFormTable() {
         this.#modalForm = Array.from(document.querySelector("#modal--form").elements)
@@ -29,17 +28,20 @@ class Members extends View {
 
     async displayUpdateData(currentPage, id) {
 
-        const data = await fetch(`/${currentPage}/${id}`).then(function(response) {
+        let data = await fetch(`/${currentPage}/${id}/edit`).then(function(response) {
             return response.json();
         }).then(function(data) {
             return data
         })
 
-        console.log(data);
+        const {user_information} = data;
+        data = {...user_information, ...data}
+
+        // console.log(objet2);
 
         this.#modalUpdateForm.forEach((input) => {
             const inputText = input.id
-            input.value = data[`${inputText}`];
+            input.value = data[`${inputText}`]?? null;
         })
     }
 
@@ -90,9 +92,8 @@ class Members extends View {
                 document.querySelector("#modal--title").textContent = "Modifier la Permission";
                 this._inputsCheck();
                 const id = +e.target.href.split('/').slice(-1)
-                document.querySelector("#modal_update--form").action = `/permissions/${id}`
-                this.displayUpdateData("permissions", id)
-                this.testFunction("modify")
+                document.querySelector("#modal_update--form").action = `/${this.#currentPage}/${id}`
+                this.displayUpdateData(`${this.#currentPage}`, id)
             })
         })
 
@@ -101,7 +102,7 @@ class Members extends View {
                 e.preventDefault()
                 const id = +e.target.href.split('/').slice(-1)
                 console.log(id)
-                document.querySelector("#modal_delete--form").action = `/permissions/delete/${id}`
+                document.querySelector("#modal_delete--form").action = `/${this.#currentPage}/delete/${id}`
 
                 this.#modalContainer.classList.remove("d-none");
                 document.querySelector("#remove--body").classList.remove("d-none");
