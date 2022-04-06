@@ -20,10 +20,11 @@
                                 avec Succès</p>
                             <p class="text-danger mb-3 d-none" id="upload_image--error">Erreur lors du
                                 chargement</p>
-                            <form action="" class="mt-3">
+                            <form action="{{ route('uploadProfilePicture') }}" class="mt-3" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <label for="profil_image--input" class="btn btn-primary"
                                     id="upload_image--button">Uploder une image </label>
-                                <input class="d-none" id="profil_image--input" type="file" accept="image/*">
+                                <input name="profilePicture" class="d-none" id="profil_image--input" type="file" accept="image/*">
                                 <input class="d-none" type="submit" id="submit_image--input">
                             </form>
                         </div>
@@ -39,4 +40,4 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
