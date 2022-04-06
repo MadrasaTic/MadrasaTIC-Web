@@ -171,7 +171,7 @@
                                 </div>
                                 <div class="invalid-feedback fs-6 d-none">Le mot de passe ne correspond pas</div>
                                 <div class="valid-feedback fs-6 d-none">Mot de passe valide</div>
-                                <button type="submit" id="password_save--submit" value="submit" > </button>
+                                <button type="submit" id="password_save--submit" value="submit" hidden></button>
                             </div>
                             <div class="col-md-6 d-flex align-items-center justify-content-center p-3 mt-2 mb-5"
                                 id="this_div">
