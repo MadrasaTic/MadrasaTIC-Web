@@ -42,7 +42,7 @@
                         <div class="modal-footer p-2 d-flex">
                             <button type="button" class="btn btn-outline-secondary me-auto fw-bold"
                                 id="modal_close--button">Fermer</button>
-                            <button type="button" class="btn btn-primary fw-bold disabled"
+                            <button type="button" class="btn btn-primary fw-bold "
                                 id="modal_save--button">Enregister</button>
                         </div>
                     </div>
