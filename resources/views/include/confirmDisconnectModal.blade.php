@@ -16,7 +16,11 @@
                     id="close_disconnect--button">Fermer</button>
                 <button class="btn btn-secondary text-primary fw-bold me-2"
                     id="cancel_disconnect--button">Annuler</button>
-                <button type="button" class="btn btn-primary fw-bold" id="save_disconnect--button">Confirmer</button>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-primary fw-bold"
+                        id="save_disconnect--button">Confirmer</button>
+                </form>
             </div>
         </div>
     </div>
