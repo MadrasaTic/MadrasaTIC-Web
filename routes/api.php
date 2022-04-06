@@ -20,3 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/login/{provider}', [AuthAPIController::class,'redirectToProvider']);
 Route::get('/auth/{provider}/callback', [AuthAPIController::class,'handleProviderCallback']);
+
+Route::post('requestToken', [AuthAPIController::class, 'requestToken']);
+Route::post('requestTokenGoogle', [AuthAPIController::class, 'requestTokenGoogle']);
