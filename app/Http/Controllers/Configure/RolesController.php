@@ -26,7 +26,7 @@ class RolesController extends Controller
     public function index()
     {
                 $permissions = Permission::all();
-        $roles = $this->rolesModel::withCount('permissions')->simplePaginate(10);
+        $roles = $this->rolesModel::withCount('permissions')->simplePaginate(20);
         return View('roles', compact('roles', 'permissions'));
     }
 
@@ -50,13 +50,20 @@ class RolesController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        /*$data = $request->validate([
             'name' => 'required|string|unique:roles,name',
             'display_name' => 'nullable|string',
             'description' => 'nullable|string',
-        ]);
-        $role = $this->rolesModel::create($data);
-        $role->syncPermissions($request->get('permissions') ?? []);
+        ]);*/
+        $data = [
+            'name' => $request->get('name'), 
+            'display_name' => $request->get('display_name'), 
+            'description' => $request->get('description'), 
+
+        ];
+
+        $role = $this->rolesModel::create($data); 
+        $role->syncPermissions($request->get('list') ?? []);
 
         Session::flash('laratrust-success', 'Role created successfully');
         return redirect()->back();
