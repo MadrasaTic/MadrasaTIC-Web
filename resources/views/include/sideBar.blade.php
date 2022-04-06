@@ -7,7 +7,7 @@
 <div class="col d-flex align-items-start justify-content-center " id="sidebar--container"> 
     <div id="sidebar--top" class="d-flex align-items-center justify-content-center border-danger" >
             <div class="h-auto w-100 ">
-                <h3 class="text-primary ms-1 fw-bold">Menu</h3>
+                <h3 class="text-primary ms-3 fw-bold">Menu</h3>
                 <div name="qsdf" class="h-auto w-100 h4 mt-4  sidebar_links">
                     <span name=""><i class="fa-solid fa-warning p-3 ms-3 me-1"></i>Signalement</span>
                 </div>
