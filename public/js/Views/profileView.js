@@ -52,7 +52,11 @@ class profileView extends View{
 
     infoFormValidation() {
         this.#formInfos.forEach((input) => {
-            input.addEventListener("focus", this._renderFocusValidation);
+            input.addEventListener("focus", (e) => {
+                this._renderInputValidation(e.target, input.type)();
+                this._enableModifyBtn();
+                console.log(input.type);
+            });
             input.addEventListener("blur", this._renderBlurValidation);
             input.addEventListener("input", (e) => {
                 this._renderInputValidation(e.target, input.type)();
@@ -61,7 +65,11 @@ class profileView extends View{
             });
         })
         this.#formPassword.forEach((input) => {
-            input.addEventListener("focus", this._renderFocusValidation);
+            input.addEventListener("focus", (e) => {
+                this._renderInputValidation(e.target, input.type)();
+                this._enableModifyBtn();
+                console.log(input.type);
+            });
             input.addEventListener("blur", this._renderBlurValidation);
             input.addEventListener("input", (e) => {
                 this._renderInputValidation(e.target, input.type)();
