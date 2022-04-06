@@ -20,7 +20,7 @@ class PermissionsController extends Controller
     public function index()
     {
         return View::make('permissions', [
-            'permissions' => $this->permissionModel::simplePaginate(10),
+            'permissions' => $this->permissionModel::simplePaginate(25),
         ]);
     }
 
@@ -52,11 +52,9 @@ class PermissionsController extends Controller
     {
         $permission = $this->permissionModel::findOrFail($id);
 
-        return View::make('laratrust::panel.edit', [
-            'model' => $permission,
-            'type' => 'permission',
-        ]);
+        return $permission;
     }
+
 
     public function update(Request $request, $id)
     {
@@ -71,5 +69,11 @@ class PermissionsController extends Controller
 
         Session::flash('laratrust-success', 'Permission updated successfully');
         return redirect(route('permissions'));
+    }
+    public function delete($id){
+        
+        $permission = $this->permissionModel::findOrFail($id);
+        $permission->delete();
+        return redirect('permissions');
     }
 }

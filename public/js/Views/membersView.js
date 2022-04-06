@@ -1,5 +1,6 @@
 
-import View from "./View.js"
+import View from "./View.js";
+
 
 class Members extends View {
     // Buttons
@@ -13,14 +14,43 @@ class Members extends View {
     #modalCloseIcon = document.querySelector("#close--icon");
     // Form
     #modalForm = "";
+    #modalUpdateForm = "";
     #btnSubmit = document.querySelector("#submit--button");
     #currentPage = window.location.pathname.slice(1);
+    #Obj
     
 
     generateFormTable() {
         this.#modalForm = Array.from(document.querySelector("#modal--form").elements)
         .filter (input => input.classList.contains("modal--input"));
+        this.#modalUpdateForm = Array.from(document.querySelector("#modal_update--form").elements)
+        .filter (input => input.placeholder);
     }
+
+    async displayUpdateData(currentPage, id) {
+
+        const data = await fetch(`/${currentPage}/${id}`).then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            return data
+        })
+
+        console.log(data);
+
+        this.#modalUpdateForm.forEach((input) => {
+            const inputText = input.id
+            input.value = data[`${inputText}`];
+        })
+
+        
+    }
+
+    testFunction () {
+        this.#modalUpdateForm.forEach(input => {
+            console.log(input.name);
+        })
+    }
+
 
 
     _inputsCheck() {
@@ -59,6 +89,9 @@ class Members extends View {
                 document.querySelector(`#${this.#currentPage}_modify--body`).classList.remove("d-none");
                 document.querySelector("#modal--title").textContent = "Modifier la Permission";
                 this._inputsCheck();
+                const id = +e.target.href.split('/').slice(-1)
+                document.querySelector("#modal_update--form").action = `/permissions/${id}`
+                this.displayUpdateData("permissions", id)
             })
         })
 
@@ -82,9 +115,9 @@ class Members extends View {
             })
         })
 
-        this.#modalSaveButton.addEventListener("click", () => {
-            this.#btnSubmit.click();
-        })
+        // this.#modalSaveButton.addEventListener("click", () => {
+        //     this.#btnSubmit.click();
+        // })
     }
 
 }

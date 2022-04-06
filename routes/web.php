@@ -41,6 +41,9 @@ Route::get('/permissions', function () {
     return view('permissions');
 });
 
+Route::resource('/roles', RolesController::class, ['as' => 'configure']);
+
+
 //====================================================================================================
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
@@ -93,7 +96,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
          //Route::resource('/permissions', PermissionsController::class, ['as' => 'configure'])
            //  ->only(['index', 'create', 'store', 'edit', 'update']);
 
-         //Route::resource('/roles', RolesController::class, ['as' => 'configure']);
+        //  Route::resource('/roles', RolesController::class, ['as' => 'configure']);
 
         Route::resource('/roles-assignment', RolesAssignmentController::class, ['as' => 'configure'])
             ->only(['index', 'edit', 'update']);
@@ -108,7 +111,7 @@ Route::get('/profile', [UserController::class, 'show'])->name('profile');
 
 Route::post('/permissions',[PermissionsController::class,'store'])->name('permissions');
 Route::get('/permissions',[PermissionsController::class,'index'])->name('permissions');
-Route::get('edit/{id}',[PermissionsController::class,'edit']);
-Route::post('/permission',[PermissionsController::class,'update'])->name('permissions');
 
-
+Route::get('/permissions/{id}',[PermissionsController::class,'edit']);
+Route::post('/permissions/{id}',[PermissionsController::class,'update']);
+Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);
