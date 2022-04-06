@@ -19,8 +19,9 @@ class MemberController extends Controller
 
     public function show(Request $request)
     {
-        dd(User::all());
-        $members = User::where("acivated", 1)->get()->load(['userInformation.position']);
+        // dd(User::all());
+        $members = User::where("acivated", 0)->get()->load(['userInformation.position']);
+        // $members = User::all()->load(['userInformation.position']);
         $roles = Role::all();
 
         return View('members', compact('members', 'roles'));
@@ -53,6 +54,17 @@ class MemberController extends Controller
 
         $user->save();
         return redirect()->back();
+    }
+
+    public function update(Request $request)
+    {
+        // dd($request);
+        $user = $request->user()->load(['userInformation.position']);
+        $user->userInformation->first_name = $request->first_name;
+        $user->userInformation->last_name = $request->last_name;
+        $user->userInformation->phone_number = $request->phone_number;
+        $user->userInformation->save();
+        return \Redirect::route('profile')->with('message', 'User has been updated!');
     }
 
     public function softDelete(Request $request, $id)

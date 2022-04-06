@@ -28,12 +28,9 @@
                                     @include("./include/membersFormUpdate")
                                 </div>
                                 <!-- Remove Body -->
-                                <form method="POST" action="{{ '/member/delete/'.$members[2] }}">
                                     <p class="d-none" id="remove--body">
                                     Êtes vous sûr de vous supprimer cet élément ?
                                     </p>
-                                    <button type="submit" class="remove--button link-danger fw-bold">Supprimer</button>
-                                </form>
                             </div>
                         </div>
                         <!-- Modal Footer -->

@@ -75,6 +75,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/profile/updatePassword', [UserController::class, 'updatePassword'])->name('updatePasswordFromProfile');
 
     Route::post('/members', 'App\Http\Controllers\MemberController@store');
+    Route::post('/members/edit/{id}', 'App\Http\Controllers\MemberController@update');
     Route::post('/members/delete/{id}', 'App\Http\Controllers\MemberController@softDelete');
 
     //Route::get('/members', function () {
