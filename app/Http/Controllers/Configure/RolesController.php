@@ -114,7 +114,7 @@ class RolesController extends Controller
         $role->syncPermissions($request->get('permissions') ?? []);
 
         Session::flash('success', 'Rôle mis à jour avec succès');
-        return redirect(route('configure.roles.index'));
+        return redirect(route('roles'));
     }
 
     public function delete($id)
@@ -136,7 +136,7 @@ class RolesController extends Controller
             $this->rolesModel::destroy($id);
         }
 
-        return redirect(route('configure.roles.index'));
+        return redirect(route('roles'));
     }
 }
 
