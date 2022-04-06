@@ -19,7 +19,8 @@ class MemberController extends Controller
 
     public function show(Request $request)
     {
-        $members = User::all()->load(['userInformation.position']);
+        dd(User::all());
+        $members = User::where("acivated", 1)->get()->load(['userInformation.position']);
         $roles = Role::all();
 
         return View('members', compact('members', 'roles'));
@@ -54,8 +55,11 @@ class MemberController extends Controller
         return redirect()->back();
     }
 
-    public function softDelete(Request $request)
+    public function softDelete(Request $request, $id)
     {
-        dd($request);
+        $user = User::find($id);
+        $user->acivated = 1;
+        $user->save();
+        dd($user);
     }
 }
