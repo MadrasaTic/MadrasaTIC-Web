@@ -6,10 +6,11 @@
 </head>
 
 <body>
+    @include('layouts.flash-messages')
     <div class="container-fluid p-0" style="min-height: 100vh">
         <div class="row p-0 g-0">
             <!-- Side Bar -->
-            @include("./include/sideBar")
+            @include('./include/sideBar')
             <!-- Middle Part -->
             <div class="col-md-7 animate__animated animate__fadeIn animate__delay-0.5s ">
                 <!-- Wrapper -->
@@ -19,11 +20,17 @@
                     <div id="profile--header" class="">
                         <br />
                         <div class="d-flex align-items-center">
-                            <div class="rounded-circle bg-secondary me-5" id="profile-picture"></div>
+                            <div class="rounded-circle bg-secondary me-5" id="profile-picture">
+                                @if (Auth::user()->userInformation->avatar_path)
+                                    <img id="profile-picture-image" class="image rounded-circle"
+                                        src="{{ asset('/storage/images/' . Auth::user()->userInformation->avatar_path) }}"
+                                        alt="{{ Auth::user()->userInformation->last_name }} {{ Auth::user()->userInformation->first_name }} profile_image">
+                                @endif
+                            </div>
                             <div>
                                 <h3 class="mb-1">{{ $user->userInformation->last_name }}<span
-                                        class="fw-normal"> {{ $user->userInformation->last_name }}</span></h3>
-                                <p class="fs-5">{{ $user->userInformation->position->first_name }}</p>
+                                        class="fw-normal"> {{ $user->userInformation->first_name }}</span></h3>
+                                <p class="fs-5">{{ $user->userInformation->position->name }}</p>
                                 <button class="btn btn-secondary btn-lg align-self-center text-primary fs-6 fw-bold"
                                     id="change_photo--button">
                                     <i class="fa-solid fa-pen-to-square me-1"></i> CHANGER LA PHOTO
@@ -108,14 +115,16 @@
                     <p class="text-lead mb-3">Mot de Passe</p>
                     <!-- Profile Change Password -->
                     <div class="">
-                        <form method="POST" action="{{ route('updatePasswordFromProfile') }}" class="row" id="password--form">
+                        <form method="POST" action="{{ route('updatePasswordFromProfile') }}" class="row"
+                            id="password--form">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6 p-3">
                                     <label for="previous_password--input" class="form-label">Ancien mot de
                                         passe</label>
                                     <div class="input-group">
-                                        <input name="previous_password" class="w-100 p-3" type="password" id="previous_password--input"
-                                            placeholder="Ancien mot de passe" />
+                                        <input name="previous_password" class="w-100 p-3" type="password"
+                                            id="previous_password--input" placeholder="Ancien mot de passe" />
                                         <span class="check--container end-0 me-2 fs-4">
                                             <i
                                                 class="valid--icon fa-solid fa-circle-check text-success d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -135,8 +144,8 @@
                             <div class="col-md-6 p-3">
                                 <label for="new_password--input" class="form-label">Nouveau mot de passe</label>
                                 <div class="input-group">
-                                    <input name="new_password" class="w-100 p-3" type="password" id="new_password--input"
-                                        placeholder="Nouveau mot de passe" />
+                                    <input name="new_password" class="w-100 p-3" type="password"
+                                        id="new_password--input" placeholder="Nouveau mot de passe" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i
                                             class="valid--icon fa-solid fa-circle-check text-success d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -151,8 +160,8 @@
                                 <label for="confirm_password--input" class="form-label">Confirmer le mot de
                                     passe</label>
                                 <div class="input-group">
-                                    <input name="confirm_password" class="w-100 p-3" type="password" id="confirm_password--input"
-                                        placeholder="Confirmez votre mot de passe" />
+                                    <input name="confirm_password" class="w-100 p-3" type="password"
+                                        id="confirm_password--input" placeholder="Confirmez votre mot de passe" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i
                                             class="valid--icon fa-solid fa-circle-check text-success d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -162,10 +171,10 @@
                                 </div>
                                 <div class="invalid-feedback fs-6 d-none">Le mot de passe ne correspond pas</div>
                                 <div class="valid-feedback fs-6 d-none">Mot de passe valide</div>
-                                <input type="submit" id="password_save--submit" value="" hidden>
+                                <button type="submit" id="password_save--submit" value="submit" hidden> </button>
                             </div>
                             <div class="col-md-6 d-flex align-items-center justify-content-center p-3 mt-2 mb-5"
-                                id="this_div">/
+                                id="this_div">
                                 <button class="btn btn-primary" id="btn--save"><i
                                         class="fa-solid fa-bookmark me-2"></i>Sauvgarder</button>
                             </div>
@@ -179,13 +188,13 @@
                 </div> <!-- Wrapper End--->
             </div> <!-- Middle Part END -->
             <!-- Notifications Bar -->
-            @include("./include/notificationsPage");
+            @include('./include/notificationsPage');
             <!-- Modal Save Photo -->
-            @include("./include/addPictureModal")
+            @include('./include/addPictureModal')
             <!-- Modal Confirm Password -->
-            @include("./include/confirmPasswordChangeModal")
+            @include('./include/confirmPasswordChangeModal')
             <!-- Modal Disconnect -->
-            @include("./include/confirmDisconnectModal")
+            @include('./include/confirmDisconnectModal')
         </div>
     </div>
 </body>
