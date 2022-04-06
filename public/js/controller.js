@@ -14,12 +14,12 @@ window.addEventListener("load", function() {
     if ((window.location.pathname.slice(1) == "login") || (window.location.pathname == "/") ) {
         loginView.generateFormArray();
         loginView.clearAllInputs();
-        // loginView.inputsCheck();
-        // window.addEventListener("keydown", (e) => {
-        //     if (e.key == "Enter") {
-        //         e.preventDefault();
-        //     }
-        // })
+        loginView.inputsCheck();
+        window.addEventListener("keydown", (e) => {
+            if (e.key == "Enter") {
+                e.preventDefault();
+            }
+        })
     }
     if (window.location.pathname.slice(1) == "profile") {
         profileView.generateFormArray();
@@ -36,6 +36,11 @@ window.addEventListener("load", function() {
         membersView.generateFormTable();
         membersView.testFunction();
         membersView.dipslayHideModal();
+        window.addEventListener("keydown", (e) => {
+            if (e.key == "Enter") {
+                e.preventDefault();
+            }
+        })
     }
 
     console.log("Js Fired");

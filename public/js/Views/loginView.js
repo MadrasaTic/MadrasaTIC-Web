@@ -5,7 +5,7 @@ class loginView extends View {
     #btnLogin = document.querySelector("#login--btn");
 
     generateFormArray() {
-        this.#formLogin = Array.from(document.querySelector("#login--form").elements).filter((input) => (input.placeholder));
+        this.#formLogin = Array.from(document.querySelector("#login--form").elements).filter((input) => (input.classList.contains("needs--validation")));
     }
 
     clearAllInputs () {
