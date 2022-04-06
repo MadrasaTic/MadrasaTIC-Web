@@ -73,7 +73,7 @@ class PermissionsController extends Controller
     public function delete($id){
         
         $permission = $this->permissionModel::findOrFail($id);
-        $permissions->delete();
+        $permission->delete();
         return redirect('permissions');
     }
 }

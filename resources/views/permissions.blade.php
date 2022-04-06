@@ -73,7 +73,7 @@
                             @foreach($permissions  as $permission)
                             <tr>
                                 <th class="py-3" scope="row">{{$permission['id']}}</th>
-                                <td>{{$permission['name']}}</td>
+                                <td>{{$permission['display_name']}}</td>
                                 <td>{{$permission['description']}}</td>
                                 <td>
                                     <a href={{'permissions/'.$permission['id']}}

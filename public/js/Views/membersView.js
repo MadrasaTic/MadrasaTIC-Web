@@ -38,7 +38,7 @@ class Members extends View {
         console.log(data);
 
         this.#modalUpdateForm.forEach((input) => {
-            const inputText = input.name
+            const inputText = input.id
             input.value = data[`${inputText}`];
         })
 
@@ -89,7 +89,8 @@ class Members extends View {
                 document.querySelector(`#${this.#currentPage}_modify--body`).classList.remove("d-none");
                 document.querySelector("#modal--title").textContent = "Modifier la Permission";
                 this._inputsCheck();
-                const id = +e.target.href.slice(-1)
+                const id = +e.target.href.split('/').slice(-1)
+                document.querySelector("#modal_update--form").action = `/permissions/${id}`
                 this.displayUpdateData("permissions", id)
             })
         })
