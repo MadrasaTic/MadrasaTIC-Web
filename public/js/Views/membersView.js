@@ -1,4 +1,3 @@
-
 import View from "./View.js";
 
 
@@ -18,7 +17,7 @@ class Members extends View {
     #btnSubmit = document.querySelector("#submit--button");
     #currentPage = window.location.pathname.slice(1);
     #Obj
-    
+
 
     generateFormTable() {
         this.#modalForm = Array.from(document.querySelector("#modal--form").elements)
@@ -29,20 +28,23 @@ class Members extends View {
 
     async displayUpdateData(currentPage, id) {
 
-        const data = await fetch(`/${currentPage}/${id}/edit`).then(function(response) {
+        let data = await fetch(`/${currentPage}/${id}/edit`).then(function(response) {
             return response.json();
         }).then(function(data) {
             return data
         })
 
-        console.log(data);
+        const {user_information} = data;
+        data = {...user_information, ...data}
+
+        // console.log(objet2);
 
         this.#modalUpdateForm.forEach((input) => {
             const inputText = input.id
-            input.value = data[`${inputText}`];
+            input.value = data[`${inputText}`]?? null;
         })
 
-        
+
     }
 
     testFunction() {
@@ -91,7 +93,7 @@ class Members extends View {
                 document.querySelector("#modal_update--form").action = `/${this.#currentPage}/${id}`
                 this.displayUpdateData(`${this.#currentPage}`, id)
             })
-        }) 
+        })
 
         this.#btnRemove.forEach(btn => {
             btn.addEventListener("click", (e) => {

@@ -28,9 +28,13 @@
                                     @include("./include/membersFormUpdate")
                                 </div>
                                 <!-- Remove Body -->
-                                    <p class="d-none" id="remove--body">
+                                <form action="/members" method="post" id="modal_delete--form">
+                                    @csrf
+                                <p class="d-none" id="remove--body">
                                     Êtes vous sûr de vous supprimer cet élément ?
-                                    </p>
+                                </p>
+                                <button type="submit">Confirmer</button>
+                                </form>
                             </div>
                         </div>
                         <!-- Modal Footer -->
@@ -73,15 +77,12 @@
                             @foreach($members as $member)
                             <tr>
                                 <th class="py-3" scope="row">{{ $member['id'] }}</th>
-                                <td>{{ $member['name'] }}</td>
+                                <td>{{ $member['userinformation']['last_name']. ' ' .$member['userinformation']['first_name'] }}</td>
                                 <td>{{ $member['email'] }}</td>
                                 <td>{{ $member['userinformation']['position']['name'] ?? $member[''] }}</td>
                                 <td>
-                                    <a href="#" class="modify--button me-3 fw-bold">Consulter</a>
-                                    <form method="POST" action="{{ '/members/delete/'.$member['id'] }}">
-                                        @csrf 
-                                        <button type="submit" class="remove--button link-danger fw-bold">Supprimer
-                                    </form>
+                                    <a href="{{ 'members/'.$member['id'] }}" class="modify--button me-3 fw-bold">Consulter</a>
+                                    <a href="{{ 'members/'.$member['id'] }}" class="remove--button link-danger fw-bold">{{ $member['acivated'] == 1 ? 'disactiver' : 'Activer' }}</a>
                                 </td>
                             </tr>
                             @endforeach
