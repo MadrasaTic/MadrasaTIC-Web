@@ -40,7 +40,7 @@ Route::post('/roles',[RolesController::class,'store'])->name('roles');
 // Route::post('/roles',[RolesController::class,'update']);
 
 Route::get('/roles/{id}',[RolesController::class,'edit']);
-Route::get('/roles/delete/{id}','App\Http\Controllers\RolesController@delete');
+Route::get('/roles/delete/{id}','App\Http\Controllers\RolesController@softDelete');
 
 
 Route::get('/permissions', function () {
@@ -75,7 +75,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/profile/updatePassword', [UserController::class, 'updatePassword'])->name('updatePasswordFromProfile');
 
     Route::post('/members', 'App\Http\Controllers\MemberController@store');
-    Route::post('/members/delete', 'App\Http\Controllers\MemberController@softDelete');
+    Route::post('/members/delete/{id}', 'App\Http\Controllers\MemberController@softDelete');
 
     //Route::get('/members', function () {
       //  return view('members');
