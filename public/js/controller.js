@@ -26,13 +26,14 @@ window.addEventListener("load", function() {
     }
     if ((window.location.pathname.slice(1) == "members") || (window.location.pathname.slice(1) == "roles") || (window.location.pathname.slice(1) == "permissions")) {
         // membersView.displayUpdateData("permissions", 1);
+        membersView.testFunction();
         membersView.generateFormTable();
         membersView.dipslayHideModal();
-        membersView.testFunction();
         // membersView.displayUpdateData("permissions", 1);
         // membersView.testFunction();
         // membersView.testFunction()
     }
+
 
 
 })

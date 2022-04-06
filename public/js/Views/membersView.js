@@ -45,10 +45,8 @@ class Members extends View {
         
     }
 
-    testFunction () {
-        this.#modalUpdateForm.forEach(input => {
-            console.log(input.name);
-        })
+    testFunction() {
+        console.log("Fired")
     }
 
 
@@ -84,7 +82,7 @@ class Members extends View {
 
         this.#btnModify.forEach((btn) => {
             btn.addEventListener("click", (e) => {
-                e.preventDefault()
+                e.preventDefault();
                 this.#modalContainer.classList.remove("d-none");
                 document.querySelector(`#${this.#currentPage}_modify--body`).classList.remove("d-none");
                 document.querySelector("#modal--title").textContent = "Modifier la Permission";
@@ -96,7 +94,12 @@ class Members extends View {
         })
 
         this.#btnRemove.forEach(btn => {
-            btn.addEventListener("click", () => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault()
+                const id = +e.target.href.split('/').slice(-1)
+                console.log(id)
+                document.querySelector("#modal_delete--form").action = `/permissions/delete/${id}`
+
                 this.#modalContainer.classList.remove("d-none");
                 document.querySelector("#remove--body").classList.remove("d-none");
                 this.#modalSaveButton.classList.remove("disabled");

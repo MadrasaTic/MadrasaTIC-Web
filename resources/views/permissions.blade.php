@@ -28,10 +28,13 @@
                                     @include("./include/permissionsFormUpdate")
                                 </div>
                                 <!-- Remove Body -->
-                                <p class="d-none" id="remove--body">
-                                    Êtes vous sûr de vous supprimer cet élément ?
-                                    <input type="submit" value="Submit" >
-                                </p>
+                                <form action="/permissions/" method="post" id="modal_delete--form">
+                                    @csrf
+                                    <p class="d-none" id="remove--body">
+                                        Êtes vous sûr de vous supprimer cet élément ?
+                                        <input type="submit" value="Submit" >
+                                    </p>
+                                </form>
                             </div>
                         </div>
                         <!-- Modal Footer -->
@@ -78,7 +81,7 @@
                                 <td>
                                     <a href={{'permissions/'.$permission['id']}}
                                         class="modify--button consult--link link-primary me-3 fw-bold">Modifier</a>
-                                    <a href={{"/permissions/delete/".$permissions['id']}} class="remove--button link-danger fw-bold">Supprimer</a>
+                                    <a href={{"/permissions/delete/".$permission['id']}} class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
                             </tr>
                             @endforeach
