@@ -166,6 +166,7 @@ class Members extends View {
                 this.#modalSaveButton.classList.add("disabled");
                 document.querySelector("#modal--title").textContent = "";
                 [...this.#modalForm, ...this.#modalUpdateForm].forEach((input) => this._renderQuitBlurValidation(input))
+                this.#checkBoxTable.forEach((checkBox) => checkBox.clicked = false)
             })
         })
 
