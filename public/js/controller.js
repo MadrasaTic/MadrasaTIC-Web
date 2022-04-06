@@ -25,13 +25,9 @@ window.addEventListener("load", function() {
         // profileView.clearInputs();
     }
     if ((window.location.pathname.slice(1) == "members") || (window.location.pathname.slice(1) == "roles") || (window.location.pathname.slice(1) == "permissions")) {
-        // membersView.displayUpdateData("permissions", 1);
-        membersView.testFunction();
+        // membersView.testFunction();
         membersView.generateFormTable();
         membersView.dipslayHideModal();
-        // membersView.displayUpdateData("permissions", 1);
-        // membersView.testFunction();
-        // membersView.testFunction()
     }
 
 

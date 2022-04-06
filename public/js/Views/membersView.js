@@ -41,13 +41,14 @@ class Members extends View {
             const inputText = input.id
             input.value = data[`${inputText}`];
         })
-
-        
     }
 
-    testFunction() {
-        console.log("Fired")
+    testFunction(type) {
+        this.#modalSaveButton.addEventListener("click", () => {
+                document.querySelector(`.${type}--submit`).click();
+            })
     }
+
 
 
 
@@ -77,6 +78,7 @@ class Members extends View {
                 document.querySelector(`#${this.#currentPage}_add--body`).classList.remove("d-none");
                 document.querySelector("#modal--title").textContent = "Ajouter une Permission";
                 this._inputsCheck();
+                this.testFunction("add")
         })
 
 
@@ -90,6 +92,7 @@ class Members extends View {
                 const id = +e.target.href.split('/').slice(-1)
                 document.querySelector("#modal_update--form").action = `/permissions/${id}`
                 this.displayUpdateData("permissions", id)
+                this.testFunction("modify")
             })
         })
 
@@ -104,6 +107,8 @@ class Members extends View {
                 document.querySelector("#remove--body").classList.remove("d-none");
                 this.#modalSaveButton.classList.remove("disabled");
                 document.querySelector("#modal--title").textContent = "Confirmer la Suppression";
+                this.testFunction("remove")
+
             })
         })
 
@@ -118,9 +123,6 @@ class Members extends View {
             })
         })
 
-        // this.#modalSaveButton.addEventListener("click", () => {
-        //     this.#btnSubmit.click();
-        // })
     }
 
 }

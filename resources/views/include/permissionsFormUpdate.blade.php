@@ -46,5 +46,5 @@
         <div class="invalid-feedback fs-6 d-none">Enter un nom valide</div>
         <div class="valid-feedback fs-6 d-none">Nom valide</div>
     </div>
-    <input type="submit" value="" id="submit--button" >
+    <input type="submit" value="" class="modify--submit" hidden>
 </form>

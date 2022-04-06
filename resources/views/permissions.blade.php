@@ -32,7 +32,7 @@
                                     @csrf
                                     <p class="d-none" id="remove--body">
                                         Êtes vous sûr de vous supprimer cet élément ?
-                                        <input type="submit" value="Submit" >
+                                        <input class="remove--submit" type="submit" value="Submit" hidden>
                                     </p>
                                 </form>
                             </div>
@@ -41,7 +41,7 @@
                         <div class="modal-footer p-2 d-flex">
                             <button type="button" class="btn btn-outline-secondary me-auto fw-bold"
                                 id="modal_close--button">Fermer</button>
-                            <button type="button" class="btn btn-primary fw-bold disabled"
+                            <button type="button" class="btn btn-primary fw-bold"
                                 id="modal_save--button">Enregister</button>
                         </div>
                     </div>
