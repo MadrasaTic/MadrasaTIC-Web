@@ -37,7 +37,6 @@ class UserSeeder extends Seeder
         $user->password = $userData['password'];
 
         $user->save();
-        $user->attachRole('1');
 
         $userInformation = new UserInformation();
 
