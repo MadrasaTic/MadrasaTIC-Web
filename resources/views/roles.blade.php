@@ -5,6 +5,7 @@
 </head>
 
 <body>
+    @include('layouts.flash-messages')
     <div class="container-fluid p-0 h-100">
         <div class="row p-0 g-0">
             <!-- Add Rôle Modal -->
@@ -33,7 +34,7 @@
                                 <p class="d-none" id="remove--body">
                                     Êtes vous sûr de vous supprimer cet élément ?
                                 </p>
-                                <button type="submit">Confirmer</button>
+                                    <input type="submit" value="" class="remove--submit" hidden>
                                 </form>
                             </div>
                         </div>
@@ -41,7 +42,7 @@
                         <div class="modal-footer p-2 d-flex">
                             <button type="button" class="btn btn-outline-secondary me-auto fw-bold"
                                 id="modal_close--button">Fermer</button>
-                            <button type="button" class="btn btn-primary fw-bold disabled"
+                            <button type="button" class="btn btn-primary fw-bold "
                                 id="modal_save--button">Enregister</button>
                         </div>
                     </div>
@@ -50,7 +51,7 @@
             <!-- Side Bar -->
             @include("./include/sideBar")
             <!-- Table  -->
-            <div class="col-md-7" style="min-height: 100vh">
+            <div class="p-4 col-md-7" style="min-height: 100vh">
                 <!-- Header -->
                 <h3 class="fw-bold mt-6 mb-4">Roles</h3>
                 <div class="px-4">
@@ -62,13 +63,13 @@
                     </div>
                 </div>
                 <!-- Rôle Table -->
-                <div class=" p-4 mt-5" id="roles--table">
+                <div class="mt-5" id="roles--table">
                     <table class="table table-responsive text-center align-middle">
                         <thead id="roles--thead">
                             <tr>
-                                <th class="w-auto py-3" scope="col">ID</th>
+                                <th class="w-20 py-3" scope="col">ID</th>
                                 <th class="w-auto py-3" scope="col">NOM</th>
-                                <th class="w-auto py-3" scope="col">#PERMISSIONS</th>
+                                <th class="w-auto py-3" scope="col">PERMISSIONS</th>
                                 <th class="w-25 py-3" scope="col">ACTIONS</th>
                             </tr>
                         </thead>

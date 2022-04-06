@@ -14,7 +14,7 @@ class AddActivatedColumn extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->tinyInteger('acivated')->default(0);
+            $table->tinyInteger('acivated')->default(1);
         });
     }
 

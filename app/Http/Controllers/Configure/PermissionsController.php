@@ -50,9 +50,9 @@ class PermissionsController extends Controller
 
     public function edit($id)
     {
-        $permission = $this->permissionModel::findOrFail($id);
+        $permissions = $this->permissionModel::findOrFail($id);
 
-        return $permission;
+        return $permissions;
     }
 
 

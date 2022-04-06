@@ -2,7 +2,7 @@
     @csrf
     <div class="mb-4 col-md-12">
         <div class="input-group">
-            <input type="text" class="modal--input w-100 p-3" placeholder="Nom/Code" name="name"/>
+            <input type="text" class="needs--validation w-100 p-3" placeholder="Nom/Code" name="name" />
             <span class=" check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -15,7 +15,7 @@
     </div>
     <div class="mb-4 col-md-12">
         <div class="input-group">
-            <input type="text" class="modal--input w-100 p-3" placeholder="Nom/Code" name="display_name"/>
+            <input type="text" class="needs--validation w-100 p-3" placeholder="Nom/Code" name="display_name" />
             <span class=" check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -40,12 +40,14 @@
         <div class="valid-feedback fs-6 d-none">Nom valide</div>
     </div>
     <div class="row m-0 ">
-        @foreach($permissions as $permission)
-        <div class="col-md-3 px-0 py-2 text-center">
-            <input type="checkbox" class="btn-check m-0 h-100 w-100" id="{{ 'btncheck'.$permission['id'] }}" autocomplete="off" name="list[]" value="{{ $permission['id'] }}">
-            <label class="btn btn-outline-primary" for="{{ 'btncheck'.$permission['id'] }}">{{ $permission['display_name'] }}</label>
-        </div>
+        @foreach ($permissions as $permission)
+            <div class="col-md-3 px-0 py-2 text-center">
+                <input type="checkbox" class="btn-check m-0 h-100 w-100" id="{{ 'add_btncheck' . $permission['id'] }}"
+                    autocomplete="off" name="permissions[]" value="{{ $permission['id'] }}">
+                <label class="btn btn-outline-primary"
+                    for="{{ 'add_btncheck' . $permission['id'] }}">{{ $permission['display_name'] }}</label>
+            </div>
         @endforeach
     </div>
-    <input type="submit" value="" id="submit--button">
+    <input type="submit" value="" class="add--submit" hidden>
 </form>

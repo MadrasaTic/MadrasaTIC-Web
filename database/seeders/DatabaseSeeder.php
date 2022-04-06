@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\PermissionSeeder;
+use Database\Seeders\PositionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(2)->create();
         $this->call([
+            PositionSeeder::class,
             UserSeeder::class,
             RoleSeeder::class,
             PermissionSeeder::class,

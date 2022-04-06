@@ -14,53 +14,91 @@ class Members extends View {
     // Form
     #modalForm = "";
     #modalUpdateForm = "";
-    #btnSubmit = document.querySelector("#submit--button");
+    #checkBoxTable = "";
+    #textAreaTable = "";
     #currentPage = window.location.pathname.slice(1);
-    #Obj
+    #type =  this.#currentPage == "members" ? "un Membre" 
+    : this.currentPage == "permissions" ?  "une Permission" 
+    : "Un Rôle" 
+
+    testFunction() {
+    }
 
 
     generateFormTable() {
         this.#modalForm = Array.from(document.querySelector("#modal--form").elements)
-        .filter (input => input.classList.contains("modal--input"));
+        .filter (input => input.classList.contains("needs--validation"));
         this.#modalUpdateForm = Array.from(document.querySelector("#modal_update--form").elements)
-        .filter (input => input.placeholder);
+        .filter (input => input.classList.contains("needs--validation"));
+        this.#checkBoxTable =  Array.from(document.querySelector("#modal_update--form").elements)
+        .filter(input => (input.type == "checkbox"))
+        this.#textAreaTable = Array.from(document.querySelector("#modal_update--form").elements)
+        .filter (input => input.classList.contains("text--area"));
     }
 
     async displayUpdateData(currentPage, id) {
-
         let data = await fetch(`/${currentPage}/${id}/edit`).then(function(response) {
             return response.json();
         }).then(function(data) {
             return data
         })
-
         const {user_information} = data;
         data = {...user_information, ...data}
 
-        // console.log(objet2);
+
+        let permissionsTable = []
+        if (data.permissions) permissionsTable = data.permissions.map(permObj => permObj["id"]) 
+        
+        console.log(permissionsTable);
+
 
         this.#modalUpdateForm.forEach((input) => {
             const inputText = input.id
             input.value = data[`${inputText}`]?? null;
         })
+
+        this.#checkBoxTable.forEach((checkbox) => {
+            const id = +checkbox.id.split("k").slice(-1).join("");
+            if(permissionsTable.indexOf(id) >= 0) {
+                checkbox.checked = true;
+            }
+        })
+
+
+        this.#textAreaTable.forEach((textArea) => textArea.value = data.description)
     }
 
-    testFunction(type) {
+    activeSubmitButton(type) {
         this.#modalSaveButton.addEventListener("click", () => {
                 document.querySelector(`.${type}--submit`).click();
             })
     }
 
 
-
-
     _inputsCheck() {
         this.#modalForm.forEach((input) => {
-            input.addEventListener("focus", this._renderFocusValidation);
+            input.addEventListener("focus", (e) => {
+                this._renderInputValidation(e.target, input.type )();
+                if (this._enableSaveBtn(this.#modalForm)) this.#modalSaveButton.classList.remove("disabled")
+                else this.#modalSaveButton.classList.add("disabled");
+            });
             input.addEventListener("blur", this._renderBlurValidation);
             input.addEventListener("input", (e) => {
                 this._renderInputValidation(e.target, input.type )();
                 if (this._enableSaveBtn(this.#modalForm)) this.#modalSaveButton.classList.remove("disabled")
+                else this.#modalSaveButton.classList.add("disabled");
+            })
+        })
+        this.#modalUpdateForm.forEach((input) => {
+            input.addEventListener("focus", (e) => {
+                this._renderInputValidation(e.target, input.type )();
+                if (this._enableSaveBtn(this.#modalUpdateForm)) this.#modalSaveButton.classList.remove("disabled")
+                else this.#modalSaveButton.classList.add("disabled");
+            });
+            input.addEventListener("blur", this._renderBlurValidation);
+            input.addEventListener("input", (e) => {
+                this._renderInputValidation(e.target, input.type )();
+                if (this._enableModifyBtn(this.#modalUpdateForm)) this.#modalSaveButton.classList.remove("disabled")
                 else this.#modalSaveButton.classList.add("disabled");
             })
         })
@@ -71,6 +109,11 @@ class Members extends View {
         else return inputsArray.every(input => input.classList.contains("is-valid"));
     }
 
+    _enableModifyBtn(inputsArray) {
+        if (!inputsArray) return true
+        else return inputsArray.some(input => input.classList.contains("is-valid"));
+    }
+
     dipslayHideModal () {
         const closeBtns = [this.#modalCloseButton, this.#modalCloseIcon];
 
@@ -78,9 +121,9 @@ class Members extends View {
                 e.preventDefault()
                 this.#modalContainer.classList.remove("d-none");
                 document.querySelector(`#${this.#currentPage}_add--body`).classList.remove("d-none");
-                document.querySelector("#modal--title").textContent = "Ajouter une Permission";
+                document.querySelector("#modal--title").textContent = `Ajouter ${this.#type}`;
                 this._inputsCheck();
-                this.testFunction("add")
+                this.activeSubmitButton("add");
         })
 
 
@@ -89,11 +132,13 @@ class Members extends View {
                 e.preventDefault();
                 this.#modalContainer.classList.remove("d-none");
                 document.querySelector(`#${this.#currentPage}_modify--body`).classList.remove("d-none");
-                document.querySelector("#modal--title").textContent = "Modifier la Permission";
+                document.querySelector("#modal--title").textContent = `Modifier ${this.#type}`;
                 this._inputsCheck();
                 const id = +e.target.href.split('/').slice(-1)
                 document.querySelector("#modal_update--form").action = `/${this.#currentPage}/${id}`
                 this.displayUpdateData(`${this.#currentPage}`, id)
+                this.activeSubmitButton("modify");
+
             })
         })
 
@@ -101,14 +146,13 @@ class Members extends View {
             btn.addEventListener("click", (e) => {
                 e.preventDefault()
                 const id = +e.target.href.split('/').slice(-1)
-                console.log(id)
                 document.querySelector("#modal_delete--form").action = `/${this.#currentPage}/delete/${id}`
 
                 this.#modalContainer.classList.remove("d-none");
                 document.querySelector("#remove--body").classList.remove("d-none");
                 this.#modalSaveButton.classList.remove("disabled");
                 document.querySelector("#modal--title").textContent = "Confirmer la Suppression";
-                this.testFunction("remove")
+                this.activeSubmitButton("remove")
 
             })
         })
@@ -121,6 +165,8 @@ class Members extends View {
                 document.querySelector("#remove--body").classList.add("d-none");
                 this.#modalSaveButton.classList.add("disabled");
                 document.querySelector("#modal--title").textContent = "";
+                [...this.#modalForm, ...this.#modalUpdateForm].forEach((input) => this._renderQuitBlurValidation(input))
+                this.#checkBoxTable.forEach((checkBox) => checkBox.clicked = false)
             })
         })
 

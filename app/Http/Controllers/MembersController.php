@@ -81,11 +81,11 @@ class MembersController extends Controller
         return $user;
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         // dd($request);
 
-        $user = User::findOrFail($request->id)->load(['userInformation.position']);
+        $user = User::findOrFail($id)->load(['userInformation.position']);
         if ($request['role_id'] != '' && $request['role_id'] != null) {
             foreach ($user->getRoles() as $key => $value) {
                 $user->detachRole($value);
@@ -93,26 +93,29 @@ class MembersController extends Controller
             $user->attachRole($request['role_id']);
         }
         if ($request['position_id'] != '' && $request['position_id'] != null) {
-            $user->userInformation()->position_id = $request['position_id'];
+            $user->userInformation->position_id = $request['position_id'];
         }
 
         $user->email = $request['email'];
-        $user->userInformation->first_name = $request->first_name;
-        $user->userInformation->last_name = $request->last_name;
-        if ($request->has('new_password') && $request->has('confirm_password')) {
+        $user->userInformation->first_name = $request['first_name'];
+        $user->userInformation->last_name = $request['last_name'];
+        if ($request['new_password'] != '' && $request['new_password'] != null
+        && $request['confirm_password'] != '' && $request['confirm_password'] != null) {
             $this->validate($request, [
                 'new_password' => 'required|same:confirm_password',
                 'confirm_password' => 'required',
             ]);
+            dd($user);
 
-            $hashedPassword = $request->user()->password;
-            $users = User::find($request->user()->id);
-            $users->password = bcrypt($request->new_password);
-            User::where( 'id' , $request->user()->id)->update( array( 'password' =>  $users->password));
-            session()->flash('success','password updated successfully');
-            return redirect()->back();
+            // $hashedPassword = $request['password'];
+            $users = User::find($user->id);
+            $users->password = bcrypt($request['new_password']);
+            User::where( 'id' , $user->id)->update( array( 'password' =>  $users->password));
+            // session()->flash('success','password updated successfully');
+            // return redirect()->back();
         }
         $user->userInformation->save();
+        $user->save();
 
         return redirect()->back();
     }

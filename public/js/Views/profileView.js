@@ -46,13 +46,17 @@ class profileView extends View{
     }
 
     generateFormArray() {
-        this.#formInfos = Array.from(document.querySelector("#infos--form").elements).filter((input) => (input.placeholder) && (!input.classList.contains("disabled")));
-        this.#formPassword = Array.from(document.querySelector("#password--form").elements).filter((input) => (input.placeholder) && (!input.classList.contains("disabled")));
+        this.#formInfos = Array.from(document.querySelector("#infos--form").elements).filter((input) => (input.classList.contains("needs--validation")));
+        this.#formPassword = Array.from(document.querySelector("#password--form").elements).filter((input) => (input.classList.contains("needs--validation")));
     }
 
     infoFormValidation() {
         this.#formInfos.forEach((input) => {
-            input.addEventListener("focus", this._renderFocusValidation);
+            input.addEventListener("focus", (e) => {
+                this._renderInputValidation(e.target, input.type)();
+                this._enableModifyBtn();
+                console.log(input.type);
+            });
             input.addEventListener("blur", this._renderBlurValidation);
             input.addEventListener("input", (e) => {
                 this._renderInputValidation(e.target, input.type)();
@@ -61,7 +65,11 @@ class profileView extends View{
             });
         })
         this.#formPassword.forEach((input) => {
-            input.addEventListener("focus", this._renderFocusValidation);
+            input.addEventListener("focus", (e) => {
+                this._renderInputValidation(e.target, input.type)();
+                this._enableModifyBtn();
+                console.log(input.type);
+            });
             input.addEventListener("blur", this._renderBlurValidation);
             input.addEventListener("input", (e) => {
                 this._renderInputValidation(e.target, input.type)();
@@ -85,13 +93,10 @@ class profileView extends View{
         this.#btnCancelDisconnect.addEventListener("click", () => {
             this.#modalDisconnect.classList.add("d-none");
             this.#previousPassword.value = this.#newPassword.value = "";
-            location.reload();
         })
 
         this.#btnSaveDisconnect.addEventListener("click", ()=> {
             this.#modalDisconnect.classList.add("d-none");
-            this.#previousPassword.value = this.#newPassword.value = "";
-            location.reload();
         })
 
         this.#iconCloseDisconnect.addEventListener("click", () => {
@@ -104,13 +109,10 @@ class profileView extends View{
 
         this.#btnCancelPassword.addEventListener("click", () => {
             this.#modalPassword.classList.add("d-none");
-            this.#previousPassword.value = this.#newPassword.value = "";
-            location.reload();
         })
 
         this.#btnSavePassword.addEventListener("click", ()=> {
             this.#modalPassword.classList.add("d-none");
-            this.#previousPassword.value = this.#newPassword.value = "";
             document.querySelector("#password_save--submit").click();
         })
 

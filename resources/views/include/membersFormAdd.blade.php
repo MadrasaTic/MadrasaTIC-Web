@@ -3,10 +3,10 @@
     <div class="mb-4 col-md-12">
         <label for="last_name" class="form-label">Nom</label>
         <div class="input-group">
-            <input type="text" class="modal--input w-100 p-3" placeholder="Nom" name="last_name" id="last_name" />
+            <input type="text" class="needs--validation w-100 p-3" placeholder="Nom" name="last_name" id="last_name" />
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
-                    class="valid--icon fa-solid fa-circle-check d-none text-success animateanimated animatefadeIn animate__delay-0.5s"></i>
+                    class="valid--icon fa-solid fa-circle-check text-success animateanimated animatefadeIn animate__delay-0.5s"></i>
                 <i
                     class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
             </span>
@@ -17,7 +17,7 @@
     <div class="mb-4 col-md-12">
         <label for="first_name" class="form-label">Prénom</label>
         <div class="input-group">
-            <input type="text" class="modal--input w-100 p-3" placeholder="Prénom" name="first_name" id="first_name" />
+            <input type="text" class="needs--validation w-100 p-3" placeholder="Prénom" name="first_name" id="first_name" />
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animateanimated animatefadeIn animate__delay-0.5s"></i>
@@ -31,7 +31,7 @@
     <div class="mb-4 col-md-12">
         <label for="email" class="form-label">Email</label>
         <div class="input-group">
-            <input type="email" class="modal--input w-100 p-3" placeholder="Email" name="email" id="email" />
+            <input type="email" class="needs--validation w-100 p-3" placeholder="Email" name="email" id="email" />
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animateanimated animatefadeIn animate__delay-0.5s"></i>
@@ -46,7 +46,7 @@
     <div class="mb-4 col-md-12">
         <label for="new_password" class="form-label">Mot de passe</label>
         <div class="input-group">
-            <input type="password" class="modal--input w-100 p-3" placeholder="Mot de passe" name="new_password"
+            <input type="password" class="needs--validation w-100 p-3" placeholder="Mot de passe" name="new_password"
                 id="new_password" />
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
@@ -61,14 +61,13 @@
     <div class="mb-4 col-md-12">
         <label for="confirm_password" class="form-label">Confirmer le mot de passe</label>
         <div class="input-group">
-            <input type="password" class="modal--input w-100 p-3" placeholder="Confirmation de mot de passe"
+            <input type="password" class="needs--validation w-100 p-3" placeholder="Confirmation de mot de passe"
                 name="confirm_password" id="confirm_password" />
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animateanimated animatefadeIn animate__delay-0.5s"></i>
                 <i
                     class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
-
             </span>
         </div>
         <div class="invalid-feedback fs-6 d-none">Enter un mot de passe valide</div>
@@ -96,5 +95,5 @@
             </select>
         </div>
     </div>
-    <input type="submit" value="ICI" id="submit--button">
+    <input type="submit" value="ICI" class="add--submit" hidden>
 </form>

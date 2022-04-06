@@ -5,7 +5,7 @@ class loginView extends View {
     #btnLogin = document.querySelector("#login--btn");
 
     generateFormArray() {
-        this.#formLogin = Array.from(document.querySelector("#login--form").elements).filter((input) => (input.placeholder));
+        this.#formLogin = Array.from(document.querySelector("#login--form").elements).filter((input) => (input.classList.contains("needs--validation")));
     }
 
     clearAllInputs () {
@@ -16,7 +16,11 @@ class loginView extends View {
 
     inputsCheck() {
         this.#formLogin.forEach((input) => {
-            input.addEventListener("focus", this._renderFocusValidation);
+            input.addEventListener("focus",(e) => {
+                this._renderInputValidation(e.target, input.type)();
+                if (this._enableLoginBtn()) this.#btnLogin.classList.remove("disabled")
+                else this.#btnLogin.classList.add("disabled")
+            } );
             input.addEventListener("blur", this._renderBlurValidation);
             input.addEventListener("input", (e) => {
                 this._renderInputValidation(e.target, input.type)();
