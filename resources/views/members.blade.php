@@ -28,9 +28,12 @@
                                     @include("./include/membersFormUpdate")
                                 </div>
                                 <!-- Remove Body -->
-                                <p class="d-none" id="remove--body">
+                                <form method="POST" action="{{ '/member/delete/'.$members[2] }}">
+                                    <p class="d-none" id="remove--body">
                                     Êtes vous sûr de vous supprimer cet élément ?
-                                </p>
+                                    </p>
+                                    <button type="submit" class="remove--button link-danger fw-bold">Supprimer</button>
+                                </form>
                             </div>
                         </div>
                         <!-- Modal Footer -->
@@ -75,10 +78,13 @@
                                 <th class="py-3" scope="row">{{ $member['id'] }}</th>
                                 <td>{{ $member['name'] }}</td>
                                 <td>{{ $member['email'] }}</td>
-                                <td>{{ $member['userinformation']['position']['name'] ?? $member['role'] }}</td>
+                                <td>{{ $member['userinformation']['position']['name'] ?? $member[''] }}</td>
                                 <td>
                                     <a href="#" class="modify--button me-3 fw-bold">Consulter</a>
-                                    <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
+                                    <form method="POST" action="{{ '/members/delete/' }}">
+                                        @csrf 
+                                        <button type="submit" class="remove--button link-danger fw-bold">Supprimer
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

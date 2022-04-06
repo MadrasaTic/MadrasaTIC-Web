@@ -56,7 +56,9 @@
     <div class="col-md-12">
         <div class="input-group">
             <select class="w-100 p-3" name="position">
-                <option value="admin" selected>Admin</option>
+                @foreach($roles as $role)
+                <option value="{{ $role->name }}" selected>{{ $role->name }}</option>
+                @endforeach
             </select>
         </div>
     </div>

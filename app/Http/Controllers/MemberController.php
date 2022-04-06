@@ -20,18 +20,16 @@ class MemberController extends Controller
     public function show(Request $request)
     {
         $members = User::all()->load(['userInformation.position']);
+        $roles = Role::all();
 
-
-        dd($members, $roles);
         return View('members', compact('members', 'roles'));
     }
 
     public function create(Request $request)
     {
         $members = User::all()->load(['userInformation.position']);
-        // dd($members->toArray());
         
-        return View('members', compact('members'));
+        return View('members', compact('roles'));
     }
 
     public function store(Request $request)
@@ -43,15 +41,21 @@ class MemberController extends Controller
             'password' => 'required'
 
         ]);*/
-        // dd($request);
+
+        $roles = Role::all();
+
         $user = new User();
-        $user->name = $request['first_name'];
-        $user->name = $request['last_name'];
+        $user->name = $request['first_name'].' '.$request['last_name'];
         $user->email = $request['email'];
         $user->password = $request['password'];
-        $user->role = $request['role'];
+        // $user->role = $request['role'];
 
         $user->save();
         return redirect()->back();
+    }
+
+    public function softDelete(Request $request)
+    {
+        dd($request);
     }
 }
