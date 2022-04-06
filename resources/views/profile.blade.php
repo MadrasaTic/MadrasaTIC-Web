@@ -7,14 +7,14 @@
 
 <body>
     @include('layouts.flash-messages')
-    <div class="container-fluid p-0" style="min-height: 100vh">
+    <div class="container-fluid p-0 " style="min-height: 100vh">
         <div class="row p-0 g-0">
             <!-- Side Bar -->
             @include('./include/sideBar')
             <!-- Middle Part -->
             <div class="col-md-7 animate__animated animate__fadeIn animate__delay-0.5s ">
                 <!-- Wrapper -->
-                <div class="col-lg-9 col-md-12">
+                <div class="col-lg-10 col-md-12 mx-auto">
                     <!-- Profile Header -->
                     <h3 class="fw-bold mt-6 mb-1">Mon profile</h3>
                     <div id="profile--header" class="">
