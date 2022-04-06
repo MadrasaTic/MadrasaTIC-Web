@@ -93,17 +93,19 @@ class MembersController extends Controller
             $user->attachRole($request['role_id']);
         }
         if ($request['position_id'] != '' && $request['position_id'] != null) {
-            $user->userInformation()->position_id = $request['position_id'];
+            $user->userInformation->position_id = $request['position_id'];
         }
 
         $user->email = $request['email'];
         $user->userInformation->first_name = $request['first_name'];
         $user->userInformation->last_name = $request['last_name'];
-        if ($request->has('new_password') && $request->has('confirm_password')) {
+        if ($request['new_password'] != '' && $request['new_password'] != null
+        && $request['confirm_password'] != '' && $request['confirm_password'] != null) {
             $this->validate($request, [
                 'new_password' => 'required|same:confirm_password',
                 'confirm_password' => 'required',
             ]);
+            dd($user);
 
             // $hashedPassword = $request['password'];
             $users = User::find($user->id);
@@ -113,7 +115,6 @@ class MembersController extends Controller
             // return redirect()->back();
         }
         $user->userInformation->save();
-        dd($user);
         $user->save();
 
         return redirect()->back();
