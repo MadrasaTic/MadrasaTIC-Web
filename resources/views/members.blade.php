@@ -81,7 +81,7 @@
                                 <td>{{ $member['userinformation']['position']['name'] ?? $member[''] }}</td>
                                 <td>
                                     <a href="#" class="modify--button me-3 fw-bold">Consulter</a>
-                                    <form method="POST" action="{{ '/members/delete/' }}">
+                                    <form method="POST" action="{{ '/members/delete/'.$member['id'] }}">
                                         @csrf 
                                         <button type="submit" class="remove--button link-danger fw-bold">Supprimer
                                     </form>
