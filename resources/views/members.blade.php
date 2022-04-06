@@ -5,6 +5,7 @@
 </head>
 
 <body>
+    @include('layouts.flash-messages')
     <div class="container-fluid p-0 h-100">
         <div class="row p-0 g-0">
             <!-- Add Rôle Modal -->

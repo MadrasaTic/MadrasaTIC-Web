@@ -5,6 +5,7 @@
 </head>
 
 <body>
+    @include('layouts.flash-messages')
   <div class="container-fluid d-flex justify-content-center align-items-center animate__animated animate__fadeIn" style="height: 100vh">
     <div class="row">
       <div class="col-md-6 mx-auto px-5 pb-5 rounded-6 hvr-grow" id="login-container">
