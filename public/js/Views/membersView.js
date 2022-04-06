@@ -29,7 +29,7 @@ class Members extends View {
 
     async displayUpdateData(currentPage, id) {
 
-        const data = await fetch(`/${currentPage}/${id}`).then(function(response) {
+        const data = await fetch(`/${currentPage}/${id}/edit`).then(function(response) {
             return response.json();
         }).then(function(data) {
             return data
@@ -45,10 +45,8 @@ class Members extends View {
         
     }
 
-    testFunction () {
-        this.#modalUpdateForm.forEach(input => {
-            console.log(input.name);
-        })
+    testFunction() {
+        console.log(`${this.#currentPage}`)
     }
 
 
@@ -84,19 +82,24 @@ class Members extends View {
 
         this.#btnModify.forEach((btn) => {
             btn.addEventListener("click", (e) => {
-                e.preventDefault()
+                e.preventDefault();
                 this.#modalContainer.classList.remove("d-none");
                 document.querySelector(`#${this.#currentPage}_modify--body`).classList.remove("d-none");
                 document.querySelector("#modal--title").textContent = "Modifier la Permission";
                 this._inputsCheck();
                 const id = +e.target.href.split('/').slice(-1)
-                document.querySelector("#modal_update--form").action = `/permissions/${id}`
-                this.displayUpdateData("permissions", id)
+                document.querySelector("#modal_update--form").action = `/${this.#currentPage}/${id}`
+                this.displayUpdateData(`${this.#currentPage}`, id)
             })
-        })
+        }) 
 
         this.#btnRemove.forEach(btn => {
-            btn.addEventListener("click", () => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault()
+                const id = +e.target.href.split('/').slice(-1)
+                console.log(id)
+                document.querySelector("#modal_delete--form").action = `/${this.#currentPage}/delete/${id}`
+
                 this.#modalContainer.classList.remove("d-none");
                 document.querySelector("#remove--body").classList.remove("d-none");
                 this.#modalSaveButton.classList.remove("disabled");

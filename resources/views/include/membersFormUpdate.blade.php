@@ -1,4 +1,4 @@
-<form class="row" id="modal--form" method="POST" action="/members">
+<form class="row" id="modal_update--form" method="POST" action="/members">
     @csrf
     <div class="mb-4 col-md-12">
         <div class="input-group">

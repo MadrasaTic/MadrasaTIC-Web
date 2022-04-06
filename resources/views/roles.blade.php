@@ -28,9 +28,13 @@
                                     @include("./include/rolesFormUpdate")
                                 </div>
                                 <!-- Remove Body -->
+                                <form action="/roles" method="post" id="modal_delete--form">
+                                    @csrf
                                 <p class="d-none" id="remove--body">
                                     Êtes vous sûr de vous supprimer cet élément ?
                                 </p>
+                                <button type="submit">Confirmer</button>
+                                </form>
                             </div>
                         </div>
                         <!-- Modal Footer -->
@@ -76,7 +80,7 @@
                                 <td>{{ $role['permissions_count'] }}</td>
                                 <td>
                                     <a href="{{ 'roles/'.$role['id'] }}" class="modify--button link-primary me-3 fw-bold">Modifier</a>
-                                    <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
+                                    <a href="{{ 'roles/'.$role['id'] }}" class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
                             </tr>
                             @endforeach

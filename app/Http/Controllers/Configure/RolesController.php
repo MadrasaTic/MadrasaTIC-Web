@@ -117,7 +117,7 @@ class RolesController extends Controller
         return redirect(route('configure.roles.index'));
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
         $usersAssignedToRole = DB::table(Config::get('laratrust.tables.role_user'))
             ->where(Config::get('laratrust.foreign_keys.role'), $id)
@@ -139,3 +139,5 @@ class RolesController extends Controller
         return redirect(route('configure.roles.index'));
     }
 }
+
+
