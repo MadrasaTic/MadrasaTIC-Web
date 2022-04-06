@@ -85,10 +85,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
     Route::middleware(['HasPermission'])->group(function () {
+        Route::resource('/roles', RolesController::class, ['as' => 'configure']);
         Route::get('/roles',[RolesController::class,'index'])->name('roles');
         Route::post('/roles/{id}',[RolesController::class,'update']);
         Route::post('/roles/delete/{id}',[RolesController::class,'delete']);
-        Route::resource('/roles', RolesController::class, ['as' => 'configure']);
 
         Route::resource('/members', MembersController::class);
         Route::get('/members',[MembersController::class,'index'])->name('members');
