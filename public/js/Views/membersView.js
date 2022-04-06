@@ -80,7 +80,7 @@ class Members extends View {
                 document.querySelector(`#${this.#currentPage}_add--body`).classList.remove("d-none");
                 document.querySelector("#modal--title").textContent = "Ajouter une Permission";
                 this._inputsCheck();
-                this.testFunction("add")
+                this.testFunction("add");
         })
 
 
@@ -94,6 +94,8 @@ class Members extends View {
                 const id = +e.target.href.split('/').slice(-1)
                 document.querySelector("#modal_update--form").action = `/${this.#currentPage}/${id}`
                 this.displayUpdateData(`${this.#currentPage}`, id)
+                this.testFunction("modify");
+
             })
         })
 

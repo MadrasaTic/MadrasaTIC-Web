@@ -33,7 +33,7 @@
                                 <p class="d-none" id="remove--body">
                                     Êtes vous sûr de vous supprimer cet élément ?
                                 </p>
-                                <button type="submit">Confirmer</button>
+                                    <input type="submit" value="" class="remove--submit" hidden>
                                 </form>
                             </div>
                         </div>

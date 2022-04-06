@@ -79,7 +79,7 @@ class UserController extends Controller
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'phone_number' => 'required|size:10|numeric',
+            'phone_number' => 'required|numeric',
         ]);
 
         $user = $request->user()->load(['userInformation.position']);

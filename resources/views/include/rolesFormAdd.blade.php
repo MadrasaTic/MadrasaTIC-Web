@@ -42,10 +42,10 @@
     <div class="row m-0 ">
         @foreach($permissions as $permission)
         <div class="col-md-3 px-0 py-2 text-center">
-            <input type="checkbox" class="btn-check m-0 h-100 w-100" id="{{ 'btncheck'.$permission['id'] }}" autocomplete="off" name="list[]" value="{{ $permission['id'] }}">
-            <label class="btn btn-outline-primary" for="{{ 'btncheck'.$permission['id'] }}">{{ $permission['display_name'] }}</label>
+            <input type="checkbox" class="btn-check m-0 h-100 w-100" id="{{ 'add_btncheck'.$permission['id'] }}" autocomplete="off" name="list[]" value="{{ $permission['id'] }}">
+            <label class="btn btn-outline-primary" for="{{ 'add_btncheck'.$permission['id'] }}">{{ $permission['display_name'] }}</label>
         </div>
         @endforeach
     </div>
-    <input type="submit" value="" id="submit--button">
+    <input type="submit" value="" class="add--submit" hidden>
 </form>

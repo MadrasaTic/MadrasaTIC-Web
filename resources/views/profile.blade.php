@@ -102,7 +102,7 @@
                                 <div class="valid-feedback fs-6 d-none">Numéro de téléphone valide</div>
                             </div>
                             <div class="d-grid mt-2">
-                                <button class="btn btn-primary" id="btn--modify" type="submit"><i
+                                <button class="btn btn-primary" id="btn--modify" ><i
                                         class="fa-solid fa-pen-to-square me-2"></i>Modifier</button>
                             </div>
                         </form>
@@ -171,7 +171,7 @@
                                 </div>
                                 <div class="invalid-feedback fs-6 d-none">Le mot de passe ne correspond pas</div>
                                 <div class="valid-feedback fs-6 d-none">Mot de passe valide</div>
-                                <button type="submit" id="password_save--submit" value="submit" hidden> </button>
+                                <button type="submit" id="password_save--submit" value="submit" > </button>
                             </div>
                             <div class="col-md-6 d-flex align-items-center justify-content-center p-3 mt-2 mb-5"
                                 id="this_div">

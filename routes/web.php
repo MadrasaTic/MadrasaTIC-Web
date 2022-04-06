@@ -121,3 +121,8 @@ Route::get('/permissions',[PermissionsController::class,'index'])->name('permiss
 Route::get('/permissions/{id}',[PermissionsController::class,'edit']);
 Route::post('/permissions/{id}',[PermissionsController::class,'update']);
 Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);
+
+Route::resource('/permissions', PermissionsController::class);
+Route::get('/permissions',[PermissionsController::class,'index'])->name('permissions');
+Route::post('/permissions/{id}',[PermissionsController::class,'update']);
+Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);

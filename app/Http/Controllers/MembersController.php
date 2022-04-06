@@ -81,11 +81,11 @@ class MembersController extends Controller
         return $user;
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         // dd($request);
 
-        $user = User::findOrFail($request->id)->load(['userInformation.position']);
+        $user = User::findOrFail($id)->load(['userInformation.position']);
         if ($request['role_id'] != '' && $request['role_id'] != null) {
             foreach ($user->getRoles() as $key => $value) {
                 $user->detachRole($value);
@@ -97,22 +97,24 @@ class MembersController extends Controller
         }
 
         $user->email = $request['email'];
-        $user->userInformation->first_name = $request->first_name;
-        $user->userInformation->last_name = $request->last_name;
+        $user->userInformation->first_name = $request['first_name'];
+        $user->userInformation->last_name = $request['last_name'];
         if ($request->has('new_password') && $request->has('confirm_password')) {
             $this->validate($request, [
                 'new_password' => 'required|same:confirm_password',
                 'confirm_password' => 'required',
             ]);
 
-            $hashedPassword = $request->user()->password;
-            $users = User::find($request->user()->id);
-            $users->password = bcrypt($request->new_password);
-            User::where( 'id' , $request->user()->id)->update( array( 'password' =>  $users->password));
-            session()->flash('success','password updated successfully');
-            return redirect()->back();
+            // $hashedPassword = $request['password'];
+            $users = User::find($user->id);
+            $users->password = bcrypt($request['new_password']);
+            User::where( 'id' , $user->id)->update( array( 'password' =>  $users->password));
+            // session()->flash('success','password updated successfully');
+            // return redirect()->back();
         }
         $user->userInformation->save();
+        dd($user);
+        $user->save();
 
         return redirect()->back();
     }

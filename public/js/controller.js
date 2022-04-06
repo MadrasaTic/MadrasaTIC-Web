@@ -30,7 +30,7 @@ window.addEventListener("load", function() {
         membersView.dipslayHideModal();
     }
 
-
+    console.log("Js Fired");
 
 })
 

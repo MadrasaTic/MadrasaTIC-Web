@@ -96,5 +96,5 @@
             </select>
         </div>
     </div>
-    <input type="submit" value="ICI" id="submit--button">
+    <input type="submit" value="ICI" class="add--submit" hidden>
 </form>

@@ -1,5 +1,6 @@
 <form class="row" id="modal_update--form" method="POST" action="/members/edit">
     @csrf
+    <input type="hidden" id="id" name="id">
     <div class="mb-4 col-md-12">
         <label for="last_name" class="form-label">Nom</label>
         <div class="input-group">
@@ -96,5 +97,5 @@
             </select>
         </div>
     </div>
-    <input type="submit" value="" id="submit--button">
+    <input type="submit" value="" class="modify--submit" hidden>
 </form>
