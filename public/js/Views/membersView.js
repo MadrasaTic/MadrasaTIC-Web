@@ -1,122 +1,128 @@
 
-import View from "./View.js"
+import View from "./View.js";
+
 
 class Members extends View {
-    // General
-    #containerModal = document.querySelector("#modal--container");
-    #selectTable = document.querySelector("#table--select");
-    #formsAdd = [...document.querySelectorAll(".add--forms")];
-    #inputsArray = this.#formsAdd.map((form) => [...form.elements]).flat().filter((input) => ((input.placeholder) && (input.type != "textarea")));
-    // Hide / Show
-    #iconClose = document.querySelector("#close--icon");
-    #btnClose = document.querySelector("#close--button");
-    #btnSave = document.querySelector("#save--button");
-    // Important Button
-    #btnAdd = document.querySelector(".add--button");
-    // Selected
-    #currentSelect = "members";
-
-    setDefaultOption () {
-        this.#selectTable.value = "members";
-    }
-
-    clearAllInputs() {
-        this.#inputsArray.forEach((input) => {
-            input.value = ""
-        })
-        this.#btnSave.classList.add("disabled")
-    }
+    // Buttons
+    #btnAdd = document.querySelector("#add--button");
+    #btnModify = Array.from(document.querySelectorAll(".modify--button"));
+    #btnRemove = Array.from(document.querySelectorAll(".remove--button"));
+    // Modal
+    #modalContainer = document.querySelector("#modal--container");
+    #modalSaveButton = document.querySelector("#modal_save--button");
+    #modalCloseButton = document.querySelector("#modal_close--button");
+    #modalCloseIcon = document.querySelector("#close--icon");
+    // Form
+    #modalForm = "";
+    #modalUpdateForm = "";
+    #btnSubmit = document.querySelector("#submit--button");
+    #currentPage = window.location.pathname.slice(1);
+    #Obj
     
-    displaySelectedTable() {
-        let newSelect = ""
-        this._consultRemoveLinks();
 
-        this.#selectTable.addEventListener("focus", (e) => {
-            this.#currentSelect = e.target.value;
+    generateFormTable() {
+        this.#modalForm = Array.from(document.querySelector("#modal--form").elements)
+        .filter (input => input.classList.contains("modal--input"));
+        this.#modalUpdateForm = Array.from(document.querySelector("#modal_update--form").elements)
+        .filter (input => input.placeholder);
+    }
+
+    async displayUpdateData(currentPage, id) {
+
+        const data = await fetch(`/${currentPage}/${id}`).then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            return data
         })
-        
-        this.#selectTable.addEventListener("change", (e) => {
-            newSelect = e.target.value;
-            document.querySelector(`#${this.#currentSelect}--table`).classList.add("d-none");
-            document.querySelector(`#${newSelect}--table`).classList.remove("d-none");
-            document.querySelector(`#add_${this.#currentSelect}--text`).classList.add("d-none");
-            document.querySelector(`#add_${newSelect}--text`).classList.remove("d-none");
-            this.#currentSelect = newSelect;
-            e.target.blur();
-            this._consultRemoveLinks();
+
+        console.log(data);
+
+        this.#modalUpdateForm.forEach((input) => {
+            const inputText = input.id
+            input.value = data[`${inputText}`];
         })
     }
 
-    modalsHideDisplay() {
-        this.#btnClose.addEventListener("click", () => {
-            this.#containerModal.classList.add("d-none");
-            this.#inputsArray.forEach((input) =>  {
-                this._renderQuitBlurValidation(input);
+    testFunction(type) {
+        this.#modalSaveButton.addEventListener("click", () => {
+                document.querySelector(`.${type}--submit`).click();
             })
-            this.clearAllInputs();
-            document.querySelector(`#${this.#currentSelect}--body`).classList.add("d-none");
-            document.querySelector(`#remove--body`).classList.add("d-none");
-
-        })
-        this.#iconClose.addEventListener("click", () => {
-            this.#containerModal.classList.add("d-none");
-            this.#inputsArray.forEach((input) =>  {
-                this._renderQuitBlurValidation(input);
-            })
-            this.clearAllInputs();
-            document.querySelector(`#${this.#currentSelect}--body`).classList.add("d-none");
-            document.querySelector(`#remove--body`).classList.add("d-none");
-
-        })
-        this.#btnAdd.addEventListener("click", () => {
-            const displayedType = this.#currentSelect == "members" ? "Un Membre" 
-            : 
-            this.#currentSelect == "permissions" ? "Une Permissison" 
-            :
-            "Un Rôle "
-            this.#containerModal.classList.remove("d-none");
-            document.querySelector(`#${this.#currentSelect}--body`).classList.remove("d-none");
-            this._validInputs(this.#currentSelect);
-            document.querySelector("#modal--title").textContent = `Ajouter ${displayedType}`
-        })
     }
-    
-    _validInputs(type) {
-        const inputsArray = this.#inputsArray.filter((input) => input.classList.contains(`${type}--inputs`));
-        inputsArray.forEach((input) => {
+
+
+
+
+    _inputsCheck() {
+        this.#modalForm.forEach((input) => {
             input.addEventListener("focus", this._renderFocusValidation);
             input.addEventListener("blur", this._renderBlurValidation);
             input.addEventListener("input", (e) => {
                 this._renderInputValidation(e.target, input.type )();
-                if (this._enableSaveBtn(inputsArray)) this.#btnSave.classList.remove("disabled")
-                else this.#btnSave.classList.add("disabled")
+                if (this._enableSaveBtn(this.#modalForm)) this.#modalSaveButton.classList.remove("disabled")
+                else this.#modalSaveButton.classList.add("disabled");
             })
         })
     }
 
-    _consultRemoveLinks() {
-        const consultLink = document.querySelector(`#${this.#currentSelect}_consult--link`);
-        const removeLink = document.querySelector(`#${this.#currentSelect}_remove--link`)
-        consultLink.addEventListener("click", () => {
-            const displayedType = this.#currentSelect == "members" ? "Un Membre" 
-            : 
-            this.#currentSelect == "permissions" ? "Une Permissison" 
-            :
-            "Un Rôle "
-            this.#containerModal.classList.remove("d-none");
-            document.querySelector(`#${this.#currentSelect}--body`).classList.remove("d-none");
-            this._validInputs(this.#currentSelect);
-            document.querySelector("#modal--title").textContent = `Ajouter ${displayedType}`
-        });
-        removeLink.addEventListener("click", () => {
-            this.#containerModal.classList.remove("d-none");
-            document.querySelector(`#remove--body`).classList.remove("d-none");
-            this.#btnSave.classList.remove("disabled")
-        })
+    _enableSaveBtn(inputsArray) {
+        if (!inputsArray) return true
+        else return inputsArray.every(input => input.classList.contains("is-valid"));
     }
 
-    _enableSaveBtn(inputsArray) {
-        return inputsArray.every(input => input.classList.contains("is-valid"));
+    dipslayHideModal () {
+        const closeBtns = [this.#modalCloseButton, this.#modalCloseIcon];
+
+        this.#btnAdd.addEventListener("click", (e) => {
+                e.preventDefault()
+                this.#modalContainer.classList.remove("d-none");
+                document.querySelector(`#${this.#currentPage}_add--body`).classList.remove("d-none");
+                document.querySelector("#modal--title").textContent = "Ajouter une Permission";
+                this._inputsCheck();
+                this.testFunction("add")
+        })
+
+
+        this.#btnModify.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                this.#modalContainer.classList.remove("d-none");
+                document.querySelector(`#${this.#currentPage}_modify--body`).classList.remove("d-none");
+                document.querySelector("#modal--title").textContent = "Modifier la Permission";
+                this._inputsCheck();
+                const id = +e.target.href.split('/').slice(-1)
+                document.querySelector("#modal_update--form").action = `/permissions/${id}`
+                this.displayUpdateData("permissions", id)
+                this.testFunction("modify")
+            })
+        })
+
+        this.#btnRemove.forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault()
+                const id = +e.target.href.split('/').slice(-1)
+                console.log(id)
+                document.querySelector("#modal_delete--form").action = `/permissions/delete/${id}`
+
+                this.#modalContainer.classList.remove("d-none");
+                document.querySelector("#remove--body").classList.remove("d-none");
+                this.#modalSaveButton.classList.remove("disabled");
+                document.querySelector("#modal--title").textContent = "Confirmer la Suppression";
+                this.testFunction("remove")
+
+            })
+        })
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                this.#modalContainer.classList.add("d-none");
+                document.querySelector(`#${this.#currentPage}_add--body`).classList.add("d-none");
+                document.querySelector(`#${this.#currentPage}_modify--body`).classList.add("d-none");
+                document.querySelector("#remove--body").classList.add("d-none");
+                this.#modalSaveButton.classList.add("disabled");
+                document.querySelector("#modal--title").textContent = "";
+            })
+        })
+
     }
 
 }

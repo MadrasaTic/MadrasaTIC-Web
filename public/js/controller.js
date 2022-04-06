@@ -1,7 +1,11 @@
 // Module Import
+import * as model from "./model.js"; 
 import loginView from "./Views/loginView.js";
 import profileView from "./Views/profileView.js";
-import membersView from "./Views/membersView.js"
+import membersView from "./Views/membersView.js";
+
+
+
 
 window.addEventListener("load", function() {
     if ((window.location.pathname.slice(1) == "login") || (window.location.pathname == "/") ) {
@@ -20,11 +24,13 @@ window.addEventListener("load", function() {
         })
         // profileView.clearInputs();
     }
-    if (window.location.pathname.slice(1) == "members") {
-        membersView.setDefaultOption();
-        membersView.clearAllInputs();
-        membersView.displaySelectedTable();
-        membersView.modalsHideDisplay();
+    if ((window.location.pathname.slice(1) == "members") || (window.location.pathname.slice(1) == "roles") || (window.location.pathname.slice(1) == "permissions")) {
+        // membersView.testFunction();
+        membersView.generateFormTable();
+        membersView.dipslayHideModal();
     }
+
+
+
 })
 
