@@ -36,12 +36,6 @@ Route::get('google', function () {
     return view('roles');
 });*/
 Route::get('/roles',[RolesController::class,'index'])->name('roles');
-Route::post('/roles',[RolesController::class,'store'])->name('roles');
-// Route::post('/roles',[RolesController::class,'update']);
-
-Route::get('/roles/{id}',[RolesController::class,'edit']);
-Route::get('/roles/delete/{id}','App\Http\Controllers\RolesController@softDelete');
-
 
 Route::get('/permissions', function () {
     return view('permissions');
@@ -78,6 +72,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/members/edit/{id}', 'App\Http\Controllers\MemberController@update');
     Route::post('/members/delete/{id}', 'App\Http\Controllers\MemberController@softDelete');
 
+    Route::post('/roles', 'App\Http\Controllers\Configure\RolesController@store');
+    Route::get('/roles/{id}',[RolesController::class,'edit']);
+    Route::get('/roles/delete/{id}','App\Http\Controllers\RolesController@softDelete');
     //Route::get('/members', function () {
       //  return view('members');
     //});

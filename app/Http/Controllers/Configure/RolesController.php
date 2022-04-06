@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
+use App\Models\Permission;
+
 
 class RolesController extends Controller
 {
@@ -23,9 +25,9 @@ class RolesController extends Controller
 
     public function index()
     {
-        return View::make('roles', [
-            'roles' => $this->rolesModel::withCount('permissions')->simplePaginate(10),
-        ]);
+                $permissions = Permission::all();
+        $roles = $this->rolesModel::withCount('permissions')->simplePaginate(10);
+        return View('roles', compact('roles', 'permissions'));
     }
 
     public function create()
@@ -57,7 +59,7 @@ class RolesController extends Controller
         $role->syncPermissions($request->get('permissions') ?? []);
 
         Session::flash('laratrust-success', 'Role created successfully');
-        return redirect(route('configure.roles.index'));
+        return redirect()->back();
     }
 
     public function edit($id)
