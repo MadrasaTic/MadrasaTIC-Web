@@ -2,7 +2,7 @@
 @csrf
     <div class="mb-4 col-md-12">
         <div class="input-group">
-            <input name="code" type="text" class="modal--input w-100 p-3" placeholder="Code" />
+            <input name="code" type="text" class="needs--validation w-100 p-3" placeholder="Code" />
             <span class=" check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -15,7 +15,7 @@
     </div>
     <div class="mb-4 col-md-12">
         <div class="input-group">
-            <input name="name" type="text" class="modal--input  w-100 p-3" placeholder="Name" />
+            <input name="name" type="text" class="needs--validation  w-100 p-3" placeholder="Name" />
             <span class=" check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -28,7 +28,7 @@
     </div>
     <div class="mb-4 col-md-12">
         <div class="input-group">
-            <input name="display_name" type="text" class="modal--input  w-100 p-3" placeholder="display_name" />
+            <input name="display_name" type="text" class="needs--validation  w-100 p-3" placeholder="display_name" />
             <span class=" check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>

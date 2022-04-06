@@ -46,8 +46,8 @@ class profileView extends View{
     }
 
     generateFormArray() {
-        this.#formInfos = Array.from(document.querySelector("#infos--form").elements).filter((input) => (input.placeholder) && (!input.classList.contains("disabled")));
-        this.#formPassword = Array.from(document.querySelector("#password--form").elements).filter((input) => (input.placeholder) && (!input.classList.contains("disabled")));
+        this.#formInfos = Array.from(document.querySelector("#infos--form").elements).filter((input) => (input.classList.contains("needs--validation")));
+        this.#formPassword = Array.from(document.querySelector("#password--form").elements).filter((input) => (input.classList.contains("needs--validation")));
     }
 
     infoFormValidation() {

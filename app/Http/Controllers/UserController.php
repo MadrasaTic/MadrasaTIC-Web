@@ -87,7 +87,7 @@ class UserController extends Controller
         $user->userInformation->last_name = $request->last_name;
         $user->userInformation->phone_number = $request->phone_number;
         $user->userInformation->save();
-        return \Redirect::route('profile')->with('message', 'User has been updated!');
+        return \Redirect::route('profile')->with('message', 'Vos informations ont été mit a jour avec succès');
     }
 
     public function updatePassword(Request $request)
@@ -104,14 +104,14 @@ class UserController extends Controller
                 $users = User::find(\Auth::user()->id);
                 $users->password = bcrypt($request->new_password);
                 User::where( 'id' , \Auth::user()->id)->update( array( 'password' =>  $users->password));
-                session()->flash('success','password updated successfully');
+                session()->flash('success','Votre mot de passe a été modifié avec succès');
                 return redirect()->back();
             } else {
-                session()->flash('error','new password can not be the old password!');
+                session()->flash('error',"Le nouveau mot de passe ne peut pas être identique l'ancien mot de passe !");
                 return redirect()->back();
             }
         } else {
-            session()->flash('error','old password doesnt matched ');
+            session()->flash('error','Votre ancien mot de passe est incorrect');
             return redirect()->back();
         }
     }
@@ -125,10 +125,10 @@ class UserController extends Controller
             $filename = \Auth::user()->id . '---' . $request->profilePicture->getClientOriginalName();
             $request->profilePicture->storeAs('images',$filename,'public');
             Auth()->user()->userInformation()->update(['avatar_path'=>$filename]);
-            session()->flash('success','Profile Picture uploaded successfully');
+            session()->flash('success','Votre photo de profil a été changée avec succès');
             return redirect()->back();
         } catch (Exception $e) {
-            session()->flash('error','Error');
+            session()->flash('error','Une erreur est survenue');
             return redirect()->back();
         }
         // }

@@ -9,8 +9,6 @@ export default class View {
     _renderFocusValidation(parentEl) {
         const iconValid =
             parentEl.target.parentElement.querySelector(".valid--icon");
-        if (!iconValid.classList.contains("d-none")) return;
-
         const iconInvalid =
             parentEl.target.parentElement.querySelector(".invalid--icon");
         const textInvalid =
@@ -33,33 +31,36 @@ export default class View {
                 ".invalid-feedback"
             );
 
+        console.log("Blur Fired");
+
         iconInvalid.classList.add("d-none");
         textInvalid.classList.add("d-none");
         parentEl.target.classList.remove("is-invalid")
     }
 
     _renderQuitBlurValidation(parentEl) {
+        console.log("Fired");
         const iconValid =
-            parentEl.parentElement.querySelector(".valid--icon");
+            parentEl?.parentElement.querySelector(".valid--icon");
         const textValid = 
-            parentEl.parentElement.parentElement.querySelector(".valid-feedback");
+            parentEl?.parentElement.parentElement.querySelector(".valid-feedback");
         const iconInvalid =
-            parentEl.parentElement.querySelector(".invalid--icon");
+            parentEl?.parentElement.querySelector(".invalid--icon");
         const textInvalid =
-            parentEl.parentElement.parentElement.querySelector(
+            parentEl?.parentElement.querySelector(
                 ".invalid-feedback"
             );
 
-        if (!iconValid.classList.contains("d-none")) {
-            iconValid.classList.add("d-none");
-            textValid.classList.add("d-none");
-            parentEl.classList.remove("is-valid");
+        if (!iconValid?.classList.contains("d-none")) {
+            iconValid?.classList.add("d-none");
+            textValid?.classList.add("d-none");
+            parentEl?.classList.remove("is-valid");
         }
 
-        if (!iconInvalid.classList.contains("d-none")) {
-            iconInvalid.classList.add("d-none");
-            textInvalid.classList.add("d-none");
-            parentEl.classList.remove("is-invalid");
+        if (!iconInvalid?.classList.contains("d-none")) {
+            iconInvalid?.classList.add("d-none");
+            textInvalid?.classList.add("d-none");
+            parentEl?.classList.remove("is-invalid");
         }
     }
 
@@ -69,7 +70,9 @@ export default class View {
             const iconInvalid = parentEl.parentElement.querySelector(".invalid--icon");
             const textValid = parentEl.parentElement.parentElement.querySelector(".valid-feedback");
             const textInvalid = parentEl.parentElement.parentElement.querySelector(".invalid-feedback");
-            const input = parentEl.value;
+            const input = parentEl?.value;
+            
+            console.log("Render Inputs Excuted");
 
     
             const re = 
@@ -77,36 +80,55 @@ export default class View {
             : 
             type === "password" ? /^(?=.*\d)(?=.*[!#$%&?"*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ 
             : 
-            type === "text" ? /^[a-zA-Z]{4,16}$/
+            type === "text" ? /^[a-zA-Z\ ]{4,30}$/
             : 
             type === "number" ? /^\d{10}$/ : "";
 
-            if (re.test(input) && iconValid.classList.contains("d-none")) {
-                this._majDisplayIcons(iconValid, iconInvalid);
-                this._majDisplayMessages(textValid, textInvalid);
-                this._majDisplayInputStyle(parentEl);
+            if (re?.test(input) && iconValid.classList.contains("d-none")) {
+                this._majDisplayIcons(iconValid, iconInvalid, "correct");
+                this._majDisplayMessages(textValid, textInvalid, "correct");
+                this._majDisplayInputStyle(parentEl, "correct");
             } else if (
-                !re.test(input) &&
+                !re?.test(input) &&
                 iconInvalid.classList.contains("d-none")
             ) {
-                this._majDisplayIcons(iconValid, iconInvalid);
-                this._majDisplayMessages(textValid, textInvalid);
-                this._majDisplayInputStyle(parentEl);
+                console.log("Incorrect");
+                this._majDisplayIcons(iconValid, iconInvalid, "incorrect");
+                this._majDisplayMessages(textValid, textInvalid, "incorrect");
+                this._majDisplayInputStyle(parentEl, "incorrect");
             }
     
         }
     }
 
-    _majDisplayIcons(iconValid, iconInvalid) {
-        iconValid.classList.toggle("d-none");
-        iconInvalid.classList.toggle("d-none");
+    _majDisplayIcons(iconValid, iconInvalid, value) {
+        if (value == "correct") {
+            iconValid.classList.remove("d-none");
+            iconInvalid.classList.add("d-none")
+        } else 
+        if (value = "incorrect") {
+            iconValid.classList.add("d-none");
+            iconInvalid.classList.remove("d-none")
+        }
     }
-    _majDisplayMessages(textValid, textInvalid) {
-        textValid.classList.toggle("d-none");
-        textInvalid.classList.toggle("d-none");
+    _majDisplayMessages(textValid, textInvalid, value) {
+        if (value == "correct") {
+            textValid.classList.remove("d-none");
+            textInvalid.classList.add("d-none")
+        } else 
+        if (value == "incorrect") {
+            textValid.classList.add("d-none");
+            textInvalid.classList.remove("d-none")
+        }
     }
-    _majDisplayInputStyle(parentInput) {
-        parentInput.classList.toggle("is-valid");
-        parentInput.classList.toggle("is-invalid");
+    _majDisplayInputStyle(parentInput, value) {
+        if (value == "correct") {
+            parentInput.classList.add("is-valid");
+            parentInput.classList.remove("is-invalid")
+        } else 
+        if (value == "incorrect") {
+            parentInput.classList.remove("is-valid");
+            parentInput.classList.add("is-invalid")
+        }
     }
 }

@@ -48,7 +48,7 @@
                             <div class="col-md-6 p-3">
                                 <label for="fname--input" class="form-label">Nom</label>
                                 <div class="input-group">
-                                    <input name="last_name" class="w-100 p-3" type="text" id="fname--input"
+                                    <input name="last_name" class="needs--validation w-100 p-3" type="text" id="fname--input"
                                         placeholder="{{ $user->userInformation->last_name }}" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i
@@ -63,7 +63,7 @@
                             <div class="col-md-6 p-3">
                                 <label for="lname--input" class="form-label">Prénom</label>
                                 <div class="input-group">
-                                    <input name="first_name" class="w-100 p-3" type="text" id="lname--input"
+                                    <input name="first_name" class="needs--validation w-100 p-3" type="text" id="lname--input"
                                         placeholder="{{ $user->userInformation->first_name }}" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i
@@ -89,7 +89,7 @@
                             <div class="col-md-12 p-3">
                                 <label for="phone--input" class="form-label">Numéro de téléphone</label>
                                 <div class="input-group">
-                                    <input name="phone_number" class="w-100 p-3" type="number" id="phone--input"
+                                    <input name="phone_number" class="needs--validation w-100 p-3" type="number" id="phone--input"
                                         placeholder="{{ $user->userInformation->phone_number }}" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i
@@ -102,7 +102,7 @@
                                 <div class="valid-feedback fs-6 d-none">Numéro de téléphone valide</div>
                             </div>
                             <div class="d-grid mt-2">
-                                <button class="btn btn-primary" id="btn--modify" ><i
+                                <button class="btn btn-primary disabled" id="btn--modify" ><i
                                         class="fa-solid fa-pen-to-square me-2"></i>Modifier</button>
                             </div>
                         </form>
@@ -123,7 +123,7 @@
                                     <label for="previous_password--input" class="form-label">Ancien mot de
                                         passe</label>
                                     <div class="input-group">
-                                        <input name="previous_password" class="w-100 p-3" type="password"
+                                        <input name="previous_password" class="needs--validation w-100 p-3" type="password"
                                             id="previous_password--input" placeholder="Ancien mot de passe" />
                                         <span class="check--container end-0 me-2 fs-4">
                                             <i
@@ -144,7 +144,7 @@
                             <div class="col-md-6 p-3">
                                 <label for="new_password--input" class="form-label">Nouveau mot de passe</label>
                                 <div class="input-group">
-                                    <input name="new_password" class="w-100 p-3" type="password"
+                                    <input name="new_password" class="needs--validation w-100 p-3" type="password"
                                         id="new_password--input" placeholder="Nouveau mot de passe" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i
@@ -160,8 +160,8 @@
                                 <label for="confirm_password--input" class="form-label">Confirmer le mot de
                                     passe</label>
                                 <div class="input-group">
-                                    <input name="confirm_password" class="w-100 p-3" type="password"
-                                        id="confirm_password--input" placeholder="Confirmez votre mot de passe" />
+                                    <input name="confirm_password" class="needs--validation w-100 p-3" type="password"
+                                        id="confirm_password--input" placeholder="Confirmation du mot de passe" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i
                                             class="valid--icon fa-solid fa-circle-check text-success d-none animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -175,7 +175,7 @@
                             </div>
                             <div class="col-md-6 d-flex align-items-center justify-content-center p-3 mt-2 mb-5"
                                 id="this_div">
-                                <button class="btn btn-primary" id="btn--save"><i
+                                <button class="btn btn-primary disabled" id="btn--save"><i
                                         class="fa-solid fa-bookmark me-2"></i>Sauvgarder</button>
                             </div>
                             <div class="col-md-6 d-flex align-items-center justify-content-center p-3 mt-2 mb-5">

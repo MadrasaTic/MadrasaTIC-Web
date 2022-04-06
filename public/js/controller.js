@@ -12,21 +12,26 @@ window.addEventListener("load", function() {
         loginView.generateFormArray();
         loginView.clearAllInputs();
         // loginView.inputsCheck();
+        window.addEventListener("keydown", (e) => {
+            if (e.key == "Enter") {
+                e.preventDefault();
+            }
+        })
     }
     if (window.location.pathname.slice(1) == "profile") {
         profileView.generateFormArray();
-        // profileView.infoFormValidation();
+        profileView.infoFormValidation();
         profileView.modalsHanlder();
+        profileView.clearInputs();
         window.addEventListener("keydown", (e) => {
             if (e.key == "Enter") {
-                // e.preventDefault();
+                e.preventDefault();
             }
         })
-        // profileView.clearInputs();
     }
     if ((window.location.pathname.slice(1) == "members") || (window.location.pathname.slice(1) == "roles") || (window.location.pathname.slice(1) == "permissions")) {
-        // membersView.testFunction();
         membersView.generateFormTable();
+        membersView.testFunction();
         membersView.dipslayHideModal();
     }
 

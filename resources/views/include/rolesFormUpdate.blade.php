@@ -2,7 +2,7 @@
     @csrf
     <div class="mb-4 col-md-12">
         <div class="input-group">
-            <input type="text" class="modal--input w-100 p-3" placeholder="Nom/Code" name="name" id="name" disabled/>
+            <input type="text" class="needs--validation w-100 p-3" placeholder="Nom/Code" name="name" id="name" disabled/>
             <span class=" check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -15,7 +15,7 @@
     </div>
     <div class="mb-4 col-md-12">
         <div class="input-group">
-            <input type="text" class="modal--input w-100 p-3" placeholder="Nom/Code" name="display_name" id="display_name"/>
+            <input type="text" class="needs--validation w-100 p-3" placeholder="Nom/Code" name="display_name" id="display_name"/>
             <span class=" check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>
@@ -28,7 +28,7 @@
     </div>
     <div class="mb-4 col-md-12"> 
         <div class="input-group">
-            <textarea class="w-100 p-3" placeholder="Déscription du rôles" style="height: 25vh" name="description" id="description"></textarea>
+            <textarea class="text--area w-100 p-3" placeholder="Déscription du rôles" style="height: 25vh" name="description" id="description"></textarea>
             <span class="check--container end-0 me-2 fs-4 d-none ">
                 <i
                     class="valid--icon fa-solid fa-circle-check d-none text-success animate__animated animate__fadeIn animate__delay-0.5s"></i>

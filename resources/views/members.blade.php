@@ -42,7 +42,7 @@
                         <div class="modal-footer p-2 d-flex">
                             <button type="button" class="btn btn-outline-secondary me-auto fw-bold"
                                 id="modal_close--button">Fermer</button>
-                            <button type="button" class="btn btn-primary fw-bold "
+                            <button type="button" class="btn btn-primary fw-bold disabled"
                                 id="modal_save--button">Enregister</button>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                                 <td>{{ $member['userinformation']['position']['name'] ?? $member[''] }}</td>
                                 <td>
                                     <a href="{{ 'members/'.$member['id'] }}" class="modify--button me-3 fw-bold">Consulter</a>
-                                    <a href="{{ 'members/'.$member['id'] }}" class="remove--button link-danger fw-bold">{{ $member['acivated'] == 1 ? 'disactiver' : 'Activer' }}</a>
+                                    <a href="{{ 'members/'.$member['id'] }}" class="remove--button link-danger fw-bold">{{ $member['acivated'] == 1 ? 'Supprimer' : 'Réactiver' }}</a>
                                 </td>
                             </tr>
                             @endforeach
