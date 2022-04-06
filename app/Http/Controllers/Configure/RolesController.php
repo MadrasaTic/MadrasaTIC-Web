@@ -67,7 +67,7 @@ class RolesController extends Controller
         $role = $this->rolesModel::query()
             ->with('permissions:id')
             ->findOrFail($id);
-
+        return $role;
         if (!Helper::roleIsEditable($role)) {
             Session::flash('laratrust-error', 'The role is not editable');
             return redirect()->back();

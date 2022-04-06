@@ -40,6 +40,9 @@ Route::get('/permissions', function () {
     return view('permissions');
 });
 
+Route::resource('/roles', RolesController::class, ['as' => 'configure']);
+
+
 //====================================================================================================
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
@@ -85,7 +88,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
          //Route::resource('/permissions', PermissionsController::class, ['as' => 'configure'])
            //  ->only(['index', 'create', 'store', 'edit', 'update']);
 
-         //Route::resource('/roles', RolesController::class, ['as' => 'configure']);
+        //  Route::resource('/roles', RolesController::class, ['as' => 'configure']);
 
         Route::resource('/roles-assignment', RolesAssignmentController::class, ['as' => 'configure'])
             ->only(['index', 'edit', 'update']);
