@@ -4,7 +4,7 @@ import loginView from "./Views/loginView.js";
 import profileView from "./Views/profileView.js";
 import membersView from "./Views/membersView.js";
 import sideBarView from "./Views/sideBarView.js";
-
+import infraView from "./Views/infraView.js"
 
 
 
@@ -46,6 +46,11 @@ window.addEventListener("load", function() {
                 e.preventDefault();
             }
         })
+    }
+    if (window.location.pathname.slice(1) == "infrastructure") {
+        infraView.renderAddAction();
+        infraView.renderInputAction();
+        infraView.renderItemAction();
     }
 
     console.log("Js Fired");

@@ -1,0 +1,54 @@
+#infra--container{
+}
+
+.items--header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8C8CA1;
+    background-color: #ECF1F4;
+}
+
+/* Add Items */
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 30px;
+    color: #8C8CA1;
+}
+
+.item:hover {
+    background-color: #ECF1F4;
+    color: #4A4A68;
+    font-weight: 500;
+}
+
+.item-hoverd {
+    background-color: #ECF1F4;
+    color: #4A4A68;
+    font-weight: 500;
+}
+
+.add_items--input {
+    height: 30px;
+    border: none;
+}
+
+.add_items--input:focus{
+    border: none !important;
+    outline: none;
+}
+
+/* Items Div */
+.items--add {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
