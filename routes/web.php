@@ -33,9 +33,13 @@ Route::get('google', function () {
     return view('googleAuth');
 });
 
-/*Route::get('/roles', function () {
-    return view('roles');
-});*/
+Route::get('/departments', function () {
+    return view('departments');
+});
+
+Route::get('/signalmentsState', function () {
+    return view('signalmentsState');
+});
 
 // Route::get('/permissions', function () {
 //     return view('permissions');
