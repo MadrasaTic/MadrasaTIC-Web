@@ -78,7 +78,7 @@
         <div class="input-group">
             <select name="position_id" class="w-100 p-3">
                 <option selected disabled></option>
-                @foreach($positions as $position)
+                @foreach($positions ?? '' as $position)
                 <option value="{{ $position->id }}">{{ $position->name }}</option>
                 @endforeach
             </select>

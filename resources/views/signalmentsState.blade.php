@@ -2,10 +2,17 @@
 
 <head>
     <link href="{{ asset('css/members.css') }}" rel="stylesheet" />
+    <style>
+        #circule-color {
+            height: 20px;
+            width: 20px; 
+            background-color: red
+        }
+    </style>
 </head>
 
+
 <body>
-    @include('layouts.flash-messages')
     <div class="container-fluid p-0 h-100">
         <div class="row p-0 g-0">
             <!-- Add Rôle Modal -->
@@ -14,27 +21,26 @@
                     <div class="modal-content animate__animated animate__fadeInDown">
                         <!-- Modal Header -->
                         <div class="modal-header" id="modal_photo--header">
-                            <h5 id="modal--title">Confirmer la suppression</h5>
+                            <h5 id="modal--title">Confirmer la f</h5>
                             <button type="button" class="btn-close" aria-label="Close" id="close--icon"></button>
                         </div>
                         <!-- Modal Body -->
                         <div class="modal-body">
                             <div class="container-fluid p-0">
-                                <!-- Add Membre -->
-                                <div class="d-none" id="members_add--body">
-                                    @include("./include/membersFormAdd")
+                                <!-- Membre -->
+                                <div class="d-none" id="signalmentsState_add--body">
+                                    @include("./include/stateFormAdd")
                                 </div>
-                                <!-- Modfiy Membre -->
-                                <div class="d-none" id="members_modify--body">
-                                    @include("./include/membersFormUpdate")
+                                <!-- Membre -->
+                                <div class="d-none" id="signalmentsState_modify--body">
+                                    @include("./include/stateFormModify")
                                 </div>
-                                <!-- Remove Body -->
+                                <!-- Remove -->
                                 <form action="/members" method="post" id="modal_delete--form">
-                                    @csrf
-                                <p class="d-none" id="remove--body">
-                                    Êtes vous sûr de vous supprimer cet élément ?
-                                </p>
-                                <input type="submit" value="" class="remove--submit" hidden>
+                                    <p class="d-none" id="remove--body">
+                                        Êtes vous sûr de vous supprimer cet élément ?
+                                    </p>
+                                    <input type="submit" value="" class="remove--submit" hidden>
                                 </form>
                             </div>
                         </div>
@@ -53,40 +59,39 @@
             <!-- Table -->
             <div class=" p-4 col-md-7" style="min-height: 100vh">
                 <!-- Header -->
-                <h3 class="fw-bold mt-6 mb-4">Membres</h3>
+                <h3 class="fw-bold mt-6 mb-4">Etats de Signalement</h3>
                 <div class="px-4">
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-outline-secondary fw-bold" id="add--button">
                             <i class="fa-solid fa-circle-plus me-1"></i>
-                            <span>Ajouter un Membre</span>
+                            <span>Ajouter un Etat</span>
                         </button>
                     </div>
                 </div>
                 <!-- Members Table -->
-                <div class=" mt-5" id="members--table">
+                <div class="mt-5" id="members--table">
                     <table class="table table-responsive text-center align-middle">
                         <thead id="members--thead">
                             <tr>
                                 <th class="w-auto py-3" scope="col">ID</th>
-                                <th class="w-auto py-3" scope="col">NOM ET PRÉNOM</th>
-                                <th class="w-auto py-3" scope="col">EMAIL</th>
-                                <th class="w-auto py-3" scope="col">RÔLE</th>
-                                <th class="w-25 py-3" scope="col">ACTIONS</th>
+                                <th class="w-auto py-3" scope="col">NOM</th>
+                                <th class="w-auto py-3" scope="col">COULEURS</th>
+                                <th class="w-auto py-3" scope="col">ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($members as $member)
                             <tr>
-                                <th class="py-3" scope="row">{{ $member['id'] }}</th>
-                                <td>{{ $member['userinformation']['last_name']. ' ' .$member['userinformation']['first_name'] }}</td>
-                                <td>{{ $member['email'] }}</td>
-                                <td>{{ $member['userinformation']['position']['name'] ?? $member[''] }}</td>
+                                <th class="" scope="row">1</th>
+                                <td>Traité</td>
+                                <td class="d-flex align-items-center justify-content-center py-3">
+                                    <div class="border-primary border-3 rounded-circle me-2" id="circule-color"></div>
+                                    #FFFFFF
+                                </td>
                                 <td>
-                                    <a href="{{ 'members/'.$member['id'] }}" class="modify--button me-3 fw-bold">Consulter</a>
-                                    <a href="{{ 'members/'.$member['id'] }}" class="remove--button link-danger fw-bold">{{ $member['acivated'] == 1 ? 'Supprimer' : 'Réactiver' }}</a>
+                                    <a href="#" class="modify--button me-3 fw-bold">Modifier</a>
+                                    <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
                             </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -95,4 +100,4 @@
             @include("./include/notificationsPage")
         </div>
     </div>
-</body>
+</body> 

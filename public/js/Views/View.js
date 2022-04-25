@@ -30,16 +30,12 @@ export default class View {
             parentEl.target.parentElement.parentElement.querySelector(
                 ".invalid-feedback"
             );
-
-        console.log("Blur Fired");
-
         iconInvalid.classList.add("d-none");
         textInvalid.classList.add("d-none");
         parentEl.target.classList.remove("is-invalid")
     }
 
     _renderQuitBlurValidation(parentEl) {
-        console.log("Fired");
         const iconValid =
             parentEl?.parentElement.querySelector(".valid--icon");
         const textValid = 
@@ -72,9 +68,6 @@ export default class View {
             const textInvalid = parentEl.parentElement.parentElement.querySelector(".invalid-feedback");
             const input = parentEl?.value;
             
-            console.log("Render Inputs Excuted");
-
-    
             const re = 
             type === "email" ? /^([a-z]){1,}\.([a-zA-Z])+(@esi-sba\.dz)$/ 
             : 
@@ -92,7 +85,6 @@ export default class View {
                 !re?.test(input) &&
                 iconInvalid.classList.contains("d-none")
             ) {
-                console.log("Incorrect");
                 this._majDisplayIcons(iconValid, iconInvalid, "incorrect");
                 this._majDisplayMessages(textValid, textInvalid, "incorrect");
                 this._majDisplayInputStyle(parentEl, "incorrect");

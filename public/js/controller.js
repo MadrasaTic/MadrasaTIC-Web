@@ -15,11 +15,11 @@ window.addEventListener("load", function() {
         loginView.generateFormArray();
         loginView.clearAllInputs();
         loginView.inputsCheck();
-        window.addEventListener("keydown", (e) => {
-            if (e.key == "Enter") {
-                e.preventDefault();
-            }
-        })
+        // window.addEventListener("keydown", (e) => {
+        //     if (e.key == "Enter") {
+        //         e.preventDefault();
+        //     }
+        // })
     }
     if (window.location.pathname.slice(1) == "profile") {
         profileView.generateFormArray();
@@ -32,7 +32,12 @@ window.addEventListener("load", function() {
             }
         })
     }
-    if ((window.location.pathname.slice(1) == "members") || (window.location.pathname.slice(1) == "roles") || (window.location.pathname.slice(1) == "permissions")) {
+    if ((window.location.pathname.slice(1) == "members") 
+        || (window.location.pathname.slice(1) == "roles") 
+        || (window.location.pathname.slice(1) == "permissions") 
+        || (window.location.pathname.slice(1) == "signalmentsState")
+        || (window.location.pathname.slice(1) == "departments")
+        )  {
         membersView.generateFormTable();
         membersView.testFunction();
         membersView.dipslayHideModal();
