@@ -28,11 +28,12 @@
                                     @include("./include/departmentsFormModify")
                                 </div>
                                 <!-- Remove -->
-                                <form action="/members" method="post" id="modal_delete--form">
+                                <form action="/permissions/" method="post" id="modal_delete--form">
+                                    @csrf
                                     <p class="d-none" id="remove--body">
                                         Êtes vous sûr de vous supprimer cet élément ?
+                                        <input class="remove--submit" type="submit" value="Submit" hidden>
                                     </p>
-                                    <input type="submit" value="" class="remove--submit" hidden>
                                 </form>
                             </div>
                         </div>
@@ -72,15 +73,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($services  as $service)
                             <tr>
-                                <th class="" scope="row">1</th>
-                                <td>Service Sécurité</td>
-                                <td>BAGHDADLI Mohammed Yacine</td>
+                                <th class="" scope="row">{{$service['id']}}</th>
+                                <td>{{$service['name']}}</td>
+                                <td>{{$service['responsable']}}</td>
                                 <td>
-                                    <a href="#" class="modify--button me-3 fw-bold">Modifier</a>
-                                    <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
+                                    <a href={{'departments/'.$service['id']}} class="modify--button me-3 fw-bold">Modifier</a>
+                                    <a href={{"/departments/delete/".$service['id']}} class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
