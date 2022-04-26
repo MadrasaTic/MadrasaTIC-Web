@@ -36,7 +36,6 @@ class Members extends View {
             case "departments":
                 this.#type = "un Service"
                 break;
-                
         }
     }
 
@@ -50,6 +49,7 @@ class Members extends View {
         .filter(input => (input.type == "checkbox"))
         this.#textAreaTable = Array.from(document.querySelector("#modal_update--form").elements)
         .filter (input => input.classList.contains("text--area"));
+        this.#modalUpdateForm = [...this.#modalUpdateForm, document.querySelector("#color--input")]
     }
 
     async displayUpdateData(currentPage, id) {
@@ -62,6 +62,7 @@ class Members extends View {
         })
         const {user_information} = data;
         data = {...user_information, ...data}
+        console.log(this.#modalUpdateForm)
         // Store CheckBox
         if (data.permissions) permissionsTable = data.permissions.map(permObj => permObj["id"]) 
 

@@ -21,7 +21,7 @@
                     <div class="modal-content animate__animated animate__fadeInDown">
                         <!-- Modal Header -->
                         <div class="modal-header" id="modal_photo--header">
-                            <h5 id="modal--title">Confirmer la f</h5>
+                            <h5 id="modal--title"></h5>
                             <button type="button" class="btn-close" aria-label="Close" id="close--icon"></button>
                         </div>
                         <!-- Modal Body -->
@@ -36,7 +36,8 @@
                                     @include("./include/stateFormModify")
                                 </div>
                                 <!-- Remove -->
-                                <form action="/members" method="post" id="modal_delete--form">
+                                <form action="/signalmentsState" method="post" id="modal_delete--form">
+                                    @csrf
                                     <p class="d-none" id="remove--body">
                                         Êtes vous sûr de vous supprimer cet élément ?
                                     </p>
@@ -80,18 +81,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($states as $state)
                             <tr>
-                                <th class="" scope="row">1</th>
-                                <td>Traité</td>
+                                <th class="" scope="row">{{ $state['id'] }}</th>
+                                <td>{{ $state['name'] }}</td>
                                 <td class="d-flex align-items-center justify-content-center py-3">
                                     <div class="border-primary border-3 rounded-circle me-2" id="circule-color"></div>
-                                    #FFFFFF
-                                </td>
+                                    {{ strtoupper($state['color']) }}</td>
                                 <td>
-                                    <a href="#" class="modify--button me-3 fw-bold">Modifier</a>
-                                    <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
+                                    <a href="{{ 'signalmentsState/'.$state['id'] }}" class="modify--button me-3 fw-bold">Modifier</a>
+                                    <a href="{{ 'signalmentsState/'.$state['id'] }}" class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
