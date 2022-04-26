@@ -15,6 +15,7 @@ use App\Http\Controllers\Configure\PermissionsController;
 use App\Http\Controllers\Configure\RolesController;
 use App\Http\Controllers\Configure\RolesAssignmentController;
 use App\Http\Controllers\MembersController;
+use App\Http\Controllers\StateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,10 +38,10 @@ Route::get('/departments', function () {
     return view('departments');
 });
 
-Route::get('/signalmentsState', function () {
-    return view('signalmentsState');
+/*Route::get('/states', function () {
+    return view('states');
 });
-
+*/
 Route::get('/infrastructure', function () {
     return view('infrastructure');
 });
@@ -107,6 +108,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/permissions',[PermissionsController::class,'index'])->name('permissions');
         Route::post('/permissions/{id}',[PermissionsController::class,'update']);
         Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);
+
+        Route::resource('/states', StateController::class);
+        // Route::get('/states',[StateController::class,'index'])->name('state');
+        // Route::post('/states/{id}',[StateController::class,'update']);
+        // Route::post('/states/delete/{id}',[StateController::class,'delete']);
 
         Route::get('/create',[CheckController::class, 'create'])->name('create');
         Route::get('/indexx',[CheckController::class, 'index'])->name('indexx');
