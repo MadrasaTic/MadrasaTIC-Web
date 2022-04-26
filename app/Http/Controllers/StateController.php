@@ -16,8 +16,7 @@ class StateController extends Controller
     {
         $states = State::all();
 
-        return View('states');
-        // return View('states', compact('states'));
+        return View('states', compact('states'));
     }
 
     /**
@@ -27,7 +26,8 @@ class StateController extends Controller
      */
     public function create()
     {
-        //
+        $states = State::all();
+        return View('states', compact('states'));
     }
 
     /**
@@ -38,7 +38,14 @@ class StateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // dd($request);
+        $state = new State();
+        $state->name = $request['state_name'];
+        $state->color = $request['state_color'];
+        $state->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -60,7 +67,9 @@ class StateController extends Controller
      */
     public function edit($id)
     {
-        //
+        $state = State::findOrFail($id);
+
+        return $state;
     }
 
     /**
@@ -72,7 +81,28 @@ class StateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $state = State::findOrFail($id);
+
+        // dd($request, $id);
+        $state->name = $request['state_name'];
+        $state->color = $request['state_color'];
+        $state->save();
+
+        return redirect()->back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $state = State::findOrFail($id);
+        $state->delete();
+        
+        return redirect()->back();
     }
 
     /**
@@ -83,6 +113,9 @@ class StateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $state = State::findOrFail($id);
+        $state->delete();
+
+        return redirect()->back();
     }
 }
