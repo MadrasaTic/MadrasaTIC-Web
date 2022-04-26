@@ -12,16 +12,32 @@ class Members extends View {
     #modalCloseButton = document.querySelector("#modal_close--button");
     #modalCloseIcon = document.querySelector("#close--icon");
     // Form
+    #currentPage = window.location.pathname.slice(1);
     #modalForm = "";
     #modalUpdateForm = "";
     #checkBoxTable = "";
     #textAreaTable = "";
-    #currentPage = window.location.pathname.slice(1);
-    #type =  this.#currentPage == "members" ? "un Membre" 
-    : this.currentPage == "permissions" ?  "une Permission" 
-    : "Un Rôle" 
+    #type =  "";
 
     testFunction() {
+        switch(this.#currentPage) {
+            case "members":
+                this.#type = "un Membre"
+                break;
+            case "permissions":
+                this.#type = "une Permission"
+                break;
+            case "signalmentsState": 
+                this.#type = "un Etat"
+                break;
+            case "roles":
+                this.#type = "un Rôle"
+                break;
+            case "departments":
+                this.#type = "un Service"
+                break;
+                
+        }
     }
 
 
@@ -37,6 +53,8 @@ class Members extends View {
     }
 
     async displayUpdateData(currentPage, id) {
+        let permissionsTable = [];
+        // Fetch & Store Data
         let data = await fetch(`/${currentPage}/${id}/edit`).then(function(response) {
             return response.json();
         }).then(function(data) {
@@ -44,27 +62,22 @@ class Members extends View {
         })
         const {user_information} = data;
         data = {...user_information, ...data}
-
-
-        let permissionsTable = []
+        // Store CheckBox
         if (data.permissions) permissionsTable = data.permissions.map(permObj => permObj["id"]) 
-        
-        console.log(permissionsTable);
 
-
+        // Display on Input
         this.#modalUpdateForm.forEach((input) => {
             const inputText = input.id
             input.value = data[`${inputText}`]?? null;
         })
-
+        // Display on CheckBox
         this.#checkBoxTable.forEach((checkbox) => {
             const id = +checkbox.id.split("k").slice(-1).join("");
             if(permissionsTable.indexOf(id) >= 0) {
                 checkbox.checked = true;
             }
         })
-
-
+        // Display on TextArea
         this.#textAreaTable.forEach((textArea) => textArea.value = data.description)
     }
 
@@ -125,7 +138,6 @@ class Members extends View {
                 this._inputsCheck();
                 this.activeSubmitButton("add");
         })
-
 
         this.#btnModify.forEach((btn) => {
             btn.addEventListener("click", (e) => {
