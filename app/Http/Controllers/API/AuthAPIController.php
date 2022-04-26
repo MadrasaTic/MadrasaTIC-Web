@@ -49,7 +49,7 @@ class AuthAPIController extends Controller
             return response()->json(['error' => 'Invalid credentials provided.'], 422);
         }
 
-        $userCreated = User::firstOrCreate(
+        $userCreated = User::with("userInformation")->firstOrCreate(
             [
                 'email' => $user->getEmail()
             ],
@@ -88,7 +88,7 @@ class AuthAPIController extends Controller
                     str_replace('-w=s96', '-w=s500', $user->getAvatar()), $user),
             ]
         );
-        dd($user->token);
+        //dd($user->token);
         $token = $userCreated->createToken('token-name')->plainTextToken;
 
         return response()->json($userCreated, 200, ['Access-Token' => $token]);
@@ -114,7 +114,7 @@ class AuthAPIController extends Controller
         ]);
 
         // getting user
-        $user = User::where('email', $request->email)->first();
+        $user = User::with('userInformation')->where('email', $request->email)->first();
 
         // checking credentials
         if( !$user || !Hash::check($request->password, $user->password)){
@@ -133,7 +133,7 @@ class AuthAPIController extends Controller
         // dd($request);
         $user = Socialite::driver('google')->stateless()->userFromToken($request->token);
         // Getting or creating user from db
-        $userCreated = User::firstOrCreate(
+        $userCreated = User::with('userInformation')->firstOrCreate(
             [
                 'email' => $user->getEmail()
             ],
