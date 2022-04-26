@@ -1,14 +1,10 @@
-<form class="row" id="modal_update--form" method="POST" action="/members">
-    <div class="mb-4 col-md-12">
-        <label for="last_name" class="form-label">ID</label>
-        <div class="input-group">
-            <input type="text" class="w-100 p-3" placeholder="ID" name="state--id" id="state--id" />
-        </div>
-    </div>
+<form class="row" id="modal_update--form" method="POST" action="{{'departments'}}">
+    @csrf
+    
     <div class="mb-4 col-md-12">
         <label for="last_name" class="form-label">Nom</label>
         <div class="input-group">
-            <input type="text" class="needs--validation w-100 p-3" placeholder="Nom" name="departments_name" id="departments_name" />
+            <input type="text" class="needs--validation w-100 p-3" placeholder="Nom" name="name" id="name" />
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check text-success d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
@@ -22,7 +18,7 @@
     <div class="mb-4 col-md-12">
         <label for="last_name" class="form-label">Résponsable</label>
         <div class="input-group">
-            <input type="text" class="needs--validation w-100 p-3" placeholder="Résponsable" name="departments_responsable" id="departments_responsable" />
+        <input name="responsable" id="responsable" type="text"  class="needs--validation  w-100 p-3" placeholder="Résponsable" />
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check text-success d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
@@ -36,7 +32,8 @@
     <div class="mb-4 col-md-12">
         <label for="last_name" class="form-label">Déscription</label>
         <div class="input-group">
-            <textarea class="w-100 p-3" placeholder="Déscription du Service" style="height: 25vh" name="description"></textarea>
+        <textarea name="description" id="description" class="text--area w-100 p-3" placeholder="Déscription du Service"
+                style="height: 25vh"></textarea>
         </div>
     </div>
     <input type="submit" value="ICI" class="modify--submit" hidden>
