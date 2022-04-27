@@ -116,7 +116,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::post('/infrastructure/annexe','store');
             Route::get('/infrastructure/annexe/{id}','show');
             Route::post('/infrastructure/annexe/{id}','update');
-            Route::post('/infrastructure/annexe/delete/{id}','delete');
+            Route::post('/infrastructure/annexe/delete/{id}','delete'); 
         });
 
         Route::controller(BlocController::class)->group(function () {

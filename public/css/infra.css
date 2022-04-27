@@ -1,4 +1,6 @@
-#infra--container{
+.infra_header--text{
+    color: black;
+    font-weight: bold;
 }
 
 .items--header {
@@ -26,24 +28,24 @@
     font-weight: 500;
 }
 
-.item-hoverd {
+.selected--annexe, .selected--bloc, .selected--room {
     background-color: #ECF1F4;
     color: #4A4A68;
     font-weight: 500;
 }
 
-.add_items--input {
+.annexe_add--input, .bloc_add--input, .room_add--input {
     height: 30px;
     border: none;
 }
 
-.add_items--input:focus{
+.annexe_add--input:focus, .bloc_add--input:focus, .room_add--input:focus{
     border: none !important;
     outline: none;
 }
 
 /* Items Div */
-.items--add {
+.annexe_add--button, .bloc_add--button, .room_add--button {
     height: 40px;
     display: flex;
     align-items: center;

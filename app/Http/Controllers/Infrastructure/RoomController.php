@@ -101,8 +101,9 @@ class RoomController extends Controller
     {
         $room = Room::find($id);
         if($room) {
-            $room->delete();
-            return "room deleted";
+            $id= $room -> id;
+            $room -> delete ();
+            return json_encode(["id" => $id]);
         } else {
             return "room not found";
         }

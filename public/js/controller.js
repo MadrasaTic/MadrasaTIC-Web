@@ -1,5 +1,5 @@
 // Module Import
-import * as model from "./model.js"; 
+import * as model from "./model.js";
 import loginView from "./Views/loginView.js";
 import profileView from "./Views/profileView.js";
 import membersView from "./Views/membersView.js";
@@ -32,9 +32,9 @@ window.addEventListener("load", function() {
             }
         })
     }
-    if ((window.location.pathname.slice(1) == "members") 
-        || (window.location.pathname.slice(1) == "roles") 
-        || (window.location.pathname.slice(1) == "permissions") 
+    if ((window.location.pathname.slice(1) == "members")
+        || (window.location.pathname.slice(1) == "roles")
+        || (window.location.pathname.slice(1) == "permissions")
         || (window.location.pathname.slice(1) == "signalmentsState")
         || (window.location.pathname.slice(1) == "departments")
         )  {
@@ -48,9 +48,13 @@ window.addEventListener("load", function() {
         })
     }
     if (window.location.pathname.slice(1) == "infrastructure") {
-        infraView.renderAddAction();
-        infraView.renderInputAction();
-        infraView.renderItemAction();
+        // Render Annexe on Load
+        infraView.getAndDisplayItems("annexe", '/infrastructure/annexe');
+        infraView.renderAddClick();
+        document.querySelector("#infra--container").addEventListener("click", (e) => {
+            if (e.target.id != "infra--container") return ;
+            infraView.closeInputs();
+        })
     }
 
     console.log("Js Fired");

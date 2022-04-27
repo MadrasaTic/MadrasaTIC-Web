@@ -99,8 +99,9 @@ class BlocController extends Controller
     {
         $bloc = Bloc::find($id);
         if($bloc) {
-            $bloc->delete();
-            return "bloc deleted";
+            $id= $bloc -> id;
+            $bloc -> delete ();
+            return json_encode(["id" => $id]);
         } else {
             return "bloc not found";
         }

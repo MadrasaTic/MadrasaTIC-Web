@@ -90,12 +90,13 @@ class AnnexeController extends Controller
      * @param  \App\Models\Annexe  $annexe
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         $annexe = Annexe::find($id);
         if($annexe) {
-            $annexe->delete();
-            return "annexe deleted";
+            $id= $annexe -> id;
+            $annexe -> delete ();
+            return json_encode(["id" => $id]);
         } else {
             return "annexe not found";
         }
