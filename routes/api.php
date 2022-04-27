@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthAPIController;
+use App\Http\Controllers\CheckController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,3 +25,7 @@ Route::get('/auth/{provider}/callback', [AuthAPIController::class,'handleProvide
 
 Route::post('requestToken', [AuthAPIController::class, 'requestToken']);
 Route::post('requestTokenGoogle', [AuthAPIController::class, 'requestTokenGoogle']);
+
+
+Route::get('/create',[CheckController::class, 'create'])->name('create');
+Route::get('/indexx',[CheckController::class, 'index'])->name('indexx');
