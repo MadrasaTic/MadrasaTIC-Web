@@ -91,7 +91,7 @@ class AuthAPIController extends Controller
         //dd($user->token);
         $token = $userCreated->createToken('token-name')->plainTextToken;
 
-        return response()->json($userCreated, 200, ['Access-Token' => $token]);
+        return redirect()->to('madrasatic://user_token/'.$token);
     }
 
     /**
