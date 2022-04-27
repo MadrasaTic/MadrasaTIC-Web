@@ -1,12 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Infrastructure;
 
 use App\Models\Room;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class RoomController extends Controller
 {
+    public function listing($bloc_id)
+    {
+        return Room::where("bloc_id", $bloc_id)->get();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +42,7 @@ class RoomController extends Controller
     {
         $room = new Room();
         $room->name = $request->get('name');
+        $room->type = $request->get('type');
         $room->bloc_id = $request->get('bloc_id');
         $room->save();
         return $room;
@@ -77,6 +83,7 @@ class RoomController extends Controller
         $room = Room::find($id);
         if($room) {
             $room->name = $request->get('name');
+            $room->type = $request->get('type');
             $room->save();
             return $room;
         } else {
@@ -94,7 +101,6 @@ class RoomController extends Controller
     {
         $room = Room::find($id);
         if($room) {
-            $room->name = $request->get('name');
             $room->delete();
             return "room deleted";
         } else {

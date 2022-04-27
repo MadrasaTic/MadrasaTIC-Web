@@ -120,7 +120,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         });
 
         Route::controller(BlocController::class)->group(function () {
-            Route::get('/infrastructure/bloc','index');
+            Route::get('/infrastructure/bloc/listing/{annexe_id}','listing');
             Route::post('/infrastructure/bloc','store');
             Route::get('/infrastructure/bloc/{id}','show');
             Route::post('/infrastructure/bloc/{id}','update');
@@ -128,7 +128,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         });
 
         Route::controller(RoomController::class)->group(function () {
-            Route::get('/infrastructure/room','index');
+            Route::get('/infrastructure/room/listing/{bloc_id}','listing');
             Route::post('/infrastructure/room','store');
             Route::get('/infrastructure/room/{id}','show');
             Route::post('/infrastructure/room/{id}','update');

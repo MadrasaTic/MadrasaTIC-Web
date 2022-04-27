@@ -94,7 +94,6 @@ class AnnexeController extends Controller
     {
         $annexe = Annexe::find($id);
         if($annexe) {
-            $annexe->name = $request->get('name');
             $annexe->delete();
             return "annexe deleted";
         } else {

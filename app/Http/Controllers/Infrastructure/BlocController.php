@@ -1,12 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Infrastructure;
 
 use App\Models\Bloc;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class BlocController extends Controller
 {
+    public function listing($annexe_id)
+    {
+        return Bloc::where('annexe_id', $annexe_id)->get();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -94,7 +99,6 @@ class BlocController extends Controller
     {
         $bloc = Bloc::find($id);
         if($bloc) {
-            $bloc->name = $request->get('name');
             $bloc->delete();
             return "bloc deleted";
         } else {
