@@ -1,0 +1,146 @@
+input,
+textarea {
+    border: none;
+    background: none;
+}
+select, #date_range--input {
+    background-color: #ECF1F4;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+}
+
+#modal input::placeholder {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: calc(1.2825rem + 0.39vw);
+    color: #203659 !important;
+    opacity: 1;
+}
+
+#modal input {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: calc(1.2825rem + 0.39vw);
+    color: #203659 !important;
+}
+
+
+/* Stats */
+.progress-cards {
+    height: 90%;
+    width: 90%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.progress .track, .progress .fill{
+	fill: none;
+	stroke-width: 5;
+	transform: rotate(90deg)translate(0px, -80px);
+}
+.progress .track{
+	stroke: #EFEFFD;
+}
+.progress .fill {
+	stroke: #EFEFFD;
+	stroke-dasharray: 219.99078369140625;
+	stroke-dashoffset: -219.99078369140625;
+	transition: stroke-dashoffset 1s;
+}
+.progress.blue .fill {
+	stroke: rgb(104, 214, 198);
+}
+.progress.green .fill {
+	stroke: #35F9AE;
+}
+.progress .value, .progress .text {
+	text-anchor: middle;
+}
+.progress .text {
+	font-size: 12px;
+}
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+		cursor: default;
+}
+
+/* Navigation  */
+#signa--nav {
+    color: #8C8CA1;
+    transition: all .3s linear;
+    cursor: pointer;
+}
+
+#signa--nav>div {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hover Effect */
+.nav_item--hoverd {
+    color: #203659;
+    border-bottom: 1px solid #203659;
+    font-weight: 500;
+}
+
+/* Search Input */
+#search_input--container {
+    position: absolute;
+}
+
+/* Search Icon */
+#search_icon--container {
+    position: absolute;
+    z-index: 1;
+}
+
+#search_icon {
+    background: none;
+    position: relative;
+    top: -50%;
+    transform: translateY(-100%);
+}
+
+/* Cards */
+#signa--cards>div {
+    height: 29rem;
+}
+
+.card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#color--icon {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: #35F9AE;
+}
+
+#state--container {
+    background-color: #EFEFFD;
+    cursor: pointer;
+}
+
+/* Signalments Modal */
+

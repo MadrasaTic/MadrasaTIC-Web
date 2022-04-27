@@ -4,7 +4,9 @@ import loginView from "./Views/loginView.js";
 import profileView from "./Views/profileView.js";
 import tablesView from "./Views/tablesView.js";
 import sideBarView from "./Views/sideBarView.js";
-import infraView from "./Views/infraView.js"
+import infraView from "./Views/infraView.js";
+import SignalmentsView from "./Views/signalmentsView.js"
+import signalmentsView from "./Views/signalmentsView.js";
 
 
 
@@ -53,6 +55,9 @@ window.addEventListener("load", function() {
         infraView.getAndDisplayItems("annexe", '/infrastructure/annexe');
         infraView.renderAddClick();
         infraView.closeAllInputsOnClick();
+    }
+    if (window.location.pathname.slice(1) == "signalments") {
+        signalmentsView.testFunction();
     }
 
     console.log("Js Fired");

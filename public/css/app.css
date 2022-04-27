@@ -38,7 +38,7 @@
   --bs-light: #FAFCFE;
   --bs-dark: #0E0E2C;
   --bs-primary-rgb: 32, 54, 89, 1;
-  --bs-secondary-rgb: 108, 117, 125;
+  --bs-secondary-rgb: 140, 140, 161;
   --bs-success-rgb: 53, 249, 174, 1;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 255, 193, 7;
@@ -7659,6 +7659,10 @@ textarea.form-control-lg {
 
 .fw-bold {
   font-weight: 700 !important;
+}
+
+.fw-500 {
+  font-weight: 500 !important;
 }
 
 .fw-bolder {
