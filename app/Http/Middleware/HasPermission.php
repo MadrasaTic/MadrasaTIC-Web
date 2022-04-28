@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Models\Permission;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,12 @@ class HasPermission
         $_exist_role_user = \DB::table('role_user')
                         ->where('user_id',auth()->id())
                         ->exists();
+
+        if( $_exist_role_user ) {
+            // ADMIN ACCESS TO EVERYTHING
+            if (User::find(auth()->id())->hasRole('Admin') ) {
+                return $next($request);
+            }
 
         if( $_exist_role_user ) {
             $user_role = \DB::table('role_user')

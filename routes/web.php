@@ -16,6 +16,9 @@ use App\Http\Controllers\Configure\RolesController;
 use App\Http\Controllers\Configure\RolesAssignmentController;
 use App\Http\Controllers\MembersController;
 
+use App\Http\Controllers\Infrastructure\AnnexeController;
+use App\Http\Controllers\Infrastructure\BlocController;
+use App\Http\Controllers\Infrastructure\RoomController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,6 +106,34 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/permissions',[PermissionsController::class,'index'])->name('permissions');
         Route::post('/permissions/{id}',[PermissionsController::class,'update']);
         Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);
+
+        Route::get('/infrastructure', function () {
+            return view('infrastructure');
+        });
+
+        Route::controller(AnnexeController::class)->group(function () {
+            Route::get('/infrastructure/annexe','index');
+            Route::post('/infrastructure/annexe','store');
+            Route::get('/infrastructure/annexe/{id}','show');
+            Route::post('/infrastructure/annexe/{id}','update');
+            Route::post('/infrastructure/annexe/delete/{id}','delete'); 
+        });
+
+        Route::controller(BlocController::class)->group(function () {
+            Route::get('/infrastructure/bloc/listing/{annexe_id}','listing');
+            Route::post('/infrastructure/bloc','store');
+            Route::get('/infrastructure/bloc/{id}','show');
+            Route::post('/infrastructure/bloc/{id}','update');
+            Route::post('/infrastructure/bloc/delete/{id}','delete');
+        });
+
+        Route::controller(RoomController::class)->group(function () {
+            Route::get('/infrastructure/room/listing/{bloc_id}','listing');
+            Route::post('/infrastructure/room','store');
+            Route::get('/infrastructure/room/{id}','show');
+            Route::post('/infrastructure/room/{id}','update');
+            Route::post('/infrastructure/room/delete/{id}','delete');
+        });
 
         Route::get('/create',[CheckController::class, 'create'])->name('create');
         Route::get('/indexx',[CheckController::class, 'index'])->name('indexx');
