@@ -16,6 +16,7 @@ use App\Http\Controllers\Configure\RolesController;
 use App\Http\Controllers\Configure\RolesAssignmentController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\StateController;
+use App\Http\Controllers\ServicesController;
 
 use App\Http\Controllers\Infrastructure\AnnexeController;
 use App\Http\Controllers\Infrastructure\BlocController;
@@ -169,3 +170,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Route::get('/permissions/{id}',[PermissionsController::class,'edit']);
 // Route::post('/permissions/{id}',[PermissionsController::class,'update']);
 // Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);
+
+// Service Routes
+Route::get('/departments', [ServicesController::class, 'show']);
+Route::post('/departments',[ServicesController::class, 'Add']);
+Route::get('/departments/{id}/edit',[ServicesController::class,'edit']);
+Route::post('/departments/{id}',[ServicesController::class,'update']);
+Route::post('/departments/delete/{id}',[ServicesController::class,'delete']);
