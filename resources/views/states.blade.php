@@ -3,10 +3,10 @@
 <head>
     <link href="{{ asset('css/members.css') }}" rel="stylesheet" />
     <style>
-        #circule-color {
+        .circle-color {
             height: 20px;
             width: 20px; 
-            background-color: red
+            background-color: black
         }
     </style>
 </head>
@@ -86,8 +86,8 @@
                                 <th class="" scope="row">{{ $state['id'] }}</th>
                                 <td>{{ $state['name'] }}</td>
                                 <td class="d-flex align-items-center justify-content-center py-3">
-                                    <div class="border-primary border-3 rounded-circle me-2" id="circule-color"></div>
-                                    {{ strtoupper($state['color']) }}</td>
+                                    <div class="circle-color border-primary border-3 rounded-circle me-2"></div>
+                                    <span> {{ strtoupper($state['color']) }}</td></span>
                                 <td>
                                     <a href="{{ 'signalmentsState/'.$state['id'] }}" class="modify--button me-3 fw-bold">Modifier</a>
                                     <a href="{{ 'signalmentsState/'.$state['id'] }}" class="remove--button link-danger fw-bold">Supprimer</a>
@@ -102,4 +102,12 @@
             @include("./include/notificationsPage")
         </div>
     </div>
+
+    <script>    
+        const circleColors = document.querySelectorAll(".circle-color");
+        circleColors.forEach((circle) => {
+            const hexValue = circle.nextElementSibling.textContent;
+            circle.style.backgroundColor = `${hexValue}`;
+        })
+    </script>
 </body> 

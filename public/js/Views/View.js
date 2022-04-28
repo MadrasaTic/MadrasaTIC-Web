@@ -73,7 +73,7 @@ export default class View {
             : 
             type === "password" ? /^(?=.*\d)(?=.*[!#$%&?"*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ 
             : 
-            type === "text" ? /^[a-zA-Z\ ]{4,30}$/
+            type === "text" ? /^[a-zA-Zéè   \ ]{4,30}$/
             : 
             type === "number" ? /^\d{10}$/ : "";
 
