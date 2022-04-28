@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -13,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return View('signalmentsCategory', compact('categories'));
     }
 
     /**
@@ -23,7 +25,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return View('signalmentsCategory', compact('categories'));
     }
 
     /**
@@ -34,7 +37,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $category = new Category();
+        $category->name = $request['name'];
+        $category->parent_id = $request['parent_id'];
+        $category->priority_default = $request['priority_default'];
+        $category->description = $request['description'];
+        $category->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -56,7 +67,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        
+        return $category;
     }
 
     /**
@@ -68,7 +81,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->name = $request['name'];
+        $category->parent_id = $request['parent_id'];
+        $category->priority_default = $request['priority_default'];
+        $category->description = $request['description'];
+        $category->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -79,6 +100,17 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect()->back();
     }
 }
