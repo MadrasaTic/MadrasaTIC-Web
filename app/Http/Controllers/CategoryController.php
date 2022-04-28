@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Service;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return View('signalmentsCategory', compact('categories'));
+        $services = Service::all();
+        return View('signalmentsCategory', compact('categories', 'services'));
     }
 
     /**
@@ -26,7 +28,8 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return View('signalmentsCategory', compact('categories'));
+        $services = Service::all();
+        return View('signalmentsCategory', compact('categories', 'services'));
     }
 
     /**
@@ -37,14 +40,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $category = new Category();
         $category->name = $request['name'];
         $category->parent_id = $request['parent_id'];
         $category->priority_default = $request['priority_default'];
-        $category->description = $request['description'];
+        $category->description = $request->get('description');
+        $category->services = $request['services'];
+        // $category->services_id = $request['services'];
+        // dd($request, $category->services(), $category);
         $category->save();
-
         return redirect()->back();
     }
 

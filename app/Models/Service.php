@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
 
 class Service extends Model
 {
@@ -11,4 +12,9 @@ class Service extends Model
 
     protected $fillable = ['name'];
     
+    public function category()
+    {
+    return $this->belongsTo(Category::class);
+    }
+
 }

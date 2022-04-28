@@ -19,7 +19,6 @@ class CreateCategoriesTable extends Migration
             $table->integer('parent_id')->nullable();
             $table->integer('priority_default');
             $table->text('description')->nullable();
-            $table->integer('service_id')->nullable();
             $table->timestamps();
         });
     }
