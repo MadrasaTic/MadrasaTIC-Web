@@ -15,6 +15,7 @@ use App\Http\Controllers\Configure\PermissionsController;
 use App\Http\Controllers\Configure\RolesController;
 use App\Http\Controllers\Configure\RolesAssignmentController;
 use App\Http\Controllers\MembersController;
+use App\Http\Controllers\PrioritiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,3 +140,13 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Route::get('/permissions/{id}',[PermissionsController::class,'edit']);
 // Route::post('/permissions/{id}',[PermissionsController::class,'update']);
 // Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);
+
+
+
+
+// Priority Route
+Route::get('/signalmentsPriority', [PrioritiesController::class, 'show']);
+Route::post('/signalmentsPriority',[PrioritiesController::class, 'Add']);
+Route::get('/signalmentsPriority/{id}/edit',[PrioritiesController::class,'edit']);
+Route::post('/signalmentsPriority/{id}',[PrioritiesController::class,'update']);
+Route::post('/signalmentsPriority/delete/{id}',[PrioritiesController::class,'delete']);

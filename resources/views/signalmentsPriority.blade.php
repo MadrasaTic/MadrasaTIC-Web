@@ -28,7 +28,8 @@
                                     @include("./include/priorityFormModify")
                                 </div>
                                 <!-- Remove -->
-                                <form action="/members" method="post" id="modal_delete--form">
+                                <form action="/permissions/" method="post" id="modal_delete--form">
+                                    @csrf
                                     <p class="d-none" id="remove--body">
                                         Êtes vous sûr de vous supprimer cet élément ?
                                     </p>
@@ -71,14 +72,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($priorities  as $priority)
                             <tr>
-                                <th class="" scope="row">1</th>
-                                <td>Priorité Ultime</td>
+                                <th class="" scope="row">{{$priority['id']}}</th>
+                                <td>{{$priority['name']}}</td>
                                 <td>
-                                    <a href="#" class="modify--button me-3 fw-bold">Modifier</a>
-                                    <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
+                                    <a href={{'signalmentsPriority/'.$priority['id']}} class="modify--button me-3 fw-bold">Modifier</a>
+                                    <a href={{"/signalmentsPriority/delete/".$priority['id']}} class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
