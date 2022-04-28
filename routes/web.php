@@ -46,6 +46,10 @@ Route::get('/departments', function () {
     return view('states');
 });
 
+Route::get('/signalmentsPriority', function () {
+    return view('signalmentsPriority');
+});
+
 // Route::get('/permissions', function () {
 //     return view('permissions');
 // });*/
