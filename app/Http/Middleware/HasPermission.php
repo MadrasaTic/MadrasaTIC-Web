@@ -15,61 +15,60 @@ class HasPermission
     {
 
         $_exist_role_user = \DB::table('role_user')
-                        ->where('user_id',auth()->id())
-                        ->exists();
+            ->where('user_id', auth()->id())
+            ->exists();
 
-        if( $_exist_role_user ) {
+        if ($_exist_role_user) {
             // ADMIN ACCESS TO EVERYTHING
-            if (User::find(auth()->id())->hasRole('Admin') ) {
+            if (User::find(auth()->id())->hasRole('Admin')) {
                 return $next($request);
             }
 
-        if( $_exist_role_user ) {
-            $user_role = \DB::table('role_user')
-                            ->where('user_id',auth()->id())
-                            ->first();
+            if ($_exist_role_user) {
+                $user_role = \DB::table('role_user')
+                    ->where('user_id', auth()->id())
+                    ->first();
 
-            $controllerAction = class_basename(Route::currentRouteAction());
+                $controllerAction = class_basename(Route::currentRouteAction());
 
-            $permission = false;
-            $permission_id_id = 0;
-
-            $permission_result = Permission::where('name',$controllerAction)
-                                    ->exists();
-
-            $permission_id = Permission::where('name',$controllerAction)
-                                ->first();
-
-            if(!$permission_result) {
+                $permission = false;
                 $permission_id_id = 0;
-                return $next($request);
-            }
-            else {
-                $permission_id_id = $permission_id->id;
-            }
 
-            $role_id = $user_role->role_id;
+                $permission_result = Permission::where('name', $controllerAction)
+                    ->exists();
 
-            $check_permission = \DB::table('permission_role')
-                                ->where('role_id',$role_id)
-                                ->where('permission_id',$permission_id_id)
-                                ->exists();
+                $permission_id = Permission::where('name', $controllerAction)
+                    ->first();
 
-            if($check_permission) {
-
-                $permission = true;
-
-                if($permission) {
+                if (!$permission_result) {
+                    $permission_id_id = 0;
                     return $next($request);
+                } else {
+                    $permission_id_id = $permission_id->id;
                 }
 
-                return abort(403);
+                $role_id = $user_role->role_id;
 
-            }else {
+                $check_permission = \DB::table('permission_role')
+                    ->where('role_id', $role_id)
+                    ->where('permission_id', $permission_id_id)
+                    ->exists();
+
+                if ($check_permission) {
+
+                    $permission = true;
+
+                    if ($permission) {
+                        return $next($request);
+                    }
+
+                    return abort(403);
+                } else {
+                    return abort(403);
+                }
+            } else {
                 return abort(403);
             }
-        }else {
-            return abort(403);
         }
     }
 }

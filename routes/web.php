@@ -15,6 +15,7 @@ use App\Http\Controllers\Configure\PermissionsController;
 use App\Http\Controllers\Configure\RolesController;
 use App\Http\Controllers\Configure\RolesAssignmentController;
 use App\Http\Controllers\MembersController;
+use App\Http\Controllers\StateController;
 
 use App\Http\Controllers\Infrastructure\AnnexeController;
 use App\Http\Controllers\Infrastructure\BlocController;
@@ -40,13 +41,13 @@ Route::get('/departments', function () {
     return view('departments');
 });
 
-Route::get('/signalmentsState', function () {
-    return view('signalmentsState');
+/*Route::get('/states', function () {
+    return view('states');
 });
 
 // Route::get('/permissions', function () {
 //     return view('permissions');
-// });
+// });*/
 
 
 
@@ -134,6 +135,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::post('/infrastructure/room/{id}','update');
             Route::post('/infrastructure/room/delete/{id}','delete');
         });
+        Route::resource('/signalmentsState', StateController::class);
+        Route::post('/signalmentsState/{id}',[StateController::class,'update']);
+        Route::post('/signalmentsState/delete/{id}',[StateController::class,'delete']); 
+        // Route::get('/states',[StateController::class,'index'])->name('state');
+        // Route::post('/states/{id}',[StateController::class,'update']);
+        // Route::post('/states/delete/{id}',[StateController::class,'delete']);
 
         Route::get('/create',[CheckController::class, 'create'])->name('create');
         Route::get('/indexx',[CheckController::class, 'index'])->name('indexx');
