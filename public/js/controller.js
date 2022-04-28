@@ -37,6 +37,7 @@ window.addEventListener("load", function() {
         || (window.location.pathname.slice(1) == "permissions") 
         || (window.location.pathname.slice(1) == "signalmentsState")
         || (window.location.pathname.slice(1) == "departments")
+        || (window.location.pathname.slice(1) == "signalmentsPriority")
         )  {
         membersView.generateFormTable();
         membersView.testFunction();

@@ -45,6 +45,10 @@ Route::get('/infrastructure', function () {
     return view('infrastructure');
 });
 
+Route::get('/signalmentsPriority', function () {
+    return view('signalmentsPriority');
+});
+
 // Route::get('/permissions', function () {
 //     return view('permissions');
 // });

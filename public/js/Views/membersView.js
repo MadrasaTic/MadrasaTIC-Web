@@ -36,7 +36,9 @@ class Members extends View {
             case "departments":
                 this.#type = "un Service"
                 break;
-                
+            case "signalmentsPriority":
+                this.#type = "une Priorité"
+                break;
         }
     }
 
