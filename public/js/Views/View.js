@@ -75,7 +75,7 @@ export default class View {
             : 
             type === "text" ? /^[a-zA-Zéè   \ ]{4,30}$/
             : 
-            type === "number" ? /^\d{10}$/ : "";
+            type === "number" ? /\d*/ : "";
 
             if (re?.test(input) && iconValid.classList.contains("d-none")) {
                 this._majDisplayIcons(iconValid, iconInvalid, "correct");
