@@ -17,6 +17,7 @@ class Members extends View {
     #modalUpdateForm = "";
     #checkBoxTable = "";
     #textAreaTable = "";
+    #selectTable = "";
     #type =  "";
 
     testFunction() {
