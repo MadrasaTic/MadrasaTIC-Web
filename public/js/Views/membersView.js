@@ -41,6 +41,9 @@ class Members extends View {
                 this.#type = "une Catégorie"
                 break;
                 
+            case "signalmentsPriority":
+                this.#type = "une Priorité"
+                break;
         }
     }
 

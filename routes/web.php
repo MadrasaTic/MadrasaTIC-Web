@@ -18,6 +18,7 @@ use App\Http\Controllers\MembersController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PrioritiesController;
 
 use App\Http\Controllers\Infrastructure\AnnexeController;
 use App\Http\Controllers\Infrastructure\BlocController;
@@ -50,6 +51,10 @@ Route::get('/departments', function () {
 /*Route::get('/signalmentsCategory', function () {
     return view('signalmentsCategory');
 });*/
+Route::get('/signalmentsPriority', function () {
+    return view('signalmentsPriority');
+});
+
 // Route::get('/permissions', function () {
 //     return view('permissions');
 // });*/
@@ -184,3 +189,12 @@ Route::post('/departments',[ServicesController::class, 'Add']);
 Route::get('/departments/{id}/edit',[ServicesController::class,'edit']);
 Route::post('/departments/{id}',[ServicesController::class,'update']);
 Route::post('/departments/delete/{id}',[ServicesController::class,'delete']);
+
+
+
+// Priority Route
+Route::get('/signalmentsPriority', [PrioritiesController::class, 'show']);
+Route::post('/signalmentsPriority',[PrioritiesController::class, 'Add']);
+Route::get('/signalmentsPriority/{id}/edit',[PrioritiesController::class,'edit']);
+Route::post('/signalmentsPriority/{id}',[PrioritiesController::class,'update']);
+Route::post('/signalmentsPriority/delete/{id}',[PrioritiesController::class,'delete']);
