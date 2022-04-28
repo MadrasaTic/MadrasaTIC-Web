@@ -52,5 +52,13 @@
                 name="description" id="description"></textarea>
         </div>
     </div>
+     @foreach ($services as $service)
+            <div class="col-md-3 px-0 py-2 text-center">
+                <input type="checkbox" class="btn-check m-0 h-100 w-100" id="{{ 'add_btncheck' . $service['id'] }}"
+                    autocomplete="off" name="services[]" value="{{ $service['id'] }}">
+                <label class="btn btn-outline-primary"
+                    for="{{ 'add_btncheck' . $service['id'] }}">{{ $service['name'] }}</label>
+            </div>
+        @endforeach
     <input type="submit" value="ICI" class="modify--submit" hidden>
 </form>
