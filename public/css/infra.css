@@ -24,14 +24,14 @@
 
 .item:hover {
     background-color: #ECF1F4;
-    color: #4A4A68;
-    font-weight: 500;
+    color: #203659;
+    font-weight: 600;
 }
 
 .selected--annexe, .selected--bloc, .selected--room {
     background-color: #ECF1F4;
-    color: #4A4A68;
-    font-weight: 500;
+    color: #203659;
+    font-weight: 600;
 }
 
 .annexe_add--input, .bloc_add--input, .room_add--input {

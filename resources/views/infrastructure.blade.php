@@ -18,13 +18,7 @@
                 <h3 class="fw-bold mt-6">Infrastructure</h3>
                 <!-- Infra -->
                 <div id="infra--container" class="mt-5" style="min-height: 500px">
-                    <div class="row m-0" id="infra-header" style="height: 60px; background-color: #ECF1F4">
-                        <div class="infra_header--text col-3 fs-4 d-flex align-items-center justify-content-center">Annexe</div>
-                        <div class="col d-flex align-items-center justify-content-center"><i class="fa-solid fa-angles-right"></i></div>
-                        <div class="infra_header--text col-3 fs-4 d-flex align-items-center justify-content-center">Annexe</div>
-                        <div class="col d-flex align-items-center justify-content-center"><i class="fa-solid fa-angles-right"></i></div>
-                        <div class="infra_header--text col-3 fs-4 d-flex align-items-center justify-content-center">Annexe</div>
-                    </div>
+                    <div class="row m-0" id="infra-header" style="height: 60px; background-color: #ECF1F4"></div>
                     <!-- Body -->
                     <div class="row m-0 ">
                         <!-- Annexe -->
