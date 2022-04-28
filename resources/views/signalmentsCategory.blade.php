@@ -28,7 +28,8 @@
                                     @include("./include/categoryFormModify")
                                 </div>
                                 <!-- Remove -->
-                                <form action="/members" method="post" id="modal_delete--form">
+                                <form action="/signalmentsCategory" method="post" id="modal_delete--form">
+                                    @csrf
                                     <p class="d-none" id="remove--body">
                                         Êtes vous sûr de vous supprimer cet élément ?
                                     </p>
@@ -73,16 +74,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($categories as $category)
                             <tr>
-                                <th class="" scope="row">1</th>
-                                <td>Gardinage</td>
-                                <td>Sécurité</td>
-                                <td>1</td>
+                                <th class="" scope="row">{{ $category['id'] }}</th>
+                                <td>{{ $category['name'] }}</td>
+                                <td>{{ $category->parent['name'] ?? '/' }}</td>
+                                <td>{{ $category['priority_default'] }}</td>
                                 <td>
-                                    <a href="#" class="modify--button me-3 fw-bold">Modifier</a>
-                                    <a href="#" class="remove--button link-danger fw-bold">Supprimer</a>
+                                    <a href="{{ 'signalmentsCategory/'.$category['id'] }}" class="modify--button me-3 fw-bold">Modifier</a>
+                                    <a href="{{ 'signalmentsCategory/'.$category['id'] }}" class="remove--button link-danger fw-bold">Supprimer</a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
