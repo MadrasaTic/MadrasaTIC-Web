@@ -104,6 +104,7 @@ class Members extends View {
             })
         })
         this.#modalUpdateForm.forEach((input) => {
+            if (!input) return
             input.addEventListener("focus", (e) => {
                 this._renderInputValidation(e.target, input.type )();
                 if (this._enableSaveBtn(this.#modalUpdateForm)) this.#modalSaveButton.classList.remove("disabled")

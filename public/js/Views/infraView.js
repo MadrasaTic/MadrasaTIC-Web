@@ -50,21 +50,27 @@ class InfraView {
 
     _renderItemsClick() {
         this.#items.forEach((item) => {
-            item.onclick = (e) => {
-                // if (e.target.classList.contains("delete--button")) return;
-                const currentSelected = e.target.closest("div");
-                const type = currentSelected.dataset.type;
-                const previousSelected = currentSelected?.parentNode?.parentNode?.querySelector(`.selected--${type}`);
-                // Remove selected from previous
-                previousSelected?.classList.remove(`selected--${type}`);
-                // Add selected to the current
-                currentSelected.classList.add(`selected--${type}`);
-                // Fetch Data
-                if (type == "room") return;
-                const subType = type == "annexe" ? "bloc" : "room";
-                this.getAndDisplayItems(subType, `/infrastructure/${subType}/listing/${currentSelected.dataset.id}`);
-            }
+            item.onclick = this._itemClickAction.bind(this);
         })
+    }
+
+    _itemClickAction(e, el) {
+        console.log("clicked");
+        const item = e?.target || el;
+        if (item.tagName == "I") return;
+        // if (e.target.classList.contains("delete--button")) return;
+        const currentSelected = item.closest("div");
+        const type = currentSelected.dataset.type;
+        const previousSelected = currentSelected?.parentNode?.parentNode?.querySelector(`.selected--${type}`);
+        // Remove selected from previous
+        previousSelected?.classList.remove(`selected--${type}`);
+        // Add selected to the current
+        currentSelected.classList.add(`selected--${type}`);
+        // Fetch Data
+        if (type == "room") return;
+        const subType = type == "annexe" ? "bloc" : "room";
+        this.getAndDisplayItems(subType, `/infrastructure/${subType}/listing/${currentSelected.dataset.id}`);
+        
     }
 
     renderAddClick () {
@@ -85,6 +91,10 @@ class InfraView {
         this.#btnEdit.forEach((btn) => {
             btn.onclick = (e) => {
                 const type = e.target.closest("div").dataset.type;
+                if (!e.target.closest("div").classList.contains(`${type}--selected`)) {
+                    this._itemClickAction(null, e.target.closest("div"))
+                }
+                console.log(e.target.closest("div"));
                 const input = document.querySelector(`.${type}_add--input`);
                 document.querySelector(`.${type}_add--button`).classList.add("d-none");
                 input.classList.remove("d-none");
@@ -98,6 +108,7 @@ class InfraView {
     _renderDeleteClick() {
         this.#btnDelete.forEach((btn) => {
             btn.onclick = (e) => {
+                console.log("clicked");
                 const item = e.target.closest("div");
                 // Display Confirmaiton Modal
 
@@ -175,10 +186,7 @@ class InfraView {
             _token: token,
         }
         sendJSON(`/infrastructure/${type}/delete/${id}`, uploadData);
-
         document.querySelector(`[data-id="${id}"]`).remove();
-
-
     }
 
     async _sendEditJSONRequest(type, id, name, roomType = "") {
