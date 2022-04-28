@@ -46,6 +46,9 @@ Route::get('/departments', function () {
     return view('states');
 });
 
+Route::get('/signalmentsCategory', function () {
+    return view('signalmentsCategory');
+});
 // Route::get('/permissions', function () {
 //     return view('permissions');
 // });*/
