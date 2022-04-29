@@ -77,7 +77,7 @@
                             <tr>
                                 <th class="" scope="row">{{$service['id']}}</th>
                                 <td>{{ $service['name'] }}</td>
-                                <td>{{ $service->responsable['name'] }}</td>
+                                <td>{{ $service->responsable['name'] ?? "/" }}</td>
                                 <td>
                                     <a href={{'departments/'.$service['id']}} class="modify--button me-3 fw-bold">Modifier</a>
                                     <a href={{"/departments/delete/".$service['id']}} class="remove--button link-danger fw-bold">Supprimer</a>
