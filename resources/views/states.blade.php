@@ -1,7 +1,7 @@
 @include('layouts.app')
 
 <head>
-    <link href="{{ asset('css/members.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/tablesPage.css') }}" rel="stylesheet" />
     <style>
         .circle-color {
             height: 20px;

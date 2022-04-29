@@ -1,9 +1,12 @@
 export default class View {
 
-    #reEmail =  /^([a-z]){1,}\.([a-zA-Z])+(@esi-sba\.dz)$/;
-    #rePassword = /^(?=.*\d)(?=.*[!#$%&?"*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    #reChars = /(?=.*[A-Z])(?=.*[a-z]).*$/
-    #reDigits = /\d/; 
+    #reEmail =  /^([a-z]){1,}\.([a-zA-Z])+(@esi-sba\.dz)$/ ;
+    #rePassword = /^(?=.*\d)(?=.*[!#$%&?"*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ 
+    #reSimpleText = /^[a-zA-Zéè\ ]{4,30}$/
+    #rePhoneNumber = /^\d{10}$/; 
+    #reSimpleNumber = /^\d+$/;
+    #positiveNumber = /^[1-9]+$/;
+    
 
 
     _renderFocusValidation(parentEl) {
@@ -67,15 +70,26 @@ export default class View {
             const textValid = parentEl.parentElement.parentElement.querySelector(".valid-feedback");
             const textInvalid = parentEl.parentElement.parentElement.querySelector(".invalid-feedback");
             const input = parentEl?.value;
+
+            let re = "";
+            switch (type) {
+                case "email":
+                    re = this.#reEmail;
+                    break;
+                case "password":
+                    re = this.#rePassword;
+                    break;
+                case "text": 
+                    re = this.#reSimpleText;
+                    break;
+                case "phoneNumber":
+                    re = this.#rePhoneNumber;
+                    break;
+                case "positiveNumber":
+                    re = this.#reSimpleNumber;
+                    break
+            }
             
-            const re = 
-            type === "email" ? /^([a-z]){1,}\.([a-zA-Z])+(@esi-sba\.dz)$/ 
-            : 
-            type === "password" ? /^(?=.*\d)(?=.*[!#$%&?"*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ 
-            : 
-            type === "text" ? /^[a-zA-Zéè   \ ]{4,30}$/
-            : 
-            type === "number" ? /\d*/ : "";
 
             if (re?.test(input) && iconValid.classList.contains("d-none")) {
                 this._majDisplayIcons(iconValid, iconInvalid, "correct");

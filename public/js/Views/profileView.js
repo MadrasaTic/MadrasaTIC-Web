@@ -53,26 +53,23 @@ class profileView extends View{
     infoFormValidation() {
         this.#formInfos.forEach((input) => {
             input.addEventListener("focus", (e) => {
-                this._renderInputValidation(e.target, input.type)();
+                this._renderInputValidation(e.target, input.dataset.type || input.type)();
                 this._enableModifyBtn();
-                console.log(input.type);
             });
             input.addEventListener("blur", this._renderBlurValidation);
             input.addEventListener("input", (e) => {
-                this._renderInputValidation(e.target, input.type)();
+                this._renderInputValidation(e.target, input.dataset.type || input.type)();
                 this._enableModifyBtn();
-                console.log(input.type);
             });
         })
         this.#formPassword.forEach((input) => {
             input.addEventListener("focus", (e) => {
-                this._renderInputValidation(e.target, input.type)();
+                this._renderInputValidation(e.target, input.dataset.type || input.type)();
                 this._enableModifyBtn();
-                console.log(input.type);
             });
             input.addEventListener("blur", this._renderBlurValidation);
             input.addEventListener("input", (e) => {
-                this._renderInputValidation(e.target, input.type)();
+                this._renderInputValidation(e.target, input.dataset.type || input.type)();
                 this._enableSaveBtn();
             });
         })
