@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="mb-4 col-md-12">
-        <label for="last_name" class="form-label">Priorité par défaut</label>
+        <label for="last_name" class="form-label">Priorité (Cela annule la priorité par défaut)</label>
         <div class="input-group">
             <input type="number" class="w-100 p-3 needs--validation" placeholder="Priorité par défaut" name ="priority_default" id="priority_default" min="0"/>
             <span class="check--container end-0 me-2 fs-4 ">
