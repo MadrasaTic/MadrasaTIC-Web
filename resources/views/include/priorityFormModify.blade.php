@@ -15,5 +15,16 @@
         <div class="invalid-feedback fs-6 d-none">Enter un nom valide</div>
         <div class="valid-feedback fs-6 d-none">Nom valide</div>
     </div>
+    <div class="mb-4 col-md-12">
+        <label for="category_id" class="form-label">Catégories associée</label>
+        <div class="input-group">
+            <select name="category_id" class="w-100 p-3">
+                <option selected disabled></option>
+                @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
     <input type="submit" value="ICI" class="modify--submit" hidden>
 </form>
