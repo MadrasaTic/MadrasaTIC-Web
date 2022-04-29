@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\View;
 use App\Models\Service;
+use App\Models\User;
 
 class ServicesController extends Controller
 {
@@ -12,16 +13,18 @@ class ServicesController extends Controller
 
     public function show()
     {    
-        $data=Service::simplePaginate(25);
-        return view('departments',['services'=>$data]);
+        $services = Service::simplePaginate(25);
+        $users = User::all();
+        return view('departments',compact('services', 'users'));
     }
 
     public function Add(Request $request)
     {
         $service= new Service;
         $service->name = $request->name;
-        $service->responsable = $request->responsable;
+        $service->responsable_id = $request->responsable_id;
         $service->description = $request->description;
+        // dd($request, $service);
         $service->save();
 
         return redirect('departments');
@@ -40,7 +43,7 @@ class ServicesController extends Controller
         $service = Service::findOrFail($id);
         
         $service->name = $request->name;
-        $service->responsable = $request->responsable;
+        $service->responsable_id = $request->responsable_id;
         $service->description = $request->description;
         $service->save();
         
