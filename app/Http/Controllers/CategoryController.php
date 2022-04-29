@@ -90,7 +90,7 @@ class CategoryController extends Controller
 
         $category->name = $request['name'];
         $category->parent_id = $request['parent_id'];
-        $category->priority_default = 1;
+        $category->priority_default = $request['priority_default'];
         $category->services_associated = json_encode($request['services']);
         $category->description = $request['description'];
         $category->save();

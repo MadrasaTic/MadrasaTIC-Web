@@ -81,7 +81,7 @@
                                 <td>{{ $category['name'] }}</td>
                                 <td>{{ $category->parent['name'] ?? '/' }}</td>
                                 <td>{{ $category->priority['name'] ?? 'Dix' }}</td>
-                                <td>{{ $category['services_associated'] }}</td> <!-- JSON data as placeholder for now -->
+                                <td>{{ $category['services_associated'] ?? '0 Services'}}</td> <!-- JSON data as placeholder for now -->
                                 <td>
                                     <a href="{{ 'signalmentsCategory/'.$category['id'] }}" class="modify--button me-3 fw-bold">Modifier</a>
                                     <a href="{{ 'signalmentsCategory/'.$category['id'] }}" class="remove--button link-danger fw-bold">Supprimer</a>
