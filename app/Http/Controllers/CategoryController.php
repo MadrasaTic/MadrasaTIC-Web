@@ -46,7 +46,7 @@ class CategoryController extends Controller
         // $category->priority_default = $request['priority_default'];
         $category->priority_default = 1;
         $category->description = $request->get('description');
-        $category->services_associated = json_encode($request['services[]']);
+        $category->services_associated = json_encode($request['services']);
         // $category->services_id = $request['services'];
         // dd($request, $category->services(), $category);
         $category->save();
