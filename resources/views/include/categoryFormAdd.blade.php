@@ -31,7 +31,7 @@
             </select>
         </div>
     </div>
-    <div class="mb-4 col-md-12">
+    <!-- <div class="mb-4 col-md-12">
         <label for="last_name" class="form-label">Priorité par défaut</label>
         <div class="input-group">
             <input type="number" class="w-100 p-3" placeholder="Priorité par défaut" name="priority_default" id="priority_default"/>
@@ -44,7 +44,7 @@
         </div>
         <div class="invalid-feedback fs-6 d-none">Enter un nom valide</div>
         <div class="valid-feedback fs-6 d-none">Nom valide</div>
-    </div>
+    </div> -->
     <div class="mb-4 col-md-12">
         <label for="last_name" class="form-label">Déscription</label>
         <div class="input-group">
