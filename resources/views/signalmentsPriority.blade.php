@@ -77,7 +77,7 @@
                             <tr>
                                 <th class="" scope="row">{{$priority['id']}}</th>
                                 <td>{{ $priority['name'] }}</td>
-                                <td>{{ $priority->category['name'] }}</td>
+                                <td>{{ $priority->category['name'] ?? '/' }}</td>
                                 <td>
                                     <a href={{'signalmentsPriority/'.$priority['id']}} class="modify--button me-3 fw-bold">Modifier</a>
                                     <a href={{"/signalmentsPriority/delete/".$priority['id']}} class="remove--button link-danger fw-bold">Supprimer</a>
