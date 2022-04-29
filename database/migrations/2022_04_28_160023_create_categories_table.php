@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->integer('parent_id')->nullable();
             $table->integer('priority_default');
+            $table->json('services_associated')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });
