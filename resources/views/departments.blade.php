@@ -92,4 +92,4 @@
             @include("./include/notificationsPage")
         </div>
     </div>
-</body> 
+</body>
