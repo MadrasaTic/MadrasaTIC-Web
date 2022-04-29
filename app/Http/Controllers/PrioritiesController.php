@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\View;
 use App\Models\Priority;
+use App\Models\Category;
 
 class PrioritiesController extends Controller
 {
@@ -12,14 +13,17 @@ class PrioritiesController extends Controller
 
     public function show()
     {    
-        $data=Priority::simplePaginate(25);
-        return view('signalmentsPriority',['priorities'=>$data]);
+        $priorities = Priority::all();
+        $categories = Category::all();
+        // dd($priorities);
+        return view('signalmentsPriority',compact('priorities', 'categories'));
     }
 
     public function Add(Request $request)
     {
         $priority= new Priority;
         $priority->name = $request->name;
+        $priority->category_id = $request->category_id;
         $priority->save();
 
         return redirect('signalmentsPriority');
@@ -38,6 +42,7 @@ class PrioritiesController extends Controller
         $priority = Priority::findOrFail($id);
         
         $priority->name = $request->name;
+        $priority->category_id = $request->category_id;
         $priority->save();
         
         return redirect('signalmentsPriority');
