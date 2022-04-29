@@ -43,9 +43,10 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request['name'];
         $category->parent_id = $request['parent_id'];
-        $category->priority_default = $request['priority_default'];
+        // $category->priority_default = $request['priority_default'];
+        $category->priority_default = 1;
         $category->description = $request->get('description');
-        $category->services = $request['services'];
+        $category->services_associated = json_encode($request['services[]']);
         // $category->services_id = $request['services'];
         // dd($request, $category->services(), $category);
         $category->save();
@@ -89,7 +90,8 @@ class CategoryController extends Controller
 
         $category->name = $request['name'];
         $category->parent_id = $request['parent_id'];
-        $category->priority_default = $request['priority_default'];
+        $category->priority_default = 1;
+        $category->services_associated = json_encode($request['services']);
         $category->description = $request['description'];
         $category->save();
 
