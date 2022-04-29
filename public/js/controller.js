@@ -15,11 +15,11 @@ window.addEventListener("load", function() {
         loginView.generateFormArray();
         loginView.clearAllInputs();
         loginView.inputsCheck();
-        // window.addEventListener("keydown", (e) => {
-        //     if (e.key == "Enter") {
-        //         e.preventDefault();
-        //     }
-        // })
+        window.addEventListener("keydown", (e) => {
+            if (e.key == "Enter") {
+                e.preventDefault();
+            }
+        })
     }
     if (window.location.pathname.slice(1) == "profile") {
         profileView.generateFormArray();
@@ -50,13 +50,9 @@ window.addEventListener("load", function() {
         })
     }
     if (window.location.pathname.slice(1) == "infrastructure") {
-        // Render Annexe on Load
         infraView.getAndDisplayItems("annexe", '/infrastructure/annexe');
         infraView.renderAddClick();
-        document.querySelector("#infra--container").addEventListener("click", (e) => {
-            if (e.target.id != "infra--container") return ;
-            infraView.closeInputs();
-        })
+        infraView.closeAllInputsOnClick();
     }
 
     console.log("Js Fired");
