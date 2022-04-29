@@ -89,7 +89,7 @@
                             <div class="col-md-12 p-3">
                                 <label for="phone--input" class="form-label">Numéro de téléphone</label>
                                 <div class="input-group">
-                                    <input name="phone_number" class="needs--validation w-100 p-3" type="number" id="phone--input"
+                                    <input name="phone_number" class="needs--validation w-100 p-3" type="text" id="phone--input" data-type="phoneNumber"
                                         placeholder="{{ $user->userInformation->phone_number }}" />
                                     <span class="check--container end-0 me-2 fs-4">
                                         <i

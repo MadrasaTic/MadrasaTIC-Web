@@ -1,5 +1,5 @@
 import View from "./View.js";
-
+import {getJSON} from "../helpers.js";
 
 class Members extends View {
     // Buttons
@@ -17,10 +17,10 @@ class Members extends View {
     #modalUpdateForm = "";
     #checkBoxTable = "";
     #textAreaTable = "";
-    #selectTable = "";
+    #optionsTable = "";
     #type =  "";
 
-    testFunction() {
+    renderModalHeaderName() {
         switch(this.#currentPage) {
             case "members":
                 this.#type = "un Membre"
@@ -54,42 +54,53 @@ class Members extends View {
         this.#modalUpdateForm = Array.from(document.querySelector("#modal_update--form").elements)
         .filter (input => input.classList.contains("needs--validation"));
         this.#checkBoxTable =  Array.from(document.querySelector("#modal_update--form").elements)
-        .filter(input => (input.type == "checkbox"))
+        .filter(input => (input.dataset.type || input.type == "checkbox"))
         this.#textAreaTable = Array.from(document.querySelector("#modal_update--form").elements)
         .filter (input => input.classList.contains("text--area"));
-        this.#modalUpdateForm = [...this.#modalUpdateForm, document.querySelector("#color")]
+        this.#modalUpdateForm = [...this.#modalUpdateForm, document.querySelector("#color")];
+        // Fill selectedTable with optionsTables
+        this.#optionsTable = Array.from(document.querySelectorAll("option"));
     }
 
     async displayUpdateData(currentPage, id) {
         let permissionsTable = [];
         // Fetch & Store Data
-        let data = await fetch(`/${currentPage}/${id}/edit`).then(function(response) {
-            return response.json();
-        }).then(function(data) {
-            return data
-        })
+        let data = await getJSON(`/${currentPage}/${id}/edit`);
+        console.log(data);
+
         const {user_information} = data;
         data = {...user_information, ...data
         }
         // Store CheckBox
         if (data.permissions) permissionsTable = data.permissions.map(permObj => permObj["id"]);
         // Display on Input 
-        console.log(this.#modalUpdateForm);
         this.#modalUpdateForm.forEach((input) => {
             if (!input) return;
             const inputText = input.id;
-            console.log(inputText);
             input.value = data[`${inputText}`]?? null;
         })
         // Display on CheckBox
-        this.#checkBoxTable.forEach((checkbox) => {
-            const id = +checkbox.id.split("k").slice(-1).join("");
-            if(permissionsTable.indexOf(id) >= 0) {
-                checkbox.checked = true;
-            }
-        })
+        if (this.#checkBoxTable) {
+            this.#checkBoxTable.forEach((checkbox) => {
+                const id = +checkbox.id.split("k").slice(-1).join("");
+                if(permissionsTable.indexOf(id) >= 0) {
+                    checkbox.checked = true;
+                }
+            })
+        }
         // Display on TextArea
-        this.#textAreaTable.forEach((textArea) => textArea.value = data.description)
+        if (this.#textAreaTable) {
+            this.#textAreaTable.forEach((textArea) => {
+                textArea.value = data.description
+            })
+        }
+        // Display on Selects
+        if (this.#optionsTable) {
+            const selectedOption = this.#optionsTable.find(option => option.dataset.selected == "true");
+            const parentOption = this.#optionsTable.find(option => option.value == data.parent_id);
+            if (!parentOption) return
+            selectedOption.text = parentOption.text;
+        }
     }
 
     activeSubmitButton(type) {
@@ -102,13 +113,13 @@ class Members extends View {
     _inputsCheck() {
         this.#modalForm.forEach((input) => {
             input.addEventListener("focus", (e) => {
-                this._renderInputValidation(e.target, input.type )();
+                this._renderInputValidation(e.target, input.dataset.type || input.type )();
                 if (this._enableSaveBtn(this.#modalForm)) this.#modalSaveButton.classList.remove("disabled")
                 else this.#modalSaveButton.classList.add("disabled");
             });
             input.addEventListener("blur", this._renderBlurValidation);
             input.addEventListener("input", (e) => {
-                this._renderInputValidation(e.target, input.type )();
+                this._renderInputValidation(e.target, input.dataset.type || input.type )();
                 if (this._enableSaveBtn(this.#modalForm)) this.#modalSaveButton.classList.remove("disabled")
                 else this.#modalSaveButton.classList.add("disabled");
             })
@@ -116,13 +127,13 @@ class Members extends View {
         this.#modalUpdateForm.forEach((input) => {
             if (!input) return
             input.addEventListener("focus", (e) => {
-                this._renderInputValidation(e.target, input.type )();
+                this._renderInputValidation(e.target, input.dataset.type || input.type )();
                 if (this._enableSaveBtn(this.#modalUpdateForm)) this.#modalSaveButton.classList.remove("disabled")
                 else this.#modalSaveButton.classList.add("disabled");
             });
             input.addEventListener("blur", this._renderBlurValidation);
             input.addEventListener("input", (e) => {
-                this._renderInputValidation(e.target, input.type )();
+                this._renderInputValidation(e.target, input.dataset.type || input.type )();
                 if (this._enableModifyBtn(this.#modalUpdateForm)) this.#modalSaveButton.classList.remove("disabled")
                 else this.#modalSaveButton.classList.add("disabled");
             })

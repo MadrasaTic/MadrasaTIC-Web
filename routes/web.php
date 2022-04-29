@@ -44,21 +44,10 @@ Route::get('/departments', function () {
     return view('departments');
 });
 
-/*Route::get('/states', function () {
-    return view('states');
-});
 
-/*Route::get('/signalmentsCategory', function () {
-    return view('signalmentsCategory');
-});*/
 Route::get('/signalmentsPriority', function () {
     return view('signalmentsPriority');
 });
-
-// Route::get('/permissions', function () {
-//     return view('permissions');
-// });*/
-
 
 
 //====================================================================================================
@@ -148,9 +137,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::resource('/signalmentsState', StateController::class);
         Route::post('/signalmentsState/{id}',[StateController::class,'update']);
         Route::post('/signalmentsState/delete/{id}',[StateController::class,'delete']); 
-        // Route::get('/states',[StateController::class,'index'])->name('state');
-        // Route::post('/states/{id}',[StateController::class,'update']);
-        // Route::post('/states/delete/{id}',[StateController::class,'delete']);
+        Route::get('/states',[StateController::class,'index'])->name('state');
+        Route::post('/states/{id}',[StateController::class,'update']);
+        Route::post('/states/delete/{id}',[StateController::class,'delete']);
         Route::resource('/signalmentsCategory', CategoryController::class);
         Route::post('/signalmentsCategory/{id}',[CategoryController::class,'update']);
         Route::post('/signalmentsCategory/delete/{id}',[CategoryController::class,'delete']); 

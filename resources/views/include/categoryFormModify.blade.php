@@ -24,7 +24,7 @@
         <label for="parent_id" class="form-label">Catégorie Parent</label>
         <div class="input-group">
             <select name="parent_id" class="w-100 p-3" id="parent_id">
-                <option selected disabled></option>
+                <option selected="selected" data-selected="true"> Choissidez cet option</option>
                 @foreach($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
@@ -34,7 +34,7 @@
     <div class="mb-4 col-md-12">
         <label for="last_name" class="form-label">Priorité (Cela annule la priorité par défaut)</label>
         <div class="input-group">
-            <input type="text" class="w-100 p-3" placeholder="Priorité par défaut" name ="priority_default" id="priority_default" min="0"/>
+            <input type="text" data-type="positiveNumber" class="w-100 p-3 needs--validation" placeholder="Priorité par défaut" name ="priority_default" id="priority_default" min="0"/>
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check text-success d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
