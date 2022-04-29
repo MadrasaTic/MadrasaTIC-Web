@@ -74,7 +74,9 @@ class Members extends View {
         // Store CheckBox
         if (data.permissions) permissionsTable = data.permissions.map(permObj => permObj["id"]);
         // Display on Input 
+        console.log(this.#modalUpdateForm);
         this.#modalUpdateForm.forEach((input) => {
+            if (!input) return;
             const inputText = input.id;
             console.log(inputText);
             input.value = data[`${inputText}`]?? null;
@@ -112,6 +114,7 @@ class Members extends View {
             })
         })
         this.#modalUpdateForm.forEach((input) => {
+            if (!input) return
             input.addEventListener("focus", (e) => {
                 this._renderInputValidation(e.target, input.type )();
                 if (this._enableSaveBtn(this.#modalUpdateForm)) this.#modalSaveButton.classList.remove("disabled")
@@ -128,7 +131,7 @@ class Members extends View {
 
     _enableSaveBtn(inputsArray) {
         if (!inputsArray) return true
-        else return inputsArray.every(input => input.classList.contains("is-valid"));
+        else return inputsArray.every(input => input && input.classList.contains("is-valid"));
     }
 
     _enableModifyBtn(inputsArray) {

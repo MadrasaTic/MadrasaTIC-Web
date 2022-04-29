@@ -2,24 +2,53 @@
     background-color: #ECF1F4;
     color: #8C8CA1;
 }
-
+/* Dont Touch */
 #sidebar--top {
-    /* border: 1px solid green !important; */
     height: 100vh;
     width: 100%;
-}
-
-.sidebar_links {
-    cursor: pointer;
-    transition: all .3s linear
-}
-
-.sidebar_links_hovered {
-    border-left: 5px solid #203659 ;
-    border-radius: 3px;
-    color: #203659;
+    z-index: 2;
 }
 
 a {
     text-decoration: none;
 }
+
+/* Header */
+#sideBar--header {
+    height: 100px;
+    /* z-index: 1; */
+}
+
+/* Profil Picture */
+#SBprofile-picture img {
+    height: 50px;
+    width: 50px;
+    /* border: 1px solid black; */
+}
+
+/* Item Div */
+.sidebar--item {
+    cursor: pointer;
+    transition: all .3s linear !important;
+    color: #8C8CA1 !important;
+
+}
+
+.sideBar_item--hoverd, .sideBar_item--selected {
+    border-left: 7px solid #203659 ;
+    border-radius: 3px;
+    color: #203659 !important;
+}
+
+/* Item Span */
+.link {
+    color: #8C8CA1 !important;
+    font-weight: 400;
+}
+
+.link--hoverd, .link--selected {
+    color: #203659 !important;
+    font-weight: 500;
+}
+
+
