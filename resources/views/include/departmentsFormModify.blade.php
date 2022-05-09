@@ -19,7 +19,7 @@
         <label for="parent_id" class="form-label">Résponsable</label>
         <div class="input-group">
             <select name="parent_id" class="w-100 p-3">
-                <option selected="selected" data-selected="true" hidden> Choissidez cet option</option>
+                <option selected="selected" data-selected="true" hidden> Choisissez cet option</option>
                 @foreach($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach

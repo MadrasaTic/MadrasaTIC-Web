@@ -11,7 +11,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'parent_id', 'priority_default', 'description', 'services_associated'];
+    protected $fillable = ['name', 'parent_id', 'priority_default', 'description', 'service_id'];
     protected $hidden = ['created_at', 'updated_at'];
 
     public function parent()
@@ -26,7 +26,7 @@ class Category extends Model
 
     public function services()
     {
-    return $this->hasMany(Service::class, 'services_associated');
+    return $this->belongsTo(Service::class, 'service_id');
     }
 
     public function priority()

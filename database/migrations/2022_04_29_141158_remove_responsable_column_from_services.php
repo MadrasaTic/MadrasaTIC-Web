@@ -13,13 +13,7 @@ class RemoveResponsableColumnFromServices extends Migration
      */
     public function up()
     {
-        if (Schema::hasColumn('services', 'responsable'))
-        {
-            Schema::table('services', function (Blueprint $table)
-            {
-                $table->dropColumn('responsable');
-            });
-        }
+        //
     }
 
     /**

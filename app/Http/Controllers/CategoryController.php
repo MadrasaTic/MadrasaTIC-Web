@@ -44,9 +44,10 @@ class CategoryController extends Controller
         $category->name = $request['name'];
         $category->parent_id = $request['parent_id'];
         // $category->priority_default = $request['priority_default'];
-        $category->priority_default = 1;
+        $category->priority_default = $request['priority'];
         $category->description = $request->get('description');
-        $category->services_associated = json_encode($request['services']);
+        $category->service_id = $request['service_id'];
+        // dd($request, $category, $category->services);
         // $category->services_id = $request['services'];
         // dd($request, $category->services(), $category);
         $category->save();
@@ -90,9 +91,11 @@ class CategoryController extends Controller
 
         $category->name = $request['name'];
         $category->parent_id = $request['parent_id'];
-        $category->priority_default = $request['priority_default'];
-        $category->services_associated = json_encode($request['services']);
+        $category->priority_default = $request['priority'];
+        // $category->services_associated = json_encode($request['services']);
         $category->description = $request['description'];
+        $category->service_id = $request['service_id'];
+        // dd($request, $category);
         $category->save();
 
         return redirect()->back();

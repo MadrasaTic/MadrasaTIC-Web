@@ -15,7 +15,7 @@ class Service extends Model
     
     public function category()
     {
-    return $this->belongsTo(Category::class);
+    return $this->hasOne(Category::class);
     }
 
     public function responsable()
