@@ -11,7 +11,7 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'responsable_id'];
+    protected $fillable = ['name', 'parent_id'];
     
     public function category()
     {
@@ -20,7 +20,7 @@ class Service extends Model
 
     public function responsable()
     {
-        return $this->belongsTo(User::class, 'responsable_id');
+        return $this->belongsTo(User::class, 'parent_id');
     }
 
 }

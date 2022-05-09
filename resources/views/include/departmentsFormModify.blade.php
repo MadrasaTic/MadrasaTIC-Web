@@ -16,9 +16,9 @@
         <div class="valid-feedback fs-6 d-none">Nom valide</div>
     </div>
     <div class="mb-4 col-md-12">
-        <label for="responsable_id" class="form-label">Résponsable</label>
+        <label for="parent_id" class="form-label">Résponsable</label>
         <div class="input-group">
-            <select name="responsable_id" class="w-100 p-3">
+            <select name="parent_id" class="w-100 p-3">
                 <option selected disabled></option>
                 @foreach($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -29,7 +29,7 @@
     <div class="mb-4 col-md-12">
         <label for="last_name" class="form-label">Description</label>
         <div class="input-group">
-        <textarea name="description" id="description" class="text--area w-100 p-3" placeholder="Description du Service"
+        <textarea name="description" id="description" class="w-100 p-3 text--area" placeholder="Description du Service"
                 style="height: 25vh"></textarea>
         </div>
     </div>

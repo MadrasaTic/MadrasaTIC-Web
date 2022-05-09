@@ -22,7 +22,7 @@ class ServicesController extends Controller
     {
         $service= new Service;
         $service->name = $request->name;
-        $service->responsable_id = $request->responsable_id;
+        $service->parent_id = $request->parent_id;
         $service->description = $request->description;
         // dd($request, $service);
         $service->save();
@@ -43,7 +43,7 @@ class ServicesController extends Controller
         $service = Service::findOrFail($id);
 
         $service->name = $request->name;
-        $service->responsable_id = $request->responsable_id;
+        $service->parent_id = $request->parent_id;
         $service->description = $request->description;
         $service->save();
 
@@ -57,5 +57,10 @@ class ServicesController extends Controller
         return redirect('departments');
     }
 
-
+    /*public function delete ($id) {
+        $service = Service::find($id);
+        $service->acivated = !$service->activated;
+        $service->save();
+        return redirect()->back();
+    }*/
 }
