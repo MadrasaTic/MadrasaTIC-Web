@@ -12,7 +12,7 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'parent_id'];
-    
+
     public function category()
     {
     return $this->hasOne(Category::class);
@@ -23,4 +23,13 @@ class Service extends Model
         return $this->belongsTo(User::class, 'parent_id');
     }
 
+    /**
+     * Get all of the signalementVersionControl for the State
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function signalementVersionControl(): HasMany
+    {
+        return $this->hasMany(SignalementVersionControl::class);
+    }
 }

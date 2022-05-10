@@ -17,4 +17,13 @@ class Priority extends Model
         return $this->hasOne(Category::class);
     }
 
+    /**
+     * Get all of the signalementVersionControl for the State
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function signalementVersionControl(): HasMany
+    {
+        return $this->hasMany(SignalementVersionControl::class);
+    }
 }
