@@ -71,4 +71,14 @@ class SignalementVersionControl extends Model
     {
         return $this->belongsTo(Proirity::class);
     }
+
+    /**
+     * Get the updatedBy that owns the SignalementVersionControl
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function updatedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
+    }
 }
