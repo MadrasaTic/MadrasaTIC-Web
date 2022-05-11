@@ -54,4 +54,27 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserInformation::class);
     }
+
+    /**
+     * The savedSignalements that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function savedSignalements()
+    {
+        return $this->belongsToMany(Signalement::class, 'saved_signalements', 'user_id', 'signalement_id')
+            ->withTimestamps();
+    }
+
+    /**
+     * The reactedSignalements that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function reactedSignalements()
+    {
+        return $this->belongsToMany(Signalement::class, 'signalement_reactions', 'user_id', 'signalement_id')
+        ->withPivot('reaction_type')
+        ->withTimestamps();
+    }
 }
