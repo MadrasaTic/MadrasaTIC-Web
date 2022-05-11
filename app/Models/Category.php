@@ -39,7 +39,7 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function signalementVersionControl(): HasMany
+    public function signalementVersionControl()
     {
         return $this->hasMany(SignalementVersionControl::class);
     }

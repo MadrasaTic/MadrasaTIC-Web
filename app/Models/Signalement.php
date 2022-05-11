@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Signalement extends Model
 {
@@ -17,7 +18,7 @@ class Signalement extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function signalementVersionControl(): HasMany
+    public function signalementVersionControl()
     {
         return $this->hasMany(SignalementVersionControl::class);
     }
@@ -27,7 +28,7 @@ class Signalement extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function attachedSignalement(): HasMany
+    public function attachedSignalement()
     {
         return $this->hasMany(Signalement::class, 'attached_signalement_id', 'id');
     }
@@ -37,9 +38,19 @@ class Signalement extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function creator(): BelongsTo
+    public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    /**
+     * Get the annexe that owns the Signalement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function annexe()
+    {
+        return $this->belongsTo(Annexe::class, 'annexe_id', 'id');
     }
 
     /**
@@ -47,14 +58,18 @@ class Signalement extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function infrastructure(): BelongsTo
+    public function bloc()
     {
-        if ($this->infrastructure_type == "annexe") {
-            return $this->belongsTo(Annexe::class, 'infrastructure_id', 'id');
-        } else if ($this->infrastructure_type == "bloc") {
-            return $this->belongsTo(Bloc::class, 'infrastructure_id', 'id');
-        } else if ($this->infrastructure_type == "salle") {
-            return $this->belongsTo(Room::class, 'infrastructure_id', 'id');
-        }
+        return $this->belongsTo(Bloc::class, 'bloc_id', 'id');
+    }
+
+    /**
+     * Get the infrastructure that owns the Signalement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function room()
+    {
+        return $this->belongsTo(Room::class, 'room_id', 'id');
     }
 }

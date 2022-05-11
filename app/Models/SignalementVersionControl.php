@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class SignalementVersionControl extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $table = 'signalement_version_controls';
 
@@ -17,7 +16,7 @@ class SignalementVersionControl extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function signalement(): BelongsTo
+    public function signalement()
     {
         return $this->belongsTo(Signalement::class);
     }
@@ -27,7 +26,7 @@ class SignalementVersionControl extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function attachedTo(): BelongsTo
+    public function attachedTo()
     {
         return $this->belongsTo(Sinalement::class, 'attached_signalement_id');
     }
@@ -37,7 +36,7 @@ class SignalementVersionControl extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function state(): BelongsTo
+    public function state()
     {
         return $this->belongsTo(State::class);
     }
@@ -47,7 +46,7 @@ class SignalementVersionControl extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category(): BelongsTo
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
@@ -57,7 +56,7 @@ class SignalementVersionControl extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function service(): BelongsTo
+    public function service()
     {
         return $this->belongsTo(Service::class);
     }
@@ -67,7 +66,7 @@ class SignalementVersionControl extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function priority(): BelongsTo
+    public function priority()
     {
         return $this->belongsTo(Proirity::class);
     }
@@ -77,7 +76,7 @@ class SignalementVersionControl extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function updatedBy(): BelongsTo
+    public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by', 'id');
     }
