@@ -72,4 +72,27 @@ class Signalement extends Model
     {
         return $this->belongsTo(Room::class, 'room_id', 'id');
     }
+
+    /**
+     * The savedBy that belong to the Signalement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function savedBy()
+    {
+        return $this->belongsToMany(User::class, 'saved_signalements', 'signalement_id', 'user_id')
+            ->withTimestamps();
+    }
+
+    /**
+     * The reactedBy that belong to the Signalement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function reactedBy()
+    {
+        return $this->belongsToMany(User::class, 'signalement_reactions', 'signalement_id', 'user_id')
+            ->withPivot('reaction_type')
+            ->withTimestamps();
+    }
 }
