@@ -66,6 +66,8 @@ class Members extends View {
         let permissionsTable = [];
         // Fetch & Store Data
         let data = await getJSON(`/${currentPage}/${id}/edit`);
+
+        // testing
         console.log(data);
 
         const {user_information} = data;
@@ -96,10 +98,13 @@ class Members extends View {
         }
         // Display on Selects
         if (this.#optionsTable) {
-            const selectedOption = this.#optionsTable.find(option => option.dataset.selected == "true");
-            const parentOption = this.#optionsTable.find(option => option.value == data.parent_id);
-            if (!parentOption) return
-            selectedOption.text = parentOption.text;
+            const displayedOptions = this.#optionsTable.filter(option => option.dataset.selected == "true");
+            displayedOptions.forEach(displayedOption => {
+                const parentSelect = displayedOption.closest("select");
+                const selectedOptionID = data[`${parentSelect.name}`];
+                const selectedOption =  Array.from(parentSelect.querySelectorAll("option")).find(option => option.value == selectedOptionID);
+                displayedOption.text = selectedOption ? selectedOption.text : "Choissidez cet option";
+            })
         }
     }
 

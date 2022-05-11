@@ -4,9 +4,6 @@
 </head>
 
 <style> 
-    img {
-        
-    }
 </style>
 
 

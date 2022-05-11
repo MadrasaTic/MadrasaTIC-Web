@@ -50,6 +50,7 @@ class CategoryController extends Controller
         // dd($request, $category, $category->services);
         // $category->services_id = $request['services'];
         // dd($request, $category->services(), $category);
+        // dd($request);
         $category->save();
         return redirect()->back();
     }
@@ -95,7 +96,8 @@ class CategoryController extends Controller
         // $category->services_associated = json_encode($request['services']);
         $category->description = $request['description'];
         $category->service_id = $request['service_id'];
-        // dd($request, $category);
+        dd($request, $category);
+        // dd($request);
         $category->save();
 
         return redirect()->back();
