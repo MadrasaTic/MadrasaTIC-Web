@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddParentIdColumnToServices extends Migration
+class RenameResponsableIdInServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddParentIdColumnToServices extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->string('responsable')->nullable();
+        Schema::table('services', function (Blueprint $table) {
+            $table->renameColumn('responsable_id', 'parent_id');
         });
     }
 

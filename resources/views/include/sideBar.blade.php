@@ -3,11 +3,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 
+<style> 
+    img {
+        
+    }
+</style>
+
 
 <div class="col-md-2 position-relative" id="sidebar--container">
     <div class="position-absolute d-flex align-items-center w-100 mt-6" id="sideBar--header">
         <div class="h-100 d-flex align-items-center mx-2" id="SBprofile-picture">
-            <img class="rounded-circle"src="https://picsum.photos/200/300" alt="">
+            <img class="rounded-circle"src="" alt="img">
         </div>
         <div class="h-100 d-flex flex-column align-items-center justify-content-center">
             <h3 class="text-primary fw-bold fs-5 ">BAGHDADLI<span class="fw-normal"> Yacine</span></h3>

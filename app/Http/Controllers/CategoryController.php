@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Service;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return View('signalmentsCategory', compact('categories'));
+        $services = Service::all();
+        return View('signalmentsCategory', compact('categories', 'services'));
     }
 
     /**
@@ -26,7 +28,8 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return View('signalmentsCategory', compact('categories'));
+        $services = Service::all();
+        return View('signalmentsCategory', compact('categories', 'services'));
     }
 
     /**
@@ -37,14 +40,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $category = new Category();
         $category->name = $request['name'];
         $category->parent_id = $request['parent_id'];
-        $category->priority_default = $request['priority_default'];
-        $category->description = $request['description'];
+        // $category->priority_default = $request['priority_default'];
+        $category->priority_default = $request['priority'];
+        $category->description = $request->get('description');
+        $category->service_id = $request['service_id'];
+        // dd($request, $category, $category->services);
+        // $category->services_id = $request['services'];
+        // dd($request, $category->services(), $category);
         $category->save();
-
         return redirect()->back();
     }
 
@@ -85,8 +91,11 @@ class CategoryController extends Controller
 
         $category->name = $request['name'];
         $category->parent_id = $request['parent_id'];
-        $category->priority_default = $request['priority_default'];
+        $category->priority_default = $request['priority'];
+        // $category->services_associated = json_encode($request['services']);
         $category->description = $request['description'];
+        $category->service_id = $request['service_id'];
+        // dd($request, $category);
         $category->save();
 
         return redirect()->back();

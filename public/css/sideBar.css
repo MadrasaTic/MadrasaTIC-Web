@@ -20,10 +20,14 @@ a {
 }
 
 /* Profil Picture */
+#SBProfile-picture {
+    overflow: hidden;
+}
+
 #SBprofile-picture img {
-    height: 50px;
-    width: 50px;
-    /* border: 1px solid black; */
+    height: 50px !important;
+    width: 50px !important;
+    border: 1px solid black !important;    
 }
 
 /* Item Div */

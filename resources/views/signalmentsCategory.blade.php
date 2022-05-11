@@ -66,20 +66,22 @@
                     <table class="table table-responsive text-center align-middle">
                         <thead id="members--thead">
                             <tr>
-                                <th class="w-auto py-3" scope="col">ID</th>
+                                <!-- <th class="w-auto py-3" scope="col">ID</th> -->
                                 <th class="w-auto py-3" scope="col">NOM</th>
                                 <th class="w-auto py-3" scope="col">CATÉGORIE PARENT</th>
                                 <th class="w-auto py-3" scope="col">PRIORITÉ</th>
+                                <th class="w-auto py-3" scope="col">DEPARTEMENT</th>
                                 <th class="w-auto py-3" scope="col">ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($categories as $category)
                             <tr>
-                                <th class="" scope="row">{{ $category['id'] }}</th>
+                                <!-- <th class="" scope="row">{{ $category['id'] }}</th> -->
                                 <td>{{ $category['name'] }}</td>
                                 <td>{{ $category->parent['name'] ?? '/' }}</td>
-                                <td>{{ $category['priority_default'] }}</td>
+                                <td>{{ $category['priority_default'] ?? '//' }}</td>
+                                <td>{{ $category->services['name'] ?? '/'}}</td> <!-- JSON data as placeholder for now -->
                                 <td>
                                     <a href="{{ 'signalmentsCategory/'.$category['id'] }}" class="modify--button me-3 fw-bold">Modifier</a>
                                     <a href="{{ 'signalmentsCategory/'.$category['id'] }}" class="remove--button link-danger fw-bold">Supprimer</a>
