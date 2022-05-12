@@ -24,6 +24,16 @@ class Signalement extends Model
     }
 
     /**
+     * Get all of the signalementVersionControl for the Signalement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function lastSignalementVC()
+    {
+        return $this->hasOne(SignalementVersionControl::class);
+    }
+
+    /**
      * Get all of the attachedSignalement for the Signalement
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
