@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 
-class Priority extends Model
+class Priority extends BaseModel
 {
     use HasFactory;
 

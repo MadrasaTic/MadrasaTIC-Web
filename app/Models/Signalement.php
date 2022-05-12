@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Signalement extends Model
+class Signalement extends BaseModel
 {
     use HasFactory;
     use SoftDeletes;
