@@ -68,6 +68,7 @@
                             <tr>
                                 <th class="w-auto py-3" scope="col">ID</th>
                                 <th class="w-auto py-3" scope="col">NOM</th>
+                                <th class="w-auto py-3" scope="col">POIDS</th>
                                 <th class="w-auto py-3" scope="col">CATEGORIE</th>
                                 <th class="w-auto py-3" scope="col">ACTIONS</th>
                             </tr>
@@ -77,6 +78,7 @@
                             <tr>
                                 <th class="" scope="row">{{$priority['id']}}</th>
                                 <td>{{ $priority['name'] }}</td>
+                                <td>{{ $priority['weight'] ?? 'Aucun poids (0)' }}</td>
                                 <td>{{ $priority->category['name'] ?? '/' }}</td>
                                 <td>
                                     <a href={{'signalmentsPriority/'.$priority['id']}} class="modify--button me-3 fw-bold">Modifier</a>
