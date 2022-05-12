@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Service;
 use App\Models\Priority;
 
-class Category extends Model
+class Category extends BaseModel
 {
     use HasFactory;
 
