@@ -22,4 +22,24 @@ class Bloc extends BaseModel
             });
         });
     }
+
+    /**
+     * Get the annexe that owns the Bloc
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function annexe()
+    {
+        return $this->belongsTo(Annexe::class);
+    }
+
+    /**
+     * Get all of the signalement for the Bloc
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function signalement()
+    {
+        return $this->hasMany(Signalement::class);
+    }
 }
