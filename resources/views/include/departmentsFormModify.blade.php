@@ -1,6 +1,5 @@
 <form class="row" id="modal_update--form" method="POST" action="{{'departments'}}">
     @csrf
-    
     <div class="mb-4 col-md-12">
         <label for="last_name" class="form-label">Nom</label>
         <div class="input-group">
@@ -19,7 +18,6 @@
         <label for="parent_id" class="form-label">Résponsable</label>
         <div class="input-group">
             <select name="parent_id" class="w-100 p-3">
-                <option selected="selected" data-selected="true" hidden> Choisissez cet option</option>
                 @foreach($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach

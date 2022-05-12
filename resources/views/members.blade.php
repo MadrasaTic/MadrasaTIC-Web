@@ -80,10 +80,10 @@
                                 <th class="py-3" scope="row">{{ $member['id'] }}</th>
                                 <td>{{ $member['userinformation']['last_name']. ' ' .$member['userinformation']['first_name'] }}</td>
                                 <td>{{ $member['email'] }}</td>
-                                <td>{{ $member['userinformation']['position']['name'] ?? $member[''] }}</td>
+                                <td></td>
                                 <td>
-                                    <a href="{{ 'members/'.$member['id'] }}" class="modify--button me-3 fw-bold">Consulter</a>
-                                    <a href="{{ 'members/'.$member['id'] }}" class="remove--button link-danger fw-bold">{{ $member['acivated'] == 1 ? 'Supprimer' : 'Réactiver' }}</a>
+                                    <a href="{{ 'members/'.$member['id'] }}" class="modify--button me-3 fw-bold">Modifier</a>
+                                    <a href="{{ 'members/'.$member['id'] }}" class="remove--button link-danger fw-bold">{{ $member['acivated'] == 1 ? 'Désactiver' : 'Activer' }}</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -18,7 +18,6 @@
         <label for="category_id" class="form-label">Catégories associée</label>
         <div class="input-group">
             <select name="category_id" class="w-100 p-3">
-                <option selected disabled></option>
                 @foreach($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach

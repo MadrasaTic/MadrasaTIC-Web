@@ -6,9 +6,9 @@
             <input type="text" class="needs--validation w-100 p-3" placeholder="Nom" name="last_name" id="last_name" />
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
-                    class="valid--icon fa-solid fa-circle-check text-success animateanimated animatefadeIn animate__delay-0.5s"></i>
+                    class="valid--icon fa-solid fa-circle-check text-success animateanimated d-none animatefadeIn animate__delay-0.5s"></i>
                 <i
-                    class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
+                    class="invalid--icon fa-solid fa-circle-exclamation text-danger d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
             </span>
         </div>
         <div class="invalid-feedback fs-6 d-none">Enter un nom valide</div>
@@ -77,7 +77,6 @@
         <label for="position_id" class="form-label">Position</label>
         <div class="input-group">
             <select name="position_id" class="w-100 p-3">
-                <option selected disabled></option>
                 @foreach($positions ?? '' as $position)
                 <option value="{{ $position->id }}">{{ $position->name }}</option>
                 @endforeach
@@ -88,7 +87,6 @@
         <label for="role_id" class="form-label">Role</label>
         <div class="input-group">
             <select name="role_id" class="w-100 p-3">
-                <option selected disabled></option>
                 @foreach($roles as $role)
                 <option value="{{ $role->id }}">{{ $role->name }}</option>
                 @endforeach

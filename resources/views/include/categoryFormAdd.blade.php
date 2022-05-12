@@ -15,7 +15,7 @@
                     class="valid--icon fa-solid fa-circle-check text-success d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
                 <i
                     class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
-            </span>
+            </span> 
         </div>
         <div class="invalid-feedback fs-6 d-none">Enter un nom valide</div>
         <div class="valid-feedback fs-6 d-none">Nom valide</div>
@@ -24,7 +24,6 @@
         <label for="parent_id" class="form-label">Catégorie Parent</label>
         <div class="input-group">
             <select name="parent_id" class="w-100 p-3">
-                <option selected disabled></option>
                 @foreach($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
@@ -49,7 +48,6 @@
         <label for="service_id" class="form-label">Service Attaché</label>
         <div class="input-group">
             <select name="service_id" class="w-100 p-3">
-                <option selected disabled></option>
                 @foreach($services as $service)
                 <option value="{{ $service->id }}">{{ $service->name }}</option>
                 @endforeach

@@ -18,7 +18,6 @@
         <label for="parent_id" class="form-label">Résponsable</label>
         <div class="input-group">
             <select name="parent_id" class="w-100 p-3">
-                <option selected disabled></option>
                 @foreach($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
