@@ -42,7 +42,7 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->name = $request['name'];
-        $category->parent_id = $request['parent_id'];
+        // $category->parent_id = $request['parent_id'];
         // $category->priority_default = $request['priority_default'];
         $category->priority_default = $request['priority'];
         $category->description = $request->get('description');
@@ -90,7 +90,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
 
         $category->name = $request['name'];
-        $category->parent_id = $request['parent_id'];
+        // $category->parent_id = $request['parent_id'];
         $category->priority_default = $request['priority'];
         // $category->services_associated = json_encode($request['services']);
         $category->description = $request['description'];

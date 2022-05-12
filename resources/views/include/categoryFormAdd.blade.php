@@ -20,7 +20,7 @@
         <div class="invalid-feedback fs-6 d-none">Enter un nom valide</div>
         <div class="valid-feedback fs-6 d-none">Nom valide</div>
     </div>
-    <div class="mb-4 col-md-12">
+    <!-- <div class="mb-4 col-md-12">
         <label for="parent_id" class="form-label">Catégorie Parent</label>
         <div class="input-group">
             <select name="parent_id" class="w-100 p-3">
@@ -30,7 +30,7 @@
                 @endforeach
             </select>
         </div>
-    </div>
+    </div> -->
     <div class="mb-4 col-md-12">
         <label for="priority" class="form-label">Priorité par défaut</label>
         <div class="input-group">
