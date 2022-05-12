@@ -68,7 +68,7 @@
                             <tr>
                                 <!-- <th class="w-auto py-3" scope="col">ID</th> -->
                                 <th class="w-auto py-3" scope="col">NOM</th>
-                                <th class="w-auto py-3" scope="col">CATÉGORIE PARENT</th>
+                                <!-- <th class="w-auto py-3" scope="col">CATÉGORIE PARENT</th> -->
                                 <th class="w-auto py-3" scope="col">PRIORITÉ</th>
                                 <th class="w-auto py-3" scope="col">DEPARTEMENT</th>
                                 <th class="w-auto py-3" scope="col">ACTION</th>
@@ -79,7 +79,7 @@
                             <tr>
                                 <!-- <th class="" scope="row">{{ $category['id'] }}</th> -->
                                 <td>{{ $category['name'] }}</td>
-                                <td>{{ $category->parent['name'] ?? '/' }}</td>
+                                <!-- <td>{{ $category->parent['name'] ?? '/' }}</td> -->
                                 <td>{{ $category['priority_default'] ?? '//' }}</td>
                                 <td>{{ $category->services['name'] ?? '/'}}</td> <!-- JSON data as placeholder for now -->
                                 <td>
