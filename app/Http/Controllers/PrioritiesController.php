@@ -24,6 +24,7 @@ class PrioritiesController extends Controller
         $priority= new Priority;
         $priority->name = $request->name;
         $priority->category_id = $request->category_id;
+        $priority->weight = $request->weight;
         $priority->save();
 
         return redirect('signalmentsPriority');
@@ -43,6 +44,7 @@ class PrioritiesController extends Controller
         
         $priority->name = $request->name;
         $priority->category_id = $request->category_id;
+        $priority->weight = $request->weight;
         $priority->save();
         
         return redirect('signalmentsPriority');
