@@ -22,4 +22,14 @@ class Annexe extends BaseModel
             });
         });
     }
+
+    /**
+     * Get all of the signalement for the Annexe
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function signalement()
+    {
+        return $this->hasMany(Signalement::class);
+    }
 }
