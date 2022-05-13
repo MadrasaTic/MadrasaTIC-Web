@@ -18,7 +18,8 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         $services = Service::all();
-        $priorities = Priority::doesntHave('category')->get();
+        // $priorities = Priority::doesntHave('category')->get();
+        $priorities = Priority::all();
         // dd($priorities);
         return View('signalmentsCategory', compact('categories', 'services', 'priorities'));
     }
