@@ -24,7 +24,7 @@
                     <p class="fs-3 m-0">Statistiques</p>
                     <div class="m-0" id="stats" style="height: 60vh">
                         <div class="row h-100 m-0 ">
-                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-center ">
+                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-start ">
                                 <div class="progress-cards text-center rounded-6 d-block">
                                     <svg class="m-auto progress mt-3 bg-primary w-75 h-75 green noselect" data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
                                         <path class="track" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
@@ -54,8 +54,8 @@
                     </div>
                     <!-- Nav -->
                     <div class="d-flex p-0 align-items-center" id="signa--nav">
-                        <div class="col nav_item--hoverd ">Signalement Aiguillés</div>
-                        <div class="col ">Signalement non Aiguillés</div>
+                        <div class="col nav_filter nav_item--hoverd">Signalement Aiguillés</div>
+                        <div class="col nav_filter">Signalement non Aiguillés</div>
                         <div class="col position-relative d-flex justify-content-end" id="signa_search--container">
                             <!-- Input -->
                             <div class="h-75 w-100" id="search_input--container">
@@ -72,27 +72,30 @@
                     </div>
                     <!-- Filter -->
                     <div class="row mt-2 m-0">
-                        <select class="col py-2 m-2" name="" id="">
-                            <option value="" selected hidden>Catégorie</option>
+                        <select class="col py-2 m-2" name="" id="category--select">
+                            <option value="" selected>Catégorie</option>
+                            <option value="" selected>Catégorie</option>
                         </select>
-                        <select class="col py-2 m-2" name="" id="">
-                            <option value="" selected hidden>État</option>
+                        <select class="col py-2 m-2" name="" id="state--select">
+                            <option value="" selected>État</option>
+                            <option value="" selected>État</option>
                         </select>
-                        <select class="col py-2 m-2" name="" id="">
-                            <option value="" selected hidden>Infrastructure</option>   
-                        </select>
+                        <button class="btn col py-2 m-2 text-start" id="infra_filter--button">Infrastructure</button>
                         <input  class="col py-2 m-2" type="date" placeholder="Date" id="date_range--input">
                     </div>
                     <!-- Infra -->
-                    <div class="row m-0">
-                        <select class="col py-2 m-2" name="" id="">
-                                <option value="" selected hidden>Site</option>   
+                    <div class="row m-0 d-none animate__animated  animate__fadeIn" id="infra-filters--container">
+                        <select class="col py-2 m-2" name="" id="annexe--select">
+                                <option value="" selected>Site</option>   
+                                <option value="" selected>Site</option>   
                             </select>
-                            <select class="col py-2 m-2" name="" id="">
-                                <option value="" selected  hidden>Bloc</option>   
+                            <select class="col py-2 m-2" name="" id="bloc--select">
+                                <option value="" selected>Bloc</option>   
+                                <option value="" selected>Bloc</option>   
                             </select>
-                            <select class="col py-2 m-2" name="" id="" >
-                                <option value="" selected  hidden>Salle</option>   
+                            <select class="col py-2 m-2" name="" id="salle--select">
+                                <option value="" selected >Salle</option>   
+                                <option value="" selected >Salle</option>   
                         </select>
                     </div>
 
@@ -119,7 +122,7 @@
                                         </p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
-                                            <a href="#" class="btn btn-primary">Détails</a>
+                                            <a href="#" class="btn btn-primary" id="show_modal--button">Détails</a>
                                         </div>
                                     </div>
                                 </div>

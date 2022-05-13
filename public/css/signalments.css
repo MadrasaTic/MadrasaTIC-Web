@@ -3,7 +3,7 @@ textarea {
     border: none;
     background: none;
 }
-select, #date_range--input {
+select, #date_range--input, #infra_filter--button {
     background-color: #ECF1F4;
     border: none;
     cursor: pointer;
@@ -92,6 +92,10 @@ textarea:focus {
     justify-content: center;
 }
 
+.nav_filter {
+    transition: all .1s ease-in !important;
+}
+
 /* Hover Effect */
 .nav_item--hoverd {
     color: #203659;
@@ -137,7 +141,7 @@ textarea:focus {
     background-color: #35F9AE;
 }
 
-#state--container {
+#state--container, #modalState--container {
     background-color: #EFEFFD;
     cursor: pointer;
 }

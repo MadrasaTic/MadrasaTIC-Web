@@ -14,7 +14,7 @@ class RenameResponsableIdInServicesTable extends Migration
     public function up()
     {
         Schema::table('services', function (Blueprint $table) {
-            $table->renameColumn('responsable_id', 'parent_id');
+            // $table->renameColumn('responsable_id', 'parent_id');
         });
     }
 

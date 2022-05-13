@@ -6,10 +6,44 @@ import tablesView from "./Views/tablesView.js";
 import sideBarView from "./Views/sideBarView.js";
 import infraView from "./Views/infraView.js";
 import SignalmentsView from "./Views/signalmentsView.js"
-import signalmentsView from "./Views/signalmentsView.js";
+
+// Signalements
+function controlSignalements () {
+    console.log("Signalments Controller Loaded");
+}
 
 
+if ((window.location.pathname.slice(1) == "signalments")) {
 
+    function init() {
+        SignalmentsView.addHandlerRender(controlSignalements);
+        SignalmentsView.addHandlerParentFilterChange();
+        SignalmentsView.addHandlerInfraFilters();
+        SignalmentsView.addHandlerShowModalBtn();
+        SignalmentsView.addHandlerCloseModal();
+        SignalmentsView.addHandlerApproveSignalmentBtn();
+        SignalmentsView.addHandlerResendSignalmentsBtn();
+        SignalmentsView.addHandlerDeleteSignalmentBtn();
+        SignalmentsView.addHandlerShowRattachedToBody();
+        SignalmentsView.addHandlerRattachedToBackBtn();
+        SignalmentsView.addHandlerRattachedToSubmitBtn();
+        SignalmentsView.addHandlerCloseRattachedToBtn();
+        SignalmentsView.addHandlerModalState();
+        // Selects
+        SignalmentsView.addHandlerModalCategoryChange();
+        SignalmentsView.addHandlerCategoryChange();
+        SignalmentsView.addHandlerStateChange();
+        SignalmentsView.addHandlerAnnexeChange();
+        SignalmentsView.addHandlerBlocChange();
+        SignalmentsView.adHandlerSalleChange();
+    }
+    init();
+}
+
+// 
+
+
+// Old Controller (Needs Refactoring)
 window.addEventListener("load", function() {
     sideBarView.displayHoverEffect();
 
@@ -56,11 +90,6 @@ window.addEventListener("load", function() {
         infraView.renderAddClick();
         infraView.closeAllInputsOnClick();
     }
-    if (window.location.pathname.slice(1) == "signalments") {
-        signalmentsView.testFunction();
-    }
-
-    console.log("Js Fired");
-
+    console.log("Js Fired (Old Controller)");
 })
 
