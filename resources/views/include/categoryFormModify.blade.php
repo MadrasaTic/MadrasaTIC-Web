@@ -24,7 +24,6 @@
         <label for="parent_id" class="form-label">Catégorie Parent</label>
         <div class="input-group">
             <select name="parent_id" class="w-100 p-3" id="parent_id">
-                <option selected="selected" data-selected="true"> Choissidez cet option</option>
                 @foreach($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
@@ -46,7 +45,6 @@
         <label for="service_id" class="form-label">Service Attaché</label>
         <div class="input-group">
             <select name="service_id" class="w-100 p-3" id="service_id">
-                <option selected disabled></option>
                 @foreach($services as $service)
                 <option value="{{ $service->id }}">{{ $service->name }}</option>
                 @endforeach

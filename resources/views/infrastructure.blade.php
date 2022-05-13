@@ -24,7 +24,7 @@
                         <!-- Annexe -->
                         <div class="items--container col m-0 p-0">
                             <div class="items--header fw-bold fs-4 border"><i
-                                    class="fa-solid fa-building me-2"></i>Annexe</div>
+                                    class="fa-solid fa-building me-2"></i>Site</div>
                             <div class="items_add--container text-primary fw-bold">
                                 <!-- Add Button -->
                                 <div class="annexe_add--button items_add" data-type="annexe">

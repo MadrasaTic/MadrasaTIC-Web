@@ -260,6 +260,7 @@ class InfraView {
                     e.preventDefault();
                     deleteModal.classList.add("d-none")
                     this._sendDeleteJSONRequet(item.dataset.type, item.dataset.id);
+                    this._itemClickAction(null, item);
                     return
                 }
                 document.querySelector("#close_delete--button").onclick = (e) => {

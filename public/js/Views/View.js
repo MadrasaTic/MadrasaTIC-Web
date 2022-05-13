@@ -33,9 +33,9 @@ export default class View {
             parentEl.target.parentElement.parentElement.querySelector(
                 ".invalid-feedback"
             );
-        iconInvalid.classList.add("d-none");
-        textInvalid.classList.add("d-none");
-        parentEl.target.classList.remove("is-invalid")
+        // iconInvalid.classList.add("d-none");
+        // textInvalid.classList.add("d-none");
+        // parentEl.target.classList.remove("is-invalid")
     }
 
     _renderQuitBlurValidation(parentEl) {
@@ -46,7 +46,7 @@ export default class View {
         const iconInvalid =
             parentEl?.parentElement.querySelector(".invalid--icon");
         const textInvalid =
-            parentEl?.parentElement.querySelector(
+            parentEl?.parentElement.parentElement.querySelector(
                 ".invalid-feedback"
             );
 

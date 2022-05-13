@@ -17,7 +17,7 @@ class Members extends View {
     #modalUpdateForm = "";
     #checkBoxTable = "";
     #textAreaTable = "";
-    #optionsTable = "";
+    #selectsTable = "";
     #type =  "";
 
     renderModalHeaderName() {
@@ -57,15 +57,20 @@ class Members extends View {
         .filter(input => (input.dataset.type || input.type == "checkbox"))
         this.#textAreaTable = Array.from(document.querySelector("#modal_update--form").elements)
         .filter (input => input.classList.contains("text--area"));
-        this.#modalUpdateForm = [...this.#modalUpdateForm, document.querySelector("#color")];
+        // Color Input
+        document.querySelector("#color") ? this.#modalUpdateForm = [...this.#modalUpdateForm, document.querySelector("#color")] : "";
         // Fill selectedTable with optionsTables
-        this.#optionsTable = Array.from(document.querySelectorAll("option"));
+        this.#selectsTable = Array.from(document.querySelector("#modal_update--form").querySelectorAll("select"));
+        // testing
+        console.log(this.#modalUpdateForm);
     }
 
     async displayUpdateData(currentPage, id) {
         let permissionsTable = [];
         // Fetch & Store Data
         let data = await getJSON(`/${currentPage}/${id}/edit`);
+
+        // testing
         console.log(data);
 
         const {user_information} = data;
@@ -95,18 +100,20 @@ class Members extends View {
             })
         }
         // Display on Selects
-        if (this.#optionsTable) {
-            const selectedOption = this.#optionsTable.find(option => option.dataset.selected == "true");
-            const parentOption = this.#optionsTable.find(option => option.value == data.parent_id);
-            if (!parentOption) return
-            selectedOption.text = parentOption.text;
+        if (this.#selectsTable) {
+                this.#selectsTable.forEach((select) => {
+                    const selectedOptionID = data[`${select.name}`];
+                    const selectedOption =  Array.from(select.querySelectorAll("option")).find(option => option.value == selectedOptionID);
+                    selectedOption ? selectedOption.selected = "selected" : "";
+                })
         }
+        
     }
 
     activeSubmitButton(type) {
         this.#modalSaveButton.addEventListener("click", () => {
-                document.querySelector(`.${type}--submit`).click();
-            })
+            document.querySelector(`.${type}--submit`).click();
+        })
     }
 
 
@@ -125,10 +132,9 @@ class Members extends View {
             })
         })
         this.#modalUpdateForm.forEach((input) => {
-            if (!input) return
             input.addEventListener("focus", (e) => {
                 this._renderInputValidation(e.target, input.dataset.type || input.type )();
-                if (this._enableSaveBtn(this.#modalUpdateForm)) this.#modalSaveButton.classList.remove("disabled")
+                if (this._enableModifyBtn(this.#modalUpdateForm)) this.#modalSaveButton.classList.remove("disabled")
                 else this.#modalSaveButton.classList.add("disabled");
             });
             input.addEventListener("blur", this._renderBlurValidation);
@@ -140,14 +146,30 @@ class Members extends View {
         })
     }
 
-    _enableSaveBtn(inputsArray) {
+    _selectChangeCheck() {
+        this.#selectsTable.forEach(select => {
+            select.addEventListener("change", () => {
+                this.#modalSaveButton.classList.remove("disabled")
+            })
+        })
+    }
+
+    _checkBoxsCheck() {
+        this.#checkBoxTable.forEach(checkBox => {
+            checkBox.addEventListener("change", () => {
+                this.#modalSaveButton.classList.remove("disabled")
+            })
+        })
+    }
+
+    _enableSaveBtn(inputsArray) {   
         if (!inputsArray) return true
         else return inputsArray.every(input => input && input.classList.contains("is-valid"));
     }
 
     _enableModifyBtn(inputsArray) {
         if (!inputsArray) return true
-        else return inputsArray.some(input => input.classList.contains("is-valid"));
+        else return inputsArray.some(input => input.classList.contains("is-valid")) && !inputsArray.some(input => input.classList.contains("is-invalid"));
     }
 
     dipslayHideModal () {
@@ -156,6 +178,7 @@ class Members extends View {
         this.#btnAdd.addEventListener("click", (e) => {
                 e.preventDefault()
                 this.#modalContainer.classList.remove("d-none");
+                this.#modalSaveButton.classList.add("disabled")
                 document.querySelector(`#${this.#currentPage}_add--body`).classList.remove("d-none");
                 document.querySelector("#modal--title").textContent = `Ajouter ${this.#type}`;
                 this._inputsCheck();
@@ -165,15 +188,17 @@ class Members extends View {
         this.#btnModify.forEach((btn) => {
             btn.addEventListener("click", (e) => {
                 e.preventDefault();
+                this.#modalSaveButton.classList.add("disabled");
                 this.#modalContainer.classList.remove("d-none");
                 document.querySelector(`#${this.#currentPage}_modify--body`).classList.remove("d-none");
                 document.querySelector("#modal--title").textContent = `Modifier ${this.#type}`;
                 this._inputsCheck();
+                this._selectChangeCheck();
+                this._checkBoxsCheck();
                 const id = +e.target.href.split('/').slice(-1)
                 document.querySelector("#modal_update--form").action = `/${this.#currentPage}/${id}`
                 this.displayUpdateData(`${this.#currentPage}`, id)
                 this.activeSubmitButton("modify");
-
             })
         })
 
@@ -201,7 +226,7 @@ class Members extends View {
                 this.#modalSaveButton.classList.add("disabled");
                 document.querySelector("#modal--title").textContent = "";
                 [...this.#modalForm, ...this.#modalUpdateForm].forEach((input) => this._renderQuitBlurValidation(input))
-                this.#checkBoxTable.forEach((checkBox) => checkBox.clicked = false)
+                this.#checkBoxTable.forEach((checkBox) => checkBox.checked = false);
             })
         })
 

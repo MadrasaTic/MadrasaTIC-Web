@@ -49,6 +49,15 @@ Route::get('/signalmentsPriority', function () {
     return view('signalmentsPriority');
 });
 
+Route::get('/signalments', function () {
+    return view('signalments');
+});
+
+// Route::get('/permissions', function () {
+//     return view('permissions');
+// });
+
+
 
 //====================================================================================================
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);
