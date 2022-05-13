@@ -11,7 +11,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', /*'parent_id',*/ 'priority_default', 'description', 'service_id'];
+    protected $fillable = ['name', /*'parent_id',*/ 'priority_id', 'description', 'service_id'];
     protected $hidden = ['created_at', 'updated_at'];
 
     /*public function parent()
@@ -31,6 +31,6 @@ class Category extends Model
 
     public function priority()
     {
-        return $this->hasOne(Priority::class);
+        return $this->belongsTo(Priority::class);
     }
 }

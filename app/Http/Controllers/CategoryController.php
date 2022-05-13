@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Service;
+use App\Models\Priority;
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,9 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         $services = Service::all();
-        return View('signalmentsCategory', compact('categories', 'services'));
+        $priorities = Priority::doesntHave('category')->get();
+        // dd($priorities);
+        return View('signalmentsCategory', compact('categories', 'services', 'priorities'));
     }
 
     /**
@@ -43,13 +46,9 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request['name'];
         // $category->parent_id = $request['parent_id'];
-        // $category->priority_default = $request['priority_default'];
-        $category->priority_default = $request['priority'];
         $category->description = $request->get('description');
         $category->service_id = $request['service_id'];
-        // dd($request, $category, $category->services);
-        // $category->services_id = $request['services'];
-        // dd($request, $category->services(), $category);
+        $category->priority_id = $request['priority_id'];
         $category->save();
         return redirect()->back();
     }
@@ -91,11 +90,10 @@ class CategoryController extends Controller
 
         $category->name = $request['name'];
         // $category->parent_id = $request['parent_id'];
-        $category->priority_default = $request['priority'];
-        // $category->services_associated = json_encode($request['services']);
+        $category->priority_id = $request['priority_id'];
         $category->description = $request['description'];
         $category->service_id = $request['service_id'];
-        // dd($request, $category);
+        $category->priority_id = $request['priority_id'];
         $category->save();
 
         return redirect()->back();
