@@ -80,7 +80,7 @@
                                 <!-- <th class="" scope="row">{{ $category['id'] }}</th> -->
                                 <td>{{ $category['name'] }}</td>
                                 <!-- <td>{{ $category->parent['name'] ?? '/' }}</td> -->
-                                <td>{{ $category['priority_default'] ?? '//' }}</td>
+                                <td>{{ $category->priority['name'] ?? '/' }}</td>
                                 <td>{{ $category->services['name'] ?? '/'}}</td> <!-- JSON data as placeholder for now -->
                                 <td>
                                     <a href="{{ 'signalmentsCategory/'.$category['id'] }}" class="modify--button me-3 fw-bold">Modifier</a>

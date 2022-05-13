@@ -32,18 +32,15 @@
         </div>
     </div> -->
     <div class="mb-4 col-md-12">
-        <label for="priority" class="form-label">Priorité par défaut</label>
+        <label for="priority_id" class="form-label">Priorité</label>
         <div class="input-group">
-            <input type="number" data-type="positiveNumber" class="needs--validation w-100 p-3" placeholder="Priorité par défaut" name="priority" id="priority_default"/>
-            <span class="check--container end-0 me-2 fs-4 ">
-                <i
-                    class="valid--icon fa-solid fa-circle-check text-success d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
-                <i
-                    class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
-            </span>
+            <select name="priority_id" class="w-100 p-3">
+                <option selected disabled></option>
+                @foreach($priorities as $priority)
+                <option value="{{ $priority->id }}">{{ $priority->name }}</option>
+                @endforeach
+            </select>
         </div>
-        <div class="invalid-feedback fs-6 d-none">Enter un nombre valide</div>
-        <div class="valid-feedback fs-6 d-none">Nombre valide</div>
     </div>
     <div class="mb-4 col-md-12">
         <label for="service_id" class="form-label">Service Attaché</label>
