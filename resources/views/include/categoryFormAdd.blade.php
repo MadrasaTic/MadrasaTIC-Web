@@ -3,19 +3,19 @@
     <div class="mb-4 col-md-12 d-none">
         <label class="form-label">ID</label>
         <div class="input-group">
-            <input type="text" class="w-100 p-3" placeholder="ID" name="id" id="id"/>
+            <input type="text" class="w-100 p-3" placeholder="ID" name="id" id="id" />
         </div>
     </div>
     <div class="mb-4 col-md-12">
         <label class="form-label">Nom</label>
         <div class="input-group">
-            <input type="text" class="needs--validation w-100 p-3" placeholder="Nom" name="name" id="name"/>
+            <input type="text" class="needs--validation w-100 p-3" placeholder="Nom" name="name" id="name" />
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check text-success d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
                 <i
                     class="invalid--icon  fa-solid fa-circle-exclamation text-danger d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
-            </span> 
+            </span>
         </div>
         <div class="invalid-feedback fs-6 d-none">Enter un nom valide</div>
         <div class="valid-feedback fs-6 d-none">Nom valide</div>
@@ -30,17 +30,15 @@
             </select>
         </div>
     </div> -->
-   <div class="mb-4 col-md-12">
+    <div class="mb-4 col-md-12">
         <label for="priority_id" class="form-label">Priorité</label>
         <div class="input-group">
             <select name="priority_id" class="w-100 p-3">
-                <option selected disabled></option>
-                    @foreach($priorities as $priority) 
-                            <option value="{{ $priority->id }}">{{ $priority->name }}</option>
-                    @endforeach
+                @foreach($priorities as $priority)
+                <option value="{{ $priority->id }}">{{ $priority->name }}</option>
+                @endforeach
             </select>
         </div>
-        <span>{{ $categories->count() }}</span>
     </div>
     <div class="mb-4 col-md-12">
         <label for="service_id" class="form-label">Service Attaché</label>

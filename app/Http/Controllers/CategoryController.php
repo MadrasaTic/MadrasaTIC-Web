@@ -73,7 +73,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id);
-        
+        $priority = Priority::findOrFail($category['priority_id']);
+
         return $category;
     }
 
@@ -90,10 +91,12 @@ class CategoryController extends Controller
 
         $category->name = $request['name'];
         // $category->parent_id = $request['parent_id'];
-        $category->priority_id = $request['priority_id'];
+        if ($request->has('priority_id')) {
+            $category->priority_id = $request['priority_id'];
+        } 
         $category->description = $request['description'];
         $category->service_id = $request['service_id'];
-        $category->priority_id = $request['priority_id'];
+        // dd($request->has('priority_id'), $request['priority_id']);
         $category->save();
 
         return redirect()->back();

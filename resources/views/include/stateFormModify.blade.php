@@ -30,8 +30,8 @@
         <div class="valid-feedback fs-6 d-none">Nom valide</div>
     </div>
     <div class="mb-4 col-md-12">
-        <input type="color" class="form-control form-control-color" id="color" value="#563d7c"
+        <input data-type="ignore-validation" type="color" class="form-control form-control-color" id="color" value="#563d7c"
             title="Choose your color" name="state_color">
     </div>
-    <input type="submit" value="ICI" class="modify--submit" hidden>
+    <input  type="submit" value="ICI" class="modify--submit" hidden>
 </form>

@@ -61,8 +61,6 @@ class Members extends View {
         document.querySelector("#color") ? this.#modalUpdateForm = [...this.#modalUpdateForm, document.querySelector("#color")] : "";
         // Fill selectedTable with optionsTables
         this.#selectsTable = Array.from(document.querySelector("#modal_update--form").querySelectorAll("select"));
-        // testing
-        console.log(this.#modalUpdateForm);
     }
 
     async displayUpdateData(currentPage, id) {
@@ -119,6 +117,7 @@ class Members extends View {
 
     _inputsCheck() {
         this.#modalForm.forEach((input) => {
+            if (input.dataset.type == "ignore-validation") return
             input.addEventListener("focus", (e) => {
                 this._renderInputValidation(e.target, input.dataset.type || input.type )();
                 if (this._enableSaveBtn(this.#modalForm)) this.#modalSaveButton.classList.remove("disabled")
@@ -132,6 +131,7 @@ class Members extends View {
             })
         })
         this.#modalUpdateForm.forEach((input) => {
+            if (input.dataset.type == "ignore-validation") return
             input.addEventListener("focus", (e) => {
                 this._renderInputValidation(e.target, input.dataset.type || input.type )();
                 if (this._enableModifyBtn(this.#modalUpdateForm)) this.#modalSaveButton.classList.remove("disabled")
@@ -148,10 +148,15 @@ class Members extends View {
 
     _selectChangeCheck() {
         this.#selectsTable.forEach(select => {
-            select.addEventListener("change", () => {
-                this.#modalSaveButton.classList.remove("disabled")
-            })
-        })
+            if (Array.from(select.querySelectorAll("option")).length == 1) {
+                this.#modalSaveButton.classList.remove("disabled");
+                
+            } else {
+                select.addEventListener("change", () => {
+                    this.#modalSaveButton.classList.remove("disabled")
+                })
+            }
+        });
     }
 
     _checkBoxsCheck() {
@@ -163,8 +168,17 @@ class Members extends View {
     }
 
     _enableSaveBtn(inputsArray) {   
+        let availableOptions = true;
+        if (this.#selectsTable) {
+            this.#selectsTable.forEach(select => {
+                if (Array.from(select.querySelectorAll("option")).length == 0) {
+                    availableOptions &= false;
+                }
+                else availableOptions &= true;
+            })
+        }
         if (!inputsArray) return true
-        else return inputsArray.every(input => input && input.classList.contains("is-valid"));
+        else return inputsArray.every(input => input && input.classList.contains("is-valid")) && availableOptions;
     }
 
     _enableModifyBtn(inputsArray) {
