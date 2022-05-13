@@ -14,6 +14,14 @@ class Signalement extends BaseModel
     protected $table = 'signalements';
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC'];
+
+
+    /**
      * Get all of the signalementVersionControl for the Signalement
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -30,7 +38,7 @@ class Signalement extends BaseModel
      */
     public function lastSignalementVC()
     {
-        return $this->hasOne(SignalementVersionControl::class);
+        return $this->hasOne(SignalementVersionControl::class)->latestOfMany();
     }
 
     /**

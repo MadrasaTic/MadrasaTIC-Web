@@ -11,6 +11,13 @@ class Category extends BaseModel
 {
     use HasFactory;
 
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['services', 'priority'];
+
     protected $fillable = ['name', /*'parent_id',*/ 'priority_id', 'description', 'service_id'];
     protected $hidden = ['created_at', 'updated_at'];
 
