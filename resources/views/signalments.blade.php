@@ -161,6 +161,11 @@
             mode: "range",
             enableTime: true,
             dateFormat: "d.m.Y",
+            onChange: function(selectedDates, dateStr, instance) {
+                const dates = dateStr.split(" to ");
+                if (dates.length == 1) return;
+                console.log(dates);
+            }
         });
 
     </script>
