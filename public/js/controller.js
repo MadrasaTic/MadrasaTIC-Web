@@ -1,41 +1,52 @@
 // Module Import
-import * as model from "./model.js";
+// import * as model from "./model.js";
 import loginView from "./Views/loginView.js";
 import profileView from "./Views/profileView.js";
 import tablesView from "./Views/tablesView.js";
 import sideBarView from "./Views/sideBarView.js";
 import infraView from "./Views/infraView.js";
-import SignalmentsView from "./Views/signalmentsView.js"
+import signalmentsView from "./Views/signalmentsView.js";
+// Models
+import * as signalmentsModal from "./Modals/signalmentsModal.js";
 
 // Signalements
 function controlSignalements () {
     console.log("Signalments Controller Loaded");
 }
 
+async function controlInfra(type, url) {
+    // Get Annexes
+    const data = await signalmentsModal.loadInfra(type, url);
+    // Render Them
+    signalmentsView.renderInfraOptions(data, type);
+}
+
 
 if ((window.location.pathname.slice(1) == "signalments")) {
 
     function init() {
-        SignalmentsView.addHandlerRender(controlSignalements);
-        SignalmentsView.addHandlerParentFilterChange();
-        SignalmentsView.addHandlerInfraFilters();
-        SignalmentsView.addHandlerShowModalBtn();
-        SignalmentsView.addHandlerCloseModal();
-        SignalmentsView.addHandlerApproveSignalmentBtn();
-        SignalmentsView.addHandlerResendSignalmentsBtn();
-        SignalmentsView.addHandlerDeleteSignalmentBtn();
-        SignalmentsView.addHandlerShowRattachedToBody();
-        SignalmentsView.addHandlerRattachedToBackBtn();
-        SignalmentsView.addHandlerRattachedToSubmitBtn();
-        SignalmentsView.addHandlerCloseRattachedToBtn();
-        SignalmentsView.addHandlerModalState();
+        signalmentsView.addHandlerRender(controlSignalements);
+        signalmentsView.addHandlerParentFilterChange();
+        signalmentsView.addHandlerInfraFilters();
+        signalmentsView.addHandlerShowModalBtn();
+        signalmentsView.addHandlerCloseModal();
+        signalmentsView.addHandlerApproveSignalmentBtn();
+        signalmentsView.addHandlerResendSignalmentsBtn();
+        signalmentsView.addHandlerDeleteSignalmentBtn();
+        signalmentsView.addHandlerShowRattachedToBody();
+        signalmentsView.addHandlerRattachedToBackBtn();
+        signalmentsView.addHandlerRattachedToSubmitBtn();
+        signalmentsView.addHandlerCloseRattachedToBtn();
+        // Modal
+        signalmentsView.addHandlerModalState();
+        signalmentsView.addHandlerModalCategoryChange();
         // Selects
-        SignalmentsView.addHandlerModalCategoryChange();
-        SignalmentsView.addHandlerCategoryChange();
-        SignalmentsView.addHandlerStateChange();
-        SignalmentsView.addHandlerAnnexeChange();
-        SignalmentsView.addHandlerBlocChange();
-        SignalmentsView.adHandlerSalleChange();
+        signalmentsView.addHandlerCategoryChange();
+        signalmentsView.addHandlerStateChange();
+        signalmentsView.addHandlerLoadAnnexe(controlInfra, "annexe", '/infrastructure/annexe');
+        signalmentsView.addHandlerAnnexeChange(controlInfra, "bloc", '/infrastructure/bloc/listing/' );
+        signalmentsView.addHandlerBlocChange(controlInfra, "room", '/infrastructure/room/listing/');
+        signalmentsView.adHandlerSalleChange();
     }
     init();
 }

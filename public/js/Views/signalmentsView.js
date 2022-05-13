@@ -79,6 +79,44 @@ class SignalmentsView {
     }
     
     // Selects
+    addHandlerLoadAnnexe(handler, type, url) {
+        window.addEventListener("load", () => {
+            handler(type, url)
+        })
+    }
+
+    addHandlerAnnexeChange(handler, type, url) {
+        const annexeSelect = document.querySelector("#annexe--select");
+        annexeSelect.addEventListener("change", () => {
+            const selectedOption = annexeSelect.options[annexeSelect.selectedIndex];
+            if (!selectedOption) return
+            const blocsUrl = url + selectedOption.value
+            handler(type, blocsUrl)
+        })
+        annexeSelect.addEventListener("click", () => {
+            const selectedOption = annexeSelect.options[annexeSelect.selectedIndex];
+            if (!selectedOption) return
+            const blocsUrl = url + selectedOption.value
+            handler(type, blocsUrl)
+        })
+    }
+
+    addHandlerBlocChange(handler, type, url) {
+        const blocSelect = document.querySelector("#bloc--select");
+        blocSelect.addEventListener("change", () => {
+            const selectedOption = blocSelect.options[blocSelect.selectedIndex];
+            if (!blocSelect) return
+            const roomsUrl = url + selectedOption.value
+            handler(type, roomsUrl)
+        })
+        blocSelect.addEventListener("click", () => {
+            const selectedOption = blocSelect.options[blocSelect.selectedIndex];
+            if (!blocSelect) return
+            const roomsUrl = url + selectedOption.value
+            handler(type, roomsUrl)
+        })
+    }
+
     addHandlerModalCategoryChange() {
         document.querySelector("#modalCategory--select").addEventListener("change", () => {
             console.log('Category Select changes');
@@ -97,20 +135,10 @@ class SignalmentsView {
         })
     }
     
-    addHandlerAnnexeChange() {
-        document.querySelector("#annexe--select").addEventListener("change", () => {
-            console.log("Annexe Change");
-        })
-    }
+    
 
-    addHandlerBlocChange() {
-        document.querySelector("#bloc--select").addEventListener("change", () => {
-            console.log("Bloc change");
-        })
-    }
-
-    adHandlerSalleChange() {
-        document.querySelector("#salle--select").addEventListener("change", () => {
+    adHandlerSalleChange(handler) {
+        document.querySelector("#room--select").addEventListener("change", () => {
             console.log("Salle change");
         })
     }
@@ -121,6 +149,17 @@ class SignalmentsView {
         })
     }
 
+
+
+    renderInfraOptions(data, type) {
+        if (type == "bloc" ) document.querySelector(`#bloc--select`).innerHTML = "";
+        document.querySelector(`#room--select`).innerHTML = "";
+        data.forEach(item =>  {
+            const select = document.querySelector(`#${type}--select`);
+            const html = `<option value="${item.id}">${item.name}</option>`;
+            select.insertAdjacentHTML("beforeend", html)
+        })
+    }
 }
 
 export default new SignalmentsView();

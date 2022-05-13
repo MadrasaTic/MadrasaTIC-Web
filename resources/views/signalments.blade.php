@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <!-- Date ranger picker -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    
+
 </head>
 
 <body>
@@ -26,7 +26,8 @@
                         <div class="row h-100 m-0 ">
                             <div class="col-md-4 p-0 d-flex align-items-center justify-content-start ">
                                 <div class="progress-cards text-center rounded-6 d-block">
-                                    <svg class="m-auto progress mt-3 bg-primary w-75 h-75 green noselect" data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
+                                    <svg class="m-auto progress mt-3 bg-primary w-75 h-75 green noselect"
+                                        data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
                                         <path class="track" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
                                         <path class="fill" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
                                         <text class="value" x="50%" y="55%">0%</text>
@@ -37,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 h-50">
-                                
+
                             </div>
                             <div class="col-md-4 h-50"></div>
                             <div class="col-md-4 h-50"></div>
@@ -81,21 +82,15 @@
                             <option value="" selected>État</option>
                         </select>
                         <button class="btn col py-2 m-2 text-start" id="infra_filter--button">Infrastructure</button>
-                        <input  class="col py-2 m-2" type="date" placeholder="Date" id="date_range--input">
+                        <input class="col py-2 m-2" type="date" placeholder="Date" id="date_range--input">
                     </div>
                     <!-- Infra -->
                     <div class="row m-0 d-none animate__animated  animate__fadeIn" id="infra-filters--container">
-                        <select class="col py-2 m-2" name="" id="annexe--select">
-                                <option value="" selected>Site</option>   
-                                <option value="" selected>Site</option>   
-                            </select>
-                            <select class="col py-2 m-2" name="" id="bloc--select">
-                                <option value="" selected>Bloc</option>   
-                                <option value="" selected>Bloc</option>   
-                            </select>
-                            <select class="col py-2 m-2" name="" id="salle--select">
-                                <option value="" selected >Salle</option>   
-                                <option value="" selected >Salle</option>   
+                        <select class="col py-2 m-2" id="annexe--select">
+                        </select>
+                        <select class="col py-2 m-2" name="" id="bloc--select">
+                        </select>
+                        <select class="col py-2 m-2" name="" id="room--select">
                         </select>
                     </div>
 
@@ -149,14 +144,16 @@
                 callback.call(scope, i, array[i]);
             }
         };
-        window.onload = function(){
+        window.onload = function () {
             var max = -219.99078369140625;
             forEach(document.querySelectorAll('.progress'), function (index, value) {
-            percent = value.getAttribute('data-progress');
-                value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - percent) / 100) * max);
+                percent = value.getAttribute('data-progress');
+                value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 -
+                    percent) / 100) * max);
                 value.querySelector('.value').innerHTML = percent + '%';
             });
         }
+
     </script>
 
     <script>
@@ -165,6 +162,7 @@
             enableTime: true,
             dateFormat: "d.m.Y",
         });
+
     </script>
 
 
