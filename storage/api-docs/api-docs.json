@@ -129,6 +129,27 @@
                 }
             }
         },
+        "/infrastructure": {
+            "get": {
+                "tags": [
+                    "Infrastructure"
+                ],
+                "summary": "Get the infrastructure",
+                "description": "Returns all the infrastructure available",
+                "operationId": "infrastructureIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
         "/signalement": {
             "get": {
                 "tags": [
@@ -421,6 +442,10 @@
         {
             "name": "Category",
             "description": "API Endpoints of Categories"
+        },
+        {
+            "name": "Infrastructure",
+            "description": "API Endpoints of Infrastructures"
         }
     ]
 }

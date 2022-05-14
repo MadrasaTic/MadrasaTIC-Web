@@ -8,6 +8,7 @@ use App\Http\Controllers\API\SignalementController;
 
 use App\Http\Controllers\API\AnnexeController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\InfrastructureController;
 
 use App\Models\User;
 /*
@@ -50,6 +51,7 @@ Route::post('annexe', [AnnexeController::class, "store"]);
 Route::get('annexe/{id}', [AnnexeController::class, "show"]);
 
 Route::get('category', [CategoryController::class, "index"]);
+Route::get('infrastructure', [InfrastructureController::class, "index"]);
 
 Route::fallback(function () {
     return response()->json(['error' => 'Not Found!'], 404);
