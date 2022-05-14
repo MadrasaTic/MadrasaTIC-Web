@@ -28,7 +28,7 @@ class SignalementVersionControl extends BaseModel
      */
     public function attachedTo()
     {
-        return $this->belongsTo(Sinalement::class, 'attached_signalement_id');
+        return $this->belongsTo(Signalement::class, 'attached_signalement_id');
     }
 
     /**

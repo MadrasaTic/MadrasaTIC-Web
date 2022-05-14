@@ -60,26 +60,28 @@
                         <div class="col position-relative d-flex justify-content-end" id="signa_search--container">
                             <!-- Input -->
                             <div class="h-75 w-100" id="search_input--container">
-                                <form action="" class="h-100 w-100">
-                                    <input type="text" class="px-3 h-100 w-100" id="search--input"
-                                        placeholder="Rechercher ...">
+                                <form action="/search" method="get"  class="h-100 w-100">
+                                    <input type="text" name="search" class="px-3 h-100 w-100" id="search--input"
+                                                            placeholder="Rechercher ...">
                                 </form>
                             </div>
                             <!-- Icon -->
                             <div class=" me-2" id="search_icon--container">
                                 <i class="align-middle bi bi-search" id="search_icon"></i>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                     <!-- Filter -->
                     <div class="row mt-2 m-0">
                         <select class="col py-2 m-2" name="" id="category--select">
-                            <option value="" selected>Catégorie</option>
-                            <option value="" selected>Catégorie</option>
+                          @foreach($categories as $category)
+                            <option value="{{$category->id}}" >{{$category->name}}</option>
+                          @endforeach 
                         </select>
                         <select class="col py-2 m-2" name="" id="state--select">
-                            <option value="" selected>État</option>
-                            <option value="" selected>État</option>
+                          @foreach($states as $state)
+                            <option value="{{$state->id}}" selected>{{$state->name}}</option>
+                          @endforeach
                         </select>
                         <button class="btn col py-2 m-2 text-start" id="infra_filter--button">Infrastructure</button>
                         <input class="col py-2 m-2" type="date" placeholder="Date" id="date_range--input">
@@ -95,8 +97,10 @@
                     </div>
 
                     <!-- Cards -->
+                    
                     <div class="mt-4" id="signa_cards--container">
-                        <div class="row m-0" id="signa--cards">
+                        <div class="row m-0" id="signa--cards"> 
+                        @foreach($signals as $signal)
                             <div class="col-xl-6 col-md-12 px-3 py-3">
                                 <!-- Card  -->
                                 <div class="card border h-100 w-100 rounded-6">
@@ -104,24 +108,22 @@
                                         class="img-fluid card-img-top h-50 rounded-6" alt="...">
                                     <div class="card-body h-50">
                                         <div class="card-description d-flex align-items-center text-secondary">
-                                            <p class="me-auto my-auto  fw-bold">Catégorie</p>
+                                            <p class="me-auto my-auto  fw-bold" >{{$signal->category['name'] ?? '/'}}</p>
                                             <span class="d-flex px-1 rounded-6" id="state--container">
-                                                <div class="my-auto me-1" id="color--icon"></div>
-                                                <span class="fw-500">Traité</span>
+                                                <div class="my-auto me-1" id="color--icon" data-color="{{$signal->state['color']}}"></div>
+                                                <span class="fw-500">{{$signal->state['name']}}</span>
                                             </span>
                                         </div>
-                                        <h5 class="card-title fw-bold">Titre du Signalement</h5>
-                                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                            Laboriosam, veniam voluptate officiis ratione cumque harum. Nisi est
-                                            voluptates quae nihil suscipit in modi eos at. Vel ad sint saepe veritatis..
-                                        </p>
+                                        <h5 class="card-title fw-bold" >{{ $signal->signalement['title'] ?? '/' }}</h5>
+                                        <p class="card-text">{{ $signal->signalement['description'] ?? '/' }}</p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
                                             <a href="#" class="btn btn-primary" id="show_modal--button">Détails</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div>    
                             </div>
+                        @endforeach
                             <div class="col-xl-6 col-md-12"></div>
                             <div class="col-xl-6 col-md-12"></div>
                         </div>

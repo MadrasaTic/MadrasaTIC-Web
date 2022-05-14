@@ -19,10 +19,12 @@ use App\Http\Controllers\StateController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PrioritiesController;
+use App\Http\Controllers\SignalementsListController;
 
 use App\Http\Controllers\Infrastructure\AnnexeController;
 use App\Http\Controllers\Infrastructure\BlocController;
 use App\Http\Controllers\Infrastructure\RoomController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -167,6 +169,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::resource('/roles-assignment', RolesAssignmentController::class, ['as' => 'configure'])
             ->only(['index', 'edit', 'update']);
         });
+
+        Route::get('/signalments', [SignalementsListController::class, 'show']);
+        Route::get('/search', [SignalementsListController::class,'search']);
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
