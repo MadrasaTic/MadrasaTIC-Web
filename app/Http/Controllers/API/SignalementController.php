@@ -64,7 +64,6 @@ class SignalementController extends Controller
      *)
      */
     public function store(Request $request) {
-        dd($request);
         $signalement = new Signalement();
         $signalement->title = $request->get('title');
         $signalement->description = $request->get('description');
