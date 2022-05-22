@@ -104,7 +104,7 @@
                             <div class="col-xl-6 col-md-12 px-3 py-3">
                                 <!-- Card  -->
                                 <div class="card border h-100 w-100 rounded-6">
-                                    <img src="https://picsum.photos/600/600"
+                                    <img src="{{ asset('$signal->attachement' ) }}"
                                         class="img-fluid card-img-top h-50 rounded-6" alt="...">
                                     <div class="card-body h-50">
                                         <div class="card-description d-flex align-items-center text-secondary">
@@ -116,6 +116,9 @@
                                         </div>
                                         <h5 class="card-title fw-bold" >{{ $signal->signalement['title'] ?? '/' }}</h5>
                                         <p class="card-text">{{ $signal->signalement['description'] ?? '/' }}</p>
+                                        <p class="card-text" >{{ $signal->signalement->annexe->name ?? '/'}}</p>
+                                        <p clase="card-text">{{$signal->signalement->bloc->name ?? '/'}}</p>
+                                        <p class="card-text">{{$signal->signalement->room->name ?? '/'}}</p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
                                             <a href="#" class="btn btn-primary" id="show_modal--button">Détails</a>

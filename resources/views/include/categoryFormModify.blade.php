@@ -43,7 +43,7 @@
     <div class="mb-4 col-md-12">
         <label for="service_id" class="form-label">Service Attaché</label>
         <div class="input-group">
-            <select name="service_id" class="w-100 p-3" id="service_id">
+            <select name="service_id" class="w-['description']100 p-3" id="service_id">
                 @foreach($services as $service)
                 <option value="{{ $service->id }}">{{ $service->name }}</option>
                 @endforeach
