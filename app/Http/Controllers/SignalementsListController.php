@@ -20,7 +20,7 @@ class SignalementsListController extends Controller
         $categories = Category::all();
         $signs = Signalement::all();
         $states = State::all();
-        $signals = SignalementVersionControl::orderByDesc('created_at')
+        $signals = SignalementVersionControl::orderByDesc('updated_at')
                                              ->orderBy('priority_id','ASC') 
                                              ->get();
 

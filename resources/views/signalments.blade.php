@@ -74,13 +74,15 @@
                     <!-- Filter -->
                     <div class="row mt-2 m-0">
                         <select class="col py-2 m-2" name="" id="category--select">
+                            <option value="reset" selected>Catégories</option>
                           @foreach($categories as $category)
                             <option value="{{$category->id}}" >{{$category->name}}</option>
                           @endforeach 
                         </select>
                         <select class="col py-2 m-2" name="" id="state--select">
+                          <option value="reset" selected>États</option>
                           @foreach($states as $state)
-                            <option value="{{$state->id}}" selected>{{$state->name}}</option>
+                            <option value="{{$state->id}}">{{$state->name}}</option>
                           @endforeach
                         </select>
                         <button class="btn col py-2 m-2 text-start" id="infra_filter--button">Infrastructure</button>
@@ -89,10 +91,14 @@
                     <!-- Infra -->
                     <div class="row m-0 d-none animate__animated  animate__fadeIn" id="infra-filters--container">
                         <select class="col py-2 m-2" id="annexe--select">
+                          <option value="reset" selected>Annexes</option>
                         </select>
                         <select class="col py-2 m-2" name="" id="bloc--select">
+                          <option value="reset" selected>Blocs</option>
                         </select>
                         <select class="col py-2 m-2" name="" id="room--select">
+                          <option value="reset" selected>Salles</option>
+
                         </select>
                     </div>
 
@@ -101,9 +107,9 @@
                     <div class="mt-4" id="signa_cards--container">
                         <div class="row m-0" id="signa--cards"> 
                         @foreach($signals as $signal)
-                            <div class="col-xl-6 col-md-12 px-3 py-3">
+                            <div class="cardDiv col-xl-6 col-md-12 px-3 py-3" data-category = "{{$signal->category['name'] ?? '/'}}" data-state="{{$signal->state['name']}}" data-annexe = "{{ $signal->signalement->annexe->name ?? '/'}}" data-bloc = "{{$signal->signalement->bloc->name ?? '/'}}" data-room = "{{$signal->signalement->room->name ?? '/'}}" data-date = "{{$signal->signalement->created_at}}" >
                                 <!-- Card  -->
-                                <div class="card border h-100 w-100 rounded-6">
+                                <div class="card border h-100 w-100 rounded-6" >
                                     <img src="{{asset('/images/signalements/'.$signal['attachement'])}}"
                                         class="img-fluid card-img-top h-50 rounded-6" alt="...">
                                     <div class="card-body h-50">
@@ -115,10 +121,9 @@
                                             </span>
                                         </div>
                                         <h5 class="card-title fw-bold" >{{ $signal->signalement['title'] ?? '/' }}</h5>
-                                        <p class="card-text">{{ $signal->signalement['description'] ?? '/' }}</p>
-                                        <p class="card-text" >{{ $signal->signalement->annexe->name ?? '/'}}</p>
-                                        <p clase="card-text">{{$signal->signalement->bloc->name ?? '/'}}</p>
-                                        <p class="card-text">{{$signal->signalement->room->name ?? '/'}}</p>
+                                        <p class="card-text">{{ $signal->signalement['description'] ?? '/' }} 
+                                        <br> {{ $signal->signalement->annexe->name ?? '/'}} | {{$signal->signalement->bloc->name ?? '/'}} | {{$signal->signalement->room->name ?? '/'}} 
+                                        <br>{{$signal->signalement->created_at}}</p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
                                             <a href="#" class="btn btn-primary" id="show_modal--button">Détails</a>
@@ -127,8 +132,6 @@
                                 </div>    
                             </div>
                         @endforeach
-                            <div class="col-xl-6 col-md-12"></div>
-                            <div class="col-xl-6 col-md-12"></div>
                         </div>
                     </div>
                 </div>
@@ -165,11 +168,16 @@
         flatpickr("#date_range--input", {
             mode: "range",
             enableTime: true,
-            dateFormat: "d.m.Y",
+            dateFormat: "Y-m-d",
             onChange: function(selectedDates, dateStr, instance) {
                 const dates = dateStr.split(" to ");
                 if (dates.length == 1) return;
-                console.log(dates);
+                //
+                const startDateTAB = dates[0]
+                const date1 = new Date(startDateTAB)
+                const dd = Date.parse(date1).toString("YY-MM-DD");
+                console.log(dd)
+                // First Display ALL Cards
             }
         });
 
