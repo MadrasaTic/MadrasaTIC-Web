@@ -132,8 +132,16 @@
                         </div>
                     </div>
                 </div>
+                {{ $signals->links() }}
             </div> <!-- Middle End-->
-
+            
+            
+           
+            
+              
+            
+            
+        </div>
             <!-- Show Signalments Modal -->
             @include('./include/showSignalmentModal')
 

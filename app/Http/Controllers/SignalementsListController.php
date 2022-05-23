@@ -22,11 +22,11 @@ class SignalementsListController extends Controller
         $states = State::all();
         $signals = SignalementVersionControl::orderByDesc('created_at')
                                              ->orderBy('priority_id','ASC') 
-                                             ->get();
+                                             ->paginate(4);
 
         return view('signalments', compact('signals','signs','categories','states'));
     }
-    
+
     public function search(Request $request){
 
         $categories = Category::all();
@@ -39,7 +39,7 @@ class SignalementsListController extends Controller
         {   
             $q->where('title', 'LIKE','%'.$search.'%');
 
-        })->get();
+        })->paginate(4);
         if ($signals) {
             return view('signalments' , compact('signals','signs','categories','states'));
         } else {
@@ -47,7 +47,7 @@ class SignalementsListController extends Controller
             {   
                 $q->where('name', 'LIKE','%'.$search.'%');
 
-            })->get();  
+            })->paginate(4);  
         }
         
         return view('signalments', compact('signals','signs','categories','states'));
