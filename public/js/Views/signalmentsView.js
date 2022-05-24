@@ -7,6 +7,7 @@ class SignalmentsView {
     #selectedAnnexe = "Annexes";
     #selectedBloc = "Blocs";
     #selectedRoom = "Salles";
+    #selectedParentFilter = ""
 
     addHandlerRender(handler) {
         if (window.location.pathname.slice(1) == "signalments") handler();
@@ -18,6 +19,37 @@ class SignalmentsView {
             if (e.target.classList.contains("nav_item--hoverd")) return;
             document.querySelector(".nav_item--hoverd").classList.remove("nav_item--hoverd");
             e.target.classList.add("nav_item--hoverd");
+
+            let allCards = Array.from(document.querySelectorAll(".cardDiv"))
+         
+            //
+            allCards.forEach(card => card.classList.remove("d-none"))
+
+            this.#selectedParentFilter = e.target.dataset.type;
+            let notMatchCardTAB  = "" 
+            if (e.target.dataset.type == "aiguillés") {
+                notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
+            } else {
+                notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state != "Non Traité");
+
+            }
+            notMatchCardTAB.forEach(card => card.classList.add("d-none"));
+        })
+        window.addEventListener("load", (e) => {
+            
+            let allCards = Array.from(document.querySelectorAll(".cardDiv"))
+         
+            //
+            allCards.forEach(card => card.classList.remove("d-none"))
+
+            
+            let notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
+      
+            notMatchCardTAB.forEach(card => card.classList.add("d-none"));
+
+            document.querySelectorAll(".color--icon").forEach(color => {
+                color.style.backgroundColor = color.dataset.color
+            })
         })
     }
 
@@ -198,6 +230,7 @@ class SignalmentsView {
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedAnnexe != "Annexes") allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
+            //allCards = allCards.filter(card => card.dataset.state == )
             
             //
             allCards.forEach(card => card.classList.remove("d-none"))

@@ -55,8 +55,8 @@
                     </div>
                     <!-- Nav -->
                     <div class="d-flex p-0 align-items-center" id="signa--nav">
-                        <div class="col nav_filter nav_item--hoverd">Signalement Aiguillés</div>
-                        <div class="col nav_filter">Signalement non Aiguillés</div>
+                        <div class="col nav_filter nav_item--hoverd" data-type="aiguillés">Signalement Aiguillés</div>
+                        <div class="col nav_filter" data-type = "n-aiguillés">Signalement non Aiguillés</div>
                         <div class="col position-relative d-flex justify-content-end" id="signa_search--container">
                             <!-- Input -->
                             <div class="h-75 w-100" id="search_input--container">
@@ -116,7 +116,7 @@
                                         <div class="card-description d-flex align-items-center text-secondary">
                                             <p class="me-auto my-auto  fw-bold" >{{$signal->category['name'] ?? '/'}}</p>
                                             <span class="d-flex px-1 rounded-6" id="state--container">
-                                                <div class="my-auto me-1" id="color--icon" data-color="{{$signal->state['color']}}"></div>
+                                                <div class="my-auto me-1 color--icon" id="color--icon" data-color="{{$signal->state['color']}}"></div>
                                                 <span class="fw-500">{{$signal->state['name']}}</span>
                                             </span>
                                         </div>
