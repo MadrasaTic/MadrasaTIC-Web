@@ -34,16 +34,16 @@ class SignalementsListController extends Controller
         $states = State::all();
         // Get the search value from the request
         $search = $request->input('search');
-        $signals =$search;
+    
         // Search in the title and body columns from the posts table
         
-        if ($signals) {
+        
             $signals = SignalementVersionControl::whereHas('signalement', function($q) use ($search)
             {   
                 $q->where('title', 'LIKE','%'.$search.'%');
 
             })->get();
-        
+        if ($signals->toArray()) {
             return view('signalments' , compact('signals','signs','categories','states'));
         }else{
             $signals = SignalementVersionControl::whereHas('category', function($q) use ($search)
