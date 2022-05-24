@@ -8,6 +8,7 @@ use Database\Seeders\PermissionSeeder;
 use Database\Seeders\PositionSeeder;
 use Database\Seeders\StateSeeder;
 use Database\Seeders\CategorySeeder;
+use Database\Seeders\SignalementSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             StateSeeder::class,
             CategorySeeder::class,
+            SignalementSeeder::class;
         ]);
     }
 }

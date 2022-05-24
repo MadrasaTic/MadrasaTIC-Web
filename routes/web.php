@@ -19,6 +19,7 @@ use App\Http\Controllers\StateController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PrioritiesController;
+use App\Http\Controllers\SignalmentsController;
 
 use App\Http\Controllers\Infrastructure\AnnexeController;
 use App\Http\Controllers\Infrastructure\BlocController;
@@ -43,7 +44,6 @@ Route::get('google', function () {
 Route::get('/departments', function () {
     return view('departments');
 });
-
 
 Route::get('/signalmentsPriority', function () {
     return view('signalmentsPriority');
@@ -152,6 +152,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::resource('/signalmentsCategory', CategoryController::class);
         Route::post('/signalmentsCategory/{id}',[CategoryController::class,'update']);
         Route::post('/signalmentsCategory/delete/{id}',[CategoryController::class,'delete']); 
+
+        Route::get('/signalments', [SignalmentsController::class, 'index']);
+        // Route::post('/signalments', [SignalmentsController::class, 'store']);
+        Route::get('/signalments/{id}/edit', [SignalmentsController::class, 'edit']);
+        Route::post('/signalments/{id}',[SignalmentsController::class,'update']);
+        // Route::post('/signalments/delete/{id}',[SignalmentsController::class,'delete']);
 
         Route::get('/create',[CheckController::class, 'create'])->name('create');
         Route::get('/indexx',[CheckController::class, 'index'])->name('indexx');

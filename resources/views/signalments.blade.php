@@ -95,6 +95,7 @@
                     </div>
 
                     <!-- Cards -->
+                    @foreach ($signalments as $signalment)
                     <div class="mt-4" id="signa_cards--container">
                         <div class="row m-0" id="signa--cards">
                             <div class="col-xl-6 col-md-12 px-3 py-3">
@@ -104,20 +105,17 @@
                                         class="img-fluid card-img-top h-50 rounded-6" alt="...">
                                     <div class="card-body h-50">
                                         <div class="card-description d-flex align-items-center text-secondary">
-                                            <p class="me-auto my-auto  fw-bold">Catégorie</p>
+                                            <p class="me-auto my-auto fw-bold">{{ $signalment->category['name'] }}</p>
                                             <span class="d-flex px-1 rounded-6" id="state--container">
                                                 <div class="my-auto me-1" id="color--icon"></div>
-                                                <span class="fw-500">Traité</span>
+                                                <span class="fw-500">{{ $signalment->state['name'] }}</span>
                                             </span>
                                         </div>
-                                        <h5 class="card-title fw-bold">Titre du Signalement</h5>
-                                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                            Laboriosam, veniam voluptate officiis ratione cumque harum. Nisi est
-                                            voluptates quae nihil suscipit in modi eos at. Vel ad sint saepe veritatis..
-                                        </p>
+                                        <h5 class="card-title fw-bold">{{ $signalment->signalement['title'] }}</h5>
+                                        <p class="card-text">{{ $signalment->signalement['description'] }}</p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
-                                            <a href="#" class="btn btn-primary" id="show_modal--button">Détails</a>
+                                            <a href="{{ '#'.'signalments/'.$signalment['id'] }}" class="btn btn-primary" id="show_modal--button">Détails</a>
                                         </div>
                                     </div>
                                 </div>
@@ -127,6 +125,7 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div> <!-- Middle End-->
 
             <!-- Show Signalments Modal -->
