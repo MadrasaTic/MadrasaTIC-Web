@@ -229,13 +229,13 @@ class SignalementController extends Controller
     /**
      * @OA\Post(
      *      path="/signalement/{id}/{reaction}",
-     *      operationId="signalementUpvote",
+     *      operationId="signalementVoting",
      *      tags={"Signalement"},
-     *      summary="Upvote existing signalement",
-     *      description="Upvote existing signalement",
+     *      summary="Up/Down vote existing signalement",
+     *      description="Up/Down vote existing signalement",
      *      security={{"bearer_token":{}}},
      *      @OA\Parameter(
-     *         description="ID of annexe",
+     *         description="ID of signalement",
      *         in="path",
      *         name="id",
      *         required=true,
