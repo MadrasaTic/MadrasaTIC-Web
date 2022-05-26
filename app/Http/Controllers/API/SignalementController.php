@@ -275,12 +275,26 @@ class SignalementController extends Controller
         if ($signalement->reactedBy->contains($user_id)) {
             $current_reaction = $signalement->reactedBy()->where('users.id', $user_id)->first()->pivot;
             if ($current_reaction->reaction_type == $reaction) {
+                if ($reaction == "up") {
+                    $signalement->up_votes -= 1;
+                } else {
+                    $signalement->down_votes -= 1;
+                }
+                $signalement->save();
                 $signalement->reactedBy()->detach($user_id);
                 return response()->json([
                     'message' => 'reaction removed',
                     'reaction' => null,
                 ]);
             } else {
+                if ($reaction == "up") {
+                    $signalement->up_votes += 1;
+                    $signalement->down_votes -= 1;
+                } else {
+                    $signalement->up_votes -= 1;
+                    $signalement->down_votes += 1;
+                }
+                $signalement->save();
                 $signalement->reactedBy()->updateExistingPivot($user_id, ["reaction_type" => $reaction]);
                 return response()->json([
                     'message' => 'reaction updated to '.$reaction,
@@ -288,6 +302,12 @@ class SignalementController extends Controller
                 ]);
             }
         } else {
+            if ($reaction == "up") {
+                $signalement->up_votes += 1;
+            } else {
+                $signalement->down_votes += 1;
+            }
+            $signalement->save();
             $signalement->reactedBy()->attach($user_id, ['reaction_type' => $reaction]);
             return response()->json([
                 'message' => 'reaction added',
