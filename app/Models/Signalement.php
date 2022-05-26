@@ -98,7 +98,7 @@ class Signalement extends BaseModel
      */
     public function savedBy()
     {
-        return $this->belongsToMany(User::class, 'saved_signalements', 'signalement_id', 'user_id')
+        return $this->belongsToMany(User::class, 'user_saved_signalement', 'signalement_id', 'user_id')
             ->withTimestamps();
     }
 
@@ -109,7 +109,7 @@ class Signalement extends BaseModel
      */
     public function reactedBy()
     {
-        return $this->belongsToMany(User::class, 'signalement_reactions', 'signalement_id', 'user_id')
+        return $this->belongsToMany(User::class, 'user_reaction_signalement', 'signalement_id', 'user_id')
             ->withPivot('reaction_type')
             ->withTimestamps();
     }
