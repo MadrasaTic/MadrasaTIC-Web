@@ -44,6 +44,10 @@ use Illuminate\Routing\Controller as BaseController;
     *     name="Infrastructure",
     *     description="API Endpoints of Infrastructures"
     * )
+    * @OA\Tag(
+    *     name="User",
+    *     description="API Endpoints of User"
+    * )
     *
     * @OAS\SecurityScheme(
     *      securityScheme="bearer_token",

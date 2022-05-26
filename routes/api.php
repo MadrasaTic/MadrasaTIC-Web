@@ -9,6 +9,7 @@ use App\Http\Controllers\API\SignalementController;
 use App\Http\Controllers\API\AnnexeController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\InfrastructureController;
+use App\Http\Controllers\API\UserController;
 
 use App\Models\User;
 /*
@@ -48,6 +49,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('signalement/{id}/react/{reaction}', [SignalementController::class, "react"]);
     Route::post('signalement/{id}/save', [SignalementController::class, "save"]);
+
+    Route::get('user/saved', [UserController::class, "saved"]);
+    Route::get('user/upvoted', [UserController::class, "upvoted"]);
+    Route::get('user/downvoted', [UserController::class, "downvoted"]);
 });
 Route::get('annexe', [AnnexeController::class, "index"]);
 Route::post('annexe', [AnnexeController::class, "store"]);
