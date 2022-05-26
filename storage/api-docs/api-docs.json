@@ -393,6 +393,62 @@
                     }
                 ]
             }
+        },
+        "/signalement/{id}/{reaction}": {
+            "post": {
+                "tags": [
+                    "Signalement"
+                ],
+                "summary": "Upvote existing signalement",
+                "description": "Upvote existing signalement",
+                "operationId": "signalementUpvote",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of annexe",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "reaction",
+                        "in": "path",
+                        "description": "reaction type",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "up",
+                                "down"
+                            ]
+                        },
+                        "example": "up"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
         }
     },
     "components": {

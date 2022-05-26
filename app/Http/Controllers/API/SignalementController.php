@@ -223,4 +223,76 @@ class SignalementController extends Controller
         $deleted = $signalement->delete();
         return $deleted;
     }
+
+
+
+    /**
+     * @OA\Post(
+     *      path="/signalement/{id}/{reaction}",
+     *      operationId="signalementUpvote",
+     *      tags={"Signalement"},
+     *      summary="Upvote existing signalement",
+     *      description="Upvote existing signalement",
+     *      security={{"bearer_token":{}}},
+     *      @OA\Parameter(
+     *         description="ID of annexe",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         example="1",
+     *         @OA\Schema(
+     *            type="integer",
+     *            format="int64"
+     *         )
+     *      ),
+     *      @OA\Parameter(
+     *         description="reaction type",
+     *         in="path",
+     *         name="reaction",
+     *         required=true,
+     *         example="up",
+     *         @OA\Schema(
+     *            type="string",
+     *            enum={"up", "down"}
+     *         )
+     *      ),
+     *      @OA\Response(response=200, description="Successful operation",),
+     *      @OA\Response(response=401, description="Unauthenticated",),
+     *      @OA\Response(response=403, description="Forbidden",),
+     *      @OA\Response(response=404, description="Not found",),
+     *)
+     */
+    public function react(Request $request, $id, $reaction) {
+        $reactions = ["up", "down"];
+        if (!in_array($reaction, $reactions)) {
+            abort(404);
+        }
+        $signalement = Signalement::find($id);
+        if ($signalement == null) {
+            abort(404);
+        }
+        $user_id = $request->user()->id;
+        if ($signalement->reactedBy->contains($user_id)) {
+            $current_reaction = $signalement->reactedBy()->where('users.id', $user_id)->first()->pivot;
+            if ($current_reaction->reaction_type == $reaction) {
+                $signalement->reactedBy()->detach($user_id);
+                return response()->json([
+                    'message' => 'reaction removed',
+                    'reaction' => null,
+                ]);
+            } else {
+                $signalement->reactedBy()->updateExistingPivot($user_id, ["reaction_type" => $reaction]);
+                return response()->json([
+                    'message' => 'reaction updated to '.$reaction,
+                    'reaction' => $reaction,
+                ]);
+            }
+        } else {
+            $signalement->reactedBy()->attach($user_id, ['reaction_type' => $reaction]);
+            return response()->json([
+                'message' => 'reaction added',
+                'reaction' => $reaction,
+            ]);
+        }
+    }
 }

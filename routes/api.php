@@ -39,11 +39,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('services', [SignalementController::class, "index"]);
     Route::get('priorities', [SignalementController::class, "index"]);
     Route::get('users', [SignalementController::class, "index"]);
+
     Route::get('signalement', [SignalementController::class, "index"]);
     Route::post('signalement', [SignalementController::class, "store"]);
     Route::get('signalement/{id}', [SignalementController::class, "show"]);
     Route::post('signalement/{id}', [SignalementController::class, "update"]);
     Route::delete('signalement/delete/{id}',[SignalementController::class,'delete']);
+
+    Route::post('signalement/{id}/{reaction}', [SignalementController::class, "react"]);
 
 });
 Route::get('annexe', [AnnexeController::class, "index"]);
