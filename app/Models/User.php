@@ -62,7 +62,7 @@ class User extends Authenticatable
      */
     public function savedSignalements()
     {
-        return $this->belongsToMany(Signalement::class, 'saved_signalements', 'user_id', 'signalement_id')
+        return $this->belongsToMany(Signalement::class, 'user_saved_signalement', 'user_id', 'signalement_id')
             ->withTimestamps();
     }
 
@@ -73,7 +73,7 @@ class User extends Authenticatable
      */
     public function reactedSignalements()
     {
-        return $this->belongsToMany(Signalement::class, 'signalement_reactions', 'user_id', 'signalement_id')
+        return $this->belongsToMany(Signalement::class, 'user_reaction_signalement', 'user_id', 'signalement_id')
         ->withPivot('reaction_type')
         ->withTimestamps();
     }

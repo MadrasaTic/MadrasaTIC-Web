@@ -46,8 +46,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('signalement/{id}', [SignalementController::class, "update"]);
     Route::delete('signalement/delete/{id}',[SignalementController::class,'delete']);
 
-    Route::post('signalement/{id}/{reaction}', [SignalementController::class, "react"]);
-
+    Route::post('signalement/{id}/react/{reaction}', [SignalementController::class, "react"]);
+    Route::post('signalement/{id}/save', [SignalementController::class, "save"]);
 });
 Route::get('annexe', [AnnexeController::class, "index"]);
 Route::post('annexe', [AnnexeController::class, "store"]);

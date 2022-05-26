@@ -228,7 +228,7 @@ class SignalementController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/signalement/{id}/{reaction}",
+     *      path="/signalement/{id}/react/{reaction}",
      *      operationId="signalementVoting",
      *      tags={"Signalement"},
      *      summary="Up/Down vote existing signalement",
@@ -312,6 +312,50 @@ class SignalementController extends Controller
             return response()->json([
                 'message' => 'reaction added',
                 'reaction' => $reaction,
+            ]);
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/signalement/{id}/save",
+     *      operationId="signalementSaving",
+     *      tags={"Signalement"},
+     *      summary="Save existing signalement",
+     *      description="Save existing signalement",
+     *      security={{"bearer_token":{}}},
+     *      @OA\Parameter(
+     *         description="ID of signalement",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         example="1",
+     *         @OA\Schema(
+     *            type="integer",
+     *            format="int64"
+     *         )
+     *      ),
+     *      @OA\Response(response=200, description="Successful operation",),
+     *      @OA\Response(response=401, description="Unauthenticated",),
+     *      @OA\Response(response=403, description="Forbidden",),
+     *      @OA\Response(response=404, description="Not found",),
+     *)
+     */
+    public function save(Request $request, $id) {
+        $signalement = Signalement::find($id);
+        if ($signalement == null) {
+            abort(404);
+        }
+        $user_id = $request->user()->id;
+        if ($signalement->savedBy->contains($user_id)) {
+            $signalement->savedBy()->detach($user_id);
+            return response()->json([
+                'message' => 'signalement unsaved',
+            ]);
+        } else {
+            $signalement->savedBy()->attach($user_id);
+            return response()->json([
+                'message' => 'signalement saved',
             ]);
         }
     }
