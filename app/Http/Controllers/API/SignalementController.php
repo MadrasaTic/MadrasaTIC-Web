@@ -28,8 +28,19 @@ class SignalementController extends Controller
      *      @OA\Response(response=403, description="Forbidden",),
      *     )
      */
-    public function index() {
-        return Signalement::with(['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC'])->get();
+    public function index(Request $request) {
+        $user_id = $request->user()->id;
+        $signalements = Signalement::with(['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC'])->get();
+        foreach ($signalements as $key => $value) {
+            $value->isSaved = ($value->isSaved()->where('users.id', $user_id)->first()) ? true : false;
+
+            if ($value->isReacted()->where('users.id', $user_id)->first()) {
+                $value->isReacted = $value->isReacted()->where('users.id', $user_id)->first()->pivot->reaction_type;
+            } else {
+                $value->isReacted = null;
+            }
+        }
+        return $signalements;
     }
 
     /**
@@ -121,9 +132,18 @@ class SignalementController extends Controller
      *      @OA\Response(response=403, description="Forbidden",),
      *)
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $user_id = $request->user()->id;
+
         $signalement = Signalement::findOrFail($id);
+
+        $signalement->isSaved = ($signalement->isSaved()->where('users.id', $user_id)->first()) ? true : false;
+        if ($signalement->isReacted()->where('users.id', $user_id)->first()) {
+            $signalement->isReacted = $signalement->isReacted()->where('users.id', $user_id)->first()->pivot->reaction_type;
+        } else {
+            $signalement->isReacted = null;
+        }
         return $signalement;
     }
 

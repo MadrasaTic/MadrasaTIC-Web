@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Auth;
 
 class Signalement extends BaseModel
 {
     use HasFactory;
     use SoftDeletes;
 
+    protected $user_id;
     protected $table = 'signalements';
 
     /**
@@ -112,5 +114,32 @@ class Signalement extends BaseModel
         return $this->belongsToMany(User::class, 'user_reaction_signalement', 'signalement_id', 'user_id')
             ->withPivot('reaction_type')
             ->withTimestamps();
+    }
+
+    /**
+     * The isSaved that belong to the Signalement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function isSaved()
+    {
+        $this->user_id = Auth::user()->id;
+        return $this->belongsToMany(User::class, 'user_saved_signalement', 'signalement_id', 'user_id')
+            ->where("user_id", $this->user_id)
+            ->withTimestamps();
+    }
+
+    /**
+     * The isReacted that belong to the Signalement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function isReacted()
+    {
+        $this->user_id = Auth::user()->id;
+        return $this->belongsToMany(User::class, 'user_reaction_signalement', 'signalement_id', 'user_id')
+            ->withPivot('reaction_type')
+            ->withTimestamps()
+            ->where("users.id", $this->user_id);
     }
 }
