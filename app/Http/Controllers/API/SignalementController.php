@@ -105,6 +105,13 @@ class SignalementController extends Controller
         $signalementVersionControl->updated_by = $request->user()->id;
         $signalementVersionControl->save();
 
+
+        $signalement->isSaved = ($signalement->isSaved()->where('users.id', $user_id)->first()) ? true : false;
+        if ($signalement->isReacted()->where('users.id', $user_id)->first()) {
+            $signalement->isReacted = $signalement->isReacted()->where('users.id', $user_id)->first()->pivot->reaction_type;
+        } else {
+            $signalement->isReacted = null;
+        }
         return $signalement;
     }
 
@@ -210,6 +217,13 @@ class SignalementController extends Controller
         }
         $signalement = Signalement::find($id)->load(['lastSignalementVC']);
 
+
+        $signalement->isSaved = ($signalement->isSaved()->where('users.id', $user_id)->first()) ? true : false;
+        if ($signalement->isReacted()->where('users.id', $user_id)->first()) {
+            $signalement->isReacted = $signalement->isReacted()->where('users.id', $user_id)->first()->pivot->reaction_type;
+        } else {
+            $signalement->isReacted = null;
+        }
         return $signalement;
     }
 
