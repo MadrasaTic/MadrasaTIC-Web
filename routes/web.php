@@ -19,12 +19,11 @@ use App\Http\Controllers\StateController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PrioritiesController;
-use App\Http\Controllers\SignalementsListController;
+use App\Http\Controllers\SignalmentsController;
 
 use App\Http\Controllers\Infrastructure\AnnexeController;
 use App\Http\Controllers\Infrastructure\BlocController;
 use App\Http\Controllers\Infrastructure\RoomController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,7 +44,6 @@ Route::get('google', function () {
 Route::get('/departments', function () {
     return view('departments');
 });
-
 
 Route::get('/signalmentsPriority', function () {
     return view('signalmentsPriority');
@@ -155,6 +153,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/signalmentsCategory/{id}',[CategoryController::class,'update']);
         Route::post('/signalmentsCategory/delete/{id}',[CategoryController::class,'delete']); 
 
+        Route::get('/signalments', [SignalmentsController::class, 'index']);
+        // Route::post('/signalments', [SignalmentsController::class, 'store']);
+        Route::get('/signalments/{id}/edit', [SignalmentsController::class, 'edit']);
+        Route::post('/signalments/{id}',[SignalmentsController::class,'update']);
+        // Route::post('/signalments/delete/{id}',[SignalmentsController::class,'delete']);
+
         Route::get('/create',[CheckController::class, 'create'])->name('create');
         Route::get('/indexx',[CheckController::class, 'index'])->name('indexx');
     });
@@ -169,9 +173,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::resource('/roles-assignment', RolesAssignmentController::class, ['as' => 'configure'])
             ->only(['index', 'edit', 'update']);
         });
-
-        Route::get('/signalments', [SignalementsListController::class, 'show']);
-        Route::get('/search', [SignalementsListController::class,'search']);
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
