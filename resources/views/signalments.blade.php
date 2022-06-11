@@ -55,35 +55,31 @@
                     </div>
                     <!-- Nav -->
                     <div class="d-flex p-0 align-items-center" id="signa--nav">
-                        <div class="col nav_filter nav_item--hoverd" data-type="aiguillés">Signalement Aiguillés</div>
-                        <div class="col nav_filter" data-type = "n-aiguillés">Signalement non Aiguillés</div>
+                        <div class="col nav_filter nav_item--hoverd">Signalement Aiguillés</div>
+                        <div class="col nav_filter">Signalement non Aiguillés</div>
                         <div class="col position-relative d-flex justify-content-end" id="signa_search--container">
                             <!-- Input -->
                             <div class="h-75 w-100" id="search_input--container">
-                                <form action="/search" method="get"  class="h-100 w-100">
-                                    <input type="text" name="search" class="px-3 h-100 w-100" id="search--input"
-                                                            placeholder="Rechercher ...">
+                                <form action="" class="h-100 w-100">
+                                    <input type="text" class="px-3 h-100 w-100" id="search--input"
+                                        placeholder="Rechercher ...">
                                 </form>
                             </div>
                             <!-- Icon -->
                             <div class=" me-2" id="search_icon--container">
                                 <i class="align-middle bi bi-search" id="search_icon"></i>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <!-- Filter -->
                     <div class="row mt-2 m-0">
                         <select class="col py-2 m-2" name="" id="category--select">
-                            <option value="reset" selected>Catégories</option>
-                          @foreach($categories as $category)
-                            <option value="{{$category->id}}" >{{$category->name}}</option>
-                          @endforeach 
+                            <option value="" selected>Catégorie</option>
+                            <option value="" selected>Catégorie</option>
                         </select>
                         <select class="col py-2 m-2" name="" id="state--select">
-                          <option value="reset" selected>États</option>
-                          @foreach($states as $state)
-                            <option value="{{$state->id}}">{{$state->name}}</option>
-                          @endforeach
+                            <option value="" selected>État</option>
+                            <option value="" selected>État</option>
                         </select>
                         <button class="btn col py-2 m-2 text-start" id="infra_filter--button">Infrastructure</button>
                         <input class="col py-2 m-2" type="date" placeholder="Date" id="date_range--input">
@@ -91,50 +87,45 @@
                     <!-- Infra -->
                     <div class="row m-0 d-none animate__animated  animate__fadeIn" id="infra-filters--container">
                         <select class="col py-2 m-2" id="annexe--select">
-                          <option value="reset" selected>Annexes</option>
                         </select>
                         <select class="col py-2 m-2" name="" id="bloc--select">
-                          <option value="reset" selected>Blocs</option>
                         </select>
                         <select class="col py-2 m-2" name="" id="room--select">
-                          <option value="reset" selected>Salles</option>
-
                         </select>
                     </div>
 
                     <!-- Cards -->
-                    
+                    @foreach ($signalments as $signalment)
                     <div class="mt-4" id="signa_cards--container">
-                        <div class="row m-0" id="signa--cards"> 
-                        @foreach($signals as $signal)
-                            <div class="cardDiv col-xl-6 col-md-12 px-3 py-3" data-category = "{{$signal->category['name'] ?? '/'}}" data-state="{{$signal->state['name']}}" data-annexe = "{{ $signal->signalement->annexe->name ?? '/'}}" data-bloc = "{{$signal->signalement->bloc->name ?? '/'}}" data-room = "{{$signal->signalement->room->name ?? '/'}}" data-date = "{{$signal->signalement->created_at}}" >
+                        <div class="row m-0" id="signa--cards">
+                            <div class="col-xl-6 col-md-12 px-3 py-3">
                                 <!-- Card  -->
-                                <div class="card border h-100 w-100 rounded-6" >
-                                    <img src="{{asset('/images/signalements/'.$signal['attachement'])}}"
-                                        class="img-fluid card-img-top h-50 rounded-6" alt="...">
+                                <div class="card border h-100 w-100 rounded-6">
+                                    <img src="https://picsum.photos/600/600"
+                                        class="img-fluid card-img-top h-50 rounded-6" alt="Image du signalement">
                                     <div class="card-body h-50">
                                         <div class="card-description d-flex align-items-center text-secondary">
-                                            <p class="me-auto my-auto  fw-bold" >{{$signal->category['name'] ?? '/'}}</p>
+                                            <p class="me-auto my-auto fw-bold">{{ $signalment->category['name'] }}</p>
                                             <span class="d-flex px-1 rounded-6" id="state--container">
-                                                <div class="my-auto me-1 color--icon" id="color--icon" data-color="{{$signal->state['color']}}"></div>
-                                                <span class="fw-500">{{$signal->state['name']}}</span>
+                                                <div class="my-auto me-1" id="color--icon"></div>
+                                                <span class="fw-500">{{ $signalment->state['name'] }}</span>
                                             </span>
                                         </div>
-                                        <h5 class="card-title fw-bold" >{{ $signal->signalement['title'] ?? '/' }}</h5>
-                                        <p class="card-text">{{ $signal->signalement['description'] ?? '/' }} 
-                                        <br> {{ $signal->signalement->annexe->name ?? '/'}} | {{$signal->signalement->bloc->name ?? '/'}} | {{$signal->signalement->room->name ?? '/'}} 
-                                        <br>{{$signal->signalement->created_at}}</p>
+                                        <h5 class="card-title fw-bold">{{ $signalment->signalement['title'] }}</h5>
+                                        <p class="card-text">{{ $signalment->signalement['description'] }}</p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
-                                            <a href="#" class="btn btn-primary" id="show_modal--button">Détails</a>
+                                            <a href="{{ '#'.$signalment['id'] }}" class="btn btn-primary" id="show_modal--button">Détails</a>
                                         </div>
                                     </div>
-                                </div>    
+                                </div>
                             </div>
-                        @endforeach
+                            <div class="col-xl-6 col-md-12"></div>
+                            <div class="col-xl-6 col-md-12"></div>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div> <!-- Middle End-->
 
             <!-- Show Signalments Modal -->
@@ -168,16 +159,11 @@
         flatpickr("#date_range--input", {
             mode: "range",
             enableTime: true,
-            dateFormat: "Y-m-d",
+            dateFormat: "d.m.Y",
             onChange: function(selectedDates, dateStr, instance) {
                 const dates = dateStr.split(" to ");
                 if (dates.length == 1) return;
-                //
-                const startDateTAB = dates[0]
-                const date1 = new Date(startDateTAB)
-                const dd = Date.parse(date1).toString("YY-MM-DD");
-                console.log(dd)
-                // First Display ALL Cards
+                console.log(dates);
             }
         });
 

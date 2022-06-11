@@ -21,7 +21,7 @@ class SignalmentsView {
             e.target.classList.add("nav_item--hoverd");
 
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-         
+        
             //
             allCards.forEach(card => card.classList.remove("d-none"))
 
@@ -72,8 +72,21 @@ class SignalmentsView {
     }
 
     addHandlerApproveSignalmentBtn() {
-        document.querySelector("#approve_signalment--button").addEventListener("click", () => {
+        document.querySelector("#approve_signalment--button").addEventListener("click", (e) => {
             console.log("Signalements Approved");
+            // const form = e.target.closest("form");
+            // form.method = "POST";
+            // form.action = "/signalements/delete/id"
+
+            const form = e.target.closest("form");
+
+
+            form.action = `/signalments/${form.dataset.id}`
+            
+
+            e.target.closest("button").click();
+            
+            
         })
     }
 
@@ -84,8 +97,18 @@ class SignalmentsView {
     }
 
     addHandlerDeleteSignalmentBtn() {
-        document.querySelector("#delete_signalment--button").addEventListener("click", () => {
+        document.querySelector("#delete_signalment--button").addEventListener("click", (e) => {
             console.log("Signalment Delete");
+            const form = e.target.closest("form");
+            
+
+            form.action = `/signalments/delete/${form.dataset.id}`
+
+            console.log(form.action)
+
+            e.target.closest("button").click();
+
+
         })
     }
 
