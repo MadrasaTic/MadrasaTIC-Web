@@ -45,8 +45,9 @@
                         <p class="fw-bold mb-0 mt-3 text-end">Signalé par : <span class="fw-normal">{{ $signalment->signalement->creator['name'] }}</span></p>
                     </div>
                     <div class="mt-3">
-                        <button class="btn btn-secondary w-100 fw-500" id="showRattachedTo--button"><i class="fa-solid fa-link me-2"></i>Rattacher à
+                        <button class="btn d-none btn-secondary w-100 fw-500" id="showRattachedTo--button"><i class="fa-solid fa-link me-2"></i>Rattacher à
                             un autre Signalement</button>
+                        <input class=" w-100 fw-500" name="file1" type="file" accept="application/pdf">
                     </div>
                 </div>
                 <!-- Modal Footer -->
