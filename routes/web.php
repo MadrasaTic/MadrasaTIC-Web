@@ -161,7 +161,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         // Route::post('/signalments', [SignalmentsController::class, 'store']);
         Route::get('/signalments/{id}/edit', [SignalmentsController::class, 'edit']);
         Route::post('/signalments/{id}',[SignalmentsController::class,'update']);
-        // Route::post('/signalments/delete/{id}',[SignalmentsController::class,'delete']);
+        Route::post('/signalments/delete/{id}',[SignalmentsController::class,'delete']);
 
         Route::get('/create',[CheckController::class, 'create'])->name('create');
         Route::get('/indexx',[CheckController::class, 'index'])->name('indexx');

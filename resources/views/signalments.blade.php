@@ -96,6 +96,7 @@
 
                     <!-- Cards -->
                     @foreach ($signalments as $signalment)
+                    @if($signalment->signalement['published'] == '1')
                     <div class="mt-4" id="signa_cards--container">
                         <div class="row m-0" id="signa--cards">
                             <div class="col-xl-6 col-md-12 px-3 py-3">
@@ -125,6 +126,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 @endforeach
             </div> <!-- Middle End-->
 

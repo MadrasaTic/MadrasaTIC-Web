@@ -85,9 +85,19 @@ class SignalmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate(request(), [
+       'file1' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
+        ]);
+
         $signalment = SignalementVersionControl::findOrFail($id);
-        dd($request, $id);
-        return view('signalments', compact('signalment'));
+        $signalment['category_id'] = $request['category'];
+        $signalment['state_id'] = $request['state'];
+        $filename = $id."-".$request['file1']->getClientOriginalName();
+        $signalment['file_path'] = $filename;
+        $request->file1->storeAs('public/files', $filename);
+        $signalment->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -96,8 +106,12 @@ class SignalmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $signalment = SignalementVersionControl::findOrFail($id);
+        $signalment->signalement['published'] = 0;
+        $signalment->signalement->save();
+
+        return redirect()->back();
     }
 }
