@@ -1,4 +1,4 @@
-<form class="row" id="modal_update--form" method="GET" action="/signalments" data-id="{{ $signalment['id'] }}">
+<form class="row" id="modal_update--form" method="POST" action="/signalments" data-id="{{ $signalment['id'] }}" enctype="multipart/form-data">
     @csrf
 <div class="d-none animate__animated animate__fadeIn modal_bg--default" id="modal_signalments">
     <div class="modal-dialog modal-lg modal-dialog-centered animate__animated animate__fadeIn">
@@ -30,10 +30,15 @@
                         </select>
                         <!-- Select End -->
                         <div class="d-flex align-content-center">
-                            <span class="d-flex my-auto px-2 rounded-6" id="modalState--container">
+                            <!-- <span class="d-flex my-auto px-2 rounded-6" id="modalState--container">
                                 <div class="my-auto me-1" id="color--icon"></div>
                                 <span class="fw-500">{{ $signalment->state['name'] }}</span>
-                            </span>
+                            </span> -->
+                            <select class="d-flex my-auto py-3 px-4" name="state" id="modalState--select">
+                            @foreach($states as $state)
+                                <option value="{{ $state['id'] }}">{{ $state['name'] }}</option>
+                            @endforeach
+                        </select>
                         </div>
                     </div>
                     <div class="rounded-5" id="modal_image--container" style="height: 50vh">
