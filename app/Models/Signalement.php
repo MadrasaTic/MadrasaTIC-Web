@@ -5,13 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Auth;
 
 class Signalement extends BaseModel
 {
     use HasFactory;
     use SoftDeletes;
 
+    protected $user_id;
     protected $table = 'signalements';
+
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC'];
+
 
     /**
      * Get all of the signalementVersionControl for the Signalement
@@ -30,7 +40,7 @@ class Signalement extends BaseModel
      */
     public function lastSignalementVC()
     {
-        return $this->hasOne(SignalementVersionControl::class);
+        return $this->hasOne(SignalementVersionControl::class)->latestOfMany();
     }
 
     /**
@@ -90,7 +100,7 @@ class Signalement extends BaseModel
      */
     public function savedBy()
     {
-        return $this->belongsToMany(User::class, 'saved_signalements', 'signalement_id', 'user_id')
+        return $this->belongsToMany(User::class, 'user_saved_signalement', 'signalement_id', 'user_id')
             ->withTimestamps();
     }
 
@@ -101,8 +111,35 @@ class Signalement extends BaseModel
      */
     public function reactedBy()
     {
-        return $this->belongsToMany(User::class, 'signalement_reactions', 'signalement_id', 'user_id')
+        return $this->belongsToMany(User::class, 'user_reaction_signalement', 'signalement_id', 'user_id')
             ->withPivot('reaction_type')
             ->withTimestamps();
+    }
+
+    /**
+     * The isSaved that belong to the Signalement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function isSaved()
+    {
+        $this->user_id = Auth::user()->id;
+        return $this->belongsToMany(User::class, 'user_saved_signalement', 'signalement_id', 'user_id')
+            ->where("user_id", $this->user_id)
+            ->withTimestamps();
+    }
+
+    /**
+     * The isReacted that belong to the Signalement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function isReacted()
+    {
+        $this->user_id = Auth::user()->id;
+        return $this->belongsToMany(User::class, 'user_reaction_signalement', 'signalement_id', 'user_id')
+            ->withPivot('reaction_type')
+            ->withTimestamps()
+            ->where("users.id", $this->user_id);
     }
 }

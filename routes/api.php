@@ -2,7 +2,15 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\API\AuthAPIController;
+use App\Http\Controllers\API\SignalementController;
+
+use App\Http\Controllers\API\AnnexeController;
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\InfrastructureController;
+use App\Http\Controllers\API\UserController;
+
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +32,35 @@ Route::get('/auth/{provider}/callback', [AuthAPIController::class,'handleProvide
 
 Route::post('requestToken', [AuthAPIController::class, 'requestToken']);
 Route::post('requestTokenGoogle', [AuthAPIController::class, 'requestTokenGoogle']);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('states', [SignalementController::class, "index"]);
+    Route::get('categories', [SignalementController::class, "index"]);
+    Route::get('infrastructure', [SignalementController::class, "index"]);
+    Route::get('services', [SignalementController::class, "index"]);
+    Route::get('priorities', [SignalementController::class, "index"]);
+    Route::get('users', [SignalementController::class, "index"]);
+
+    Route::get('signalement', [SignalementController::class, "index"]);
+    Route::post('signalement', [SignalementController::class, "store"]);
+    Route::get('signalement/{id}', [SignalementController::class, "show"]);
+    Route::post('signalement/{id}', [SignalementController::class, "update"]);
+    Route::delete('signalement/delete/{id}',[SignalementController::class,'delete']);
+
+    Route::post('signalement/{id}/react/{reaction}', [SignalementController::class, "react"]);
+    Route::post('signalement/{id}/save', [SignalementController::class, "save"]);
+
+    Route::get('user/saved', [UserController::class, "saved"]);
+    Route::get('user/upvoted', [UserController::class, "upvoted"]);
+    Route::get('user/downvoted', [UserController::class, "downvoted"]);
+});
+Route::get('annexe', [AnnexeController::class, "index"]);
+Route::post('annexe', [AnnexeController::class, "store"]);
+Route::get('annexe/{id}', [AnnexeController::class, "show"]);
+
+Route::get('category', [CategoryController::class, "index"]);
+Route::get('infrastructure', [InfrastructureController::class, "index"]);
+
+Route::fallback(function () {
+    return response()->json(['error' => 'Not Found!'], 404);
+});

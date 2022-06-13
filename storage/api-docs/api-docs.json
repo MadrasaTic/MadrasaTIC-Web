@@ -1,0 +1,507 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "MadrasaTic API Documentation",
+        "description": "MadrasaTic API Documentation built with L5 Swagger OpenApi",
+        "contact": {
+            "email": "contact@madrasatic.tech"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api/",
+            "description": "API server"
+        }
+    ],
+    "paths": {
+        "/annexe": {
+            "get": {
+                "tags": [
+                    "Annexe"
+                ],
+                "summary": "Get list of annexes",
+                "description": "Returns list of annexes",
+                "operationId": "annexeIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Annexe"
+                ],
+                "summary": "Create new annexe",
+                "description": "Create new annexe",
+                "operationId": "annexeStore",
+                "requestBody": {
+                    "request": "Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/annexe/{id}": {
+            "get": {
+                "tags": [
+                    "Annexe"
+                ],
+                "summary": "Get details of annexe",
+                "description": "Returns annexe object",
+                "operationId": "annexeShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of annexe",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/category": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Get list of categories",
+                "description": "Returns list of categories",
+                "operationId": "categoryIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/infrastructure": {
+            "get": {
+                "tags": [
+                    "Infrastructure"
+                ],
+                "summary": "Get the infrastructure",
+                "description": "Returns all the infrastructure available",
+                "operationId": "infrastructureIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/signalement": {
+            "get": {
+                "tags": [
+                    "Signalement"
+                ],
+                "summary": "Get list of signalements",
+                "description": "Returns list of signalements",
+                "operationId": "signalementIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Signalement"
+                ],
+                "summary": "Create new signalement",
+                "description": "Create new signalement",
+                "operationId": "signalementStore",
+                "requestBody": {
+                    "request": "Request",
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "annexe_id",
+                                    "infrastructure_type",
+                                    "published",
+                                    "category_id",
+                                    "attachement"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "annexe_id": {
+                                        "type": "string"
+                                    },
+                                    "bloc_id": {
+                                        "type": "string"
+                                    },
+                                    "room_id": {
+                                        "type": "string"
+                                    },
+                                    "infrastructure_type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "annexe",
+                                            "bloc",
+                                            "room"
+                                        ]
+                                    },
+                                    "published": {
+                                        "type": "integer"
+                                    },
+                                    "category_id": {
+                                        "type": "string"
+                                    },
+                                    "attachement": {
+                                        "description": "file to upload",
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/signalement/{id}": {
+            "get": {
+                "tags": [
+                    "Signalement"
+                ],
+                "summary": "Show existing signalement",
+                "description": "Show existing signalement",
+                "operationId": "signalementShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Signalement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Signalement"
+                ],
+                "summary": "Update existing signalement",
+                "description": "Update existing signalement",
+                "operationId": "signalementUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of annexe",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "request": "Request",
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "published": {
+                                        "type": "string"
+                                    },
+                                    "category_id": {
+                                        "type": "string"
+                                    },
+                                    "attachement": {
+                                        "description": "file to upload",
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/signalement/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Signalement"
+                ],
+                "summary": "Delete existing signalement",
+                "description": "Delete existing signalement",
+                "operationId": "signalementDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Signalement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/signalement/{id}/{reaction}": {
+            "post": {
+                "tags": [
+                    "Signalement"
+                ],
+                "summary": "Upvote existing signalement",
+                "description": "Upvote existing signalement",
+                "operationId": "signalementUpvote",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of annexe",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "reaction",
+                        "in": "path",
+                        "description": "reaction type",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "up",
+                                "down"
+                            ]
+                        },
+                        "example": "up"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BaseModel": {
+                "properties": {
+                    "created_at": {
+                        "description": "Initial creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    },
+                    "deleted_at": {
+                        "description": "Soft delete timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Signalement",
+            "description": "API Endpoints of Signalements"
+        },
+        {
+            "name": "Annexe",
+            "description": "API Endpoints of Annexes"
+        },
+        {
+            "name": "Category",
+            "description": "API Endpoints of Categories"
+        },
+        {
+            "name": "Infrastructure",
+            "description": "API Endpoints of Infrastructures"
+        }
+    ]
+}
