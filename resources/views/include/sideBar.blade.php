@@ -37,73 +37,79 @@
                 <!-- Head -->
                 <h3 class="text-primary ms-2 mb-2 h3">Menu</h3>
                 <!-- Item -->
-                <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="{{ route("signalements")}}">
+                <a class="link" href="{{ route("signalements")}}">
+                    <div name="" class="@if(Route::current()->getName() == "signalements") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-warning py-3 px-1 ms-3"></i>
                         <span class="me-1">Signalement</span>
-                    </a>
-                </div>
+                    </div>
+                </a>
                 <!-- Item -->
-                <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="#">
+                <a class="link" href="#">
+                    <div name="" class="@if(Route::current()->getName() == "annonces") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-bullhorn py-3 px-1 ms-3"></i>
                         <span class="me-1">Annonce</span>
-                    </a>
-                </div>
-                <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="{{ route("infrastructure") }}">
+                    </div>
+                </a>
+                <a class="link" href="{{ route("infrastructure") }}">
+                    <div name="" class="@if(Route::current()->getName() == "infrastructure") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-building py-3 px-1 ms-3"></i>
                         <span class="me-1">Infrastructure</span>
-                    </a>
-                </div>
-                <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="#">
+                    </div>
+                </a>
+                {{-- <a class="link" href="#">
+                    <div name="" class="@if(Route::current()->getName() == "saved") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-save py-3 px-1 ms-3"></i>
                         <span class="me-1">Enregistré</span>
-                    </a>
-                </div>
-                <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="{{ route("infrastructure") }}">
+                    </div>
+                </a> --}}
+                <a class="link" href="{{ route("departments") }}">
+                    <div name="" class="@if(Route::current()->getName() == "departments") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-cog py-3 px-1 ms-3"></i>
                         <span class="me-1">Services</span>
-                    </a>
-                </div>
-                <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="{{ route("signalmentsCategory") }}">
+                    </div>
+                </a>
+                <a class="link" href="{{ route("signalmentsCategory") }}">
+                    <div name="" class="@if(Route::current()->getName() == "signalmentsCategory") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-list py-3 px-1 ms-3"></i>
                         <span class="me-1">Catégories</span>
-                    </a>
-                </div>
-                <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="{{ route("signalmentsState") }}">
+                    </div>
+                </a>
+                <a class="link" href="{{ route("signalmentsState") }}">
+                    <div name="" class="@if(Route::current()->getName() == "signalmentsState") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-flag py-3 px-1 ms-3"></i>
                         <span class="me-1">États</span>
-                    </a>
-                </div>
-                <div name="" class="sideBar--item  h-auto w-100 fs-4">
-                    <a class="link" href="{{ route("members")}}">
+                    </div>
+                </a>
+                <a class="link" href="{{ route("signalmentsPriority") }}">
+                    <div name="" class="@if(Route::current()->getName() == "signalmentsPriority") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
+                        <i class="fa-solid fa-level-up py-3 px-1 ms-3"></i>
+                        <span class="me-1">Priorités</span>
+                    </div>
+                </a>
+                <a class="link" href="{{ route("members")}}">
+                    <div name="" class="@if(Route::current()->getName() == "members") sideBar_item--selected @endif sideBar--item  h-auto w-100 fs-4">
                         <i class="fa-solid fa-users py-3 px-1 ms-3"></i>
                         <span class="me-1">Membres</span>
-                    </a>
-                </div>
-                <div name="" class="sideBar--item  h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="{{ route("roles")}}">
+                    </div>
+                </a>
+                <a class="link" href="{{ route("roles")}}">
+                    <div name="" class="@if(Route::current()->getName() == "roles") sideBar_item--selected @endif sideBar--item  h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-key py-3 px-1 ms-3"></i>
                         <span class="me-1">Roles</span>
-                    </a>
-                </div>
-                <div name="" class="sideBar--item  h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="{{ route("permissions")}}">
+                    </div>
+                </a>
+                <a class="link" href="{{ route("permissions")}}">
+                    <div name="" class="@if(Route::current()->getName() == "permissions") sideBar_item--selected @endif sideBar--item  h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-regular fa-star py-3 px-1 ms-3"></i>
                         <span class="me-1">Permissions</span>
-                    </a>
-                </div>
-                <div name="" class="sideBar--item  h-auto w-100 fs-4">
-                    <a class="link" href="{{ route("profile")}}">
+                    </div>
+                </a>
+                <a class="link" href="{{ route("profile")}}">
+                    <div name="" class="@if(Route::current()->getName() == "profile") sideBar_item--selected @endif sideBar--item  h-auto w-100 fs-4">
                         <i class="fa-solid fa-user py-3 px-1 ms-3"></i>
                         <span class="me-1">Mon Profil</span>
-                    </a>
-                </div>
+                    </div>
+                </a>
 
             </div>
     </div>

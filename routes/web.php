@@ -107,6 +107,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/permissions/{id}',[PermissionsController::class,'update']);
         Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);
 
+        Route::get('/departments', [ServicesController::class, 'show'])->name('departments');
+        Route::post('/departments',[ServicesController::class, 'Add']);
+        Route::get('/departments/{id}/edit',[ServicesController::class,'edit']);
+        Route::post('/departments/{id}',[ServicesController::class,'update']);
+        Route::post('/departments/delete/{id}',[ServicesController::class,'delete']);
+
         Route::get('/infrastructure', function () {
             return view('infrastructure');
         })->name("infrastructure");
@@ -151,6 +157,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::post('/signalmentsCategory/{id}','update');
             Route::post('/signalmentsCategory/delete/{id}','delete');
         });
+
+        Route::get('/signalmentsPriority', [PrioritiesController::class, 'show'])->name("signalmentsPriority");
+        Route::post('/signalmentsPriority',[PrioritiesController::class, 'Add']);
+        Route::get('/signalmentsPriority/{id}/edit',[PrioritiesController::class,'edit']);
+        Route::post('/signalmentsPriority/{id}',[PrioritiesController::class,'update']);
+        Route::post('/signalmentsPriority/delete/{id}',[PrioritiesController::class,'delete']);
+
         // Route::resource('/signalmentsState', StateController::class);
         // Route::post('/signalmentsState/{id}',[StateController::class,'update']);
         // Route::post('/signalmentsState/delete/{id}',[StateController::class,'delete']);
@@ -196,17 +209,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);
 
 // Service Routes
-Route::get('/departments', [ServicesController::class, 'show']);
-Route::post('/departments',[ServicesController::class, 'Add']);
-Route::get('/departments/{id}/edit',[ServicesController::class,'edit']);
-Route::post('/departments/{id}',[ServicesController::class,'update']);
-Route::post('/departments/delete/{id}',[ServicesController::class,'delete']);
 
 
 
 // Priority Route
-Route::get('/signalmentsPriority', [PrioritiesController::class, 'show']);
-Route::post('/signalmentsPriority',[PrioritiesController::class, 'Add']);
-Route::get('/signalmentsPriority/{id}/edit',[PrioritiesController::class,'edit']);
-Route::post('/signalmentsPriority/{id}',[PrioritiesController::class,'update']);
-Route::post('/signalmentsPriority/delete/{id}',[PrioritiesController::class,'delete']);
