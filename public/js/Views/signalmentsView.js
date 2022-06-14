@@ -311,9 +311,9 @@ class SignalmentsView {
     }
 
     addHandlerModalState() {
-        document.querySelector("#modalState--container").addEventListener("click", () => {
-            console.log("Modal state change");
-        })
+        // document.querySelector("#modalState--container").addEventListener("click", () => {
+            // console.log("Modal state change");
+        // })
     }
 
 

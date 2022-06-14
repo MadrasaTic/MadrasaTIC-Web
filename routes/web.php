@@ -57,6 +57,10 @@ Route::get('/signalmentsRapport', function () {
     return view('signalmentsRapport');
 });
 
+Route::get('/annonces', function () {
+    return view('annonces');
+});
+
 // Route::get('/permissions', function () {
 //     return view('permissions');
 // });

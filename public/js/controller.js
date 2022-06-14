@@ -6,8 +6,10 @@ import tablesView from "./Views/tablesView.js";
 import sideBarView from "./Views/sideBarView.js";
 import infraView from "./Views/infraView.js";
 import signalmentsView from "./Views/signalmentsView.js";
+import annoncesView from "./Views/annoncesView.js"
 // Models
 import * as signalmentsModal from "./Modals/signalmentsModal.js";
+
 
 // Signalements
 function controlSignalements () {
@@ -23,6 +25,7 @@ async function controlInfra(type, url) {
 
 
 if ((window.location.pathname.slice(1) == "signalments")) {
+    console.log("Signalement");
 
     function init() {
         signalmentsView.addHandlerRender(controlSignalements);
@@ -49,6 +52,39 @@ if ((window.location.pathname.slice(1) == "signalments")) {
         signalmentsView.adHandlerSalleChange();
     }
     init();
+}
+
+
+if ((window.location.pathname.slice(1) == "annonces")) {
+    console.log("Annonces");
+
+    function init() {
+        annoncesView.addHandlerRender(controlSignalements);
+        annoncesView.addHandlerParentFilterChange();
+        annoncesView.addHandlerInfraFilters();
+        annoncesView.addHandlerShowModalBtn();
+        annoncesView.addHandlerCloseModal();
+        annoncesView.addHandlerApproveSignalmentBtn();
+        annoncesView.addHandlerResendSignalmentsBtn();
+        annoncesView.addHandlerDeleteSignalmentBtn();
+        annoncesView.addHandlerShowRattachedToBody();
+        annoncesView.addHandlerRattachedToBackBtn();
+        annoncesView.addHandlerRattachedToSubmitBtn();
+        annoncesView.addHandlerCloseRattachedToBtn();
+        // Modal
+        annoncesView.addHandlerModalState();
+        annoncesView.addHandlerModalCategoryChange();
+        // Selects
+        annoncesView.addHandlerCategoryChange();
+        annoncesView.addHandlerStateChange();
+        annoncesView.addHandlerLoadAnnexe(controlInfra, "annexe", '/infrastructure/annexe');
+        annoncesView.addHandlerAnnexeChange(controlInfra, "bloc", '/infrastructure/bloc/listing/' );
+        annoncesView.addHandlerBlocChange(controlInfra, "room", '/infrastructure/room/listing/');
+        annoncesView.adHandlerSalleChange();
+    }
+
+    init();
+
 }
 
 // 
