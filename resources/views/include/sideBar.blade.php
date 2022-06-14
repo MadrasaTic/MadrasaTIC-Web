@@ -3,21 +3,36 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 
-<style> 
+<style>
 </style>
 
 
 <div class="col-md-2 position-relative" id="sidebar--container">
-    <div class="position-absolute d-flex align-items-center w-100 mt-6" id="sideBar--header">
+    <div class="position-relative d-flex align-items-center w-100 mt-5" id="sideBar--header">
         <div class="h-100 d-flex align-items-center mx-2" id="SBprofile-picture">
-            <img class="rounded-circle img-fluid" src="https://picsum.photos/id/237/200/300" alt="img">
+            <div class="rounded-circle bg-secondary" id="profile-picture">
+                @if (Auth::user()->userInformation->avatar_path != "")
+            <img
+                class="rounded-circle img-fluid"
+                src="{{ asset('/storage/images/' . Auth::user()->userInformation->avatar_path) }}"
+                alt="img"/>
+            @else
+            <div
+                class="rounded-circle img-fluid"
+                style="
+                    height: 75px;
+                    width: 75px;
+                "></div>
+            </div>
+            @endif
+
         </div>
         <div class="h-100 d-flex flex-column align-items-center justify-content-center">
-            <h3 class="text-primary fw-bold fs-5 ">BAGHDADLI<span class="fw-normal"> Yacine</span></h3>
-            <p class="fs-6 fw-normal m-0">my.baghdadli@esi-sba.dz</p>
+            <h3 class="text-primary fw-bold fs-5 ">{{ Auth::user()->userInformation->last_name }}<span class="fw-normal"> {{ Auth::user()->userInformation->first_name }}</span></h3>
+            <p class="fs-6 fw-normal m-0">{{ Auth::user()->email }}</p>
         </div>
     </div>
-    <div class="position-relative d-flex align-items-center justify-content-center" id="sidebar--top">
+    <div class="position-relative d-flex align-items-center justify-content-center mt-5" id="sidebar--top">
             <div class="h-auto w-100" id="sidebar_items--container">
                 <!-- Head -->
                 <h3 class="text-primary ms-2 mb-2 h3">Menu</h3>
