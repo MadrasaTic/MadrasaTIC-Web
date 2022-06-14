@@ -7,10 +7,18 @@ class SignalmentsView {
     #selectedAnnexe = "Annexes";
     #selectedBloc = "Blocs";
     #selectedRoom = "Salles";
-    #selectedParentFilter = ""
+    #selectedParentFilter = "aiguillés";
 
     addHandlerRender(handler) {
         if (window.location.pathname.slice(1) == "signalments") handler();
+    }
+
+    addHanlderApplyStateColors() {
+        window.addEventListener("load", () => {
+            document.querySelectorAll(".color--icon").forEach(color => {
+                color.style.backgroundColor = color.dataset.color
+            })
+        })
     }
 
     addHandlerParentFilterChange() {
@@ -19,37 +27,25 @@ class SignalmentsView {
             if (e.target.classList.contains("nav_item--hoverd")) return;
             document.querySelector(".nav_item--hoverd").classList.remove("nav_item--hoverd");
             e.target.classList.add("nav_item--hoverd");
-
-            let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-
             //
-            allCards.forEach(card => card.classList.remove("d-none"))
-
+            let allCards = Array.from(document.querySelectorAll(".cardDiv"))
+            allCards.forEach(card => card.classList.remove("d-none"));
             this.#selectedParentFilter = e.target.dataset.type;
-            let notMatchCardTAB  = ""
+            let notMatchCardTAB = ""
+            this.#selectedParentFilter = e.target.dataset.type;
             if (e.target.dataset.type == "aiguillés") {
-                notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
+                notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
             } else {
-                notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state != "Non Traité");
-
+                notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state != "Non Traité");
             }
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
         window.addEventListener("load", (e) => {
-
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-
             //
             allCards.forEach(card => card.classList.remove("d-none"))
-
-
-            let notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
-
+            let notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
-
-            document.querySelectorAll(".color--icon").forEach(color => {
-                color.style.backgroundColor = color.dataset.color
-            })
         })
     }
 
@@ -75,18 +71,8 @@ class SignalmentsView {
         document.querySelector("#approve_signalment--button").addEventListener("click", (e) => {
             console.log("Signalements Approved");
             // const form = e.target.closest("form");
-            // form.method = "POST";
-            // form.action = "/signalements/delete/id"
-
-            const form = e.target.closest("form");
-
-
-            form.action = `/signalments/${form.dataset.id}`
-
-
-            e.target.closest("button").click();
-
-
+            // form.action = `/signalments/${form.dataset.id}`
+            // e.target.closest("button").click();
         })
     }
 
@@ -99,16 +85,10 @@ class SignalmentsView {
     addHandlerDeleteSignalmentBtn() {
         document.querySelector("#delete_signalment--button").addEventListener("click", (e) => {
             console.log("Signalment Delete");
-            const form = e.target.closest("form");
-
-
-            form.action = `/signalments/delete/${form.dataset.id}`
-
-            console.log(form.action)
-
-            e.target.closest("button").click();
-
-
+            // const form = e.target.closest("form");
+            // form.action = `/signalments/delete/${form.dataset.id}`
+            // console.log(form.action)
+            // e.target.closest("button").click();
         })
     }
 
@@ -157,37 +137,39 @@ class SignalmentsView {
             this.#selectedAnnexe = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
-
             //
             allCards.forEach(card => card.classList.remove("d-none"))
             // If Categories Reset
             if (this.#selectedAnnexe == "Annexes") return;
             // First Cards not Match Condition
-            const notMatchCardTAB  = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.annexe && card.dataset.annexe != selectedOption.text);
+            const notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.annexe && card.dataset.annexe != selectedOption.text);
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
-       annexeSelect.addEventListener("click", () => {
-           const selectedOption = annexeSelect.options[annexeSelect.selectedIndex];
-           if (!selectedOption) return
-           const blocsUrl = url + selectedOption.value
-           handler(type, blocsUrl)
-           // Filtrage Code
-           this.#selectedAnnexe = selectedOption.text;
-           // First Display ALL Cards
-           let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-           if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
-           if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
-
-           //
-           allCards.forEach(card => card.classList.remove("d-none"))
-           // If Categories Reset
-           if (this.#selectedAnnexe == "Annexes") return;
-           // First Cards not Match Condition
-           const notMatchCardTAB  = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.annexe && card.dataset.annexe != selectedOption.text);
-           notMatchCardTAB.forEach(card => card.classList.add("d-none"));
-       })
+        annexeSelect.addEventListener("click", () => {
+            const selectedOption = annexeSelect.options[annexeSelect.selectedIndex];
+            if (!selectedOption) return
+            const blocsUrl = url + selectedOption.value
+            handler(type, blocsUrl)
+            // Filtrage Code
+            this.#selectedAnnexe = selectedOption.text;
+            // First Display ALL Cards
+            let allCards = Array.from(document.querySelectorAll(".cardDiv"));
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
+            if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
+            if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
+            //
+            allCards.forEach(card => card.classList.remove("d-none"))
+            // If Categories Reset
+            if (this.#selectedAnnexe == "Cites") return;
+            // First Cards not Match Condition
+            const notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.annexe && card.dataset.annexe != selectedOption.text);
+            notMatchCardTAB.forEach(card => card.classList.add("d-none"));
+        })
 
 
     }
@@ -203,6 +185,30 @@ class SignalmentsView {
             this.#selectedBloc = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
+            if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
+            if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
+            allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
+            //
+            allCards.forEach(card => card.classList.remove("d-none"))
+            // If Categories Reset
+            if (this.#selectedAnnexe == "Annexes" || this.#selectedBloc == "Blocs") return;
+            // First Cards not Match Condition
+            const notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.bloc && card.dataset.bloc != selectedOption.text);
+            notMatchCardTAB.forEach(card => card.classList.add("d-none"));
+        })
+        blocSelect.addEventListener("click", () => {
+            const selectedOption = blocSelect.options[blocSelect.selectedIndex];
+            if (!blocSelect) return
+            const roomsUrl = url + selectedOption.value
+            handler(type, roomsUrl)
+            // Filtrage Code
+            this.#selectedBloc = selectedOption.text;
+            // First Display ALL Cards
+            let allCards = Array.from(document.querySelectorAll(".cardDiv"));
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
             allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
@@ -212,29 +218,8 @@ class SignalmentsView {
             // If Categories Reset
             if (this.#selectedAnnexe == "Annexes" || this.#selectedBloc == "Blocs") return;
             // First Cards not Match Condition
-            const notMatchCardTAB  = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.bloc && card.dataset.bloc != selectedOption.text);
+            const notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.bloc && card.dataset.bloc != selectedOption.text);
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
-        })
-        blocSelect.addEventListener("click", () => {
-            const selectedOption = blocSelect.options[blocSelect.selectedIndex];
-            if (!blocSelect) return
-            const roomsUrl = url + selectedOption.value
-            handler(type, roomsUrl)
-                  // Filtrage Code
-                  this.#selectedBloc = selectedOption.text;
-                  // First Display ALL Cards
-                  let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-                  if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
-                  if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
-                  allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
-
-                  //
-                  allCards.forEach(card => card.classList.remove("d-none"))
-                  // If Categories Reset
-                  if (this.#selectedAnnexe == "Annexes" || this.#selectedBloc == "Blocs") return;
-                  // First Cards not Match Condition
-                  const notMatchCardTAB  = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.bloc && card.dataset.bloc != selectedOption.text);
-                  notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
     }
 
@@ -250,18 +235,17 @@ class SignalmentsView {
             const selectedOption = select.options[select.selectedIndex];
             this.#selectedCategory = selectedOption.text;
             // First Display ALL Cards
-            let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-            console.log(allCards)
+            let allCards = Array.from(document.querySelectorAll(".cardDiv"));
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedAnnexe != "Annexes") allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
-            //allCards = allCards.filter(card => card.dataset.state == )
-
             //
             allCards.forEach(card => card.classList.remove("d-none"))
             // If Categories Reset
             if (selectedOption.text == "Catégories") return;
             // First Cards not Match Condition
-            const notMatchCardTAB  = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.category && card.dataset.category != selectedOption.text);
+            const notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.category && card.dataset.category != selectedOption.text);
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
     }
@@ -273,15 +257,16 @@ class SignalmentsView {
             this.#selectedState = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"));
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
             if (this.#selectedAnnexe != "Annexes") allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
-
             //
             allCards.forEach(card => card.classList.remove("d-none"))
             // If Categories Reset
             if (selectedOption.text == "États") return;
             // First Cards not Match Condition
-            const notMatchCardTAB  = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state && card.dataset.state != selectedOption.text);
+            const notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state && card.dataset.state != selectedOption.text);
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
     }
@@ -294,7 +279,9 @@ class SignalmentsView {
             const selectedOption = e.target.options[e.target.selectedIndex];
             this.#selectedRoom = selectedOption.text;
             // First Display ALL Cards
-            let allCards = Array.from(document.querySelectorAll(".cardDiv"))
+            let allCards = Array.from(document.querySelectorAll(".cardDiv"));
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
             allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
@@ -305,7 +292,7 @@ class SignalmentsView {
             // If Categories Reset
             if (this.#selectedAnnexe == "Annexes" || this.#selectedBloc == "Blocs" || this.#selectedRoom == "Salles") return;
             // First Cards not Match Condition
-            const notMatchCardTAB  = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.room && card.dataset.room != selectedOption.text);
+            const notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.room && card.dataset.room != selectedOption.text);
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
     }
@@ -319,25 +306,25 @@ class SignalmentsView {
 
 
     renderInfraOptions(data, type) {
-        if (type == "annexe" ) {
+        if (type == "annexe") {
             const blocSelect = document.querySelector(`#annexe--select`)
             blocSelect.innerHTML = "";
             const html = `<option value="reset" selected>Cites</option>`
             blocSelect.insertAdjacentHTML("afterbegin", html)
         }
-        if (type == "bloc" ) {
+        if (type == "bloc") {
             const blocSelect = document.querySelector(`#bloc--select`)
             blocSelect.innerHTML = "";
             const html = `<option value="reset" selected>Blocs</option>`
             blocSelect.insertAdjacentHTML("afterbegin", html)
         }
-        if (type == "room" ) {
+        if (type == "room") {
             const blocSelect = document.querySelector(`#room--select`)
             blocSelect.innerHTML = "";
             const html = `<option value="reset" selected>Salles</option>`
             blocSelect.insertAdjacentHTML("afterbegin", html)
         }
-        data.forEach(item =>  {
+        data.forEach(item => {
             const select = document.querySelector(`#${type}--select`);
             const html = `<option value="${item.id}">${item.name}</option>`;
             select.insertAdjacentHTML("beforeend", html)

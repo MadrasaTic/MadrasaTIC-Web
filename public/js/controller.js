@@ -25,21 +25,22 @@ async function controlInfra(type, url) {
 if ((window.location.pathname.slice(1) == "signalments")) {
 
     function init() {
+        signalmentsView.addHanlderApplyStateColors();
         signalmentsView.addHandlerRender(controlSignalements);
         signalmentsView.addHandlerParentFilterChange();
         signalmentsView.addHandlerInfraFilters();
         signalmentsView.addHandlerShowModalBtn();
-        signalmentsView.addHandlerCloseModal();
+        // Modal
         signalmentsView.addHandlerApproveSignalmentBtn();
         signalmentsView.addHandlerResendSignalmentsBtn();
         signalmentsView.addHandlerDeleteSignalmentBtn();
-        signalmentsView.addHandlerShowRattachedToBody();
         signalmentsView.addHandlerRattachedToBackBtn();
-        signalmentsView.addHandlerRattachedToSubmitBtn();
+        signalmentsView.addHandlerShowRattachedToBody();
         signalmentsView.addHandlerCloseRattachedToBtn();
-        // Modal
+        signalmentsView.addHandlerRattachedToSubmitBtn();
         signalmentsView.addHandlerModalState();
         signalmentsView.addHandlerModalCategoryChange();
+        signalmentsView.addHandlerCloseModal();
         // Selects
         signalmentsView.addHandlerCategoryChange();
         signalmentsView.addHandlerStateChange();

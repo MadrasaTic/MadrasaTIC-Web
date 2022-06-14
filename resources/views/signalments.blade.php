@@ -23,9 +23,9 @@
                 <!-- Stats -->
                 <div class="mb-4 mt-2" id="stats--container">
                     <p class="fs-3 m-0">Statistiques</p>
-                    <div class="m-0" id="stats" style="height: 30vh">
-                        <div class="row h-50 m-0 ">
-                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-start ">
+                    <div class="m-0 border border-primary" id="stats" style="min-height: 30vh">
+                        <div class="row m-0 ">
+                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-start border border-success">
                                 <div class="progress-cards text-center rounded-6 d-block">
                                     <svg class="m-auto progress mt-3 bg-primary w-75 h-75 green noselect"
                                         data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
@@ -38,12 +38,36 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-md-4 h-50">
-
+                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-center border border-success">
+                                <div class="progress-cards text-center rounded-6 d-block">
+                                    <svg class="m-auto progress mt-3 bg-primary w-75 h-75 green noselect"
+                                        data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
+                                        <path class="track" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
+                                        <path class="fill" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
+                                        <text class="value" x="50%" y="55%">0%</text>
+                                    </svg>
+                                    <div class="m-auto">
+                                        <span>text here</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-end border border-success">
+                                <div class="progress-cards text-center rounded-6 d-block">
+                                    <svg class="m-auto progress mt-3 bg-primary w-75 h-75 green noselect"
+                                        data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
+                                        <path class="track" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
+                                        <path class="fill" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
+                                        <text class="value" x="50%" y="55%">0%</text>
+                                    </svg>
+                                    <div class="m-auto">
+                                        <span>text here</span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-4 h-50"></div>
                             <div class="col-md-4 h-50"></div>
-                            <div class="col-md-4 h-50"></div> --}}
+                            <div class="col-md-4 h-50"></div>
+                            <div class="col-md-4 h-50"></div> 
                         </div>
                     </div>
                 </div>
@@ -56,8 +80,8 @@
                     </div>
                     <!-- Nav -->
                     <div class="d-flex p-0 align-items-center" id="signa--nav">
-                        <div class="col nav_filter nav_item--hoverd">Signalement Aiguillés</div>
-                        <div class="col nav_filter">Signalement non Aiguillés</div>
+                        <div class="col nav_filter nav_item--hoverd" data-type="aiguillés">Signalement Aiguillés</div>
+                        <div class="col nav_filter" data-type="non-aiguillés">Signalement non Aiguillés</div>
                         <div class="col position-relative d-flex justify-content-end" id="signa_search--container">
                             <!-- Input -->
                             <div class="h-75 w-100" id="search_input--container">
@@ -121,12 +145,13 @@
                                         <div class="card-description d-flex align-items-center text-secondary">
                                             <p class="me-auto my-auto fw-bold">{{ $signalment->lastSignalementVC->category['name'] }}</p>
                                             <span class="d-flex px-1 rounded-6" id="state--container">
-                                                <div class="my-auto me-1" id="color--icon" style="background-color: {{$signalment->lastSignalementVC->state['color']}}"></div>
+                                                <div class="my-auto me-1" id="color--icon" style="background-color: {{ $signalment->lastSignalementVC->state['color'] }}"></div>
                                                 <span class="fw-500">{{ $signalment->lastSignalementVC->state['name'] }}</span>
                                             </span>
                                         </div>
                                         <h5 class="card-title fw-bold">{{ $signalment['title'] }}</h5>
                                         <p class="card-text">{{ $signalment['description'] }}</p>
+                                        <p class="card-text" >{{ $signalment->annexe['name']}} / {{ $signalment->bloc['name']}} / {{ $signalment->room['name']}}</p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
                                             <a href="{{ '#'.$signalment['id'] }}" class="btn btn-primary" id="show_modal--button">Détails</a>

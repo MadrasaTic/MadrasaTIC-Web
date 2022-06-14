@@ -86,7 +86,7 @@ class SignalmentsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-       'file1' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
+        'file1' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
         ]);
 
         $signalment = SignalementVersionControl::findOrFail($id);

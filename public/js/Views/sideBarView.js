@@ -33,7 +33,7 @@ class sideBarView {
         document.querySelector(`.sideBar_item--${type}`)?.classList.remove(`sideBar_item--${type}`);
         document.querySelector(`.link--${type}`)?.classList.remove(`link--${type}`);       
         div.classList.add(`sideBar_item--${type}`);
-        link.classList.add(`link--${type}`);
+        link?.classList.add(`link--${type}`);
     }
 }
 

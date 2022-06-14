@@ -17,7 +17,8 @@
     <div class="mb-4 col-md-12">
         <label for="last_name" class="form-label">Nom</label>
         <div class="input-group">
-            <input type="text" class="w-100 p-3" placeholder="Nom" name="state_name" id="state_name" />
+            <input type="text" class="needs--validation w-100 p-3" placeholder="Nom" name="state_name"
+                id="name" />
             <span class="check--container end-0 me-2 fs-4 ">
                 <i
                     class="valid--icon fa-solid fa-circle-check text-success d-none animateanimated animatefadeIn animate__delay-0.5s"></i>
@@ -29,7 +30,8 @@
         <div class="valid-feedback fs-6 d-none">Nom valide</div>
     </div>
     <div class="mb-4 col-md-12">
-        <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#DCDCDC" title="Choose your color" name="state_color">
+        <input data-type="ignore-validation" type="color" class="form-control form-control-color" id="color" value="#563d7c"
+            title="Choose your color" name="state_color">
     </div>
 
     <input type="submit" value="ICI" class="add--submit" hidden>
