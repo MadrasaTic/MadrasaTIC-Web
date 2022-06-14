@@ -45,6 +45,10 @@ use Illuminate\Routing\Controller as BaseController;
     *     description="API Endpoints of Infrastructures"
     * )
     * @OA\Tag(
+    *     name="State",
+    *     description="API Endpoints of States"
+    * )
+    * @OA\Tag(
     *     name="User",
     *     description="API Endpoints of User"
     * )
