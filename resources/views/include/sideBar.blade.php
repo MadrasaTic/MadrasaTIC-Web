@@ -12,19 +12,19 @@
         <div class="h-100 d-flex align-items-center mx-2" id="SBprofile-picture">
             <div class="rounded-circle bg-secondary" id="">
                 @if (Auth::user()->userInformation->avatar_path != "")
-            <img
-                class="rounded-circle img-fluid"
-                src="{{ asset('/storage/images/' . Auth::user()->userInformation->avatar_path) }}"
-                alt="img"/>
-            @else
-            <div
-                class="rounded-circle img-fluid"
-                style="
-                    height: 75px;
-                    width: 75px;
-                "></div>
+                <img
+                    class="rounded-circle img-fluid"
+                    src="{{ asset('/storage/images/' . Auth::user()->userInformation->avatar_path) }}"
+                    alt="img"/>
+                @else
+                <div
+                    class="rounded-circle img-fluid"
+                    style="
+                        height: 75px;
+                        width: 75px;">
+                </div>
+                @endif
             </div>
-            @endif
 
         </div>
         <div class="h-100 d-flex flex-column align-items-center justify-content-center">
