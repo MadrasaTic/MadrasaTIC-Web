@@ -20,8 +20,8 @@
                 <div
                     class="rounded-circle img-fluid"
                     style="
-                        height: 75px;
-                        width: 75px;">
+                        height: 50px;
+                        width: 50px;">
                 </div>
                 @endif
             </div>
