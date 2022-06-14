@@ -86,23 +86,10 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset']);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    //Route::get('/profile', [UserController::class, 'show'])->name('profile');
+    Route::get('/profile', [UserController::class, 'show'])->name('profile');
     Route::post('/profile', [UserController::class, 'update']);
     Route::post('/profile/updatePassword', [UserController::class, 'updatePassword'])->name('updatePasswordFromProfile');
     Route::post('/profile/uploadProfilePicture', [UserController::class, 'uploadProfilePicture'])->name('uploadProfilePicture');
-    Route::get('/profile', [UserController::class, 'show'])->name('profile');
-
-    // Route::post('/members', 'App\Http\Controllers\MemberController@store');
-    // Route::post('/members/edit/{id}', 'App\Http\Controllers\MemberController@update');
-    // Route::post('/members/delete/{id}', 'App\Http\Controllers\MemberController@softDelete');
-
-    //Route::get('/members', function () {
-        //  return view('members');
-        //});
-        // Route::get('/dashboard', function () {
-            //     return Inertia::render('Dashboard');
-            // })->name('dashboard');
-
 
     Route::middleware(['HasPermission'])->group(function () {
         Route::resource('/roles', RolesController::class, ['as' => 'configure']);
@@ -119,10 +106,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/permissions',[PermissionsController::class,'index'])->name('permissions');
         Route::post('/permissions/{id}',[PermissionsController::class,'update']);
         Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);
-
-        // Route::get('/infrastructure', function () {
-        //     return view('infrastructure');
-        // });
 
         Route::controller(AnnexeController::class)->group(function () {
             Route::get('/infrastructure/annexe','index');
@@ -157,7 +140,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/signalmentsCategory/{id}',[CategoryController::class,'update']);
         Route::post('/signalmentsCategory/delete/{id}',[CategoryController::class,'delete']);
 
-        Route::get('/signalments', [SignalmentsController::class, 'index']);
+        Route::get('/signalments', [SignalmentsController::class, 'index'])->name('signalements');
         // Route::post('/signalments', [SignalmentsController::class, 'store']);
         Route::get('/signalments/{id}/edit', [SignalmentsController::class, 'edit']);
         Route::post('/signalments/{id}',[SignalmentsController::class,'update']);

@@ -10,7 +10,7 @@
 <div class="col-md-2 position-relative" id="sidebar--container">
     <div class="position-relative d-flex align-items-center w-100 mt-5" id="sideBar--header">
         <div class="h-100 d-flex align-items-center mx-2" id="SBprofile-picture">
-            <div class="rounded-circle bg-secondary" id="profile-picture">
+            <div class="rounded-circle bg-secondary" id="">
                 @if (Auth::user()->userInformation->avatar_path != "")
             <img
                 class="rounded-circle img-fluid"
@@ -38,7 +38,7 @@
                 <h3 class="text-primary ms-2 mb-2 h3">Menu</h3>
                 <!-- Item -->
                 <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="#">
+                    <a class="link" href="{{ route("signalements")}}">
                         <i class="fa-solid fa-warning py-3 px-1 ms-3"></i>
                         <span class="me-1">Signalement</span>
                     </a>
@@ -56,26 +56,26 @@
                         <span class="me-1">Enregistré</span>
                     </a>
                 </div>
+                <div name="" class="sideBar--item  h-auto w-100 fs-4">
+                    <a class="link" href="{{ route("members")}}">
+                        <i class="fa-solid fa-users py-3 px-1 ms-3"></i>
+                        <span class="me-1">Membres</span>
+                    </a>
+                </div>
                 <div name="" class="sideBar--item  h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="#">
+                    <a class="link" href="{{ route("roles")}}">
                         <i class="fa-solid fa-key py-3 px-1 ms-3"></i>
                         <span class="me-1">Roles</span>
                     </a>
                 </div>
                 <div name="" class="sideBar--item  h-auto w-100 fs-4" item-clicked="0">
-                    <a class="link" href="#">
+                    <a class="link" href="{{ route("permissions")}}">
                         <i class="fa-regular fa-star py-3 px-1 ms-3"></i>
                         <span class="me-1">Permissions</span>
                     </a>
                 </div>
                 <div name="" class="sideBar--item  h-auto w-100 fs-4">
-                    <a class="link" href="#">
-                        <i class="fa-solid fa-users py-3 px-1 ms-3"></i>
-                        <span class="me-1">Membres</span>
-                    </a>
-                </div>
-                <div name="" class="sideBar--item  h-auto w-100 fs-4">
-                    <a class="link" href="#">
+                    <a class="link" href="{{ route("profile")}}">
                         <i class="fa-solid fa-user py-3 px-1 ms-3"></i>
                         <span class="me-1">Mon Profil</span>
                     </a>
