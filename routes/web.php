@@ -107,6 +107,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/permissions/{id}',[PermissionsController::class,'update']);
         Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);
 
+        Route::get('/infrastructure', function () {
+            return view('infrastructure');
+        })->name("infrastructure");
+
+
         Route::controller(AnnexeController::class)->group(function () {
             Route::get('/infrastructure/annexe','index');
             Route::post('/infrastructure/annexe','store');
@@ -130,15 +135,31 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::post('/infrastructure/room/{id}','update');
             Route::post('/infrastructure/room/delete/{id}','delete');
         });
-        Route::resource('/signalmentsState', StateController::class);
-        Route::post('/signalmentsState/{id}',[StateController::class,'update']);
-        Route::post('/signalmentsState/delete/{id}',[StateController::class,'delete']);
+
+        Route::controller(StateController::class)->group(function () {
+            Route::get('/signalmentsState','index')->name("signalmentsState");
+            Route::post('/signalmentsState','store');
+            Route::get('/signalmentsState/{id}','show');
+            Route::post('/signalmentsState/{id}','update');
+            Route::post('/signalmentsState/delete/{id}','delete');
+        });
+
+        Route::controller(CategoryController::class)->group(function () {
+            Route::get('/signalmentsCategory','index')->name("signalmentsCategory");
+            Route::post('/signalmentsCategory','store');
+            Route::get('/signalmentsCategory/{id}','show');
+            Route::post('/signalmentsCategory/{id}','update');
+            Route::post('/signalmentsCategory/delete/{id}','delete');
+        });
+        // Route::resource('/signalmentsState', StateController::class);
+        // Route::post('/signalmentsState/{id}',[StateController::class,'update']);
+        // Route::post('/signalmentsState/delete/{id}',[StateController::class,'delete']);
         /* Route::get('/states',[StateController::class,'index'])->name('state');
         Route::post('/states/{id}',[StateController::class,'update']);
         Route::post('/states/delete/{id}',[StateController::class,'delete']); */
-        Route::resource('/signalmentsCategory', CategoryController::class);
-        Route::post('/signalmentsCategory/{id}',[CategoryController::class,'update']);
-        Route::post('/signalmentsCategory/delete/{id}',[CategoryController::class,'delete']);
+        // Route::resource('/signalmentsCategory', CategoryController::class);
+        // Route::post('/signalmentsCategory/{id}',[CategoryController::class,'update']);
+        // Route::post('/signalmentsCategory/delete/{id}',[CategoryController::class,'delete']);
 
         Route::get('/signalments', [SignalmentsController::class, 'index'])->name('signalements');
         // Route::post('/signalments', [SignalmentsController::class, 'store']);

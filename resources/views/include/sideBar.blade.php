@@ -51,9 +51,33 @@
                     </a>
                 </div>
                 <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
+                    <a class="link" href="{{ route("infrastructure") }}">
+                        <i class="fa-solid fa-building py-3 px-1 ms-3"></i>
+                        <span class="me-1">Infrastructure</span>
+                    </a>
+                </div>
+                <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
                     <a class="link" href="#">
                         <i class="fa-solid fa-save py-3 px-1 ms-3"></i>
                         <span class="me-1">Enregistré</span>
+                    </a>
+                </div>
+                <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
+                    <a class="link" href="{{ route("infrastructure") }}">
+                        <i class="fa-solid fa-cog py-3 px-1 ms-3"></i>
+                        <span class="me-1">Services</span>
+                    </a>
+                </div>
+                <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
+                    <a class="link" href="{{ route("signalmentsCategory") }}">
+                        <i class="fa-solid fa-list py-3 px-1 ms-3"></i>
+                        <span class="me-1">Catégories</span>
+                    </a>
+                </div>
+                <div name="" class="sideBar--item h-auto w-100 fs-4" item-clicked="0">
+                    <a class="link" href="{{ route("signalmentsState") }}">
+                        <i class="fa-solid fa-flag py-3 px-1 ms-3"></i>
+                        <span class="me-1">États</span>
                     </a>
                 </div>
                 <div name="" class="sideBar--item  h-auto w-100 fs-4">
