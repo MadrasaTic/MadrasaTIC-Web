@@ -102,7 +102,7 @@
                             <div class="col-xl-6 col-md-12 px-3 py-3">
                                 <!-- Card  -->
                                 <div class="card border h-100 w-100 rounded-6">
-                                    <img src="https://picsum.photos/600/600"
+                                    <img src="{{asset('/images/signalements/'.$signal['attachement'])}}"
                                         class="img-fluid card-img-top h-50 rounded-6" alt="Image du signalement">
                                     <div class="card-body h-50">
                                         <div class="card-description d-flex align-items-center text-secondary">

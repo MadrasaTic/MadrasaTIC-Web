@@ -29,78 +29,39 @@
                     <div class="mt-4" id="signa_cards--container">
                         <div class="row m-0" id="signa--cards">
                             <!-- Card  -->
+                            @foreach($annonces as $annonce)
+                            @if($annonce['public'] == '1')
                             <div class="col-xl-6 col-md-12 px-3 py-3">
                                 <div class="card border h-100 w-100 rounded-6">
-                                    <img src="https://picsum.photos/600/600"
+                                    <img src="{{asset('/images/annonces/'.$annonce['image'])}}"
                                         class="img-fluid card-img-top h-50 rounded-6" alt="Image du signalement">
                                     <div class="card-body h-50">
                                         <div class="card-description d-flex align-items-center text-secondary">
-                                            <p class="me-auto my-auto fw-bold">Nom Annonceur</p>
+                                            <p class="me-auto my-auto fw-bold">{{$annonce->user->userInformation['first_name']}} {{$annonce->user->userInformation['last_name']}}</p>
                                             <span class="d-flex px-1 rounded-6" id="state--container">
                                                 <div class="my-auto me-1" id="color--icon"></div>
-                                                <span class="fw-500">Publié</span>
+                                                <span class="fw-500">{{$annonce->state}}</span>
                                             </span>
                                         </div>
-                                        <h5 class="card-title fw-bold">Titre de l'Annonce</h5>
-                                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque provident amet commodi, accusamus odio mollitia excepturi sed neque culpa numquam, fugiat assumenda enim deserunt modi voluptate voluptates asperiores cumque quam!</p>
+                                        <h5 class="card-title fw-bold">{{$annonce->title}}</h5>
+                                        <p class="card-text">{{$annonce->description}}</p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
-                                            <button href="" class="btn btn-primary show_modal--button">Détails</button>
+                                            <button href={{'annonces/'.$annonce['id']}} class="btn btn-primary show_modal--button">Détails</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Card  -->
-                            <div class="col-xl-6 col-md-12 px-3 py-3">
-                                <div class="card border h-100 w-100 rounded-6">
-                                    <img src="https://picsum.photos/600/600"
-                                        class="img-fluid card-img-top h-50 rounded-6" alt="Image du signalement">
-                                    <div class="card-body h-50">
-                                        <div class="card-description d-flex align-items-center text-secondary">
-                                            <p class="me-auto my-auto fw-bold">Nom Annonceur</p>
-                                            <span class="d-flex px-1 rounded-6" id="state--container">
-                                                <div class="my-auto me-1" id="color--icon"></div>
-                                                <span class="fw-500">Publié</span>
-                                            </span>
-                                        </div>
-                                        <h5 class="card-title fw-bold">Titre de l'Annonce</h5>
-                                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque provident amet commodi, accusamus odio mollitia excepturi sed neque culpa numquam, fugiat assumenda enim deserunt modi voluptate voluptates asperiores cumque quam!</p>
-                                        <div class="card--footer d-flex">
-                                            <a class="me-auto my-auto" href="test"></a>
-                                            <button href="" class="btn btn-primary show_modal--button">Détails</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card  -->
-                            <div class="col-xl-6 col-md-12 px-3 py-3">
-                                <div class="card border h-100 w-100 rounded-6">
-                                    <img src="https://picsum.photos/600/600"
-                                        class="img-fluid card-img-top h-50 rounded-6" alt="Image du signalement">
-                                    <div class="card-body h-50">
-                                        <div class="card-description d-flex align-items-center text-secondary">
-                                            <p class="me-auto my-auto fw-bold">Nom Annonceur</p>
-                                            <span class="d-flex px-1 rounded-6" id="state--container">
-                                                <div class="my-auto me-1" id="color--icon"></div>
-                                                <span class="fw-500">Publié</span>
-                                            </span>
-                                        </div>
-                                        <h5 class="card-title fw-bold">Titre de l'Annonce</h5>
-                                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque provident amet commodi, accusamus odio mollitia excepturi sed neque culpa numquam, fugiat assumenda enim deserunt modi voluptate voluptates asperiores cumque quam!</p>
-                                        <div class="card--footer d-flex">
-                                            <a class="me-auto my-auto" href="test"></a>
-                                            <button href="" class="btn btn-primary show_modal--button">Détails</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('./include/showAnnonceModal')
+                            @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div> <!-- Middle End-->
 
             <!-- Show Signalments Modal -->
-            @include('./include/showAnnonceModal')
+            
 
             <!-- Notifications Bar -->
             @include('./include/notificationsPage');

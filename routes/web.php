@@ -24,6 +24,8 @@ use App\Http\Controllers\SignalmentsController;
 use App\Http\Controllers\Infrastructure\AnnexeController;
 use App\Http\Controllers\Infrastructure\BlocController;
 use App\Http\Controllers\Infrastructure\RoomController;
+
+use App\Http\Controllers\AnnoncesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -169,6 +171,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
         Route::get('/create',[CheckController::class, 'create'])->name('create');
         Route::get('/indexx',[CheckController::class, 'index'])->name('indexx');
+
+        // Annonces
+        Route::get('/annonces',[AnnoncesController::class, 'index']);
+        Route::get('/annonces/{id}',[AnnoncesController::class, 'show']);
+        Route::get('/annonces/delete/{id}',[AnnoncesController::class, 'delete']);
     });
 
     Route::middleware(['HasPermission'])->group(function () {

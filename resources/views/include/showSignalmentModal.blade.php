@@ -1,5 +1,5 @@
 <form class="row" id="modal_update--form" method="POST" action="/signalments" data-id="{{ $signalment['id'] }}" enctype="multipart/form-data">
-    @csrf
+@csrf
 <div class="d-none animate__animated animate__fadeIn modal_bg--default" id="modal_signalments">
     <div class="modal-dialog modal-lg modal-dialog-centered animate__animated animate__fadeIn">
         <div class="modal-content animate__animated animate__fadeInDown" id="modal_photo--container">

@@ -1,4 +1,4 @@
-<form class="row" id="modal_update--form" method="POST" action=""{{'signalmentsPriority'}}"">
+<form class="row" id="modal_update--form" method="POST" action="{{'signalmentsPriority'}}">
     @csrf
     <div class="mb-4 col-md-12">
     <label for="last_name" class="form-label">Nom</label>
