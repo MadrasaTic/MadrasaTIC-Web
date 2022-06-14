@@ -2,6 +2,7 @@
 
 <head>
     <link href="{{ asset('css/signalments.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <!-- Date ranger picker -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -22,8 +23,8 @@
                 <!-- Stats -->
                 <div class="mb-4 mt-2" id="stats--container">
                     <p class="fs-3 m-0">Statistiques</p>
-                    <div class="m-0" id="stats" style="height: 60vh">
-                        <div class="row h-100 m-0 ">
+                    <div class="m-0" id="stats" style="height: 30vh">
+                        <div class="row h-50 m-0 ">
                             <div class="col-md-4 p-0 d-flex align-items-center justify-content-start ">
                                 <div class="progress-cards text-center rounded-6 d-block">
                                     <svg class="m-auto progress mt-3 bg-primary w-75 h-75 green noselect"
@@ -37,12 +38,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 h-50">
+                            {{-- <div class="col-md-4 h-50">
 
                             </div>
                             <div class="col-md-4 h-50"></div>
                             <div class="col-md-4 h-50"></div>
-                            <div class="col-md-4 h-50"></div>
+                            <div class="col-md-4 h-50"></div> --}}
                         </div>
                     </div>
                 </div>
@@ -60,9 +61,9 @@
                         <div class="col position-relative d-flex justify-content-end" id="signa_search--container">
                             <!-- Input -->
                             <div class="h-75 w-100" id="search_input--container">
-                                <form action="" class="h-100 w-100">
-                                    <input type="text" class="px-3 h-100 w-100" id="search--input"
-                                        placeholder="Rechercher ...">
+                                <form action="/search" method="get"  class="h-100 w-100">
+                                    <input type="text" name="search" class="px-3 h-100 w-100" id="search--input"
+                                                            placeholder="Rechercher ...">
                                 </form>
                             </div>
                             <!-- Icon -->
@@ -74,12 +75,16 @@
                     <!-- Filter -->
                     <div class="row mt-2 m-0">
                         <select class="col py-2 m-2" name="" id="category--select">
-                            <option value="" selected>Catégorie</option>
-                            <option value="" selected>Catégorie</option>
+                            <option value="none" selected>Catégories</option>
+                                @foreach($categories as $category)
+                                <option value="{{$category->id}}" >{{$category->name}}</option>
+                                @endforeach
                         </select>
                         <select class="col py-2 m-2" name="" id="state--select">
-                            <option value="" selected>État</option>
-                            <option value="" selected>État</option>
+                            <option value="none" selected>États</option>
+                            @foreach($states as $state)
+                                <option value="{{$state->id}}">{{$state->name}}</option>
+                            @endforeach
                         </select>
                         <button class="btn col py-2 m-2 text-start" id="infra_filter--button">Infrastructure</button>
                         <input class="col py-2 m-2" type="date" placeholder="Date" id="date_range--input">
@@ -95,25 +100,33 @@
                     </div>
 
                     <!-- Cards -->
-                    @foreach ($signalments as $signalment)
-                    @if($signalment->signalement['published'] == '1')
                     <div class="mt-4" id="signa_cards--container">
                         <div class="row m-0" id="signa--cards">
-                            <div class="col-xl-6 col-md-12 px-3 py-3">
+                            @foreach ($signalments as $signalment)
+                            {{-- {{ dd($signalment);}} --}}
+                            @if($signalment['published'] == '1')
+                            <div
+                                class="cardDiv col-xl-6 col-md-12 px-3 py-3"
+                                data-state="{{ $signalment->lastSignalementVC->state['name'] }}"
+                                data-category="{{ $signalment->lastSignalementVC->category['name'] }}"
+                                data-annexe="{{ $signalment->annexe['name'] }}"
+                                data-bloc="{{ $signalment->bloc ? $signalment->bloc['name']: null }}"
+                                data-room="{{ $signalment->room ? $signalment->room['name']: null }}"
+                            >
                                 <!-- Card  -->
                                 <div class="card border h-100 w-100 rounded-6">
-                                    <img src="https://picsum.photos/600/600"
+                                    <img src="{{ asset('/storage/images/signalements/'.$signalment->lastSignalementVC['attachement']) }}"
                                         class="img-fluid card-img-top h-50 rounded-6" alt="Image du signalement">
                                     <div class="card-body h-50">
                                         <div class="card-description d-flex align-items-center text-secondary">
-                                            <p class="me-auto my-auto fw-bold">{{ $signalment->category['name'] }}</p>
+                                            <p class="me-auto my-auto fw-bold">{{ $signalment->lastSignalementVC->category['name'] }}</p>
                                             <span class="d-flex px-1 rounded-6" id="state--container">
-                                                <div class="my-auto me-1" id="color--icon"></div>
-                                                <span class="fw-500">{{ $signalment->state['name'] }}</span>
+                                                <div class="my-auto me-1" id="color--icon" style="background-color: {{$signalment->lastSignalementVC->state['color']}}"></div>
+                                                <span class="fw-500">{{ $signalment->lastSignalementVC->state['name'] }}</span>
                                             </span>
                                         </div>
-                                        <h5 class="card-title fw-bold">{{ $signalment->signalement['title'] }}</h5>
-                                        <p class="card-text">{{ $signalment->signalement['description'] }}</p>
+                                        <h5 class="card-title fw-bold">{{ $signalment['title'] }}</h5>
+                                        <p class="card-text">{{ $signalment['description'] }}</p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
                                             <a href="{{ '#'.$signalment['id'] }}" class="btn btn-primary" id="show_modal--button">Détails</a>
@@ -121,13 +134,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-md-12"></div>
-                            <div class="col-xl-6 col-md-12"></div>
+                            @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
-                @endif
-                @endforeach
             </div> <!-- Middle End-->
 
             <!-- Show Signalments Modal -->
@@ -139,6 +150,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/select2.min.js') }}"></script>
     <script>
         var forEach = function (array, callback, scope) {
             for (var i = 0; i < array.length; i++) {

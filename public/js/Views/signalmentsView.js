@@ -21,12 +21,12 @@ class SignalmentsView {
             e.target.classList.add("nav_item--hoverd");
 
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-        
+
             //
             allCards.forEach(card => card.classList.remove("d-none"))
 
             this.#selectedParentFilter = e.target.dataset.type;
-            let notMatchCardTAB  = "" 
+            let notMatchCardTAB  = ""
             if (e.target.dataset.type == "aiguillés") {
                 notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
             } else {
@@ -36,15 +36,15 @@ class SignalmentsView {
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
         window.addEventListener("load", (e) => {
-            
+
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-         
+
             //
             allCards.forEach(card => card.classList.remove("d-none"))
 
-            
+
             let notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
-      
+
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
 
             document.querySelectorAll(".color--icon").forEach(color => {
@@ -63,7 +63,7 @@ class SignalmentsView {
         document.querySelector("#show_modal--button").addEventListener("click", () => {
             document.querySelector("#modal_signalments").classList.remove("d-none");
         })
-    } 
+    }
 
     addHandlerCloseModal() {
         document.querySelector("#close_signalment--button").addEventListener("click", () => {
@@ -82,11 +82,11 @@ class SignalmentsView {
 
 
             form.action = `/signalments/${form.dataset.id}`
-            
+
 
             e.target.closest("button").click();
-            
-            
+
+
         })
     }
 
@@ -100,7 +100,7 @@ class SignalmentsView {
         document.querySelector("#delete_signalment--button").addEventListener("click", (e) => {
             console.log("Signalment Delete");
             const form = e.target.closest("form");
-            
+
 
             form.action = `/signalments/delete/${form.dataset.id}`
 
@@ -138,7 +138,7 @@ class SignalmentsView {
             document.querySelector("#rattachedTo--body").classList.add("d-none");
         })
     }
-    
+
     // Selects
     addHandlerLoadAnnexe(handler, type, url) {
         window.addEventListener("load", () => {
@@ -188,7 +188,7 @@ class SignalmentsView {
            const notMatchCardTAB  = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.annexe && card.dataset.annexe != selectedOption.text);
            notMatchCardTAB.forEach(card => card.classList.add("d-none"));
        })
-       
+
 
     }
 
@@ -227,7 +227,7 @@ class SignalmentsView {
                   if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
                   if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
                   allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
-      
+
                   //
                   allCards.forEach(card => card.classList.remove("d-none"))
                   // If Categories Reset
@@ -251,10 +251,11 @@ class SignalmentsView {
             this.#selectedCategory = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
+            console.log(allCards)
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedAnnexe != "Annexes") allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
             //allCards = allCards.filter(card => card.dataset.state == )
-            
+
             //
             allCards.forEach(card => card.classList.remove("d-none"))
             // If Categories Reset
@@ -274,7 +275,7 @@ class SignalmentsView {
             let allCards = Array.from(document.querySelectorAll(".cardDiv"));
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
             if (this.#selectedAnnexe != "Annexes") allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
-            
+
             //
             allCards.forEach(card => card.classList.remove("d-none"))
             // If Categories Reset
@@ -284,14 +285,13 @@ class SignalmentsView {
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
     }
-    
-    
+
+
 
     adHandlerSalleChange(handler) {
         document.querySelector("#room--select").addEventListener("change", (e) => {
             // Filtrage Code
             const selectedOption = e.target.options[e.target.selectedIndex];
-            console.log(selectedOption)
             this.#selectedRoom = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
@@ -319,16 +319,24 @@ class SignalmentsView {
 
 
     renderInfraOptions(data, type) {
+        if (type == "annexe" ) {
+            const blocSelect = document.querySelector(`#annexe--select`)
+            blocSelect.innerHTML = "";
+            const html = `<option value="reset" selected>Cites</option>`
+            blocSelect.insertAdjacentHTML("afterbegin", html)
+        }
         if (type == "bloc" ) {
             const blocSelect = document.querySelector(`#bloc--select`)
             blocSelect.innerHTML = "";
             const html = `<option value="reset" selected>Blocs</option>`
             blocSelect.insertAdjacentHTML("afterbegin", html)
-        } 
-        const roomSelect = document.querySelector(`#room--select`)
-        roomSelect.innerHTML = "";
-        const html2 = `<option value="reset" selected>Salles</option>`;
-        roomSelect.insertAdjacentHTML("afterbegin", html2)
+        }
+        if (type == "room" ) {
+            const blocSelect = document.querySelector(`#room--select`)
+            blocSelect.innerHTML = "";
+            const html = `<option value="reset" selected>Salles</option>`
+            blocSelect.insertAdjacentHTML("afterbegin", html)
+        }
         data.forEach(item =>  {
             const select = document.querySelector(`#${type}--select`);
             const html = `<option value="${item.id}">${item.name}</option>`;

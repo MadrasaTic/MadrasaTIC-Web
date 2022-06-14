@@ -22,7 +22,7 @@ class SignalmentsController extends Controller
     {
         $categories = Category::all();
         $states = State::all();
-        $signalments = SignalementVersionControl::all();
+        $signalments = Signalement::with(['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC'])->get();
 
         return view('signalments', compact('signalments','categories','states'));
     }
@@ -47,7 +47,7 @@ class SignalmentsController extends Controller
     {
         $categories = Category::all();
         $states = State::all();
-        $signalments = SignalementVersionControl::all();
+        $signalments = Signalement::with(['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC'])->get();
 
         return view('signalments', compact('signalments','categories','states'));
     }

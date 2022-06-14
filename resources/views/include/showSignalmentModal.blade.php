@@ -11,9 +11,15 @@
                         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
                             aria-label="breadcrumb">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item fw-bold"><a href="#">Cycle Supérieure</a></li>
-                                <li class="breadcrumb-item fw-bold"><a href="#">Bloc A</a></li>
-                                <li class="breadcrumb-item fw-bold"><a href="#">TD (Salle N°12)</a></li>
+                                @if($signalment->annexe != null)
+                                <li class="breadcrumb-item fw-bold"><a>Cite: {{ $signalment->annexe->name }}</a></li>
+                                @endif
+                                @if($signalment->bloc != null)
+                                <li class="breadcrumb-item fw-bold"><a>Bloc: {{ $signalment->bloc->name }}</a></li>
+                                @endif
+                                @if($signalment->room != null)
+                                <li class="breadcrumb-item fw-bold"><a>Salle: {{ $signalment->room->name }}</a></li>
+                                @endif
                             </ol>
                         </nav>
                     </div>
@@ -21,19 +27,23 @@
                 </div>
                 <!-- Modal Body -->
                 <div class="modal-body" id="modal_ signalments--body">
-                    <div class="d-flex mb-3" id="modal_header--container">
+                    <div class="d-flex mb-3 justify-content-between" id="modal_header--container">
                         <!-- Catégorie Select -->
-                        <select class="me-auto my-auto py-3 px-2 w-25" name="category" id="modalCategory--select">
-                            @foreach($categories as $category)
-                                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
-                            @endforeach
-                        </select>
+                        <div class="d-flex align-content-center">
+                            <label for="modalCategory--select" >Catégorie: </label>
+                                <select class="" name="category" id="modalCategory--select">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                    @endforeach
+                                </select>
+                        </div>
                         <!-- Select End -->
                         <div class="d-flex align-content-center">
-                            <!-- <span class="d-flex my-auto px-2 rounded-6" id="modalState--container">
-                                <div class="my-auto me-1" id="color--icon"></div>
-                                <span class="fw-500">{{ $signalment->state['name'] }}</span>
-                            </span> -->
+                            <label for="modalState--select" >Etat: </label>
+                            <span class="d-flex my-auto px-2 rounded-6 d-none" id="modalState--container">
+                                <div class="my-auto me-1" id="color--icon" style="background-color: {{$signalment->lastSignalementVC->state['color']}}"></div>
+                                <span class="fw-500">{{ $signalment->lastSignalementVC->state['name'] }}</span>
+                            </span>
                             <select class="d-flex my-auto py-3 px-4" name="state" id="modalState--select">
                             @foreach($states as $state)
                                 <option value="{{ $state['id'] }}">{{ $state['name'] }}</option>
@@ -42,16 +52,17 @@
                         </div>
                     </div>
                     <div class="rounded-5" id="modal_image--container" style="height: 50vh">
-                        <img src="{{ asset('/images/signalements/'.$signalment['attachement']) }}" class="img-fluid h-100 w-100 rounded-5" alt="Image du signalement">
+                        <img src="{{ asset('/storage/images/signalements/'.$signalment->lastSignalementVC['attachement']) }}" class="img-fluid h-100 w-100 rounded-5" alt="Image du signalement">
                     </div>
                     <div class="mt-3" id="modal_infos--container">
-                        <h2>{{ $signalment->signalement['title'] }}</h2>
-                        <p class="m-0 fs-5 text-justify" style="text-align: justify;">{{ $signalment->signalement['description'] }}</p>
-                        <p class="fw-bold mb-0 mt-3 text-end">Signalé par : <span class="fw-normal">{{ $signalment->signalement->creator['name'] }}</span></p>
+                        <h2>{{ $signalment['title'] }}</h2>
+                        <p class="m-0 fs-5 text-justify" style="text-align: justify;">{{ $signalment['description'] }}</p>
+                        <p class="fw-bold mb-0 mt-3">Signalé par : <span class="fw-normal">{{ $signalment->creator->userInformation->first_name }} {{$signalment->creator->userInformation->last_name}}</span></p>
                     </div>
                     <div class="mt-3">
-                        <button class="btn d-none btn-secondary w-100 fw-500" id="showRattachedTo--button"><i class="fa-solid fa-link me-2"></i>Rattacher à
-                            un autre Signalement</button>
+                        <button class="btn btn-secondary w-100 fw-500" id="showRattachedTo--button">
+                            <i class="fa-solid fa-link me-2"></i>Rattacher à un autre Signalement
+                        </button>
                         <input class=" w-100 fw-500" name="file1" type="file" accept="application/pdf">
                     </div>
                 </div>
@@ -78,14 +89,14 @@
                     <div class="card border w-100 rounded-6 mb-4">
                         <div class="card-body h-50" style="cursor: pointer;">
                             <div class="card-description d-flex align-items-center text-secondary">
-                                <p class="me-auto my-auto  fw-bold">{{ $signalment->category['name'] }}</p>
+                                <p class="me-auto my-auto  fw-bold">{{ $signalment->lastSignalementVC->category['name'] }}</p>
                                 <span class="d-flex px-1 rounded-6" id="state--container">
-                                    <div class="my-auto me-1" id="color--icon"></div>
-                                    <span class="fw-500">{{ $signalment->state['name'] }}</span>
+                                    <div class="my-auto me-1" id="color--icon" style="background-color: {{$signalment->lastSignalementVC->state['color']}}"></div>
+                                    <span class="fw-500">{{ $signalment->lastSignalementVC->state['name'] }}</span>
                                 </span>
                             </div>
-                            <h5 class="card-title fw-bold">{{ $signalment->signalement['title'] }}</h5>
-                            <p class="card-text">{{ $signalment->signalement['description'] }}</p>
+                            <h5 class="card-title fw-bold">{{ $signalment['title'] }}</h5>
+                            <p class="card-text">{{ $signalment['description'] }}</p>
                             <div class="card--footer d-flex">
                                 <a class="me-auto my-auto" href="test"></a>
                                 <a href="#" class="btn btn-primary disabled">Détails</a>

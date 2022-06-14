@@ -12,6 +12,13 @@ class SignalementVersionControl extends BaseModel
     protected $table = 'signalement_version_controls';
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['state', 'category', 'service', 'priority'];
+
+    /**
      * Get the signalement that owns the SignalementVersionControl
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -68,7 +75,7 @@ class SignalementVersionControl extends BaseModel
      */
     public function priority()
     {
-        return $this->belongsTo(Proirity::class);
+        return $this->belongsTo(Priority::class);
     }
 
     /**
