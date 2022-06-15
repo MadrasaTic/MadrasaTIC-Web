@@ -10,7 +10,7 @@
 <div class="col-md-2 position-relative" id="sidebar--container">
     <div class="position-relative d-flex align-items-center w-100 mt-5" id="sideBar--header">
         <div class="h-100 d-flex align-items-center mx-2" id="SBprofile-picture">
-            <div class="rounded-circle bg-secondary" id="">
+            <!-- <div class="rounded-circle bg-secondary" id="">
                 @if (Auth::user()->userInformation->avatar_path != "")
                 <img
                     class="rounded-circle img-fluid"
@@ -24,8 +24,7 @@
                         width: 50px;">
                 </div>
                 @endif
-            </div>
-
+            </div> -->
         </div>
         <div class="h-100 d-flex flex-column align-items-center justify-content-center">
             <h3 class="text-primary fw-bold fs-5 ">{{ Auth::user()->userInformation->last_name }}<span class="fw-normal"> {{ Auth::user()->userInformation->first_name }}</span></h3>

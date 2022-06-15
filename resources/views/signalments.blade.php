@@ -23,9 +23,9 @@
                 <!-- Stats -->
                 <div class="mb-4 mt-2" id="stats--container">
                     <p class="fs-3 m-0">Statistiques</p>
-                    <div class="m-0 border border-primary" id="stats" style="min-height: 30vh">
+                    <div class="m-0" id="stats" style="min-height: 30vh">
                         <div class="row m-0 ">
-                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-start border border-success">
+                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-start">
                                 <div class="progress-cards text-center rounded-6 d-block">
                                     <svg class="m-auto progress mt-3 bg-primary w-75 h-75 green noselect"
                                         data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
@@ -34,40 +34,67 @@
                                         <text class="value" x="50%" y="55%">0%</text>
                                     </svg>
                                     <div class="m-auto">
-                                        <span>text here</span>
+                                        <p class="fw-500 mt-1 fs-4 text-success">Traité</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-center border border-success">
+                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-center">
                                 <div class="progress-cards text-center rounded-6 d-block">
-                                    <svg class="m-auto progress mt-3 bg-primary w-75 h-75 green noselect"
-                                        data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
+                                    <div class="d-flex align-items-center justify-content-center h-100">
+                                            <div class="text-center fw-500">
+                                                <p class="m-0 fs-1">25</p>
+                                                <p class="m-0 fs-3">Signalements</p>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-end">
+                                <div class="progress-cards text-center rounded-6 d-block">
+                                    <svg class="m-auto progress mt-3 bg-primary w-75 h-75 danger noselect"
+                                        data-progress="35" x="0px" y="0px" viewBox="0 0 80 80">
                                         <path class="track" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
                                         <path class="fill" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
                                         <text class="value" x="50%" y="55%">0%</text>
                                     </svg>
                                     <div class="m-auto">
-                                        <span>text here</span>
+                                        <p class="fw-500 mt-1 fs-4 text-danger">Non Traité</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-end border border-success">
+                            <!--  -->
+                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-start">
                                 <div class="progress-cards text-center rounded-6 d-block">
-                                    <svg class="m-auto progress mt-3 bg-primary w-75 h-75 green noselect"
-                                        data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
+                                    <div class="d-flex align-items-center justify-content-center h-100">
+                                            <div class="text-center fw-500">
+                                                <p class="m-0 fs-1">50</p>
+                                                <p class="m-0 fs-3">Annonces</p>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-center">
+                                <div class="progress-cards text-center rounded-6 d-block">
+                                    <svg class="m-auto progress mt-3 bg-primary w-75 h-75 orange noselect"
+                                        data-progress="54" x="0px" y="0px" viewBox="0 0 80 80">
                                         <path class="track" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
                                         <path class="fill" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
                                         <text class="value" x="50%" y="55%">0%</text>
                                     </svg>
                                     <div class="m-auto">
-                                        <span>text here</span>
+                                        <p class="fw-500 mt-1 fs-4" style="color: #fd7e14">En Cours</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 h-50"></div>
-                            <div class="col-md-4 h-50"></div>
-                            <div class="col-md-4 h-50"></div>
-                            <div class="col-md-4 h-50"></div> 
+                            <div class="col-md-4 p-0 d-flex align-items-center justify-content-end">
+                                <div class="progress-cards text-center rounded-6 d-block">
+                                    <div class="d-flex align-items-center justify-content-center h-100">
+                                            <div class="text-center fw-500">
+                                                <p class="m-0 fs-1">100</p>
+                                                <p class="m-0 fs-3">Utilisateurs</p>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

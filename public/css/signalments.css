@@ -44,7 +44,7 @@ textarea:focus {
 
 .progress .track, .progress .fill{
 	fill: none;
-	stroke-width: 5;
+	stroke-width: 8;
 	transform: rotate(90deg)translate(0px, -80px);
 }
 .progress .track{
@@ -61,6 +61,12 @@ textarea:focus {
 }
 .progress.green .fill {
 	stroke: #35F9AE;
+}
+.progress.danger .fill {
+	stroke: #F80509;
+}
+.progress.orange .fill {
+	stroke: #fd7e14;
 }
 .progress .value, .progress .text {
 	text-anchor: middle;
