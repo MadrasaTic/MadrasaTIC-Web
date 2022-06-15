@@ -1,140 +1,56 @@
 
-
 class SignalmentsView {
-    #selectedCategory = "Catégories";
-    #selectedState = "États";
-    #selectedDate = "";
-    #selectedAnnexe = "Annexes";
-    #selectedBloc = "Blocs";
-    #selectedRoom = "Salles";
-    #selectedParentFilter = ""
-
-    addHandlerRender(handler) {
-        if (window.location.pathname.slice(1) == "signalments") handler();
+    // Annonce
+    addHandlerAnnonceState() {
+        window.addEventListener("load", () => {
+            const stateContainers = document.querySelectorAll(".state--container");
+            stateContainers.forEach(container => {
+                const state = container.dataset.annoncestate;
+                const stateIcon = container.querySelector("#color--icon");
+                const stateText = container.querySelector("#annonce--state");
+                if (state == 1) {
+                    stateText.textContent = "Publié";
+                    stateIcon.style.backgroundColor = "#35F9AE"
+                } else {
+                    stateText.textContent = "Hidden";
+                    stateIcon.style.backgroundColor = "#F80509"
+                }
+            })
+        })
     }
-
-    addHandlerParentFilterChange() {
-    
-    }
-
-    addHandlerInfraFilters() {
-
-    }
-
-    addHandlerShowModalBtn() {
+    // Modal Basic Operations
+    addHandlerShowModalBtn(handler) {
         const showModalBtn = document.querySelectorAll(".show_modal--button");
-        console.log(showModalBtn);
         showModalBtn.forEach(btn => {
-            btn.addEventListener("click", () => {
+            btn.addEventListener("click", (e) => {  
                 document.querySelector("#modal_signalments").classList.remove("d-none");
+                handler(e.target.dataset.annonceid);
             })
         })
     } 
-
     addHandlerCloseModal() {
         document.querySelector("#close_signalment--button").addEventListener("click", () => {
             document.querySelector("#modal_signalments").classList.add("d-none");
         })
     }
-
-    addHandlerApproveSignalmentBtn() {
-        document.querySelector("#approve_signalment--button").addEventListener("click", (e) => {
-            console.log("Signalements Approved");
-            // const form = e.target.closest("form");
-            // form.method = "POST";
-            // form.action = "/signalements/delete/id"
-
-            const form = e.target.closest("form");
-
-
-            form.action = `/signalments/${form.dataset.id}`
-            
-
-            e.target.closest("button").click();
-            
-            
-        })
-    }
-
-    addHandlerResendSignalmentsBtn() {
-        document.querySelector("#resend_signalment--button").addEventListener("click", () => {
-            console.log("Signalement Resent");
-        })
-    }
-
-    addHandlerDeleteSignalmentBtn() {
+    addHandlerDeleteAnnonceBtn() {
         document.querySelector("#delete_signalment--button").addEventListener("click", (e) => {
-            console.log("Signalment Delete");
-            const form = e.target.closest("form");
-            
-
-            form.action = `/signalments/delete/${form.dataset.id}`
-
-            console.log(form.action)
-
-            e.target.closest("button").click();
-
-
+            console.log("Annonce Delete");
         })
     }
-
-    addHandlerShowRattachedToBody() {
-   
-    }
-
-    addHandlerRattachedToBackBtn() {
-       
-    }
-
-    addHandlerRattachedToSubmitBtn() {
-       
-    }
-
-    addHandlerCloseRattachedToBtn() {
+    // Render Annonce ifno
+    renderAnnonceInfo(data) {
+        console.log("Fired");
+        // console.log(data.title);
+        document.querySelector("#annonce-title").textContent = data.title;
+        document.querySelector("#annonce-description").textContent = data.description;
+        // document.querySelector("#annonce-state") = data.state
+        document.querySelector("#annonce-image").src = `/images/annonces/${data.image}`;
+        document.querySelector("#annonce-annoncer").textContent = data.user.name;
 
     }
+
     
-    // Selects
-    addHandlerLoadAnnexe(handler, type, url) {
-        window.addEventListener("load", () => {
-            handler(type, url)
-        })
-    }
-
-    addHandlerAnnexeChange(handler, type, url) {
-
-    }
-
-    addHandlerBlocChange(handler, type, url) {
-    }
-
-    addHandlerModalCategoryChange() {
-   
-    }
-
-    addHandlerCategoryChange() {
-        
-    }
-
-    addHandlerStateChange() {
-
-    }
-    
-    
-
-    adHandlerSalleChange(handler) {
-      
-    }
-
-    addHandlerModalState() {
-       
-    }
-
-
-
-    renderInfraOptions(data, type) {
-
-    }
 }
 
 export default new SignalmentsView();

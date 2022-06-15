@@ -18,7 +18,6 @@ class CreateAnnoncesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('description');
-            $table->string('state');
             $table->string('image');
             $table->integer('public');
             $table->timestamps();

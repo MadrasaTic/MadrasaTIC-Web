@@ -30,7 +30,6 @@
                         <div class="row m-0" id="signa--cards">
                             <!-- Card  -->
                             @foreach($annonces as $annonce)
-                            @if($annonce['public'] == '1')
                             <div class="col-xl-6 col-md-12 px-3 py-3">
                                 <div class="card border h-100 w-100 rounded-6">
                                     <img src="{{asset('/images/annonces/'.$annonce['image'])}}"
@@ -38,30 +37,28 @@
                                     <div class="card-body h-50">
                                         <div class="card-description d-flex align-items-center text-secondary">
                                             <p class="me-auto my-auto fw-bold">{{$annonce->user->userInformation['first_name']}} {{$annonce->user->userInformation['last_name']}}</p>
-                                            <span class="d-flex px-1 rounded-6" id="state--container">
+                                            <span class="d-flex px-1 rounded-6 state--container" data-annoncestate = "{{$annonce['public']}}">
                                                 <div class="my-auto me-1" id="color--icon"></div>
-                                                <span class="fw-500">{{$annonce->state}}</span>
+                                                <span class="fw-500" id="annonce--state"></span>
                                             </span>
                                         </div>
                                         <h5 class="card-title fw-bold">{{$annonce->title}}</h5>
                                         <p class="card-text">{{$annonce->description}}</p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
-                                            <button href={{'annonces/'.$annonce['id']}} class="btn btn-primary show_modal--button">Détails</button>
+                                            <button class="btn btn-primary show_modal--button" data-annonceID="{{ $annonce['id'] }}">Détails</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @include('./include/showAnnonceModal')
-                            @endif
                             @endforeach
                         </div>
                     </div>
                 </div>
             </div> <!-- Middle End-->
-
-            <!-- Show Signalments Modal -->
             
+            <!-- Show Annonce Modal -->
+            @include('./include/showAnnonceModal')
 
             <!-- Notifications Bar -->
             @include('./include/notificationsPage');

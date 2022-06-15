@@ -9,9 +9,10 @@ import signalmentsView from "./Views/signalmentsView.js";
 import annoncesView from "./Views/annoncesView.js"
 // Models
 import * as signalmentsModal from "./Modals/signalmentsModal.js";
+import * as annonceModal from "./Modals/annonceModal.js";
 
 
-// Signalements
+// Signalements Controllers
 function controlSignalements () {
     console.log("Signalments Controller Loaded");
 }
@@ -21,6 +22,15 @@ async function controlInfra(type, url) {
     const data = await signalmentsModal.loadInfra(type, url);
     // Render Them
     signalmentsView.renderInfraOptions(data, type);
+}
+
+// Annonces Controllers
+async function controlAnnonce(id) {
+    // Get Annonce's infos
+    const data = await annonceModal.loadAnnonceInfo(id);
+    // Render Them
+    console.log(data);
+    annoncesView.renderAnnonceInfo(data);
 }
 
 
@@ -59,28 +69,12 @@ if ((window.location.pathname.slice(1) == "annonces")) {
     console.log("Annonces");
 
     function init() {
-        annoncesView.addHandlerRender(controlSignalements);
-        annoncesView.addHandlerParentFilterChange();
-        annoncesView.addHandlerInfraFilters();
-        annoncesView.addHandlerShowModalBtn();
-        annoncesView.addHandlerCloseModal();
-        annoncesView.addHandlerApproveSignalmentBtn();
-        annoncesView.addHandlerResendSignalmentsBtn();
-        annoncesView.addHandlerDeleteSignalmentBtn();
-        annoncesView.addHandlerShowRattachedToBody();
-        annoncesView.addHandlerRattachedToBackBtn();
-        annoncesView.addHandlerRattachedToSubmitBtn();
-        annoncesView.addHandlerCloseRattachedToBtn();
+        // OnLoad
+        annoncesView.addHandlerAnnonceState();
         // Modal
-        annoncesView.addHandlerModalState();
-        annoncesView.addHandlerModalCategoryChange();
-        // Selects
-        annoncesView.addHandlerCategoryChange();
-        annoncesView.addHandlerStateChange();
-        annoncesView.addHandlerLoadAnnexe(controlInfra, "annexe", '/infrastructure/annexe');
-        annoncesView.addHandlerAnnexeChange(controlInfra, "bloc", '/infrastructure/bloc/listing/' );
-        annoncesView.addHandlerBlocChange(controlInfra, "room", '/infrastructure/room/listing/');
-        annoncesView.adHandlerSalleChange();
+        annoncesView.addHandlerShowModalBtn(controlAnnonce);
+        annoncesView.addHandlerCloseModal();
+        annoncesView.addHandlerDeleteAnnonceBtn();
     }
 
     init();

@@ -38,13 +38,13 @@ class SignalmentsView {
         window.addEventListener("load", (e) => {
             
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-         
+
             //
             allCards.forEach(card => card.classList.remove("d-none"))
 
             
             let notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
-      
+
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
 
             document.querySelectorAll(".color--icon").forEach(color => {
