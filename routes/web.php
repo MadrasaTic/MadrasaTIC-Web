@@ -63,6 +63,10 @@ Route::get('/annonces', function () {
     return view('annonces');
 });
 
+Route::get('/addAnnonce', function () {
+    return view('addAnnonce');
+});
+
 // Route::get('/permissions', function () {
 //     return view('permissions');
 // });
