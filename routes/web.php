@@ -61,8 +61,14 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 //     return view('permissions');
 // });
 
+// Added
+Route::get('/addSignalement', function () {
+    return view('addSignalement');
+});
 
-
+Route::get('/signalmentsRapport', function () {
+    return view('signalmentsRapport');
+});
 //====================================================================================================
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback']);

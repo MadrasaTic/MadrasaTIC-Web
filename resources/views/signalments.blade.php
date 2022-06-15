@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <!-- Date ranger picker -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
 </head>
 
 <body>
@@ -41,10 +40,10 @@
                             <div class="col-md-4 p-0 d-flex align-items-center justify-content-center">
                                 <div class="progress-cards text-center rounded-6 d-block">
                                     <div class="d-flex align-items-center justify-content-center h-100">
-                                            <div class="text-center fw-500">
-                                                <p class="m-0 fs-1">25</p>
-                                                <p class="m-0 fs-3">Signalements</p>
-                                            </div>
+                                        <div class="text-center fw-500">
+                                            <p class="m-0 fs-1">25</p>
+                                            <p class="m-0 fs-3">Signalements</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -65,10 +64,10 @@
                             <div class="col-md-4 p-0 d-flex align-items-center justify-content-start">
                                 <div class="progress-cards text-center rounded-6 d-block">
                                     <div class="d-flex align-items-center justify-content-center h-100">
-                                            <div class="text-center fw-500">
-                                                <p class="m-0 fs-1">50</p>
-                                                <p class="m-0 fs-3">Annonces</p>
-                                            </div>
+                                        <div class="text-center fw-500">
+                                            <p class="m-0 fs-1">50</p>
+                                            <p class="m-0 fs-3">Annonces</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -88,10 +87,10 @@
                             <div class="col-md-4 p-0 d-flex align-items-center justify-content-end">
                                 <div class="progress-cards text-center rounded-6 d-block">
                                     <div class="d-flex align-items-center justify-content-center h-100">
-                                            <div class="text-center fw-500">
-                                                <p class="m-0 fs-1">100</p>
-                                                <p class="m-0 fs-3">Utilisateurs</p>
-                                            </div>
+                                        <div class="text-center fw-500">
+                                            <p class="m-0 fs-1">100</p>
+                                            <p class="m-0 fs-3">Utilisateurs</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +111,8 @@
                         <div class="col position-relative d-flex justify-content-end" id="signa_search--container">
                             <!-- Input -->
                             <div class="h-75 w-100" id="search_input--container">
-                                <input type="text" name="search" class="px-3 h-100 w-100" id="search--input" placeholder="Rechercher ...">
+                                <input type="text" name="search" class="px-3 h-100 w-100" id="search--input"
+                                    placeholder="Rechercher ...">
                             </div>
                             <!-- Icon -->
                             <div class=" me-2" id="search_icon--container">
@@ -124,14 +124,14 @@
                     <div class="row mt-2 m-0">
                         <select class="col py-2 m-2" name="" id="category--select">
                             <option value="none" selected>Catégories</option>
-                                @foreach($categories as $category)
-                                <option value="{{$category->id}}" >{{$category->name}}</option>
-                                @endforeach
+                            @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
                         </select>
                         <select class="col py-2 m-2" name="" id="state--select">
                             <option value="none" selected>États</option>
                             @foreach($states as $state)
-                                <option value="{{$state->id}}">{{$state->name}}</option>
+                            <option value="{{$state->id}}">{{$state->name}}</option>
                             @endforeach
                         </select>
                         <button class="btn col py-2 m-2 text-start" id="infra_filter--button">Infrastructure</button>
@@ -153,33 +153,37 @@
                             @foreach ($signalments as $signalment)
                             {{-- {{ dd($signalment);}} --}}
                             @if($signalment['published'] == '1')
-                            <div
-                                class="cardDiv col-xl-6 col-md-12 px-3 py-3"
+                            <div class="cardDiv col-xl-6 col-md-12 px-3 py-3"
                                 data-state="{{ $signalment->lastSignalementVC->state['name'] }}"
                                 data-category="{{ $signalment->lastSignalementVC->category['name'] }}"
                                 data-annexe="{{ $signalment->annexe['name'] }}"
                                 data-bloc="{{ $signalment->bloc ? $signalment->bloc['name']: null }}"
                                 data-room="{{ $signalment->room ? $signalment->room['name']: null }}"
-                                data-title="{{ $signalment['title'] }}"
-                            >
+                                data-title="{{ $signalment['title'] }}">
                                 <!-- Card  -->
                                 <div class="card border h-100 w-100 rounded-6">
                                     <img src="{{ asset('/storage/images/signalements/'.$signalment->lastSignalementVC['attachement']) }}"
                                         class="img-fluid card-img-top h-50 rounded-6" alt="Image du signalement">
                                     <div class="card-body h-50">
                                         <div class="card-description d-flex align-items-center text-secondary">
-                                            <p class="me-auto my-auto fw-bold">{{ $signalment->lastSignalementVC->category['name'] }}</p>
+                                            <p class="me-auto my-auto fw-bold">
+                                                {{ $signalment->lastSignalementVC->category['name'] }}</p>
                                             <span class="d-flex px-1 rounded-6" id="state--container">
-                                                <div class="my-auto me-1" id="color--icon" style="background-color: {{ $signalment->lastSignalementVC->state['color'] }}"></div>
-                                                <span class="fw-500">{{ $signalment->lastSignalementVC->state['name'] }}</span>
+                                                <div class="my-auto me-1" id="color--icon"
+                                                    style="background-color: {{ $signalment->lastSignalementVC->state['color'] }}">
+                                                </div>
+                                                <span
+                                                    class="fw-500">{{ $signalment->lastSignalementVC->state['name'] }}</span>
                                             </span>
                                         </div>
                                         <h5 class="card-title fw-bold">{{ $signalment['title'] }}</h5>
                                         <p class="card-text">{{ $signalment['description'] }}</p>
-                                        <p class="card-text" >{{ $signalment->annexe['name']}} / {{ $signalment->bloc['name']}} / {{ $signalment->room['name']}}</p>
+                                        <p class="card-text">{{ $signalment->annexe['name']}} /
+                                            {{ $signalment->bloc['name']}} / {{ $signalment->room['name']}}</p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
-                                            <a href="{{ '#'.$signalment['id'] }}" class="btn btn-primary" id="show_modal--button">Détails</a>
+                                            <a href="{{ '#'.$signalment['id'] }}"
+                                                class="btn btn-primary show_modal--button">Détails</a>
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +199,7 @@
             @include('./include/showSignalmentModal')
 
             <!-- Notifications Bar -->
-            @include('./include/notificationsPage');
+            @include('./include/notificationsPage')
         </div>
     </div>
 
@@ -207,7 +211,7 @@
             for (var i = 0; i < array.length; i++) {
                 callback.call(scope, i, array[i]);
             }
-        };
+        }
         window.onload = function () {
             var max = -219.99078369140625;
             forEach(document.querySelectorAll('.progress'), function (index, value) {
@@ -225,12 +229,12 @@
             mode: "range",
             enableTime: true,
             dateFormat: "d.m.Y",
-            onChange: function(selectedDates, dateStr, instance) {
+            onChange: function (selectedDates, dateStr, instance) {
                 const dates = dateStr.split(" to ");
                 if (dates.length == 1) return;
                 console.log(dates);
             }
-        });
+        })
 
     </script>
 

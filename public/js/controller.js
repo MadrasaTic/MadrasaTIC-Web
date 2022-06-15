@@ -28,22 +28,32 @@ if ((window.location.pathname.slice(1) == "signalments")) {
         signalmentsView.addHanlderApplyStateColors();
         signalmentsView.addHandlerRender(controlSignalements);
         signalmentsView.addHandlerParentFilterChange();
-        signalmentsView.addHandlerInfraFilters();
+        // Basic Modal Operations
         signalmentsView.addHandlerShowModalBtn();
-        // Modal
+        signalmentsView.addHandlerCloseModal();
+        
         signalmentsView.addHandlerApproveSignalmentBtn();
         signalmentsView.addHandlerResendSignalmentsBtn();
         signalmentsView.addHandlerDeleteSignalmentBtn();
-        signalmentsView.addHandlerRattachedToBackBtn();
+        // Rattached To
         signalmentsView.addHandlerShowRattachedToBody();
         signalmentsView.addHandlerCloseRattachedToBtn();
+        
+        signalmentsView.addHandlerDivClick();
+
+        signalmentsView.addHandlerRattachedToBackBtn();
         signalmentsView.addHandlerRattachedToSubmitBtn();
-        signalmentsView.addHandlerModalState();
+        
         signalmentsView.addHandlerModalCategoryChange();
-        signalmentsView.addHandlerCloseModal();
-        // Selects
+        // Rapport
+        signalmentsView.addHandlerShowRapportBody();
+        signalmentsView.addHandlerCloseRapportBtn();
+        signalmentsView.addHandlerRapportAddBtn();
+        signalmentsView.addHandlerRapportBackBtn();
+        // Filters
         signalmentsView.addHandlerCategoryChange();
         signalmentsView.addHandlerStateChange();
+        signalmentsView.addHandlerInfraFilters();
         signalmentsView.addHandlerLoadAnnexe(controlInfra, "annexe", '/infrastructure/annexe');
         signalmentsView.addHandlerAnnexeChange(controlInfra, "bloc", '/infrastructure/bloc/listing/' );
         signalmentsView.addHandlerBlocChange(controlInfra, "room", '/infrastructure/room/listing/');

@@ -9,6 +9,8 @@ class SignalmentsView {
     #selectedRoom = "Salles";
     #selectedParentFilter = "aiguillés";
 
+
+    // Init
     addHandlerRender(handler) {
         if (window.location.pathname.slice(1) == "signalments") handler();
     }
@@ -16,28 +18,9 @@ class SignalmentsView {
     addHanlderApplyStateColors() {
         window.addEventListener("load", () => {
             document.querySelectorAll(".color--icon").forEach(color => {
-                color.style.backgroundColor = color.dataset.color
+                color.style.backgroundColor = color.dataset.color;
             })
         })
-    }
-    
-    addHandlerSearchInput() {
-        const input = document.querySelector("#search--input")
-        input.addEventListener("input", (e) => {
-            let allCards = Array.from(document.querySelectorAll(".cardDiv"));
-            // Display All cards
-            allCards.forEach(card => card.classList.add("d-none"));
-            // 
-            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
-            if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
-            if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
-            if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
-            allCards = allCards.filter(card => card.dataset.title.includes(input.value) || card.dataset.category.includes(input.value)) 
-            //
-            allCards.forEach(card => card.classList.remove("d-none"));
-            window.scrollBy(0, 150);
-        })
-
     }
 
     addHandlerParentFilterChange() {
@@ -67,59 +50,68 @@ class SignalmentsView {
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
     }
-
-    addHandlerInfraFilters() {
-        document.querySelector("#infra_filter--button").addEventListener("click", () => {
-            document.querySelector("#infra-filters--container").classList.toggle("d-none")
+    
+    addHandlerSearchInput() {
+        const input = document.querySelector("#search--input")
+        input.addEventListener("input", (e) => {
+            let allCards = Array.from(document.querySelectorAll(".cardDiv"));
+            // Display All cards
+            allCards.forEach(card => card.classList.add("d-none"));
+            // 
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
+            if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
+            if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
+            allCards = allCards.filter(card => card.dataset.title.includes(input.value) || card.dataset.category.includes(input.value)) 
+            //
+            allCards.forEach(card => card.classList.remove("d-none"));
+            window.scrollBy(0, 150);
         })
     }
 
+
+    // Modal Basic Operations
     addHandlerShowModalBtn() {
-        document.querySelector("#show_modal--button").addEventListener("click", () => {
-            document.querySelector("#modal_signalments").classList.remove("d-none");
+        const showModalBtn = document.querySelectorAll(".show_modal--button");
+        showModalBtn.forEach(btn => {
+            btn.addEventListener("click", (e) => {  
+                document.querySelector("#modal_signalments").classList.remove("d-none");
+            })
         })
-    }
-
+    } 
     addHandlerCloseModal() {
         document.querySelector("#close_signalment--button").addEventListener("click", () => {
             document.querySelector("#modal_signalments").classList.add("d-none");
         })
     }
-
     addHandlerApproveSignalmentBtn() {
         document.querySelector("#approve_signalment--button").addEventListener("click", (e) => {
             console.log("Signalements Approved");
-            // const form = e.target.closest("form");
-            // form.action = `/signalments/${form.dataset.id}`
-            // e.target.closest("button").click();
         })
     }
-
     addHandlerResendSignalmentsBtn() {
         document.querySelector("#resend_signalment--button").addEventListener("click", () => {
             console.log("Signalement Resent");
         })
     }
-
     addHandlerDeleteSignalmentBtn() {
         document.querySelector("#delete_signalment--button").addEventListener("click", (e) => {
             console.log("Signalment Delete");
-            // const form = e.target.closest("form");
-            // form.action = `/signalments/delete/${form.dataset.id}`
-            // console.log(form.action)
-            // e.target.closest("button").click();
         })
     }
 
+    // Modal Rattached To
     addHandlerShowRattachedToBody() {
-        document.querySelector("#showRattachedTo--button").addEventListener("click", () => {
+        document.querySelector("#showRattachedTo--button").addEventListener("click", (e) => {
+            e.preventDefault()
             document.querySelector("#signalments--body").classList.add("d-none");
             document.querySelector("#rattachedTo--body").classList.remove("d-none");
         })
     }
 
     addHandlerRattachedToBackBtn() {
-        document.querySelector("#rattachedTo_back--button").addEventListener("click", () => {
+        document.querySelector("#rattachedTo_back--button").addEventListener("click", (e) => {
+            e.preventDefault()
             document.querySelector("#signalments--body").classList.remove("d-none");
             document.querySelector("#rattachedTo--body").classList.add("d-none");
         })
@@ -138,7 +130,54 @@ class SignalmentsView {
         })
     }
 
-    // Selects
+    addHandlerDivClick() {
+        const rattachedToBody = document.querySelector("#rattachedTo--body");
+        const rattachedToCards = rattachedToBody.querySelectorAll(".card");
+        rattachedToCards.forEach(card => {
+            card.addEventListener("click", (e) => {
+                const divCard = e.target.closest(".card");
+                divCard.classList.toggle("cardClicked");
+            })
+        })
+    }
+
+    // Rapport Body
+    addHandlerShowRapportBody() {
+        document.querySelector("#showRapport--button").addEventListener("click", (e)=> {
+            e.preventDefault();
+            document.querySelector("#signalments--body").classList.add("d-none");
+            document.querySelector("#rapport--body").classList.remove("d-none");
+        })
+    }
+
+    addHandlerCloseRapportBtn() {
+        document.querySelector("#close_rapport--icon").addEventListener("click", () => {
+            document.querySelector("#signalments--body").classList.remove("d-none");
+            document.querySelector("#rapport--body").classList.add("d-none");
+        })
+    }
+
+    addHandlerRapportAddBtn() {
+        document.querySelector("#rapport_add--button").addEventListener("click", (e) =>{
+            console.log("Add Rapport");
+        })
+    } 
+
+    addHandlerRapportBackBtn() {
+        document.querySelector("#rapport_back--button").addEventListener("click", (e) =>{
+            e.preventDefault()
+            document.querySelector("#signalments--body").classList.remove("d-none");
+            document.querySelector("#rapport--body").classList.add("d-none");
+        })  
+    }
+
+    // Select Handlers    
+    addHandlerInfraFilters() {
+        document.querySelector("#infra_filter--button").addEventListener("click", () => {
+            document.querySelector("#infra-filters--container").classList.toggle("d-none")
+        })
+    }
+
     addHandlerLoadAnnexe(handler, type, url) {
         window.addEventListener("load", () => {
             handler(type, url)
@@ -189,8 +228,6 @@ class SignalmentsView {
             const notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.annexe && card.dataset.annexe != selectedOption.text);
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
-
-
     }
 
     addHandlerBlocChange(handler, type, url) {
@@ -231,7 +268,6 @@ class SignalmentsView {
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
             allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
-
             //
             allCards.forEach(card => card.classList.remove("d-none"))
             // If Categories Reset
@@ -290,8 +326,6 @@ class SignalmentsView {
         })
     }
 
-
-
     adHandlerSalleChange(handler) {
         document.querySelector("#room--select").addEventListener("change", (e) => {
             // Filtrage Code
@@ -305,7 +339,6 @@ class SignalmentsView {
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
             allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
             allCards = allCards.filter(card => card.dataset.bloc == this.#selectedBloc);
-
             //
             allCards.forEach(card => card.classList.remove("d-none"))
             // If Categories Reset
@@ -315,13 +348,6 @@ class SignalmentsView {
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
     }
-
-    addHandlerModalState() {
-        document.querySelector("#modalState--container").addEventListener("click", () => {
-            console.log("Modal state change");
-        })
-    }
-
 
 
     renderInfraOptions(data, type) {
