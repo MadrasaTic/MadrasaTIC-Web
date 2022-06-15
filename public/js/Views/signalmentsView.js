@@ -20,6 +20,25 @@ class SignalmentsView {
             })
         })
     }
+    
+    addHandlerSearchInput() {
+        const input = document.querySelector("#search--input")
+        input.addEventListener("input", (e) => {
+            let allCards = Array.from(document.querySelectorAll(".cardDiv"));
+            // Display All cards
+            allCards.forEach(card => card.classList.add("d-none"));
+            // 
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
+            if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
+            if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
+            allCards = allCards.filter(card => card.dataset.title.includes(input.value) || card.dataset.category.includes(input.value)) 
+            //
+            allCards.forEach(card => card.classList.remove("d-none"));
+            window.scrollBy(0, 150);
+        })
+
+    }
 
     addHandlerParentFilterChange() {
         document.querySelector("#signa--nav").addEventListener("click", (e) => {
@@ -28,7 +47,7 @@ class SignalmentsView {
             document.querySelector(".nav_item--hoverd").classList.remove("nav_item--hoverd");
             e.target.classList.add("nav_item--hoverd");
             //
-            let allCards = Array.from(document.querySelectorAll(".cardDiv"))
+            let allCards = Array.from(document.querySelectorAll(".cardDiv"));
             allCards.forEach(card => card.classList.remove("d-none"));
             this.#selectedParentFilter = e.target.dataset.type;
             let notMatchCardTAB = ""

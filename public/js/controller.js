@@ -48,6 +48,8 @@ if ((window.location.pathname.slice(1) == "signalments")) {
         signalmentsView.addHandlerAnnexeChange(controlInfra, "bloc", '/infrastructure/bloc/listing/' );
         signalmentsView.addHandlerBlocChange(controlInfra, "room", '/infrastructure/room/listing/');
         signalmentsView.adHandlerSalleChange();
+        // Inputs
+        signalmentsView.addHandlerSearchInput();
     }
     init();
 }

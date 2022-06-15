@@ -112,10 +112,7 @@
                         <div class="col position-relative d-flex justify-content-end" id="signa_search--container">
                             <!-- Input -->
                             <div class="h-75 w-100" id="search_input--container">
-                                <form action="/search" method="get"  class="h-100 w-100">
-                                    <input type="text" name="search" class="px-3 h-100 w-100" id="search--input"
-                                                            placeholder="Rechercher ...">
-                                </form>
+                                <input type="text" name="search" class="px-3 h-100 w-100" id="search--input" placeholder="Rechercher ...">
                             </div>
                             <!-- Icon -->
                             <div class=" me-2" id="search_icon--container">
@@ -163,6 +160,7 @@
                                 data-annexe="{{ $signalment->annexe['name'] }}"
                                 data-bloc="{{ $signalment->bloc ? $signalment->bloc['name']: null }}"
                                 data-room="{{ $signalment->room ? $signalment->room['name']: null }}"
+                                data-title="{{ $signalment['title'] }}"
                             >
                                 <!-- Card  -->
                                 <div class="card border h-100 w-100 rounded-6">
