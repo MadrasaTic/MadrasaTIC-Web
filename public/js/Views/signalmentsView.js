@@ -141,7 +141,7 @@ class SignalmentsView {
         })
     }
 
-    // Rapport Body
+    // Add Rapport Body
     addHandlerShowRapportBody() {
         document.querySelector("#showRapport--button").addEventListener("click", (e)=> {
             e.preventDefault();
@@ -168,6 +168,55 @@ class SignalmentsView {
             e.preventDefault()
             document.querySelector("#signalments--body").classList.remove("d-none");
             document.querySelector("#rapport--body").classList.add("d-none");
+        })  
+    }
+
+    addHandlerInputDispaly() {
+        const rapportBody = document.querySelector("#rapport--body");
+        const inputs = Array.from(rapportBody.querySelectorAll("input"));
+        inputs.push(rapportBody.querySelector("textarea"));
+
+        inputs.forEach(input => {
+            input.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                }
+            })
+        })
+    }
+
+    addHandlerRapportImgBtn() {
+        const addImageBtn = document.querySelector("#rapport_image--button");
+        const browseInput = document.querySelector("#rapport--browse");
+        addImageBtn.addEventListener("click", (e) => {
+            browseInput.click();
+        })
+        browseInput.addEventListener("change", (e) => {
+            document.querySelector("#rapport_images--p").textContent = browseInput.value;
+        })
+    }
+
+    // View Rapport
+    addHandlerViewRapportBody() {
+        document.querySelector("#viewRapport--button").addEventListener("click", (e)=> {
+            e.preventDefault();
+            document.querySelector("#signalments--body").classList.add("d-none");
+            document.querySelector("#viewRapport--body").classList.remove("d-none");
+        })
+    }
+
+    addHandlerCloseViewRapportBtn() {
+        document.querySelector("#close_viewRapport--icon").addEventListener("click", () => {
+            document.querySelector("#signalments--body").classList.remove("d-none");
+            document.querySelector("#viewRapport--body").classList.add("d-none");
+        })
+    }
+
+    addHandlerViewRapportBackBtn() {
+        document.querySelector("#viewRapport_back--button").addEventListener("click", (e) =>{
+            e.preventDefault()
+            document.querySelector("#signalments--body").classList.remove("d-none");
+            document.querySelector("#viewRapport--body").classList.add("d-none");
         })  
     }
 

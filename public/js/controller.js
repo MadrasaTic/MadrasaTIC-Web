@@ -45,11 +45,18 @@ if ((window.location.pathname.slice(1) == "signalments")) {
         signalmentsView.addHandlerRattachedToSubmitBtn();
         
         signalmentsView.addHandlerModalCategoryChange();
-        // Rapport
+        // Add Rapport
         signalmentsView.addHandlerShowRapportBody();
         signalmentsView.addHandlerCloseRapportBtn();
         signalmentsView.addHandlerRapportAddBtn();
         signalmentsView.addHandlerRapportBackBtn();
+        signalmentsView.addHandlerInputDispaly();
+        signalmentsView.addHandlerRapportImgBtn();
+        // View Rapport
+        signalmentsView.addHandlerViewRapportBody();
+        signalmentsView.addHandlerCloseViewRapportBtn();
+        signalmentsView.addHandlerViewRapportBackBtn();
+
         // Filters
         signalmentsView.addHandlerCategoryChange();
         signalmentsView.addHandlerStateChange();
