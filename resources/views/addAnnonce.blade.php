@@ -30,19 +30,21 @@
         <div class="col-md-5 h-75 px-6 rounded-6 " style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
             <div class="">
                 <h3 class="text-center mb-4 mt-3">Ajouter une Annonce</h3>
-                <form class="w-100">
+                <form class="w-100" method="POST" action="/annonces" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group mb-2">
                         <label>Titre de l'Annonce</label>
-                        <input type="email" class="form-control" placeholder="Titre de l'Annonce">
+                        <input name="title" class="form-control" placeholder="Titre de l'Annonce">
                     </div>
                     <div class="form-group mb-2">
                         <label>Déscription de l'Annonce</label>
-                        <textarea class="form-control" rows="10"></textarea>
+                        <textarea name="description" class="form-control" rows="10"></textarea>
                     </div>
+                    
                     <div class="form-group mb-2">
-                        <label class="mb-1">Ajouter une Image (Non Obligatoire) <br></label>
+                        <label class="mb-1">Ajouter une Image <br></label>
                         <div class="form-group">
-                            <input type="file" class="form-control-file" accept=".jpg" id="#browse-input">
+                            <input  name="image" type="file" class="form-control-file"  id="#browse-input">
                         </div>
                     </div>
     

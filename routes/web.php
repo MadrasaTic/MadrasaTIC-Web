@@ -179,6 +179,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         // Annonces
         Route::get('/annonces',[AnnoncesController::class, 'index']);
         Route::get('/annonces/{id}',[AnnoncesController::class, 'show']);
+        Route::post('/annonces',[AnnoncesController::class, 'Add']);
         Route::get('/annonces/delete/{id}',[AnnoncesController::class, 'delete']);
     });
 

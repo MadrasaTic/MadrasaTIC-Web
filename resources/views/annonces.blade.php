@@ -30,6 +30,7 @@
                         <div class="row m-0" id="signa--cards">
                             <!-- Card  -->
                             @foreach($annonces as $annonce)
+                            
                             <div class="col-xl-6 col-md-12 px-3 py-3">
                                 <div class="card border h-100 w-100 rounded-6">
                                     <img src="{{asset('/images/annonces/'.$annonce['image'])}}"
