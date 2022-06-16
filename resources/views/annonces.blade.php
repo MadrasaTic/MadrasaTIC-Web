@@ -44,7 +44,7 @@
                                             </span>
                                         </div>
                                         <h5 class="card-title fw-bold">{{$annonce->title}}</h5>
-                                        <p class="card-text">{{$annonce->description}}</p>
+                                        <p class="card-text">{{$annonce->description}}</p>  
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
                                             <button class="btn btn-primary show_modal--button" data-annonceID="{{ $annonce['id'] }}">Détails</button>

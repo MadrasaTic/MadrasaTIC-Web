@@ -9,7 +9,7 @@ use Auth;
 
 class Annonce extends Model
 {
-    use HasFactory;
+    use HasFactory , SoftDeletes;
      /**
      * The relationships that should always be loaded.
      *

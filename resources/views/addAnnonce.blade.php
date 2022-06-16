@@ -40,6 +40,13 @@
                         <label>Déscription de l'Annonce</label>
                         <textarea name="description" class="form-control" rows="10"></textarea>
                     </div>
+                    <div class="form-group mb-2">
+                        
+                        <input name="beginDate" type="date" class="form-control" placeholder="Titre de l'Annonce">
+                    </div>
+                    <div class="form-group mb-2">
+                        <input name="endDate" type="date" class="form-control" placeholder="Titre de l'Annonce">
+                    </div>
                     
                     <div class="form-group mb-2">
                         <label class="mb-1">Ajouter une Image <br></label>

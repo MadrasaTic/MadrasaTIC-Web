@@ -20,8 +20,6 @@ class CreateAnnoncesTable extends Migration
             $table->string('description');
             $table->string('image');
             $table->integer('public');
-            //$table->date('beginTime')->nullable();
-            //$table->date('endTime')->nullable();
             $table->timestamps();
         });
     }

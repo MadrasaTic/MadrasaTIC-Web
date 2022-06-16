@@ -38,12 +38,12 @@ class AnnoncesController extends Controller
     public function Add(Request $request)
     {
         
-        
-        
         $annonce= new Annonce;
         $annonce->user_id = $request->user()->id;
         $annonce->title = $request->title;
         $annonce->description = $request->description;
+        $annonce->beginDate = $request->beginDate;
+        $annonce->endDate = $request->endDate;
         $annonce['public'] = 1;
         
           
@@ -60,16 +60,12 @@ class AnnoncesController extends Controller
           return redirect('annonces');
     }
            
-
-        
-        
-        
-
-     public function delete($id)
+    
+    
+    public function delete($id)
     {
         $annonce = Annonce::findOrFail($id);
-        $annonce['public'] = 0;
-        $annonce->save();
+        $annonce->delete();
 
         return redirect('annonces');
 

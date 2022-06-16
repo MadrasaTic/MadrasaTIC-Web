@@ -66,6 +66,9 @@ Route::get('/annonces', function () {
 Route::get('/addAnnonce', function () {
     return view('addAnnonce');
 });
+Route::get('/Modifyannonces', function () {
+    return view('Modifyannonces');
+});
 
 // Route::get('/permissions', function () {
 //     return view('permissions');
@@ -180,6 +183,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/annonces',[AnnoncesController::class, 'index']);
         Route::get('/annonces/{id}',[AnnoncesController::class, 'show']);
         Route::post('/annonces',[AnnoncesController::class, 'Add']);
+        Route::get('/Modifyannonces/{id}/edit', [AnnoncesController::class, 'edit']);
+        Route::post('/annonces/{id}',[AnnoncesController::class,'update']);
         Route::get('/annonces/delete/{id}',[AnnoncesController::class, 'delete']);
     });
 
