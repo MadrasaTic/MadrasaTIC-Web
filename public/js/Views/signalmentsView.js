@@ -136,6 +136,8 @@ class SignalmentsView {
         rattachedToCards.forEach(card => {
             card.addEventListener("click", (e) => {
                 const divCard = e.target.closest(".card");
+                const selectedCard = rattachedToBody.querySelector(".cardClicked");
+                selectedCard && selectedCard.classList.remove("cardClicked");
                 divCard.classList.toggle("cardClicked");
             })
         })
