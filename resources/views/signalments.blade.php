@@ -18,7 +18,7 @@
 
             <!-- Middle -->
             <div class="p-4 col-md-7">
-                <h3 class="fw-bold mt-4">Bonjour Yacine ! </h3>
+                <h3 class="fw-bold mt-4">Bonjour {{ Auth()->user()->userInformation->first_name }} ! </h3>
                 <!-- Stats -->
                 <div class="mb-4 mt-2" id="stats--container">
                     <p class="fs-3 m-0">Statistiques</p>
