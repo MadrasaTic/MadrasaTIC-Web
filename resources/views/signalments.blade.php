@@ -162,7 +162,7 @@
                                 data-title="{{ $signalment['title'] }}">
                                 <!-- Card  -->
                                 <div class="card border h-100 w-100 rounded-6">
-                                    <img src="{{ asset('/storage/images/signalements/'.$signalment->lastSignalementVC['attachement']) }}"
+                                    <img src="{{ asset('/storage/'.$signalment->lastSignalementVC['attachement']) }}"
                                         class="img-fluid card-img-top h-50 rounded-6" alt="Image du signalement">
                                     <div class="card-body h-50">
                                         <div class="card-description d-flex align-items-center text-secondary">
@@ -178,8 +178,9 @@
                                         </div>
                                         <h5 class="card-title fw-bold">{{ $signalment['title'] }}</h5>
                                         <p class="card-text">{{ $signalment['description'] }}</p>
-                                        <p class="card-text">{{ $signalment->annexe['name']}} /
-                                            {{ $signalment->bloc['name']}} / {{ $signalment->room['name']}}</p>
+                                        <p class="card-text">
+                                            <i class="fa-solid fa-building px-1"></i>
+                                            {{ $signalment->annexe['name']}} {{ $signalment->bloc ? "/ ".$signalment->bloc['name'] : null }} {{ $signalment->room ? "/ ".$signalment->room['name']: null }}</p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
                                             <a href="{{ '#'.$signalment['id'] }}"
@@ -197,8 +198,8 @@
 
             <!-- Notifications Bar -->
             @include('./include/notificationsPage')
-            
-            
+
+
         </div>
     </div>
     <!-- Show Signalments Modal -->
