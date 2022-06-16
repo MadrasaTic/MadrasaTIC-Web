@@ -11,16 +11,9 @@
                             <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
                                 aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0">
-                                    @if($signalment->annexe != null)
-                                    <li class="breadcrumb-item fw-bold"><a>Cite: {{ $signalment->annexe->name }}</a>
-                                    </li>
-                                    @endif
-                                    @if($signalment->bloc != null)
-                                    <li class="breadcrumb-item fw-bold"><a>Bloc: {{ $signalment->bloc->name }}</a></li>
-                                    @endif
-                                    @if($signalment->room != null)
-                                    <li class="breadcrumb-item fw-bold"><a>Salle: {{ $signalment->room->name }}</a></li>
-                                    @endif
+                                    <li class="breadcrumb-item fw-bold"><a id="signalments-annexe">Cite Here</a></li>
+                                    <li class="breadcrumb-item fw-bold"><a id="signalments-bloc">Bloc Here</a></li>
+                                    <li class="breadcrumb-item fw-bold"><a id="signalments-room">Room Here</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -45,16 +38,14 @@
                             </div>
                         </div>
                         <div class="rounded-5" id="modal_image--container" style="height: 50vh">
-                            <img src="{{ asset('/storage/images/signalements/'.$signalment->lastSignalementVC['attachement']) }}"
+                            <img src="signalments-img"
                                 class="img-fluid h-100 w-100 rounded-5" alt="Image du signalement">
                         </div>
                         <div class="mt-3" id="modal_infos--container">
-                            <h2>{{ $signalment['title'] }}</h2>
-                            <p class="m-0 fs-5 text-justify" style="text-align: justify;">
-                                {{ $signalment['description'] }}</p>
+                            <h2 id="signalment-title">Titre Here</h2>
+                            <p class="m-0 fs-5 text-justify" id="signalment-description" style="text-align: justify;">Description Here</p>
                             <p class="fw-bold mb-0 mt-3 text-end">Signalé par : <span
-                                    class="fw-normal">{{ $signalment->creator->userInformation->first_name }}
-                                    {{$signalment->creator->userInformation->last_name}}</span></p>
+                                    class="fw-normal" id="signalments-user">User Here</span></p>
                         </div>
                         <div class="mt-3">
                             <button class="btn btn-secondary w-100 fw-500" id="showRattachedTo--button">
@@ -122,9 +113,8 @@
                 </div>
                 <!-- Rattached-To END -->
 
-
                 <!-- Add Rapport  -->
-                <div class="d-none" id="rapport--body">
+                <div class="d-none animate__animated  animate__fadeIn" id="rapport--body">
                     <div class="modal-header">
                         <p class="m-0 h5">Rattacher un Rapport</p>
                         <button type="button" class="btn-close" aria-label="Close" id="close_rapport--icon""></button>
@@ -133,12 +123,11 @@
                             <div>
                                 <div class="form-group mb-2">
                                     <label>Titre du Rapport</label>
-                                    <input type="text" class="form-control" placeholder="Titre du Rapport"
-                                        data-type="h1">
+                                    <input type="text" class="form-control" placeholder="Titre du Rapport" id="addRapport-title">
                                 </div>
                                 <div class="form-group mb-4">
                                     <label>Contenu du Rapport</label>
-                                    <textarea class="form-control" rows="10" data-type="p"></textarea>
+                                    <textarea class="form-control" rows="10" id="addRapport-description"></textarea>
                                 </div>
                                 <div class="form-group mb-2">
                                     <button class="btn btn-secondary w-100" type="button" id="rapport_image--button">Ajouter des images</button>
@@ -155,16 +144,16 @@
                 <!-- Add Rapport END -->
 
                 <!-- View Rapport -->
-                <div class="d-none" id="viewRapport--body">
+                <div class="d-none animate__animated  animate__fadeIn" id="viewRapport--body">
                     <div class="modal-header">
                         <p class="m-0 h5">Rapport du Signalement</p>
                         <button type="button" class="btn-close" aria-label="Close" id="close_viewRapport--icon""></button>
                     </div>
                     <div class="modal-body" style="height: 30rem; overflow: scroll;">
                             <div>
-                                <h3>Titre du Rapport </h3>
-                                <p style="text-align: justify;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci et similique praesentium aut consequuntur cumque, porro assumenda reiciendis vero non. Incidunt odit eveniet expedita voluptatum neque excepturi debitis reprehenderit enim.</p>
-                                <img class="img-fluid" src="https://picsum.photos/id/237/200/300" alt="">
+                                <h3 id="viewRapport-title">Titre du Rapport Here</h3>
+                                <p id="viewRapport-description"style="text-align: justify;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci et similique praesentium aut consequuntur cumque, porro assumenda reiciendis vero non. Incidunt odit eveniet expedita voluptatum neque excepturi debitis reprehenderit enim.</p>
+                                <img id="addRapport-image" class="img-fluid" src="https://picsum.photos/id/237/200/300" alt="">
                             </div>
                     </div>
                     <div class="container-fluid mt-1 mb-2 p-2 d-flex modal-footer">
