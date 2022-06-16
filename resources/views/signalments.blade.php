@@ -180,7 +180,8 @@
                                         <p class="card-text">{{ $signalment['description'] }}</p>
                                         <p class="card-text">
                                             <i class="fa-solid fa-building px-1"></i>
-                                            {{ $signalment->annexe['name']}} {{ $signalment->bloc ? "/ ".$signalment->bloc['name'] : null }} {{ $signalment->room ? "/ ".$signalment->room['name']: null }}</p>
+                                            {{ $signalment->annexe['name']}} {{ $signalment->bloc ? "/ ".$signalment->bloc['name'] : null }} {{ $signalment->room ? "/ ".$signalment->room['name']: null }}
+                                        </p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
                                             <a href="{{ '#'.$signalment['id'] }}"
