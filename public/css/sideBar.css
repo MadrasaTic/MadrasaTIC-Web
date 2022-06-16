@@ -47,6 +47,7 @@ a {
 .link {
     color: #8C8CA1 !important;
     font-weight: 400;
+    text-decoration: none;
 }
 
 .link--hoverd, .link--selected {
