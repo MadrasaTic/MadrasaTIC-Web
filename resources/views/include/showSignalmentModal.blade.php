@@ -28,6 +28,64 @@
                                     <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
                                     @endforeach
                                 </select>
+                        </div>
+                        <!-- Select End -->
+                        <div class="d-flex align-content-center">
+                            <label for="modalState--select" >Etat: </label>
+                            <span class="d-flex my-auto px-2 rounded-6 d-none" id="modalState--container">
+                                <div class="my-auto me-1" id="color--icon" style="background-color: {{$signalment->lastSignalementVC->state['color']}}"></div>
+                                <span class="fw-500">{{ $signalment->lastSignalementVC->state['name'] }}</span>
+                            </span>
+                            <select class="d-flex my-auto py-3 px-4" name="state" id="modalState--select">
+                            @foreach($states as $state)
+                                <option value="{{ $state['id'] }}">{{ $state['name'] }}</option>
+                            @endforeach
+                        </select>
+                        </div>
+                    </div>
+                    <div class="rounded-5" id="modal_image--container" style="height: 50vh">
+                        <img src="{{ asset('/storage/'.$signalment->lastSignalementVC['attachement']) }}" class="img-fluid h-100 w-100 rounded-5" alt="Image du signalement">
+                    </div>
+                    <div class="mt-3" id="modal_infos--container">
+                        <h2>{{ $signalment['title'] }}</h2>
+                        <p class="m-0 fs-5 text-justify" style="text-align: justify;">{{ $signalment['description'] }}</p>
+                        <p class="fw-bold mb-0 mt-3">Signalé par : <span class="fw-normal">{{ $signalment->creator->userInformation->first_name }} {{$signalment->creator->userInformation->last_name}}</span></p>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-secondary w-100 fw-500" id="showRattachedTo--button">
+                            <i class="fa-solid fa-link me-2"></i>Rattacher à un autre Signalement
+                        </button>
+                        <input class=" w-100 fw-500" name="file1" type="file" accept="application/pdf">
+                    </div>
+                </div>
+                <!-- Modal Footer -->
+                <div class="container-fluid mt-1 mb-2 p-2 d-flex" id="moda_photo--footer">
+                    <button type="submit" class="btn btn-outline-secondary me-auto fw-bold" data-bs-dismiss="modal"
+                        id="delete_signalment--button">Supprimer</button>
+                    <button type="button" class="btn d-none btn-secondary fw-bold me-3"
+                        id="resend_signalment--button">Renvoyer</button>
+                    <button type="submit" class="btn btn-primary fw-bold"
+                        id="approve_signalment--button">Valider</button>
+                </div>
+            </div>
+            <!-- Rattacher un signalement -->
+            <div class="d-none animate__animated  animate__fadeIn" id="rattachedTo--body">
+                <!-- Header -->
+                <div class="modal-header">
+                    <p class="m-0 h5">Rattacher à un signalement</p>
+                    <button type="button" class="btn-close" aria-label="Close" id="close_rattachedTo--icon"></button>
+                </div>
+                <!-- Body -->
+                @foreach ($signalments as $signalment)
+                <div class="modal-body" style="height: 30rem; overflow: scroll;">
+                    <div class="card border w-100 rounded-6 mb-4">
+                        <div class="card-body h-50" style="cursor: pointer;">
+                            <div class="card-description d-flex align-items-center text-secondary">
+                                <p class="me-auto my-auto  fw-bold">{{ $signalment->lastSignalementVC->category['name'] }}</p>
+                                <span class="d-flex px-1 rounded-6" id="state--container">
+                                    <div class="my-auto me-1" id="color--icon" style="background-color: {{$signalment->lastSignalementVC->state['color']}}"></div>
+                                    <span class="fw-500">{{ $signalment->lastSignalementVC->state['name'] }}</span>
+                                </span>
                             </div>
                             <div class="d-flex align-content-center">
                                 <select class="d-flex my-auto px-3 py-3" name="state" id="modalState--select">
