@@ -56,7 +56,10 @@ if ((window.location.pathname.slice(1) == "signalments")) {
         signalmentsView.addHandlerViewRapportBody();
         signalmentsView.addHandlerCloseViewRapportBtn();
         signalmentsView.addHandlerViewRapportBackBtn();
-
+        // View Changes
+        signalmentsView.addHandlerViewChangestBody();
+        signalmentsView.addHandlerCloseViewChangesBtn();
+        signalmentsView.addHandlerChangestBackBtn();
         // Filters
         signalmentsView.addHandlerCategoryChange();
         signalmentsView.addHandlerStateChange();

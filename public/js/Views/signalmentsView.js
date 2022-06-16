@@ -222,6 +222,29 @@ class SignalmentsView {
         })  
     }
 
+    // View Change
+    addHandlerViewChangestBody() {
+        document.querySelector("#viewChanges--button").addEventListener("click", (e)=> {
+            e.preventDefault();
+            document.querySelector("#signalments--body").classList.add("d-none");
+            document.querySelector("#changes--body").classList.remove("d-none");
+        })
+    }
+
+    addHandlerCloseViewChangesBtn() {
+        document.querySelector("#close_changes--icon").addEventListener("click", () => {
+            document.querySelector("#signalments--body").classList.remove("d-none");
+            document.querySelector("#changes--body").classList.add("d-none");
+        })
+    }
+
+    addHandlerChangestBackBtn() {
+        document.querySelector("#changes_back--button").addEventListener("click", (e) =>{
+            e.preventDefault()
+            document.querySelector("#signalments--body").classList.remove("d-none");
+            document.querySelector("#changes--body").classList.add("d-none");
+        })  
+    }
     // Select Handlers    
     addHandlerInfraFilters() {
         document.querySelector("#infra_filter--button").addEventListener("click", () => {

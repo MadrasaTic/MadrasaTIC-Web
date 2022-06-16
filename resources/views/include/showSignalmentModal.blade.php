@@ -38,14 +38,15 @@
                             </div>
                         </div>
                         <div class="rounded-5" id="modal_image--container" style="height: 50vh">
-                            <img src="signalments-img"
-                                class="img-fluid h-100 w-100 rounded-5" alt="Image du signalement">
+                            <img src="signalments-img" class="img-fluid h-100 w-100 rounded-5"
+                                alt="Image du signalement">
                         </div>
                         <div class="mt-3" id="modal_infos--container">
                             <h2 id="signalment-title">Titre Here</h2>
-                            <p class="m-0 fs-5 text-justify" id="signalment-description" style="text-align: justify;">Description Here</p>
-                            <p class="fw-bold mb-0 mt-3 text-end">Signalé par : <span
-                                    class="fw-normal" id="signalments-user">User Here</span></p>
+                            <p class="m-0 fs-5 text-justify" id="signalment-description" style="text-align: justify;">
+                                Description Here</p>
+                            <p class="fw-bold mb-0 mt-3 text-end">Signalé par : <span class="fw-normal"
+                                    id="signalments-user">User Here</span></p>
                         </div>
                         <div class="mt-3">
                             <button class="btn btn-secondary w-100 fw-500" id="showRattachedTo--button">
@@ -60,6 +61,11 @@
                         <div>
                             <button class="btn btn-secondary w-100 fw-500" id="viewRapport--button">
                                 <i class="fa-solid fa-link me-2"></i>Afficher le rapport
+                            </button>
+                        </div>
+                        <div>
+                            <button class="btn btn-secondary w-100 fw-500" id="viewChanges--button">
+                                <i class="fa-solid fa-link me-2"></i>Historique de Modification
                             </button>
                         </div>
                     </div>
@@ -123,14 +129,16 @@
                             <div>
                                 <div class="form-group mb-2">
                                     <label>Titre du Rapport</label>
-                                    <input type="text" class="form-control" placeholder="Titre du Rapport" id="addRapport-title">
+                                    <input type="text" class="form-control" placeholder="Titre du Rapport"
+                                        id="addRapport-title">
                                 </div>
                                 <div class="form-group mb-4">
                                     <label>Contenu du Rapport</label>
                                     <textarea class="form-control" rows="10" id="addRapport-description"></textarea>
                                 </div>
                                 <div class="form-group mb-2">
-                                    <button class="btn btn-secondary w-100" type="button" id="rapport_image--button">Ajouter des images</button>
+                                    <button class="btn btn-secondary w-100" type="button"
+                                        id="rapport_image--button">Ajouter des images</button>
                                     <p class="text-secondary text-center" id="rapport_images--p"></p>
                                     <input class="d-none" type="file" accept=".jpg" id="rapport--browse">
                                 </div>
@@ -149,15 +157,79 @@
                         <p class="m-0 h5">Rapport du Signalement</p>
                         <button type="button" class="btn-close" aria-label="Close" id="close_viewRapport--icon""></button>
                     </div>
-                    <div class="modal-body" style="height: 30rem; overflow: scroll;">
+                    <div class=" modal-body" style="height: 30rem; overflow: scroll;">
                             <div>
                                 <h3 id="viewRapport-title">Titre du Rapport Here</h3>
-                                <p id="viewRapport-description"style="text-align: justify;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci et similique praesentium aut consequuntur cumque, porro assumenda reiciendis vero non. Incidunt odit eveniet expedita voluptatum neque excepturi debitis reprehenderit enim.</p>
-                                <img id="addRapport-image" class="img-fluid" src="https://picsum.photos/id/237/200/300" alt="">
+                                <p id="viewRapport-description" style="text-align: justify;">Lorem ipsum dolor sit, amet
+                                    consectetur adipisicing elit. Adipisci et similique praesentium aut consequuntur
+                                    cumque, porro assumenda reiciendis vero non. Incidunt odit eveniet expedita
+                                    voluptatum neque excepturi debitis reprehenderit enim.</p>
+                                <img id="addRapport-image" class="img-fluid" src="https://picsum.photos/id/237/200/300"
+                                    alt="">
                             </div>
                     </div>
                     <div class="container-fluid mt-1 mb-2 p-2 d-flex modal-footer">
                         <button class="btn btn-secondary fw-bold me-2" id="viewRapport_back--button">Revenir</button>
+                    </div>
+                </div>
+                <!-- View Rapport End -->
+
+                <!-- Signalements changes -->
+                <div class="d-none animate__animated  animate__fadeIn" id="changes--body">
+                    <div class="modal-header">
+                        <p class="m-0 h5">Historique des Changements</p>
+                        <button type="button" class="btn-close" aria-label="Close" id="close_changes--icon""></button>
+                    </div>
+                    <div class=" modal-body" style="height: 30rem; overflow: scroll;">
+                            <div>
+                                <table class="table table-light table-hover table-responsive align-middle table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                            <th scope="col">Handle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+                    <div class="container-fluid mt-1 mb-2 p-2 d-flex modal-footer">
+                        <button class="btn btn-secondary fw-bold me-2" id="changes_back--button">Revenir</button>
                     </div>
                 </div>
 
@@ -166,5 +238,3 @@
         </div>
         <input type="submit" value="ICI" class="modify--submit" hidden>
 </form>
-
-
