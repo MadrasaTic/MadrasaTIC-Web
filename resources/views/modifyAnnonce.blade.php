@@ -29,7 +29,7 @@
     <div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100vh">
         <div class="col-md-5 h-75 px-6 rounded-6 " style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
             <div class="">
-                <h3 class="text-center mb-4 mt-3">Ajouter une Annonce</h3>
+                <h3 class="text-center mb-4 mt-3">Modifier une Annonce</h3>
                 <form class="w-100" method="POST" action="/annonces" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-2">
@@ -56,7 +56,7 @@
                     </div>
     
                     <center>
-                        <button type="submit" class="btn btn-primary mt-3 py-2 px-3">Ajouter l'Annonce</button>
+                        <button type="submit" class="btn btn-primary mt-3 py-2 px-3">Modifier l'Annonce</button>
                     </center>
                 </form>
             </div>

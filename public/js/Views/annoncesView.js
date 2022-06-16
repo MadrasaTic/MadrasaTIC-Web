@@ -34,7 +34,7 @@ class SignalmentsView {
         })
     }
     addHandlerDeleteAnnonceBtn() {
-        document.querySelector("#delete_signalment--button").addEventListener("click", (e) => {
+        document.querySelector("#delete_annonce--button").addEventListener("click", (e) => {
             console.log("Annonce Delete");
         })
     }
@@ -47,6 +47,9 @@ class SignalmentsView {
         // document.querySelector("#annonce-state") = data.state
         document.querySelector("#annonce-image").src = `/images/annonces/${data.image}`;
         document.querySelector("#annonce-annoncer").textContent = data.user.name;
+        // Modify and delete
+        document.querySelector("#delete_annonce--button").querySelector("a").href = `/annonce/delete/${data.id}`;
+        document.querySelector("#modify_annonce--button").querySelector("a").href = `modifyAnnonce/${data.id}`;
 
     }
 

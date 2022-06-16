@@ -66,8 +66,8 @@ Route::get('/annonces', function () {
 Route::get('/addAnnonce', function () {
     return view('addAnnonce');
 });
-Route::get('/Modifyannonces', function () {
-    return view('Modifyannonces');
+Route::get('/modifyAnnonce', function () {
+    return view('modifyAnnonce');
 });
 
 // Route::get('/permissions', function () {

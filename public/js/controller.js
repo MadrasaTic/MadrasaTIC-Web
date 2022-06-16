@@ -29,7 +29,6 @@ async function controlAnnonce(id) {
     // Get Annonce's infos
     const data = await annonceModal.loadAnnonceInfo(id);
     // Render Them
-    console.log(data);
     annoncesView.renderAnnonceInfo(data);
 }
 
