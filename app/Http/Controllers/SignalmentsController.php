@@ -10,6 +10,7 @@ use App\Models\State;
 use App\Models\Annexe;
 use App\Models\Bloc;
 use App\Models\Room;
+use App\Models\User;
 
 class SignalmentsController extends Controller
 {
@@ -23,12 +24,27 @@ class SignalmentsController extends Controller
         $categories = Category::all();
         $states = State::all();
         $signalments = Signalement::with(['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC'])->get();
+
+        $users_count = User::count();
+        $signalements_count = count($signalments);
+        $non_traite_count = Signalement::whereHas('lastSignalementVC', function ($query) use ($states) {
+            return $query->where('state_id', '=', $states[0]->id);
+        })->count();
+        $encours_count = Signalement::whereHas('lastSignalementVC', function ($query) use ($states) {
+            return $query->where('state_id', '=', $states[1]->id);
+        })->count();
+        $traite_count = $signalements_count - $encours_count - $non_traite_count;
+        // dd($traite_count);
         $stats = [
-            "signalements" => count($signalments),
-            "signalements" => count($signalments),
+            "traite_count" => $traite_count * 100 / $signalements_count,
+            "signalements_count" => $signalements_count,
+            "non_traite_count" => $non_traite_count * 100 / $signalements_count,
+            "annonce_count" => 0,
+            "encours_count" => $encours_count * 100 / $signalements_count,
+            "users_count" => $users_count,
         ];
 
-        return view('signalments', compact('signalments','categories','states'));
+        return view('signalments', compact('signalments','categories','states','stats'));
     }
 
     /**
