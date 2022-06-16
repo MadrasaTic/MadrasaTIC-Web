@@ -3,10 +3,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 
-<style>
-</style>
-
-
 <div class="col-md-2 position-relative" id="sidebar--container">
     <div class="position-relative d-flex align-items-center w-100 mt-5" id="sideBar--header">
         <div class="h-100 d-flex align-items-center mx-2" id="SBprofile-picture">

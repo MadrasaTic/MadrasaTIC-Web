@@ -195,13 +195,14 @@
                 </div>
             </div> <!-- Middle End-->
 
-            <!-- Show Signalments Modal -->
-            @include('./include/showSignalmentModal')
-
             <!-- Notifications Bar -->
             @include('./include/notificationsPage')
+            
+            
         </div>
     </div>
+    <!-- Show Signalments Modal -->
+    @include('./include/showSignalmentModal')
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
