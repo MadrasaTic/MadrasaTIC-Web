@@ -59,9 +59,34 @@ class AnnoncesController extends Controller
            //dd($annonce);
           return redirect('annonces');
     }
-           
+       
+    public function edit($id)
+    {
+        $data = Annonce::find($id);
+        return view('modifyAnnonce' , compact('data'));
+    }
     
-    
+    public function update(Request $request)
+    {
+        $data = Annonce::findOrFail($request->id);
+        $data->user_id = $request->user()->id;
+        $data->title = $request->title;
+        $data->description = $request->description;
+        $data->beginDate = $request->beginDate;
+        $data->endDate = $request->endDate;
+        $data['public'] = 1;
+        if ($request->hasfile('image')) {
+            $image = $request->file('image');
+
+                $path = $image->getClientOriginalName();
+                $image->move(public_path().'/images/annonces', $path);
+                $data->image= $path;                    
+            }
+        //dd($data);
+        $data->save();
+
+        return redirect('annonces');
+    }
     public function delete($id)
     {
         $annonce = Annonce::findOrFail($id);

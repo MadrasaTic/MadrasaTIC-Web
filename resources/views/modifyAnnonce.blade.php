@@ -30,28 +30,29 @@
         <div class="col-md-5 h-75 px-6 rounded-6 " style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
             <div class="">
                 <h3 class="text-center mb-4 mt-3">Modifier une Annonce</h3>
-                <form class="w-100" method="POST" action="/annonces" enctype="multipart/form-data">
+                <form class="w-100" method="POST" action="/modifyAnnonce"" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" value="{{$data->id}}">
                     <div class="form-group mb-2">
                         <label>Titre de l'Annonce</label>
-                        <input name="title" class="form-control" placeholder="Titre de l'Annonce">
+                        <input name="title" value="{{$data->title}}" class="form-control" placeholder="Titre de l'Annonce">
                     </div>
                     <div class="form-group mb-2">
                         <label>Déscription de l'Annonce</label>
-                        <textarea name="description" class="form-control" rows="10"></textarea>
+                        <textarea name="description" value="{{$data->description}}" class="form-control" rows="10"></textarea>
                     </div>
                     <div class="form-group mb-2">
                         <label>Date Début</label>
-                        <input name="beginDate" type="date" class="form-control" placeholder="Titre de l'Annonce">
+                        <input name="beginDate" type="date" value="{{$data->beginDate}}" class="form-control" placeholder="Titre de l'Annonce">
                     </div>
                     <div class="form-group mb-2">
                         <label>Date Fin</label>
-                        <input name="endDate" type="date" class="form-control" placeholder="Titre de l'Annonce">
+                        <input name="endDate" type="date"  class="form-control" placeholder="Titre de l'Annonce">
                     </div>
                     <div class="form-group mb-2">
                         <label class="mb-1">Ajouter une Image <br></label>
                         <div class="form-group">
-                            <input  name="image" type="file" class="form-control-file"  id="#browse-input">
+                            <input  name="image" type="file" value="{{$data->image}}" class="form-control-file"  id="#browse-input">
                         </div>
                     </div>
     
