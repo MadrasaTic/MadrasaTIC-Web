@@ -17,10 +17,21 @@
 
 
             <!-- Middle -->
+            
             <div class="p-4 col-md-7">
                 <!-- Signalments -->
                 <div id="signalments--container">
                     <!-- Header -->
+                    <div class="px-4">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-outline-secondary fw-bold" id="add--button">
+                            <a href="{{'addAnnonce'}}"><span>Ajouter un Service</span></a>
+                            
+                        </button>
+                    </div>
+                </div>
+                    
+                </div>
                     <div class="d-flex align-items-center py-2" id="signa--header">
                         <p class="fs-3 me-auto my-auto ">Annonces</p>
                         <i class="fs-3 bi bi-grid-3x3-gap-fill"></i>
@@ -44,7 +55,9 @@
                                             </span>
                                         </div>
                                         <h5 class="card-title fw-bold">{{$annonce->title}}</h5>
-                                        <p class="card-text">{{$annonce->description}}</p>  
+                                        <p class="card-text">{{$annonce->description}}</p>
+                                        <p class="card-text">Date debut:{{$annonce->beginDate}} </p>
+                                        <p class="card-text">Date fin:{{$annonce->endDate}}</p>  
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
                                             <button class="btn btn-primary show_modal--button" data-annonceID="{{ $annonce['id'] }}">Détails</button>

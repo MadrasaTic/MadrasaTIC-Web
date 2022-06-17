@@ -9,6 +9,9 @@ use Auth;
 
 class Annonce extends Model
 {
+    protected $fillable = [
+        'user_id','title', 'description','beginDate','endDate', 'image',
+    ];
     use HasFactory , SoftDeletes;
      /**
      * The relationships that should always be loaded.

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use App\Models\Annonce;
 use Carbon\Carbon;
@@ -17,11 +18,15 @@ class AnnoncesController extends Controller
      */
 
     public function index(){
+
+        $dt = Carbon::now();
+        $annonces= Annonce::whereRaw('"'.$dt.'" between `beginDate` and `endDate`')
+                        ->get();
+            return view('annonces' , compact('annonces'));
         
-        $annonces = Annonce::all();
         //$annonces->beginTime->addDays(10); 
         //dd($annonces);        
-        return view('annonces' , compact('annonces'));
+        
         
         
         

@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group mb-2">
                         <label>Date Fin</label>
-                        <input name="endDate" type="date"  class="form-control" placeholder="Titre de l'Annonce">
+                        <input name="endDate" type="date" value="{{$data->endDate}}" class="form-control" placeholder="Titre de l'Annonce">
                     </div>
                     <div class="form-group mb-2">
                         <label class="mb-1">Ajouter une Image <br></label>
