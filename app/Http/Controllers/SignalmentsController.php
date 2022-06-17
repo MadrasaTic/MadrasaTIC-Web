@@ -65,11 +65,45 @@ class SignalmentsController extends Controller
      */
     public function store(Request $request)
     {
-        $categories = Category::all();
-        $states = State::all();
-        $signalments = Signalement::with(['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC'])->get();
+        $signalement = new Signalement();
+        $signalement->title = $request->get('title');
+        $signalement->description = $request->get('description');
 
-        return view('signalments', compact('signalments','categories','states'));
+        $signalement->annexe_id = $request->get('annexe_id');
+        $signalement->bloc_id = $request->get('bloc_id');
+        $signalement->room_id = $request->get('room_id');
+        $signalement->infrastructure_type = $request->get('infrastructure_type');
+
+        $signalement->creator_id = $request->user()->id;
+
+        $signalement->published = $request->get('published');
+        $signalement->save();
+
+        $signalementVersionControl = new SignalementVersionControl();
+        $signalementVersionControl->signalement_id = $signalement->id;
+        $signalementVersionControl->state_id = State::first()->id;
+        $signalementVersionControl->category_id = $request->get('category_id');
+
+        if ($request->hasFile('attachement')) {
+            $path = $request->file('attachement')->store('images/signalements', 'public');
+            $signalementVersionControl->attachement = $path;
+        } else {
+            $signalementVersionControl->attachement = "";
+        }
+        $signalementVersionControl->service_id = Category::find($request->get('category_id'))->services->id;
+        $signalementVersionControl->priority_id = Category::find($request->get('category_id'))->priority->id;
+        $signalementVersionControl->updated_by = $request->user()->id;
+        $signalementVersionControl->save();
+
+
+        $signalement->isSaved = ($signalement->isSaved()->where('users.id', $user_id)->first()) ? true : false;
+        if ($signalement->isReacted()->where('users.id', $user_id)->first()) {
+            $signalement->isReacted = $signalement->isReacted()->where('users.id', $user_id)->first()->pivot->reaction_type;
+        } else {
+            $signalement->isReacted = null;
+        }
+        return $signalement;
+
     }
 
     /**
@@ -80,7 +114,9 @@ class SignalmentsController extends Controller
      */
     public function show($id)
     {
-        //
+        $signalement = Signalement::findOrFail($id);
+
+        return $signalement;
     }
 
     /**
@@ -105,19 +141,29 @@ class SignalmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate(request(), [
-        'file1' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
-        ]);
+        $signalement = Signalement::find($id);
+        if ($signalement == null) {
+            return "signalment not found";
+        }
+        $signalement->load(['lastSignalementVC']);
+        $signalementVersionControl = $signalement->lastSignalementVC;
+        $newVC = $signalementVersionControl->replicate();
+        if ($request->has('category_id') && $request->get('category_id') != null
+            && $newVC->category_id != $request->get('category_id')) {
+            $newVC->category_id = $request->get('category_id');
+            $newVC->service_id = Category::find($request->get('category_id'))->services->id;
+            $newVC->priority_id = Category::find($request->get('category_id'))->priority->id;
+            $newVC->updated_by = $request->user()->id;
+            $newVC->save();
+        }
 
-        $signalment = SignalementVersionControl::findOrFail($id);
-        $signalment['category_id'] = $request['category'];
-        $signalment['state_id'] = $request['state'];
-        $filename = $id."-".$request['file1']->getClientOriginalName();
-        $signalment['file_path'] = $filename;
-        $request->file1->storeAs('public/files', $filename);
-        $signalment->save();
-
-        return redirect()->back();
+        if ($request->has('state_id') && $request->get('state_id') != null
+            && $newVC->state_id != $request->get('state_id')) {
+            $newVC->state_id = $request->get('state_id');
+            $newVC->updated_by = $request->user()->id;
+            $newVC->save();
+        }
+        return $signalement;
     }
 
     /**
@@ -128,10 +174,8 @@ class SignalmentsController extends Controller
      */
     public function delete($id)
     {
-        $signalment = SignalementVersionControl::findOrFail($id);
-        $signalment->signalement['published'] = 0;
-        $signalment->signalement->save();
-
-        return redirect()->back();
+        $signalement = Signalement::find($id);
+        $deleted = $signalement->delete();
+        return $deleted;
     }
 }
