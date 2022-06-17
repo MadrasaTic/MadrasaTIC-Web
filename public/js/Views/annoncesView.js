@@ -48,7 +48,7 @@ class SignalmentsView {
         document.querySelector("#annonce-image").src = `/images/annonces/${data.image}`;
         document.querySelector("#annonce-annoncer").textContent = data.user.name;
         // Modify and delete
-        document.querySelector("#delete_annonce--button").querySelector("a").href = `/annonce/delete/${data.id}`;
+        document.querySelector("#delete_annonce--button").querySelector("a").href = `/annonces/delete/${data.id}`;
         document.querySelector("#modify_annonce--button").querySelector("a").href = `modifyAnnonce/${data.id}`;
 
     }

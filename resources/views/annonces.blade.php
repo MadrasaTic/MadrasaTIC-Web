@@ -25,7 +25,7 @@
                     <div class="px-4">
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-outline-secondary fw-bold" id="add--button">
-                            <a href="{{'addAnnonce'}}"><span>Ajouter un Service</span></a>
+                            <a href="{{'addAnnonce'}}"><span>Ajouter une annonce</span></a>
                             
                         </button>
                     </div>
@@ -56,7 +56,7 @@
                                         </div>
                                         <h5 class="card-title fw-bold">{{$annonce->title}}</h5>
                                         <p class="card-text">{{$annonce->description}}</p>
-                                        <p class="card-text">Date debut:{{$annonce->beginDate}} </p>
+                                        <p class="card-text">Date debut:{{$annonce->beginDate}}</p>
                                         <p class="card-text">Date fin:{{$annonce->endDate}}</p>  
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>

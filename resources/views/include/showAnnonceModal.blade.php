@@ -21,10 +21,13 @@
                             <p class="m-0 fs-5 text-justify" id="annonce-description" style="text-align: justify;"></p>
                             <p class="fw-bold mb-0 mt-3 text-end">Annoncé par : <span class="fw-normal" id="annonce-annoncer"></span></p>
                         </div>
+                        <p class="card-text">Date debut:{{$annonce->beginDate}}</p>
+                        <p class="card-text">Date fin:{{$annonce->endDate}}</p> 
                     </div>
+                    
                     <!-- Modal Footer -->
                     <div class="container-fluid mt-1 mb-2 p-2 d-flex modal-footer" id="moda_photo--footer">
-                        <button class="btn btn-outline-secondary me-auto fw-bold" id="delete_annonce--button"><a href="/annonce/delete/id">Archiver</a></button>
+                        <button class="btn btn-outline-secondary me-auto fw-bold" id="delete_annonce--button"><a href="/annonce/delete/'.$annonce['id']">Archiver</a></button>
                         <button class="btn btn-primary" id="modify_annonce--button"><a class="fw-bold" style="color: white" href="{{'modifyAnnonce/'.$annonce['id']}}">Modifier</a></button>
                     </div>
                     
