@@ -20,7 +20,7 @@ class Signalement extends BaseModel
      *
      * @var array
      */
-    protected $with = ['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC'];
+    protected $with = ['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC', 'report'];
 
 
     /**
