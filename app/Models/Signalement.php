@@ -142,4 +142,14 @@ class Signalement extends BaseModel
             ->withTimestamps()
             ->where("users.id", $this->user_id);
     }
+
+    /**
+     * Get all of the report for the Signalement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function report()
+    {
+        return $this->hasOne(Report::class)->latestOfMany();
+    }
 }
