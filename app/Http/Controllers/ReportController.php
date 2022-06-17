@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use App\Models\Signalement;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -12,9 +13,11 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($signalement_id)
     {
-        //
+        $signalement = Signalement::findOrFail($signalement_id);
+
+        return $signalement->report;
     }
 
     /**
@@ -33,13 +36,13 @@ class ReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $signalement_id)
     {
         $report = new Report();
         $report->title = $request->get('title');
         $report->description = $request->get('description');
         $report->created_by = $request->user()->id;
-        $report->signalement_id = $request->get('signalement_id');
+        $report->signalement_id = $signalement_id;
         if ($request->hasFile('attachement')) {
             $path = $request->file('attachement')->store('images/reports', 'public');
             $report->attachement = $path;
@@ -57,11 +60,11 @@ class ReportController extends Controller
      * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    /* public function show($id)
     {
         $report = Report::findOrFail($id);
         return $report;
-    }
+    } */
 
     /**
      * Show the form for editing the specified resource.
@@ -69,11 +72,11 @@ class ReportController extends Controller
      * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    /* public function edit($id)
     {
         $report = Report::findOrFail($id);
         return $report;
-    }
+    } */
 
     /**
      * Update the specified resource in storage.
@@ -82,19 +85,24 @@ class ReportController extends Controller
      * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $signalement_id)
     {
-        $report = Report::findOrFail($id);
-        $report->title = $request->get('title');
-        $report->description = $request->get('description');
-        $report->created_by = $request->user()->id;
-        $report->signalement_id = $request->get('signalement_id');
-        if ($request->hasFile('attachement')) {
-            $path = $request->file('attachement')->store('images/reports', 'public');
-            $report->attachement = $path;
+        $signalement = Signalement::findOrFail($signalement_id);
+        if($signalement->report != null) {
+            $report = Report::findOrFail($signalement->report->id);
+            $report->title = $request->get('title');
+            $report->description = $request->get('description');
+            $report->created_by = $request->user()->id;
+            $report->signalement_id = $request->get('signalement_id');
+            if ($request->hasFile('attachement')) {
+                $path = $request->file('attachement')->store('images/reports', 'public');
+                $report->attachement = $path;
+            }
+            $report->save();
+            return $report;
+        } else {
+            return "report doesn't exist";
         }
-        $report->save();
-        return $report;
     }
 
     /**
@@ -105,8 +113,14 @@ class ReportController extends Controller
      */
     public function destroy($id)
     {
-        $report = Report::findOrFail($id);
-        $report->delete();
-        return "report delleted";
+
+        $signalement = Signalement::findOrFail($signalement_id);
+        if($signalement->report != null) {
+            $report = Report::findOrFail($signalement->report->id);
+            $report->delete();
+            return "report delleted";
+        } else {
+            return "report doesn't exist";
+        }
     }
 }
