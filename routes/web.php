@@ -20,6 +20,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PrioritiesController;
 use App\Http\Controllers\SignalmentsController;
+use App\Http\Controllers\ReportController;
 
 use App\Http\Controllers\Infrastructure\AnnexeController;
 use App\Http\Controllers\Infrastructure\BlocController;
@@ -34,41 +35,12 @@ use App\Http\Controllers\Infrastructure\RoomController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// views
 Route::get('/', [LoginController::class, 'showLoginForm']);
 
-// Route::get('google', function () {
-//     return view('googleAuth');
-// });
-
-// Route::get('/departments', function () {
-//     return view('departments');
-// });
-
-// Route::get('/signalmentsPriority', function () {
-//     return view('signalmentsPriority');
-// });
-
-// Route::get('/signalments', function () {
-//     return view('signalments');
-// });
-
-// Route::get('/signalmentsRapport', function () {
-//     return view('signalmentsRapport');
-// });
-
-// Route::get('/permissions', function () {
-//     return view('permissions');
-// });
-
-// Added
 Route::get('/addSignalement', function () {
     return view('addSignalement');
 });
 
-Route::get('/signalmentsRapport', function () {
-    return view('signalmentsRapport');
-});
 //====================================================================================================
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
@@ -90,7 +62,6 @@ Route::get('password/reset/{token}', [ResetPasswordController::class, 'showReset
 Route::post('password/reset', [ResetPasswordController::class, 'reset']);
 
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/profile', [UserController::class, 'show'])->name('profile');
     Route::post('/profile', [UserController::class, 'update']);
@@ -170,52 +141,22 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/signalmentsPriority/{id}',[PrioritiesController::class,'update']);
         Route::post('/signalmentsPriority/delete/{id}',[PrioritiesController::class,'delete']);
 
-        // Route::resource('/signalmentsState', StateController::class);
-        // Route::post('/signalmentsState/{id}',[StateController::class,'update']);
-        // Route::post('/signalmentsState/delete/{id}',[StateController::class,'delete']);
-        /* Route::get('/states',[StateController::class,'index'])->name('state');
-        Route::post('/states/{id}',[StateController::class,'update']);
-        Route::post('/states/delete/{id}',[StateController::class,'delete']); */
-        // Route::resource('/signalmentsCategory', CategoryController::class);
-        // Route::post('/signalmentsCategory/{id}',[CategoryController::class,'update']);
-        // Route::post('/signalmentsCategory/delete/{id}',[CategoryController::class,'delete']);
-
         Route::get('/signalments', [SignalmentsController::class, 'index'])->name('signalements');
-        // Route::post('/signalments', [SignalmentsController::class, 'store']);
+        Route::post('/signalments', [SignalmentsController::class, 'store']);
+        Route::get('/signalments/{id}',[SignalmentsController::class,'show']);
         Route::get('/signalments/{id}/edit', [SignalmentsController::class, 'edit']);
         Route::post('/signalments/{id}',[SignalmentsController::class,'update']);
         Route::post('/signalments/delete/{id}',[SignalmentsController::class,'delete']);
 
-        Route::get('/create',[CheckController::class, 'create'])->name('create');
-        Route::get('/indexx',[CheckController::class, 'index'])->name('indexx');
+        Route::get('/signalments/{signalement_id}/report', [ReportController::class, 'index'])->name("signalementReport");
+        Route::post('/signalments/{signalement_id}/report', [ReportController::class, 'store']);
+        Route::post('/signalments/{signalement_id}/report/edit', [ReportController::class, 'store']);
+        Route::post('/signalments/{signalement_id}/report/delete', [ReportController::class, 'store']);
     });
 
     Route::middleware(['HasPermission'])->group(function () {
-
-        //Route::resource('/permissions', PermissionsController::class, ['as' => 'configure'])
-        //  ->only(['index', 'create', 'store', 'edit', 'update']);
-
-        //  Route::resource('/roles', RolesController::class, ['as' => 'configure']);
-
         Route::resource('/roles-assignment', RolesAssignmentController::class, ['as' => 'configure'])
             ->only(['index', 'edit', 'update']);
         });
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-
-// Route::get('/members', 'App\Http\Controllers\MemberController@show');
-
-
-// Route::post('/permissions',[PermissionsController::class,'store'])->name('permissions');
-// Route::get('/permissions',[PermissionsController::class,'index'])->name('permissions');
-
-// Route::get('/permissions/{id}',[PermissionsController::class,'edit']);
-// Route::post('/permissions/{id}',[PermissionsController::class,'update']);
-// Route::post('/permissions/delete/{id}',[PermissionsController::class,'delete']);
-
-// Service Routes
-
-
-
-// Priority Route
