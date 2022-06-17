@@ -142,6 +142,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/signalmentsPriority/delete/{id}',[PrioritiesController::class,'delete']);
 
         Route::get('/signalments', [SignalmentsController::class, 'index'])->name('signalements');
+        Route::get('/signalments_display', [SignalmentsController::class, 'displayJson']);
         Route::post('/signalments', [SignalmentsController::class, 'store']);
         Route::get('/signalments/{id}',[SignalmentsController::class,'show']);
         Route::get('/signalments/{id}/edit', [SignalmentsController::class, 'edit']);

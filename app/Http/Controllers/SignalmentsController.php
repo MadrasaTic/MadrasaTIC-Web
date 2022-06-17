@@ -14,6 +14,10 @@ use App\Models\User;
 
 class SignalmentsController extends Controller
 {
+    public function displayJson() {
+        $signalements = Signalement::with(['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC', 'report'])->get();
+        return $signalements;
+    }
     /**
      * Display a listing of the resource.
      *
