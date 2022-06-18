@@ -10,6 +10,7 @@ class SignalmentsView {
     #selectedParentFilter = "aiguillés";
     #currentSignalmentID = "";
     #currentSignalmentCategoryName = "";
+    #currentSignalmentCreatorID = "";
 
 
     // Init
@@ -101,9 +102,12 @@ class SignalmentsView {
             console.log("Signalement Resent");
         })
     }
-    addHandlerDeleteSignalmentBtn() {
+    addHandlerDeleteSignalmentBtn(handler) {
         document.querySelector("#delete_signalment--button").addEventListener("click", (e) => {
-            console.log("Signalment Delete");
+            // e.target.querySelector("a").href = `/signalments/delete/${this.#currentSignalmentID}`;
+            console.log(e.target);
+            console.log(this.#currentSignalmentID);
+            handler(this.#currentSignalmentID);
         })
     }
 
@@ -173,9 +177,21 @@ class SignalmentsView {
         })
     }
 
-    addHandlerRapportAddBtn() {
+    addHandlerRapportAddBtn(handler) {
         document.querySelector("#rapport_add--button").addEventListener("click", (e) =>{
+            e.preventDefault();
             console.log("Add Rapport");
+            // Récupréer inputs et les stocker dans un object
+            const uploadData = {
+                title: document.querySelector("#addRapport-title").value,
+                description: document.querySelector("#addRapport-description").value,
+                attachement: document.querySelector("#rapport--browse").value,
+                created_by: this.#currentSignalmentCreatorID,
+                signalement_id: this.#currentSignalmentID,
+            }
+            // Send the object to the controlelr
+            console.log(uploadData);
+            handler(uploadData)
         })
     } 
 
@@ -470,6 +486,7 @@ class SignalmentsView {
         // Set 
         this.#currentSignalmentID = data.id;
         this.#currentSignalmentCategoryName = document.querySelector(`#modalCategory--select option[value = "${data.categoryID}"]`).text;
+        this.#currentSignalmentCreatorID = data.creatorID;
 
         // Header
         document.querySelector("#signalments-annexe").textContent = "Cite: " + data.annexeName;

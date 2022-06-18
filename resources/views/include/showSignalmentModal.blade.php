@@ -5,8 +5,7 @@
 }
 </style>
 
-<form class="row" id="modal_update--form" 
-    enctype="multipart/form-data">
+<form class="row" id="modal_update--form" enctype="multipart/form-data">
     @csrf
     <div class="d-none animate__animated animate__fadeIn modal_bg--default" id="modal_signalments">
         <div class="modal-dialog modal-lg modal-dialog-centered animate__animated animate__fadeIn">
@@ -77,8 +76,7 @@
                         </div>
                     </div>
                     <div class="container-fluid mt-1 mb-2 p-2 d-flex modal-footer" id="moda_photo--footer">
-                        <button type="submit" class="btn btn-outline-secondary me-auto fw-bold" data-bs-dismiss="modal"
-                            id="delete_signalment--button">Supprimer</button>
+                        <button type="button" class="btn btn-outline-secondary me-auto fw-bold" id="delete_signalment--button">Supprimer</button>
                         <button type="button" class="btn btn-secondary fw-bold me-2"
                             id="resend_signalment--button">Renvoyer</button>
                         <button type="submit" class="btn btn-primary fw-bold"
@@ -120,10 +118,10 @@
                     </div>
                     <div class="container-fluid mt-1 mb-2 p-2 d-flex modal-footer">
                         <button class="btn btn-secondary fw-bold me-2" id="rattachedTo_back--button">Revenir</button>
-                        <button type="button" class="btn btn-primary fw-bold"
+                        <button class="btn btn-primary fw-bold"
                             id="rattachedTo_valid--button">Rattacher</button>
                     </div>
-                </div>
+                </div>  
                 <!-- Rattached-To END -->
 
                 <!-- Add Rapport  -->
@@ -147,7 +145,7 @@
                                     <button class="btn btn-secondary w-100" type="button"
                                         id="rapport_image--button">Ajouter des images</button>
                                     <p class="text-secondary text-center" id="rapport_images--p"></p>
-                                    <input class="d-none" type="file" accept=".jpg" id="rapport--browse">
+                                    <input class="d-none" type="file" accept=".jpg" id="rapport--browse" >
                                 </div>
                             </div>
                     </div>
@@ -235,5 +233,6 @@
 
             </div>
         </div>
-        <input type="submit" value="ICI" class="modify--submit" hidden>
+        <!-- <input type="submit" value="ICI" class="modify--submit" hidden> -->
 </form>
+

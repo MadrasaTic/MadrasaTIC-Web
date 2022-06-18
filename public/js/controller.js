@@ -21,12 +21,13 @@ async function controlShowSignalment (signalmentID) {
         annexe: {name: annexeName},
         bloc: {name: blocName},
         room: {name: roomName},
-        creator: {user_information: {first_name: creatorFName, last_name: creatorLName}},
+        creator: {user_information: {first_name: creatorFName, last_name: creatorLName, user_id: creatorID}},
         last_signalement_v_c: {state: {id: stateID}, category: {id: categoryID}, attachement: image},
     } = data;
 
     const filteredData = {
         id,
+        creatorID: creatorID,
         title: title,
         description: description,
         annexeName : annexeName,
@@ -42,14 +43,23 @@ async function controlShowSignalment (signalmentID) {
     signalmentsView.renderShowSignalment(filteredData);
 }
 
-
 async function controlShowRapport(signalmentID) {
     // Get rapport data
     const data = await signalmentsModal.loadRapportInfo(signalmentID);
     // Render Data
     signalmentsView.renderShowRapport(data);
-
 }
+
+async function controlAddRapport(uploadData) {
+    const resp = await signalmentsModal.addSignalmentRapport(uploadData);
+    console.log(resp);
+}
+
+async function controlDeleteSignalment(signalmentID) {
+    const resp = await signalmentsModal.deleteSignalment(signalmentID);
+
+    console.log(resp);
+}   
 
 async function controlInfra(type, url) {
     // Get Annexes
@@ -71,7 +81,7 @@ if ((window.location.pathname.slice(1) == "signalments")) {
         
         signalmentsView.addHandlerApproveSignalmentBtn();
         signalmentsView.addHandlerResendSignalmentsBtn();
-        signalmentsView.addHandlerDeleteSignalmentBtn();
+        signalmentsView.addHandlerDeleteSignalmentBtn(controlDeleteSignalment);
         // Rattached To
         signalmentsView.addHandlerShowRattachedToBody();
         signalmentsView.addHandlerCloseRattachedToBtn();
@@ -85,7 +95,7 @@ if ((window.location.pathname.slice(1) == "signalments")) {
         // Add Rapport
         signalmentsView.addHandlerShowRapportBody();
         signalmentsView.addHandlerCloseRapportBtn();
-        signalmentsView.addHandlerRapportAddBtn();
+        signalmentsView.addHandlerRapportAddBtn(controlAddRapport);
         signalmentsView.addHandlerRapportBackBtn();
         signalmentsView.addHandlerInputDispaly();
         signalmentsView.addHandlerRapportImgBtn();
