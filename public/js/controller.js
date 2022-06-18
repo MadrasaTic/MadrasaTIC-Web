@@ -10,6 +10,7 @@ import annoncesView from "./Views/annoncesView.js"
 // Models
 import * as signalmentsModal from "./Modals/signalmentsModal.js";
 import * as annonceModal from "./Modals/annonceModal.js";
+import addSignalmentView from "./Views/addSignalmentView.js";
 
 // Signalements
 async function controlShowSignalment (signalmentID) {
@@ -79,6 +80,14 @@ async function controlAnnonce(id) {
     annoncesView.renderAnnonceInfo(data);
 }
 
+if (window.location.pathname.slice(1) == "addSignalement") {
+    console.log("Add Signalement");
+    addSignalmentView.addHandlerLoadAnnexe(controlInfra, "annexe", '/infrastructure/annexe');
+    addSignalmentView.addHandlerAnnexeChange(controlInfra, "bloc", '/infrastructure/bloc/listing/' );
+    addSignalmentView.addHandlerBlocChange(controlInfra, "room", '/infrastructure/room/listing/');
+    addSignalmentView.adHandlerSalleChange();
+
+}
 
 if ((window.location.pathname.slice(1) == "signalments")) {
     console.log("Signalement");
