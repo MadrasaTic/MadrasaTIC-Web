@@ -11,16 +11,62 @@ import annoncesView from "./Views/annoncesView.js"
 import * as signalmentsModal from "./Modals/signalmentsModal.js";
 import * as annonceModal from "./Modals/annonceModal.js";
 
+// Signalements
+async function controlShowSignalment (signalmentID) {
+    // Get Signalment Info
+    const data = await signalmentsModal.loadSignalmentInfo(signalmentID);
+    // Organize Data
+    const  {
+        id,
+        title,
+        description,
+        annexe: {name: annexeName},
+        bloc: {name: blocName},
+        room: {name: roomName},
+        creator: {user_information: {first_name: creatorFName, last_name: creatorLName, user_id: creatorID}},
+        last_signalement_v_c: {state: {id: stateID}, category: {id: categoryID}, attachement: image},
+    } = data;
 
-// Signalements Controllers
-function controlSignalements () {
-    console.log("Signalments Controller Loaded");
+    const filteredData = {
+        id,
+        creatorID: creatorID,
+        title: title,
+        description: description,
+        annexeName : annexeName,
+        image: image,
+        blocName: blocName,
+        roomName : roomName,
+        creatorName : creatorFName +  " " +creatorLName,
+        stateID: stateID,
+        categoryID: categoryID,
+    }
+    console.log(filteredData);
+    // Render Data
+    signalmentsView.renderShowSignalment(filteredData);
+}
+
+async function controlShowRapport(signalmentID) {
+    // Get rapport data
+    const data = await signalmentsModal.loadRapportInfo(signalmentID);
+    // Render Data
+    signalmentsView.renderShowRapport(data);
+}
+
+async function controlAddRapport(uploadData) {
+    const resp = await signalmentsModal.addSignalmentRapport(uploadData);
+    console.log(resp);
+}
+
+async function controlDeleteSignalment(signalmentID) {
+    const resp = await signalmentsModal.deleteSignalment(signalmentID);
+
+    console.log(resp);
 }
 
 async function controlInfra(type, url) {
     // Get Annexes
     const data = await signalmentsModal.loadInfra(type, url);
-    // Render Them
+    // Render Data
     signalmentsView.renderInfraOptions(data, type);
 }
 
@@ -38,34 +84,34 @@ if ((window.location.pathname.slice(1) == "signalments")) {
 
     function init() {
         signalmentsView.addHanlderApplyStateColors();
-        signalmentsView.addHandlerRender(controlSignalements);
+        signalmentsView.addHandlerRender();
         signalmentsView.addHandlerParentFilterChange();
         // Basic Modal Operations
-        signalmentsView.addHandlerShowModalBtn();
+        signalmentsView.addHandlerShowModalBtn(controlShowSignalment);
         signalmentsView.addHandlerCloseModal();
-        
+
         signalmentsView.addHandlerApproveSignalmentBtn();
         signalmentsView.addHandlerResendSignalmentsBtn();
-        signalmentsView.addHandlerDeleteSignalmentBtn();
+        signalmentsView.addHandlerDeleteSignalmentBtn(controlDeleteSignalment);
         // Rattached To
         signalmentsView.addHandlerShowRattachedToBody();
         signalmentsView.addHandlerCloseRattachedToBtn();
-        
+
         signalmentsView.addHandlerDivClick();
 
         signalmentsView.addHandlerRattachedToBackBtn();
         signalmentsView.addHandlerRattachedToSubmitBtn();
-        
+
         signalmentsView.addHandlerModalCategoryChange();
         // Add Rapport
         signalmentsView.addHandlerShowRapportBody();
         signalmentsView.addHandlerCloseRapportBtn();
-        signalmentsView.addHandlerRapportAddBtn();
+        signalmentsView.addHandlerRapportAddBtn(controlAddRapport);
         signalmentsView.addHandlerRapportBackBtn();
         signalmentsView.addHandlerInputDispaly();
         signalmentsView.addHandlerRapportImgBtn();
         // View Rapport
-        signalmentsView.addHandlerViewRapportBody();
+        signalmentsView.addHandlerViewRapportBody(controlShowRapport);
         signalmentsView.addHandlerCloseViewRapportBtn();
         signalmentsView.addHandlerViewRapportBackBtn();
         // View Changes
@@ -103,7 +149,7 @@ if ((window.location.pathname.slice(1) == "annonces")) {
 
 }
 
-// 
+//
 
 
 // Old Controller (Needs Refactoring)

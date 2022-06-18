@@ -8,11 +8,14 @@ class SignalmentsView {
     #selectedBloc = "Blocs";
     #selectedRoom = "Salles";
     #selectedParentFilter = "aiguillés";
+    #currentSignalmentID = "";
+    #currentSignalmentCategoryName = "";
+    #currentSignalmentCreatorID = "";
 
 
     // Init
-    addHandlerRender(handler) {
-        if (window.location.pathname.slice(1) == "signalments") handler();
+    addHandlerRender() {
+        // if (window.location.pathname.slice(1) == "signalments")
     }
 
     addHanlderApplyStateColors() {
@@ -70,11 +73,16 @@ class SignalmentsView {
 
 
     // Modal Basic Operations
-    addHandlerShowModalBtn() {
+    addHandlerShowModalBtn(handler) {
         const showModalBtn = document.querySelectorAll(".show_modal--button");
         showModalBtn.forEach(btn => {
             btn.addEventListener("click", (e) => {
+                // Display Modal
                 document.querySelector("#modal_signalments").classList.remove("d-none");
+                // Get clicked Signalment ID
+                const id = e.target.dataset.signalmentid;
+                // Call controller
+                handler(id);
             })
         })
     }
@@ -93,9 +101,12 @@ class SignalmentsView {
             console.log("Signalement Resent");
         })
     }
-    addHandlerDeleteSignalmentBtn() {
+    addHandlerDeleteSignalmentBtn(handler) {
         document.querySelector("#delete_signalment--button").addEventListener("click", (e) => {
-            console.log("Signalment Delete");
+            // e.target.querySelector("a").href = `/signalments/delete/${this.#currentSignalmentID}`;
+            console.log(e.target);
+            console.log(this.#currentSignalmentID);
+            handler(this.#currentSignalmentID);
         })
     }
 
@@ -105,6 +116,13 @@ class SignalmentsView {
             e.preventDefault()
             document.querySelector("#signalments--body").classList.add("d-none");
             document.querySelector("#rattachedTo--body").classList.remove("d-none");
+            const cardsContainer = document.querySelector("#rattachedTo--body").querySelector(".modal-body");
+            const allCards = Array.from(cardsContainer.querySelectorAll(".card"));
+            // Display All Cards
+            allCards.forEach(card => card.classList.remove("d-none"));
+            // Hide same ID & Not Same Category Name
+            const noMatchCard = allCards.filter(card => card.dataset.signalmentid == this.#currentSignalmentID || card.dataset.signalmentcategory != this.#currentSignalmentCategoryName);
+            noMatchCard && noMatchCard.forEach(card => card.classList.add("d-none"));
         })
     }
 
@@ -136,8 +154,8 @@ class SignalmentsView {
             card.addEventListener("click", (e) => {
                 const divCard = e.target.closest(".card");
                 const selectedCard = rattachedToBody.querySelector(".cardClicked");
-                selectedCard && selectedCard.classList.remove("cardClicked");
                 divCard.classList.toggle("cardClicked");
+                selectedCard && selectedCard.classList.remove("cardClicked");
             })
         })
     }
@@ -158,9 +176,21 @@ class SignalmentsView {
         })
     }
 
-    addHandlerRapportAddBtn() {
+    addHandlerRapportAddBtn(handler) {
         document.querySelector("#rapport_add--button").addEventListener("click", (e) =>{
+            e.preventDefault();
             console.log("Add Rapport");
+            // Récupréer inputs et les stocker dans un object
+            const uploadData = {
+                title: document.querySelector("#addRapport-title").value,
+                description: document.querySelector("#addRapport-description").value,
+                attachement: document.querySelector("#rapport--browse").value,
+                created_by: this.#currentSignalmentCreatorID,
+                signalement_id: this.#currentSignalmentID,
+            }
+            // Send the object to the controlelr
+            console.log(uploadData);
+            handler(uploadData)
         })
     }
 
@@ -198,11 +228,13 @@ class SignalmentsView {
     }
 
     // View Rapport
-    addHandlerViewRapportBody() {
+    addHandlerViewRapportBody(handler) {
         document.querySelector("#viewRapport--button").addEventListener("click", (e)=> {
             e.preventDefault();
             document.querySelector("#signalments--body").classList.add("d-none");
             document.querySelector("#viewRapport--body").classList.remove("d-none");
+             //
+            handler(this.#currentSignalmentID);
         })
     }
 
@@ -454,6 +486,50 @@ class SignalmentsView {
             const html = `<option value="${item.id}">${item.name}</option>`;
             select.insertAdjacentHTML("beforeend", html)
         })
+    }
+    // Show Signalment
+    renderShowSignalment(data) {
+        // Set
+        this.#currentSignalmentID = data.id;
+        this.#currentSignalmentCategoryName = document.querySelector(`#modalCategory--select option[value = "${data.categoryID}"]`).text;
+        this.#currentSignalmentCreatorID = data.creatorID;
+
+        // Header
+        document.querySelector("#signalments-annexe").textContent = "Cite: " + data.annexeName;
+        document.querySelector("#signalments-bloc").textContent = "Bloc: " + data.blocName;
+        document.querySelector("#signalments-room").textContent = "Salle : " + data.roomName;
+        // Selects
+        document.querySelector(`#modalCategory--select option[value = "${data.categoryID}"]`).selected = true;
+        document.querySelector(`#modalState--select option[value = "${data.stateID}"]`).selected = true;
+        // Image
+        // document.querySelector(`#signalments-img`).src = `/storage/${data.image}`;
+        // Body
+        document.querySelector("#signalment-title").textContent = data.title;
+        document.querySelector("#signalment-description").textContent = data.description;
+        document.querySelector("#signalments-user").textContent = data.creatorName;
+    }
+    // Show Rapport
+    renderShowRapport(data) {
+        console.log(data);
+        const rapportContainer = document.querySelector("#viewRapport--body").querySelector(".modal-body");
+        const htmlInvalid = `
+        <div class="h-100 w-100 d-flex align-items-center justify-content-center">
+            <p>Aucun rapport n'est rattaché à ce signalement</p>
+        </div>
+        `
+        if (data) {
+            const htmlValid = `
+            <div>
+                <h3 id="viewRapport-title">${data.title }</h3>
+                <p id="viewRapport-description" style="text-align: justify;">${data.description }</p>
+                <img id="addRapport-image" class="img-fluid" src="/storage/images/report/${data.attachement}"
+                    alt="Image du Rapport">
+            </div>
+            `
+
+            rapportContainer.insertAdjacentHTML("afterbegin",  htmlValid)
+        }
+        else rapportContainer.insertAdjacentHTML("afterbegin", htmlInvalid)
     }
 }
 

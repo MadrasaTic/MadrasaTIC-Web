@@ -184,8 +184,7 @@
                                         </p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
-                                            <a href="{{ '#'.$signalment['id'] }}"
-                                                class="btn btn-primary show_modal--button">Détails</a>
+                                            <a class="btn btn-primary show_modal--button" data-signalmentid="{{ $signalment['id'] }}">Détails</a>
                                         </div>
                                     </div>
                                 </div>

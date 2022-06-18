@@ -9,6 +9,7 @@ export async function sendJSON(url, uploadData) {
             body: JSON.stringify(uploadData)
         });
         const data = await resp.json();
+        console.log(resp);
         if (!resp.ok) console("The request failed");
         return data;
     } catch (err) {

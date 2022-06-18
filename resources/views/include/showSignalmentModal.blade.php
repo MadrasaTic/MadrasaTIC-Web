@@ -1,5 +1,11 @@
-<form class="row" id="modal_update--form" method="POST" action="/signalments" data-id="{{ $signalment['id'] }}"
-    enctype="multipart/form-data">
+<style>
+    .cardClicked {
+    border: 2px solid #35F9AE !important;
+    border-radius: 8px;
+}
+</style>
+
+<form class="row" id="modal_update--form" enctype="multipart/form-data">
     @csrf
     <div class="d-none animate__animated animate__fadeIn modal_bg--default" id="modal_signalments">
         <div class="modal-dialog modal-lg modal-dialog-centered animate__animated animate__fadeIn">
@@ -70,8 +76,7 @@
                         </div>
                     </div>
                     <div class="container-fluid mt-1 mb-2 p-2 d-flex modal-footer" id="moda_photo--footer">
-                        <button type="submit" class="btn btn-outline-secondary me-auto fw-bold" data-bs-dismiss="modal"
-                            id="delete_signalment--button">Supprimer</button>
+                        <button type="button" class="btn btn-outline-secondary me-auto fw-bold" id="delete_signalment--button">Supprimer</button>
                         <button type="button" class="btn btn-secondary fw-bold me-2"
                             id="resend_signalment--button">Renvoyer</button>
                         <button type="submit" class="btn btn-primary fw-bold"
@@ -89,7 +94,7 @@
                     </div>
                     <div class="modal-body" style="height: 30rem; overflow: scroll;">
                         @foreach ($signalments as $signalment)
-                        <div class="card border w-100 rounded-6 mb-4">
+                        <div class="card border w-100 rounded-6 mb-4" data-signalmentid="{{ $signalment['id'] }}" data-signalmentcategory = "{{ $signalment->lastSignalementVC->category['name'] }}">
                             <div class="card-body h-50" style="cursor: pointer;">
                                 <div class="card-description d-flex align-items-center text-secondary">
                                     <p class="me-auto my-auto  fw-bold">
@@ -113,7 +118,7 @@
                     </div>
                     <div class="container-fluid mt-1 mb-2 p-2 d-flex modal-footer">
                         <button class="btn btn-secondary fw-bold me-2" id="rattachedTo_back--button">Revenir</button>
-                        <button type="button" class="btn btn-primary fw-bold"
+                        <button class="btn btn-primary fw-bold"
                             id="rattachedTo_valid--button">Rattacher</button>
                     </div>
                 </div>
@@ -125,7 +130,7 @@
                         <p class="m-0 h5">Rattacher un Rapport</p>
                         <button type="button" class="btn-close" aria-label="Close" id="close_rapport--icon""></button>
                     </div>
-                    <div class=" modal-body" style="height: 30rem; overflow: scroll;">
+                    <div class="modal-body" style="height: 30rem; overflow: scroll;">
                             <div>
                                 <div class="form-group mb-2">
                                     <label>Titre du Rapport</label>
@@ -140,7 +145,7 @@
                                     <button class="btn btn-secondary w-100" type="button"
                                         id="rapport_image--button">Ajouter des images</button>
                                     <p class="text-secondary text-center" id="rapport_images--p"></p>
-                                    <input class="d-none" type="file" accept=".jpg" id="rapport--browse">
+                                    <input class="d-none" type="file" accept=".jpg" id="rapport--browse" >
                                 </div>
                             </div>
                     </div>
@@ -158,15 +163,7 @@
                         <button type="button" class="btn-close" aria-label="Close" id="close_viewRapport--icon""></button>
                     </div>
                     <div class=" modal-body" style="height: 30rem; overflow: scroll;">
-                            <div>
-                                <h3 id="viewRapport-title">Titre du Rapport Here</h3>
-                                <p id="viewRapport-description" style="text-align: justify;">Lorem ipsum dolor sit, amet
-                                    consectetur adipisicing elit. Adipisci et similique praesentium aut consequuntur
-                                    cumque, porro assumenda reiciendis vero non. Incidunt odit eveniet expedita
-                                    voluptatum neque excepturi debitis reprehenderit enim.</p>
-                                <img id="addRapport-image" class="img-fluid" src="https://picsum.photos/id/237/200/300"
-                                    alt="">
-                            </div>
+
                     </div>
                     <div class="container-fluid mt-1 mb-2 p-2 d-flex modal-footer">
                         <button class="btn btn-secondary fw-bold me-2" id="viewRapport_back--button">Revenir</button>
@@ -236,5 +233,6 @@
 
             </div>
         </div>
-        <input type="submit" value="ICI" class="modify--submit" hidden>
+        <!-- <input type="submit" value="ICI" class="modify--submit" hidden> -->
 </form>
+
