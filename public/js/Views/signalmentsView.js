@@ -97,6 +97,7 @@ class SignalmentsView {
             console.log(this.#currentSignalmentID);
             let rep = fetch(`/signalments/${this.#currentSignalmentID}/valider`)
             console.log(rep)
+            window.location.reload();
             return false
         })
     }
@@ -522,6 +523,7 @@ class SignalmentsView {
         // Body
         document.querySelector("#signalment-title").textContent = data.title;
         document.querySelector("#signalment-description").textContent = data.description;
+        document.querySelector("#signalment-image-modal").src = data.image;
         document.querySelector("#signalments-user").textContent = data.creatorName;
     }
     // Show Rapport

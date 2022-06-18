@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class="rounded-5" id="modal_image--container" style="height: 50vh">
-                            <img src="{{ asset('/storage/' . $signalment->lastSignalementVC['attachement']) }}"
+                            <img id="signalment-image-modal" src=""
                                 class="img-fluid h-100 w-100 rounded-5" alt="Image du signalement">
                         </div>
                         <div class="mt-3" id="modal_infos--container">
