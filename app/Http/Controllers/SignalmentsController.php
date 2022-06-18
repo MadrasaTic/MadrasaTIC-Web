@@ -242,7 +242,7 @@ class SignalmentsController extends Controller
         $signalementVersionControl = $signalement->lastSignalementVC;
         $newVC = $signalementVersionControl->replicate();
         $state = State::get()->toArray()[1];
-        $newVC->state_id = $state->id;
+        $newVC->state_id = $state['id'];
         $newVC->updated_by = $request->user()->id;
         $newVC->save();
         return $signalement;
