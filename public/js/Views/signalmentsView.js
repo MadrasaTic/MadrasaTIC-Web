@@ -523,7 +523,7 @@ class SignalmentsView {
         // Body
         document.querySelector("#signalment-title").textContent = data.title;
         document.querySelector("#signalment-description").textContent = data.description;
-        document.querySelector("#signalment-image-modal").src = data.image;
+        document.querySelector("#signalment-image-modal").src = `/storage/${data.image}`;
         document.querySelector("#signalments-user").textContent = data.creatorName;
     }
     // Show Rapport
