@@ -38,6 +38,7 @@ class ReportController extends Controller
      */
     public function store(Request $request, $signalement_id)
     {
+        $signalement = Signalement::findOrFail($signalement_id);
         $report = new Report();
         $report->title = $request->get('title');
         $report->description = $request->get('description');
