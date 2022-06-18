@@ -9,7 +9,6 @@
 <style>
     input:focus {
         outline: 0 !important;
-
     }
 
     input::placeholder {
@@ -37,27 +36,19 @@
 
                 <div class="form-group mb-2">
                     <label>Catégorie du Signalement</label>
-                    <select class="form-select" aria-label="">
-                        <option selected>Selectionner la Catégorie</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" >
                     </select>
                 </div>
 
                 <div class="form-group mb-2">
                     <label>Service du Signalement</label>
-                    <select class="form-select" aria-label="">
-                        <option selected>Selectionner un Service</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select">
                     </select>
                 </div>
 
                 <div class="form-group mb-2">
                     <label>Cite du Signalement</label>
-                    <select class="form-select" aria-label="">
+                    <select class="form-select" id="annexe--select">
                         <option selected>Selectionner le Cite</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -67,21 +58,13 @@
 
                 <div class="form-group mb-2">
                     <label>Bloc du Signalement</label>
-                    <select class="form-select" aria-label="">
-                        <option selected>Selectionner le Bloc</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" id="bloc--select">
                     </select>
                 </div>
 
                 <div class="form-group mb-2">
                     <label>Salle du Signalement</label>
-                    <select class="form-select" aria-label="">
-                        <option selected>Selectionner la Salle</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" id="room--select">
                     </select>
                 </div>
 
