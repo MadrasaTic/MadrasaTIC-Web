@@ -11,11 +11,12 @@ use App\Models\Annexe;
 use App\Models\Bloc;
 use App\Models\Room;
 use App\Models\User;
+use App\Models\Annonce;
 
 class SignalmentsController extends Controller
 {
     public function displayJson() {
-        $signalements = Signalement::with(['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC', 'report'])->get();
+        $signalements = Signalement::with(['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC', 'report'])->where("published", "=", "1")->get();
         return $signalements;
     }
     /**
@@ -27,24 +28,25 @@ class SignalmentsController extends Controller
     {
         $categories = Category::all();
         $states = State::all();
-        $signalments = Signalement::with(['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC'])->get();
+        $signalments = Signalement::with(['annexe', 'bloc', 'room', 'creator', 'lastSignalementVC'])->where("published", "=", "1")->get();
 
         $users_count = User::count();
         $signalements_count = count($signalments);
         $non_traite_count = Signalement::whereHas('lastSignalementVC', function ($query) use ($states) {
             return $query->where('state_id', '=', $states[0]->id);
-        })->count();
+        })->where("published", "=", "1")->count();
         $encours_count = Signalement::whereHas('lastSignalementVC', function ($query) use ($states) {
             return $query->where('state_id', '=', $states[1]->id);
-        })->count();
+        })->where("published", "=", "1")->count();
         $traite_count = $signalements_count - $encours_count - $non_traite_count;
+        $annonces_count = Annonce::count();
         // dd($traite_count);
         $stats = [
-            "traite_count" => $traite_count * 100 / $signalements_count,
+            "traite_count" => number_format($traite_count * 100 / $signalements_count, 2),
             "signalements_count" => $signalements_count,
-            "non_traite_count" => $non_traite_count * 100 / $signalements_count,
-            "annonce_count" => 0,
-            "encours_count" => $encours_count * 100 / $signalements_count,
+            "non_traite_count" => number_format($non_traite_count * 100 / $signalements_count, 2),
+            "annonce_count" => $annonces_count,
+            "encours_count" => number_format($encours_count * 100 / $signalements_count, 2),
             "users_count" => $users_count,
         ];
 
@@ -181,5 +183,44 @@ class SignalmentsController extends Controller
         $signalement = Signalement::find($id);
         $deleted = $signalement->delete();
         return $deleted;
+    }
+
+    public function all_versions($id) {
+        $versions = Signalement::with('signalementVersionControl')->findOrFail($id)->toArray()["signalement_version_control"];
+        $results = [];
+        $ids = [];
+        $versions_count = count($versions);
+
+        for($x = 0; $x < $versions_count - 1; $x++) {
+            foreach ($versions[$x] as $key => $value) {
+                if(is_array($value)) {
+                    // dd($value);
+                    $value = "";
+                    $versions[$x][$key] = "";
+                }
+                if($value == null) {
+                    $value = "";
+                    $versions[$x][$key] = "";
+                }
+            }
+            foreach ($versions[$x+1] as $key => $value) {
+                if(is_array($value)) {
+                    // dd($value);
+                    $value = "";
+                    $versions[$x+1][$key] = "";
+                }
+                if($value == null) {
+                    $value = "";
+                    $versions[$x+1][$key] = "";
+                }
+            }
+            // var_dump($versions[$x]);
+            array_push($results, array_diff($versions[$x], $versions[$x+1]));
+        }
+        dd($results);
+        // foreach ($versions as $key => $value) {
+        //     dd($versions[$key]);
+        // }
+        return $results;
     }
 }
