@@ -178,14 +178,9 @@
                                         </div>
                                         <h5 class="card-title fw-bold">{{ $signalment['title'] }}</h5>
                                         <p class="card-text">{{ $signalment['description'] }}</p>
-                                        <p class="card-text">
-                                            <i class="fa-solid fa-building px-1"></i>
-                                            {{ $signalment->annexe['name']}} {{ $signalment->bloc ? "/ ".$signalment->bloc['name'] : null }} {{ $signalment->room ? "/ ".$signalment->room['name']: null }}
-                                        </p>
                                         <div class="card--footer d-flex">
                                             <a class="me-auto my-auto" href="test"></a>
-                                            <a href="{{ '#'.$signalment['id'] }}"
-                                                class="btn btn-primary show_modal--button">Détails</a>
+                                            <a class="btn btn-primary show_modal--button" data-signalmentid="{{ $signalment['id'] }}">Détails</a>
                                         </div>
                                     </div>
                                 </div>

@@ -152,10 +152,5 @@ textarea:focus {
     cursor: pointer;
 }
 
-.cardClicked {
-    border: 3px solid #35F9AE !important;
-    /* box-shadow: 0px 0px 0px 4px rgba(49, 208, 170, 0.2); */
-    border-radius: 8px;
-}
 
 

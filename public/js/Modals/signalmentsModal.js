@@ -23,3 +23,21 @@ export async function loadInfra(type, url) {
     } 
 }
 
+
+export async function loadSignalmentInfo(id) {
+    try {
+        const data = await getJSON(`/signalments/${id}`);
+        return data;
+    } catch (err) {
+        console.error(err.message)
+    }
+}
+
+export async function loadRapportInfo(id) {
+    try {
+        const data = await getJSON(`/signalments/${id}/report`);
+        return data
+    } catch (err) {
+        console.error(err.message)
+    }
+}

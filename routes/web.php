@@ -145,7 +145,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/signalments_display', [SignalmentsController::class, 'displayJson']);
         Route::post('/signalments', [SignalmentsController::class, 'store']);
         Route::get('/signalments/{id}',[SignalmentsController::class,'show']);
-        Route::get('/signalments/{id}/edit', [SignalmentsController::class, 'edit']);
+        Route::get('/signalments/{id}/edit', [SignalmentsController::class, 'edit']);   
         Route::post('/signalments/{id}',[SignalmentsController::class,'update']);
         Route::post('/signalments/delete/{id}',[SignalmentsController::class,'delete']);
 
