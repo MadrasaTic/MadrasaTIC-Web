@@ -164,7 +164,10 @@ if ((window.location.pathname.slice(1) == "annonces")) {
 
 // Old Controller (Needs Refactoring)
 window.addEventListener("load", function() {
-    sideBarView.displayHoverEffect();
+
+    if (window.location.pathname.slice(1) != "addSignalement") {
+        sideBarView.displayHoverEffect();
+    }
 
     if ((window.location.pathname.slice(1) == "login") || (window.location.pathname == "/") ) {
         loginView.generateFormArray();
