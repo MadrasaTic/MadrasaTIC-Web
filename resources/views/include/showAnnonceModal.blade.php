@@ -21,8 +21,8 @@
                             <p class="m-0 fs-5 text-justify" id="annonce-description" style="text-align: justify;"></p>
                             <p class="fw-bold mb-0 mt-3 text-end">Annoncé par : <span class="fw-normal" id="annonce-annoncer"></span></p>
                         </div>
-                        <p class="card-text">Date debut:</p>
-                        <p class="card-text">Date fin:</p>
+                        <p class="card-text" id="annonce-date-begin-modal">Date debut:</p>
+                        <p class="card-text" id="annonce-date-end-modal">Date fin:</p>
                     </div>
 
                     <!-- Modal Footer -->

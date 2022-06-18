@@ -18,51 +18,46 @@ class AnnoncesController extends Controller
      */
 
     public function index(){
-
-        $dt = Carbon::now();
-        // $annonces= Annonce::whereRaw('"'.$dt.'" between `beginDate` and `endDate`')
-        //                 ->get();
+        setlocale(LC_ALL, 'fr_FR');
+        Carbon::setLocale('fr');
+        $now = Carbon::now();
         $annonces= Annonce::get();
-            return view('annonces' , compact('annonces'));
-
-        //$annonces->beginTime->addDays(10);
-        //dd($annonces);
-
-
-
-
-
+        foreach($annonces as $key => $value) {
+            $value->annoncestate = (strtotime($value->beginDate) <= strtotime($now) && strtotime($value->endDate) >= strtotime($now));
+        }
+        return view('annonces' , compact('annonces'));
     }
 
     public function show($id)
     {
+        Carbon::setLocale('fr');
         $annonces= Annonce::findOrFail($id);
-
         return $annonces;
     }
 
     public function Add(Request $request)
     {
-
-        $annonce= new Annonce;
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'beginDate' => 'required',
+            'endDate' => 'required',
+            'image' => 'required|file|max:2048',
+        ]);
+        $annonce= new Annonce();
         $annonce->user_id = $request->user()->id;
         $annonce->title = $request->title;
         $annonce->description = $request->description;
         $annonce->beginDate = $request->beginDate;
         $annonce->endDate = $request->endDate;
-
-
         if ($request->hasfile('image')) {
-              $image = $request->file('image');
-
-                  $path = $image->getClientOriginalName();
-                  $image->move(public_path().'/images/annonces', $path);
-                  $annonce->image= $path;
-              }
-
-           $annonce->save();
-           //dd($annonce);
-          return redirect('annonces');
+            $path = $request->file('image')->store('images/annonces', 'public');
+            $annonce->image = $path;
+        } else {
+            $annonce->image = "";
+        }
+        $annonce->save();
+        return redirect('annonces');
     }
 
     public function edit($id)
@@ -80,23 +75,16 @@ class AnnoncesController extends Controller
         $data->beginDate = $request->beginDate;
         $data->endDate = $request->endDate;
         if ($request->hasfile('image')) {
-            $image = $request->file('image');
-
-                $path = $image->getClientOriginalName();
-                $image->move(public_path().'/images/annonces', $path);
-                $data->image= $path;
-            }
-        //dd($data);
+            $path = $request->file('image')->store('images/annonces', 'public');
+            $data->image = $path;
+        }
         $data->save();
-
         return redirect('annonces');
     }
     public function delete($id)
     {
         $annonce = Annonce::findOrFail($id);
         $annonce->delete();
-
         return redirect('annonces');
-
     }
 }
