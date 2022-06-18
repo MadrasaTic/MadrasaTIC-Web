@@ -24,7 +24,9 @@ class AnnonceController extends Controller
      *     )
      */
     public function index(){
-        $annonces = Annonce::all();
+        $dt = Carbon::now();
+        $annonces= Annonce::whereRaw('"'.$dt.'" between `beginDate` and `endDate`')
+                        ->get();
         return $annonces;
     }
 
@@ -94,10 +96,10 @@ class AnnonceController extends Controller
         $annonce->beginDate = $request->beginDate;
         $annonce->endDate = $request->endDate;
         if ($request->hasfile('image')) {
-            $image = $request->file('image');
-            $path = $image->getClientOriginalName();
-            $image->move(public_path().'/images/annonces', $path);
-            $annonce->image= $path;
+            $path = $request->file('image')->store('images/annonces', 'public');
+            $annonce->image = $path;
+        } else {
+            $annonce->image = "";
         }
         $annonce->save();
         return $annonce;
