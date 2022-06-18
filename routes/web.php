@@ -25,6 +25,8 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Infrastructure\AnnexeController;
 use App\Http\Controllers\Infrastructure\BlocController;
 use App\Http\Controllers\Infrastructure\RoomController;
+
+use App\Http\Controllers\AnnoncesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -153,6 +155,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/signalments/{signalement_id}/report', [ReportController::class, 'store']);
         Route::post('/signalments/{signalement_id}/report/edit', [ReportController::class, 'store']);
         Route::post('/signalments/{signalement_id}/report/delete', [ReportController::class, 'store']);
+        // Annonces
+        Route::get('/annonces',[AnnoncesController::class, 'index']);
+        Route::get('/annonces/{id}',[AnnoncesController::class, 'show']);
+        Route::post('/annonces',[AnnoncesController::class, 'Add']);
+        Route::get('/modifyAnnonce/{id}', [AnnoncesController::class, 'edit']);
+        Route::post('/modifyAnnonce',[AnnoncesController::class,'update']);
+        Route::get('/annonces/delete/{id}',[AnnoncesController::class, 'delete']);
     });
 
     Route::middleware(['HasPermission'])->group(function () {

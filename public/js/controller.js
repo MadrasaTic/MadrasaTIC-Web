@@ -6,10 +6,13 @@ import tablesView from "./Views/tablesView.js";
 import sideBarView from "./Views/sideBarView.js";
 import infraView from "./Views/infraView.js";
 import signalmentsView from "./Views/signalmentsView.js";
+import annoncesView from "./Views/annoncesView.js"
 // Models
 import * as signalmentsModal from "./Modals/signalmentsModal.js";
+import * as annonceModal from "./Modals/annonceModal.js";
 
-// Signalements
+
+// Signalements Controllers
 function controlSignalements () {
     console.log("Signalments Controller Loaded");
 }
@@ -21,8 +24,17 @@ async function controlInfra(type, url) {
     signalmentsView.renderInfraOptions(data, type);
 }
 
+// Annonces Controllers
+async function controlAnnonce(id) {
+    // Get Annonce's infos
+    const data = await annonceModal.loadAnnonceInfo(id);
+    // Render Them
+    annoncesView.renderAnnonceInfo(data);
+}
+
 
 if ((window.location.pathname.slice(1) == "signalments")) {
+    console.log("Signalement");
 
     function init() {
         signalmentsView.addHanlderApplyStateColors();
@@ -72,6 +84,23 @@ if ((window.location.pathname.slice(1) == "signalments")) {
         signalmentsView.addHandlerSearchInput();
     }
     init();
+}
+
+
+if ((window.location.pathname.slice(1) == "annonces")) {
+    console.log("Annonces");
+
+    function init() {
+        // OnLoad
+        annoncesView.addHandlerAnnonceState();
+        // Modal
+        annoncesView.addHandlerShowModalBtn(controlAnnonce);
+        annoncesView.addHandlerCloseModal();
+        annoncesView.addHandlerDeleteAnnonceBtn();
+    }
+
+    init();
+
 }
 
 // 

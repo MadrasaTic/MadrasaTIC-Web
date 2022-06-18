@@ -44,25 +44,24 @@ class SignalmentsView {
         })
         window.addEventListener("load", (e) => {
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-            //
             allCards.forEach(card => card.classList.remove("d-none"))
-            let notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
+            let notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
     }
-    
+
     addHandlerSearchInput() {
         const input = document.querySelector("#search--input")
         input.addEventListener("input", (e) => {
             let allCards = Array.from(document.querySelectorAll(".cardDiv"));
             // Display All cards
             allCards.forEach(card => card.classList.add("d-none"));
-            // 
-            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            //
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");
             if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
-            allCards = allCards.filter(card => card.dataset.title.includes(input.value) || card.dataset.category.includes(input.value)) 
+            allCards = allCards.filter(card => card.dataset.title.includes(input.value) || card.dataset.category.includes(input.value))
             //
             allCards.forEach(card => card.classList.remove("d-none"));
             window.scrollBy(0, 150);
@@ -74,11 +73,11 @@ class SignalmentsView {
     addHandlerShowModalBtn() {
         const showModalBtn = document.querySelectorAll(".show_modal--button");
         showModalBtn.forEach(btn => {
-            btn.addEventListener("click", (e) => {  
+            btn.addEventListener("click", (e) => {
                 document.querySelector("#modal_signalments").classList.remove("d-none");
             })
         })
-    } 
+    }
     addHandlerCloseModal() {
         document.querySelector("#close_signalment--button").addEventListener("click", () => {
             document.querySelector("#modal_signalments").classList.add("d-none");
@@ -163,14 +162,14 @@ class SignalmentsView {
         document.querySelector("#rapport_add--button").addEventListener("click", (e) =>{
             console.log("Add Rapport");
         })
-    } 
+    }
 
     addHandlerRapportBackBtn() {
         document.querySelector("#rapport_back--button").addEventListener("click", (e) =>{
             e.preventDefault()
             document.querySelector("#signalments--body").classList.remove("d-none");
             document.querySelector("#rapport--body").classList.add("d-none");
-        })  
+        })
     }
 
     addHandlerInputDispaly() {
@@ -219,7 +218,7 @@ class SignalmentsView {
             e.preventDefault()
             document.querySelector("#signalments--body").classList.remove("d-none");
             document.querySelector("#viewRapport--body").classList.add("d-none");
-        })  
+        })
     }
 
     // View Change
@@ -243,9 +242,9 @@ class SignalmentsView {
             e.preventDefault()
             document.querySelector("#signalments--body").classList.remove("d-none");
             document.querySelector("#changes--body").classList.add("d-none");
-        })  
+        })
     }
-    // Select Handlers    
+    // Select Handlers
     addHandlerInfraFilters() {
         document.querySelector("#infra_filter--button").addEventListener("click", () => {
             document.querySelector("#infra-filters--container").classList.toggle("d-none")
@@ -269,7 +268,7 @@ class SignalmentsView {
             this.#selectedAnnexe = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");
             if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
@@ -290,7 +289,7 @@ class SignalmentsView {
             this.#selectedAnnexe = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"));
-            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");
             if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
@@ -315,7 +314,7 @@ class SignalmentsView {
             this.#selectedBloc = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
-            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");
             if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
@@ -337,7 +336,7 @@ class SignalmentsView {
             this.#selectedBloc = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"));
-            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");
             if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
@@ -365,7 +364,7 @@ class SignalmentsView {
             this.#selectedCategory = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"));
-            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");
             if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedAnnexe != "Annexes") allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
@@ -386,7 +385,7 @@ class SignalmentsView {
             this.#selectedState = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"));
-            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");
             if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
             if (this.#selectedAnnexe != "Annexes") allCards = allCards.filter(card => card.dataset.annexe == this.#selectedAnnexe);
@@ -407,7 +406,7 @@ class SignalmentsView {
             this.#selectedRoom = selectedOption.text;
             // First Display ALL Cards
             let allCards = Array.from(document.querySelectorAll(".cardDiv"));
-            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");                
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");
             if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
@@ -422,6 +421,13 @@ class SignalmentsView {
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
     }
+
+    addHandlerModalState() {
+        // document.querySelector("#modalState--container").addEventListener("click", () => {
+            // console.log("Modal state change");
+        // })
+    }
+
 
 
     renderInfraOptions(data, type) {

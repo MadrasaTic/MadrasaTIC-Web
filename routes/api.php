@@ -11,6 +11,7 @@ use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\StateController;
 use App\Http\Controllers\API\InfrastructureController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\AnnonceController;
 
 use App\Models\User;
 /*
@@ -50,6 +51,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('signalement/{id}/react/{reaction}', [SignalementController::class, "react"]);
     Route::post('signalement/{id}/save', [SignalementController::class, "save"]);
+
+    Route::get('/annonce',[AnnonceController::class, 'index']);
+    Route::get('/annonce/{id}',[AnnonceController::class, 'show']);
+    Route::post('/annonce',[AnnonceController::class, 'store']);
 
     Route::get('user/saved', [UserController::class, "saved"]);
     Route::get('user/upvoted', [UserController::class, "upvoted"]);

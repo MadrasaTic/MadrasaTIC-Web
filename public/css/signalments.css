@@ -128,9 +128,9 @@ textarea:focus {
 }
 
 /* Cards */
-#signa--cards>div {
+/* #signa--cards>div {
     height: 29rem;
-}
+} */
 
 .card-text {
     display: -webkit-box;

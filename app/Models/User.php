@@ -84,4 +84,9 @@ class User extends Authenticatable
         ->withPivot('reaction_type')
         ->withTimestamps();
     }
+
+    public function annonce()
+    {
+        return $this->hasMany(Annonce::class);
+    }
 }

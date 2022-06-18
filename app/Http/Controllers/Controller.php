@@ -33,6 +33,10 @@ use Illuminate\Routing\Controller as BaseController;
     *     description="API Endpoints of Signalements"
     * )
     * @OA\Tag(
+    *     name="Annonce",
+    *     description="API Endpoints of Annonces"
+    * )
+    * @OA\Tag(
     *     name="Annexe",
     *     description="API Endpoints of Annexes"
     * )
