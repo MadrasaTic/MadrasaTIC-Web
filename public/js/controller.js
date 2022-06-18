@@ -80,7 +80,7 @@ async function controlAnnonce(id) {
     annoncesView.renderAnnonceInfo(data);
 }
 
-if (window.location.pathname.slice(1) == "addSignalement") {
+if (window.location.pathname.slice(1) == "signalments/create") {
     console.log("Add Signalement");
     addSignalmentView.addHandlerLoadAnnexe(controlInfra, "annexe", '/infrastructure/annexe');
     addSignalmentView.addHandlerAnnexeChange(controlInfra, "bloc", '/infrastructure/bloc/listing/' );
