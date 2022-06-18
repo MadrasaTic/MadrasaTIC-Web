@@ -20,8 +20,9 @@ class AnnoncesController extends Controller
     public function index(){
 
         $dt = Carbon::now();
-        $annonces= Annonce::whereRaw('"'.$dt.'" between `beginDate` and `endDate`')
-                        ->get();
+        // $annonces= Annonce::whereRaw('"'.$dt.'" between `beginDate` and `endDate`')
+        //                 ->get();
+        $annonces= Annonce::get();
             return view('annonces' , compact('annonces'));
 
         //$annonces->beginTime->addDays(10);
@@ -49,6 +50,10 @@ class AnnoncesController extends Controller
         $annonce->description = $request->description;
         $annonce->beginDate = $request->beginDate;
         $annonce->endDate = $request->endDate;
+<<<<<<< Updated upstream
+=======
+        $annonce['public'] = 1;
+>>>>>>> Stashed changes
 
 
         if ($request->hasfile('image')) {
