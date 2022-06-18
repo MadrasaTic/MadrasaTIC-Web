@@ -39,16 +39,16 @@ class SignalmentsView {
             let notMatchCardTAB = ""
             this.#selectedParentFilter = e.target.dataset.type;
             if (e.target.dataset.type == "aiguillés") {
-                notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
+                notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non traité");
             } else {
-                notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state != "Non Traité");
+                notMatchCardTAB = Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state != "Non traité");
             }
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
         window.addEventListener("load", (e) => {
             let allCards = Array.from(document.querySelectorAll(".cardDiv"))
             allCards.forEach(card => card.classList.remove("d-none"))
-            let notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non Traité");
+            let notMatchCardTAB =  Array.from(document.querySelectorAll(".cardDiv")).filter(card => card.dataset.state == "Non traité");
             notMatchCardTAB.forEach(card => card.classList.add("d-none"));
         })
     }
@@ -60,7 +60,7 @@ class SignalmentsView {
             // Display All cards
             allCards.forEach(card => card.classList.add("d-none"));
             //
-            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non Traité");
+            if (this.#selectedParentFilter == "aiguillés") allCards = allCards.filter(card => card.dataset.state != "Non traité");
             if (this.#selectedParentFilter == "non-aiguillés") allCards = allCards.filter(card => card.dataset.state == "Traité" );
             if (this.#selectedState != "États") allCards = allCards.filter(card => card.dataset.state == this.#selectedState);
             if (this.#selectedCategory != "Catégories") allCards = allCards.filter(card => card.dataset.category == this.#selectedCategory);
