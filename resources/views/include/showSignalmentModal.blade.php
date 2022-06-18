@@ -160,7 +160,7 @@
                             <div class="form-group mb-2">
                                 <button class="btn btn-secondary w-100" type="button"
                                     id="rapport_image--button">Ajouter des images</button>
-                                <p class="text-secondary text-center" id="rapport_images--p"></p>
+                                <p class="text-secondary text-center d-none" id="rapport_images--p"></p>
                                 <input class="d-none" type="file" id="rapport--browse">
                             </div>
                         </div>

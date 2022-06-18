@@ -2,7 +2,7 @@
 
 <head>
     <link href="{{ asset('css/signalments.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
+    {{-- <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" /> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <!-- Date ranger picker -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -206,8 +206,8 @@
     <!-- Show Signalments Modal -->
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('js/select2.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/select2.min.js') }}"></script> --}}
     <script>
         var forEach = function (array, callback, scope) {
             for (var i = 0; i < array.length; i++) {
