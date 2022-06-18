@@ -103,7 +103,7 @@ class ReportController extends Controller
             $signalement->load(['lastSignalementVC']);
             $signalementVersionControl = $signalement->lastSignalementVC;
             $newVC = $signalementVersionControl->replicate();
-            $state = State::latest()->first()->toArray();
+            $state = State::orderBy('id', 'desc')->first()->toArray();
             $newVC->state_id = $state['id'];
             $newVC->updated_by = $request->user()->id;
             $newVC->save();
