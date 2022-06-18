@@ -91,9 +91,13 @@ class SignalmentsView {
             document.querySelector("#modal_signalments").classList.add("d-none");
         })
     }
-    addHandlerApproveSignalmentBtn() {
+    async addHandlerApproveSignalmentBtn() {
         document.querySelector("#approve_signalment--button").addEventListener("click", (e) => {
-            console.log("Signalements Approved");
+            e.preventDefault();
+            console.log(this.#currentSignalmentID);
+            let rep = fetch(`/signalments/${this.#currentSignalmentID}/valider`)
+            console.log(rep)
+            return false
         })
     }
     addHandlerResendSignalmentsBtn() {

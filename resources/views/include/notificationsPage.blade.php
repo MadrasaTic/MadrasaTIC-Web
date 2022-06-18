@@ -11,6 +11,8 @@
         <a type="button" href="/signalments/create" class="btn btn-secondary btn-lg w-100 mb-3">Ajouter un Signalement</a>
         <a type="button" href="/annonces/create" class="btn btn-secondary btn-lg w-100 mb-5">Ajouter une Annonce</a>
     </div>
+</div>
+<div class="col px-3 border-start border-2 d-none">
     <div class="mb-3 border notification--container animate__animated animate__pulse" style="height: 4.5rem;">
         <div class="row m-0 w-100 h-100">
             <div class="col-md-2"></div>

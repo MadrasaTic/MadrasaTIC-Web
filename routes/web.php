@@ -150,6 +150,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/signalments/{id}',[SignalmentsController::class,'show']);
         Route::get('/signalments/{id}/allversions',[SignalmentsController::class,'all_versions']);
         Route::get('/signalments/{id}/edit', [SignalmentsController::class, 'edit']);
+        Route::get('/signalments/{id}/valider', [SignalmentsController::class, 'valider']);
         Route::post('/signalments/{id}',[SignalmentsController::class,'update']);
         Route::post('/signalments/delete/{id}',[SignalmentsController::class,'delete']);
 

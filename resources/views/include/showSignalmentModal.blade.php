@@ -87,7 +87,7 @@
                     <div class="container-fluid mt-1 mb-2 p-2 d-flex modal-footer" id="moda_photo--footer">
                         <button type="button" class="btn btn-outline-secondary me-auto fw-bold"
                             id="delete_signalment--button">Rejeter</button>
-                        <button type="button" class="btn btn-secondary fw-bold me-2"
+                        <button type="button" class="btn btn-secondary fw-bold me-2 d-none"
                             id="resend_signalment--button">Renvoyer</button>
                         <button type="submit" class="btn btn-primary fw-bold"
                             id="approve_signalment--button">Valider</button>

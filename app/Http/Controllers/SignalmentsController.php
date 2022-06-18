@@ -224,4 +224,27 @@ class SignalmentsController extends Controller
         // }
         return $results;
     }
+
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function valider(Request $request, $id)
+    {
+        $signalement = Signalement::find($id);
+        if ($signalement == null) {
+            return "signalment not found";
+        }
+        $signalement->load(['lastSignalementVC']);
+        $signalementVersionControl = $signalement->lastSignalementVC;
+        $newVC = $signalementVersionControl->replicate();
+        $state = State::get()->toArray()[1];
+        $newVC->state_id = $state->id;
+        $newVC->updated_by = $request->user()->id;
+        $newVC->save();
+        return $signalement;
+    }
 }
