@@ -99,6 +99,14 @@ class ReportController extends Controller
                 $report->attachement = $path;
             }
             $report->save();
+
+            $signalement->load(['lastSignalementVC']);
+            $signalementVersionControl = $signalement->lastSignalementVC;
+            $newVC = $signalementVersionControl->replicate();
+            $state = State::latest()->first()->toArray();
+            $newVC->state_id = $state['id'];
+            $newVC->updated_by = $request->user()->id;
+            $newVC->save();
             return $report;
         } else {
             return "report doesn't exist";
