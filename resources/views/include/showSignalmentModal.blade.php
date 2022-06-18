@@ -70,7 +70,7 @@
                         </div>
                         <div>
                             <button class="btn btn-secondary w-100 fw-500
-                            @if(!User::find(auth()->id())->roles[0]->hasPermission('createReport')) d-none @endif"
+                            @if(!Auth::user()->roles[0]->hasPermission('createReport')) d-none @endif"
                              id="showRapport--button">
                                 <i class="fa-solid fa-link me-2"></i>Rattacher un rapport
                             </button>
@@ -88,12 +88,12 @@
                     </div>
                     <div class="container-fluid mt-1 mb-2 p-2 d-flex modal-footer" id="moda_photo--footer">
                         <button type="button" class="btn btn-outline-secondary me-auto fw-bold
-                        @if(!User::find(auth()->id())->roles[0]->hasPermission('aiguiller')) d-none @endif"
+                        @if(!Auth::user()->roles[0]->hasPermission('aiguiller')) d-none @endif"
                             id="delete_signalment--button">Rejeter</button>
                         <button type="button" class="btn btn-secondary fw-bold me-2 d-none"
                             id="resend_signalment--button">Renvoyer</button>
                         <button type="submit" class="btn btn-primary fw-bold
-                        @if(!User::find(auth()->id())->roles[0]->hasPermission('aiguiller')) d-none @endif"
+                        @if(!Auth::user()->roles[0]->hasPermission('aiguiller')) d-none @endif"
                             id="approve_signalment--button">Valider</button>
                     </div>
                 </div>
