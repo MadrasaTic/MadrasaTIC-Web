@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Report;
 use App\Models\Signalement;
+use App\Models\State;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
