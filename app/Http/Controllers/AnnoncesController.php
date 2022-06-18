@@ -50,10 +50,6 @@ class AnnoncesController extends Controller
         $annonce->description = $request->description;
         $annonce->beginDate = $request->beginDate;
         $annonce->endDate = $request->endDate;
-<<<<<<< Updated upstream
-=======
-        $annonce['public'] = 1;
->>>>>>> Stashed changes
 
 
         if ($request->hasfile('image')) {
