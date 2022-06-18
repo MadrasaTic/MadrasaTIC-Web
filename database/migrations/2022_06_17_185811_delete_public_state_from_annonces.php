@@ -15,7 +15,7 @@ class DeletePublicStateFromAnnonces extends Migration
     {
         Schema::table('annonces', function (Blueprint $table) {
             $table->dropColumn('public');
-            $table->dropColumn('state');
+            // $table->dropColumn('state');
         });
     }
 
