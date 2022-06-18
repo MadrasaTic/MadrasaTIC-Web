@@ -206,6 +206,8 @@ class SignalementController extends Controller
         if ($request->has('category_id') && $request->get('category_id') != null
             && $newVC->category_id != $request->get('category_id')) {
             $newVC->category_id = $request->get('category_id');
+            $newVC->service_id = Category::find($request->get('category_id'))->services->id;
+            $newVC->priority_id = Category::find($request->get('category_id'))->priority->id;
             $newVC->updated_by = $request->user()->id;
             $newVC->save();
         }
