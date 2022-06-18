@@ -21,12 +21,13 @@ async function controlShowSignalment (signalmentID) {
         title,
         description,
         annexe: {name: annexeName},
-        bloc: {name: blocName},
-        room: {name: roomName},
         creator: {user_information: {first_name: creatorFName, last_name: creatorLName, user_id: creatorID}},
         last_signalement_v_c: {state: {id: stateID}, category: {id: categoryID}, attachement: image},
     } = data;
-
+    data.blocName = data.bloc?data.bloc.name : ""
+    data.roomName = data.room?data.room.name : ""
+    const blocName = data.bloc?data.bloc.name : ""
+    const roomName = data.room?data.room.name : ""
     const filteredData = {
         id,
         creatorID: creatorID,
@@ -59,8 +60,8 @@ async function controlAddRapport(uploadData) {
 
 async function controlDeleteSignalment(signalmentID) {
     const resp = await signalmentsModal.deleteSignalment(signalmentID);
-
     console.log(resp);
+    window.location.reload();
 }
 
 async function controlInfra(type, url) {

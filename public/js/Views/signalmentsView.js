@@ -180,17 +180,28 @@ class SignalmentsView {
         document.querySelector("#rapport_add--button").addEventListener("click", (e) =>{
             e.preventDefault();
             console.log("Add Rapport");
+            let formData = new FormData();
+
             // Récupréer inputs et les stocker dans un object
             const uploadData = {
+                _token: document.head.querySelector('meta[name="csrf-token"]').content,
                 title: document.querySelector("#addRapport-title").value,
                 description: document.querySelector("#addRapport-description").value,
-                attachement: document.querySelector("#rapport--browse").value,
+                attachement: document.querySelector("#rapport--browse").files[0],
                 created_by: this.#currentSignalmentCreatorID,
                 signalement_id: this.#currentSignalmentID,
             }
-            // Send the object to the controlelr
-            console.log(uploadData);
-            handler(uploadData)
+            for ( var key in uploadData ) {
+                formData.append(key, uploadData[key]);
+            }
+            // Send the object to the controller
+            const resp = fetch(`/signalments/${uploadData.signalement_id}/report`,{
+                method: "POST",
+                body: formData
+            });
+            console.log(resp);
+            // return resp;
+            document.querySelector("#rapport_back--button").click()
         })
     }
 
@@ -496,8 +507,9 @@ class SignalmentsView {
 
         // Header
         document.querySelector("#signalments-annexe").textContent = "Cite: " + data.annexeName;
+        console.log(data.annexeName);
         document.querySelector("#signalments-bloc").textContent = "Bloc: " + data.blocName;
-        document.querySelector("#signalments-room").textContent = "Salle : " + data.roomName;
+        document.querySelector("#signalments-room").textContent = "Salle: " + data.roomName;
         // Selects
         document.querySelector(`#modalCategory--select option[value = "${data.categoryID}"]`).selected = true;
         document.querySelector(`#modalState--select option[value = "${data.stateID}"]`).selected = true;
@@ -522,7 +534,7 @@ class SignalmentsView {
             <div>
                 <h3 id="viewRapport-title">${data.title }</h3>
                 <p id="viewRapport-description" style="text-align: justify;">${data.description }</p>
-                <img id="addRapport-image" class="img-fluid" src="/storage/images/report/${data.attachement}"
+                <img id="addRapport-image" class="img-fluid" src="/storage/${data.attachement}"
                     alt="Image du Rapport">
             </div>
             `

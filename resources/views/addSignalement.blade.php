@@ -86,9 +86,9 @@
                 </div>
 
                 <div class="form-group mb-2">
-                    <label class="mb-1">Ajouter une Image (Non Obligatoire) <br></label>
+                    <label class="mb-1">Ajouter une Image<br></label>
                     <div class="form-group">
-                        <input type="file" class="form-control-file" accept=".jpg" multiple id="#browse-input">
+                        <input type="file" class="form-control-file" id="#browse-input">
                     </div>
                 </div>
 

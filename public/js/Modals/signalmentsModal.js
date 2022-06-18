@@ -14,7 +14,7 @@ export const state = {
     bookmarks: [],
 }
 
-// Post Function 
+// Post Function
 export async function deleteSignalment(id) {
     try {
         const token = document.head.querySelector('meta[name="csrf-token"]').content;
@@ -52,10 +52,10 @@ export async function loadInfra(type, url) {
     try {
         const data = await getJSON(url);
         return data;
-        
+
     } catch (err) {
         console.error(err.message);
-    } 
+    }
 }
 
 
