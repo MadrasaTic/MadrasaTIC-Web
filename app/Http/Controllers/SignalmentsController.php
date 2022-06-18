@@ -217,6 +217,7 @@ class SignalmentsController extends Controller
             // var_dump($versions[$x]);
             array_push($results, array_diff($versions[$x], $versions[$x+1]));
         }
+        // dd($versions);
         dd($results);
         // foreach ($versions as $key => $value) {
         //     dd($versions[$key]);
