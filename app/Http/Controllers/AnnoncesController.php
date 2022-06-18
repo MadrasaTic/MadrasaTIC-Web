@@ -17,7 +17,7 @@ class AnnoncesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(){
+    public function index() {
         setlocale(LC_ALL, 'fr_FR');
         Carbon::setLocale('fr');
         $now = Carbon::now();
@@ -26,6 +26,10 @@ class AnnoncesController extends Controller
             $value->annoncestate = (strtotime($value->beginDate) <= strtotime($now) && strtotime($value->endDate) >= strtotime($now));
         }
         return view('annonces' , compact('annonces'));
+    }
+
+    public function create() {
+        return view('addAnnonce');
     }
 
     public function show($id)

@@ -146,6 +146,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/signalments', [SignalmentsController::class, 'index'])->name('signalements');
         Route::get('/signalments_display', [SignalmentsController::class, 'displayJson']);
         Route::post('/signalments', [SignalmentsController::class, 'store']);
+        Route::get('/signalments/create', [SignalmentsController::class, 'create']);
         Route::get('/signalments/{id}',[SignalmentsController::class,'show']);
         Route::get('/signalments/{id}/edit', [SignalmentsController::class, 'edit']);
         Route::post('/signalments/{id}',[SignalmentsController::class,'update']);
@@ -156,7 +157,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/signalments/{signalement_id}/report/edit', [ReportController::class, 'store']);
         Route::post('/signalments/{signalement_id}/report/delete', [ReportController::class, 'store']);
         // Annonces
-        Route::get('/annonces',[AnnoncesController::class, 'index']);
+        Route::get('/annonces',[AnnoncesController::class, 'index'])->name("annonces");
+        Route::get('/annonces/create',[AnnoncesController::class, 'create']);
         Route::get('/annonces/{id}',[AnnoncesController::class, 'show']);
         Route::post('/annonces',[AnnoncesController::class, 'Add']);
         Route::get('/modifyAnnonce/{id}', [AnnoncesController::class, 'edit']);

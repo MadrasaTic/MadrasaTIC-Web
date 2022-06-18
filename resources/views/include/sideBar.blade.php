@@ -4,9 +4,9 @@
 </head>
 
 <div class="col-md-2 position-relative" id="sidebar--container">
-    <div class="position-relative d-flex align-items-center w-100 mt-5" id="sideBar--header">
+    <div class="position-relative d-flex align-items-center w-100 mt-5 mx-2" id="sideBar--header">
         <div class="h-100 d-flex align-items-center mx-2" id="SBprofile-picture">
-            <!-- <div class="rounded-circle bg-secondary" id="">
+            <div class="rounded-circle bg-secondary" id="">
                 @if (Auth::user()->userInformation->avatar_path != "")
                 <img
                     class="rounded-circle img-fluid"
@@ -20,13 +20,14 @@
                         width: 50px;">
                 </div>
                 @endif
-            </div> -->
+            </div>
         </div>
-        <div class="h-100 d-flex flex-column align-items-center justify-content-center">
-            <h3 class="text-primary fw-bold fs-5 ">{{ Auth::user()->userInformation->last_name }}<span class="fw-normal"> {{ Auth::user()->userInformation->first_name }}</span></h3>
-            <p class="fs-6 fw-normal m-0">{{ Auth::user()->email }}</p>
+        <div class="h-100 d-flex flex-column justify-content-center">
+            <h3 class="text-primary fw-bold fs-5 mb-0" style="text-align: left;">{{ Auth::user()->userInformation->last_name }}</h3>
+            <h3 class="text-primary fs-5 ">{{ Auth::user()->userInformation->first_name }}</h3>
         </div>
     </div>
+    {{-- <p class="fs-6 fw-normal m-0">{{ Auth::user()->email }}</p> --}}
     <div class="position-relative d-flex align-items-center justify-content-center mt-5" id="sidebar--top">
             <div class="h-auto w-100" id="sidebar_items--container">
                 <!-- Head -->
@@ -39,7 +40,7 @@
                     </div>
                 </a>
                 <!-- Item -->
-                <a class="link" href="#">
+                <a class="link" href="{{ route("annonces")}}">
                     <div name="" class="@if(Route::current()->getName() == "annonces") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-bullhorn py-3 px-1 ms-3"></i>
                         <span class="me-1">Annonce</span>

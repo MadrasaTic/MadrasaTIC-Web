@@ -58,7 +58,7 @@ class SignalmentsController extends Controller
      */
     public function create()
     {
-        //
+        return view("addSignalement");
     }
 
     /**

@@ -32,7 +32,7 @@
                     <div class="d-flex align-items-center py-2" id="signa--header">
                         <p class="fs-3 me-auto my-auto ">Annonces</p>
                         <button class="btn btn-outline-secondary fw-bold" id="add--button">
-                            <a href="{{'addAnnonce'}}"><span>Ajouter une annonce</span></a>
+                            <a href="/annonces/create"><span>Ajouter une annonce</span></a>
 
                         </button>
                     </div>
