@@ -91,7 +91,7 @@ class AuthAPIController extends Controller
         //dd($user->token);
         $token = $userCreated->createToken('token-name')->plainTextToken;
 	// return "<script> function me(){window.location.replace('exp://'+document.getElementById('ip_address').value+':19000/--/user_token/".$token."');}</script>ip address<input id='ip_address' type='text'><button onclick='me()'>redirect</button>".$token;
-        return redirect()->to('madrasatic-mobile://user_token/'.$token);
+        return redirect()->to('exp://exp.host/@community/with-webbrowser-redirect/--/user_token/'.$token);
     }
 
     /**
