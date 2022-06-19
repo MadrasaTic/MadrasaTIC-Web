@@ -64,7 +64,7 @@
                                     id="signalments-user"></span></p>
                         </div>
                         <div class="mt-3">
-                            <button class="btn btn-secondary w-100 fw-500 d-none" id="showRattachedTo--button">
+                            <button class="btn btn-secondary w-100 fw-500" id="showRattachedTo--button">
                                 <i class="fa-solid fa-link me-2"></i>Consulter les signalement similaire
                             </button>
                         </div>

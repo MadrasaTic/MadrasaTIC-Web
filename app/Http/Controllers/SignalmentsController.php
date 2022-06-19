@@ -60,7 +60,8 @@ class SignalmentsController extends Controller
      */
     public function create()
     {
-        return view("addSignalement");
+        $categories = Category::all();
+        return view("addSignalement", compact('categories'));
     }
 
     /**
@@ -78,11 +79,17 @@ class SignalmentsController extends Controller
         $signalement->annexe_id = $request->get('annexe_id');
         $signalement->bloc_id = $request->get('bloc_id');
         $signalement->room_id = $request->get('room_id');
-        $signalement->infrastructure_type = $request->get('infrastructure_type');
+        if ($request->get('room_id')) {
+            $signalement->infrastructure_type = "room";
+        } elseif ($request->get('bloc_id')) {
+            $signalement->infrastructure_type = "bloc";
+        } else {
+            $signalement->infrastructure_type = "annexe";
+        }
 
         $signalement->creator_id = $request->user()->id;
 
-        $signalement->published = $request->get('published');
+        $signalement->published = 1;
         $signalement->save();
 
         $signalementVersionControl = new SignalementVersionControl();
@@ -100,14 +107,6 @@ class SignalmentsController extends Controller
         $signalementVersionControl->priority_id = Category::find($request->get('category_id'))->priority->id;
         $signalementVersionControl->updated_by = $request->user()->id;
         $signalementVersionControl->save();
-
-
-        $signalement->isSaved = ($signalement->isSaved()->where('users.id', $user_id)->first()) ? true : false;
-        if ($signalement->isReacted()->where('users.id', $user_id)->first()) {
-            $signalement->isReacted = $signalement->isReacted()->where('users.id', $user_id)->first()->pivot->reaction_type;
-        } else {
-            $signalement->isReacted = null;
-        }
         return $signalement;
 
     }

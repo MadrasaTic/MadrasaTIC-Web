@@ -9,7 +9,9 @@
 <div class="col px-3 border-start border-2">
     <div class="w-100 mt-6 mb-5 border-bottom">
         <a type="button" href="/signalments/create" class="btn btn-secondary btn-lg w-100 mb-3">Ajouter un Signalement</a>
+        @if(Auth::user()->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Annonce*'))
         <a type="button" href="/annonces/create" class="btn btn-secondary btn-lg w-100 mb-5">Ajouter une Annonce</a>
+        @endif
     </div>
 </div>
 <div class="col px-3 border-start border-2 d-none">
