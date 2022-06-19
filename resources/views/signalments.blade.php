@@ -153,7 +153,7 @@
                             @foreach ($signalments as $signalment)
                             {{-- {{ dd($signalment);}} --}}
                             @if($signalment['published'] == '1')
-                            <div class="cardDiv col-xl-6 col-md-12 px-3 py-3"
+                            <div class="cardDiv col-xl-6 col-md-12 px-3 py-3 " style="height: 27rem;"
                                 data-state="{{ $signalment->lastSignalementVC->state['name'] }}"
                                 data-category="{{ $signalment->lastSignalementVC->category['name'] }}"
                                 data-annexe="{{ $signalment->annexe['name'] }}"

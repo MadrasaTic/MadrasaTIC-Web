@@ -42,10 +42,10 @@
                             <!-- Card  -->
                             @foreach($annonces as $annonce)
 
-                            <div class="col-xl-6 col-md-12 px-3 py-3">
+                            <div class="col-xl-6 col-md-12 px-3 py-3 " style="height: 27rem;">
                                 <div class="card border w-100 rounded-6">
                                     <img src="{{asset('/storage/'.$annonce['image'])}}"
-                                        class="img-fluid card-img-top h-50 rounded-6" alt="Image du signalement">
+                                        class="img-fluid card-img-top h-50 rounded-6" alt="Image de l'Annonce">
                                     <div class="card-body">
                                         <div class="card-description d-flex align-items-center text-secondary">
                                             <p class="me-auto my-auto fw-bold">{{$annonce->user->userInformation['first_name']}} {{$annonce->user->userInformation['last_name']}}</p>
@@ -72,16 +72,16 @@
                         </div>
                     </div>
                 </div>
+                @include('./include/notificationsPage')
             </div> <!-- Middle End-->
 
             <!-- Show Annonce Modal -->
-            @include('./include/showAnnonceModal')
-
+            
             <!-- Notifications Bar -->
-            @include('./include/notificationsPage')
         </div>
     </div>
-
+    
+    @include('./include/showAnnonceModal')
 
 
 
