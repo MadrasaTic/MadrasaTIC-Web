@@ -20,7 +20,7 @@ class PermissionsController extends Controller
     public function index()
     {
         return View::make('permissions', [
-            'permissions' => $this->permissionModel::simplePaginate(25),
+            'permissions' => $this->permissionModel::get(),
         ]);
     }
 
@@ -34,7 +34,7 @@ class PermissionsController extends Controller
     }
 
     public function store(Request $request)
-    {   
+    {
         $data = $request->validate([
             'name' => 'required|string|unique:roles,name',
             'display_name' => 'nullable|string',
@@ -42,7 +42,7 @@ class PermissionsController extends Controller
         ]);
 
         $permission = $this->permissionModel::create($data);
-        
+
 
         Session::flash('laratrust-success', 'Permission created successfully');
         return redirect(route('permissions'));
@@ -71,7 +71,7 @@ class PermissionsController extends Controller
         return redirect(route('permissions'));
     }
     public function delete($id){
-        
+
         $permission = $this->permissionModel::findOrFail($id);
         $permission->delete();
         return redirect('permissions');

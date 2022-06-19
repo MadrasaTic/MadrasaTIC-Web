@@ -65,7 +65,7 @@
                         </div>
                         <div class="mt-3">
                             <button class="btn btn-secondary w-100 fw-500 d-none" id="showRattachedTo--button">
-                                <i class="fa-solid fa-link me-2"></i>Rattacher à un autre Signalement
+                                <i class="fa-solid fa-link me-2"></i>Consulter les signalement similaire
                             </button>
                         </div>
                         <div>
