@@ -40,7 +40,7 @@
                     </div>
                 </a>
                 <!-- Item -->
-                @if(User::find(auth()->id())->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Annonce*'))
+                @if(Auth::user()->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Annonce*'))
                 <a class="link" href="{{ route("annonces")}}">
                     <div name="" class="@if(Route::current()->getName() == "annonces") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-bullhorn py-3 px-1 ms-3"></i>
@@ -48,7 +48,7 @@
                     </div>
                 </a>
                 @endif
-                @if(User::find(auth()->id())->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Infrastructure*'))
+                @if(Auth::user()->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Infrastructure*'))
                 <a class="link" href="{{ route("infrastructure") }}">
                     <div name="" class="@if(Route::current()->getName() == "infrastructure") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-building py-3 px-1 ms-3"></i>
@@ -62,7 +62,7 @@
                         <span class="me-1">Enregistré</span>
                     </div>
                 </a> --}}
-                @if(User::find(auth()->id())->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Service*'))
+                @if(Auth::user()->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Service*'))
                 <a class="link" href="{{ route("departments") }}">
                     <div name="" class="@if(Route::current()->getName() == "departments") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-cog py-3 px-1 ms-3"></i>
@@ -70,7 +70,7 @@
                     </div>
                 </a>
                 @endif
-                @if(User::find(auth()->id())->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Category*'))
+                @if(Auth::user()->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Category*'))
                 <a class="link" href="{{ route("signalmentsCategory") }}">
                     <div name="" class="@if(Route::current()->getName() == "signalmentsCategory") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-list py-3 px-1 ms-3"></i>
@@ -78,7 +78,7 @@
                     </div>
                 </a>
                 @endif
-                @if(User::find(auth()->id())->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('State*'))
+                @if(Auth::user()->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('State*'))
                 <a class="link" href="{{ route("signalmentsState") }}">
                     <div name="" class="@if(Route::current()->getName() == "signalmentsState") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-flag py-3 px-1 ms-3"></i>
@@ -86,7 +86,7 @@
                     </div>
                 </a>
                 @endif
-                @if(User::find(auth()->id())->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Priorities*'))
+                @if(Auth::user()->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Priorities*'))
                 <a class="link" href="{{ route("signalmentsPriority") }}">
                     <div name="" class="@if(Route::current()->getName() == "signalmentsPriority") sideBar_item--selected @endif sideBar--item h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-level-up py-3 px-1 ms-3"></i>
@@ -94,7 +94,7 @@
                     </div>
                 </a>
                 @endif
-                @if(User::find(auth()->id())->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Members*'))
+                @if(Auth::user()->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Members*'))
                 <a class="link" href="{{ route("members")}}">
                     <div name="" class="@if(Route::current()->getName() == "members") sideBar_item--selected @endif sideBar--item  h-auto w-100 fs-4">
                         <i class="fa-solid fa-users py-3 px-1 ms-3"></i>
@@ -102,7 +102,7 @@
                     </div>
                 </a>
                 @endif
-                @if(User::find(auth()->id())->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Roles*'))
+                @if(Auth::user()->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Roles*'))
                 <a class="link" href="{{ route("roles")}}">
                     <div name="" class="@if(Route::current()->getName() == "roles") sideBar_item--selected @endif sideBar--item  h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-solid fa-key py-3 px-1 ms-3"></i>
@@ -110,7 +110,7 @@
                     </div>
                 </a>
                 @endif
-                @if(User::find(auth()->id())->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Permissions*'))
+                @if(Auth::user()->hasRole('Admin') || Auth::user()->roles[0]->hasPermission('Permissions*'))
                 <a class="link" href="{{ route("permissions")}}">
                     <div name="" class="@if(Route::current()->getName() == "permissions") sideBar_item--selected @endif sideBar--item  h-auto w-100 fs-4" item-clicked="0">
                         <i class="fa-regular fa-star py-3 px-1 ms-3"></i>
